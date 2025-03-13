@@ -1,4 +1,5 @@
 package pantrypal.inventory;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -29,10 +30,9 @@ public class IngredientInventory {
             ingredient.quantity += quantity;
             System.out.println("Increased " + name + " by " + quantity + " " + unit);
         } else {
-            printIngredientNotFound("Ingredient not found or unit mismatch. Please try again. (" + unit + ")");
+            System.out.println("Ingredient not found or unit mismatch.(" + unit + ")");
         }
     }
-
 
     // Decrease ingredient quantity
     public void decreaseQuantity(String name, double quantity, String unit) {
@@ -45,7 +45,7 @@ public class IngredientInventory {
                 System.out.println("Not enough " + name + " in stock.");
             }
         } else {
-            printIngredientNotFound("Ingredient not found or unit mismatch. Please try again. (" + unit + ")");
+            System.out.println("Ingredient not found or unit mismatch.(" + unit + ")");
         }
     }
 
@@ -64,8 +64,9 @@ public class IngredientInventory {
         if (inventory.isEmpty()) {
             System.out.println("Inventory is empty.");
         } else {
-            inventory.forEach((name, ingredient) ->
-                    System.out.println(name + ": " + ingredient.quantity + " " + ingredient.unit));
+            inventory.forEach((name, ingredient) -> {
+                System.out.println(name + ": " + ingredient.quantity + " " + ingredient.unit);
+            });
         }
     }
 
@@ -75,7 +76,8 @@ public class IngredientInventory {
         for (Map.Entry<String, Double> alert : lowStockAlerts.entrySet()) {
             Ingredient ingredient = inventory.get(alert.getKey());
             if (ingredient != null && ingredient.quantity <= alert.getValue()) {
-                System.out.println("Low stock: " + ingredient.name + " (" + ingredient.quantity + " " + ingredient.unit + ")");
+                System.out.println("Low stock: " + ingredient.name + " (" + ingredient.quantity + " " +
+                ingredient.unit + ")");
                 found = true;
             }
         }
@@ -94,12 +96,6 @@ public class IngredientInventory {
         }
     }
 
-    // Message when ingredient is not found
-    private static void printIngredientNotFound(String unit) {
-        System.out.println(unit);
-    }
-
-
     public static void main(String[] args) {
         IngredientInventory inventory = new IngredientInventory();
         Scanner scanner = new Scanner(System.in);
@@ -114,23 +110,35 @@ public class IngredientInventory {
 
             switch (command) {
             case "addNewIngredient":
-                if (parts.length == 4) inventory.addNewIngredient(parts[1], Double.parseDouble(parts[2]), parts[3]);
-                else System.out.println("Usage: addNewIngredient <name> <quantity> <unit>");
+                if (parts.length == 4) {
+                    inventory.addNewIngredient(parts[1], Double.parseDouble(parts[2]), parts[3]);
+                } else {
+                    System.out.println("Usage: addNewIngredient <name> <quantity> <unit>");
+                }
                 break;
 
             case "increaseQuantity":
-                if (parts.length == 4) inventory.increaseQuantity(parts[1], Double.parseDouble(parts[2]), parts[3]);
-                else System.out.println("Usage: increaseQuantity <name> <quantity> <unit>");
+                if (parts.length == 4) {
+                    inventory.increaseQuantity(parts[1], Double.parseDouble(parts[2]), parts[3]);
+                } else {
+                    System.out.println("Usage: increaseQuantity <name> <quantity> <unit>");
+                }
                 break;
 
             case "decreaseQuantity":
-                if (parts.length == 4) inventory.decreaseQuantity(parts[1], Double.parseDouble(parts[2]), parts[3]);
-                else System.out.println("Usage: decreaseQuantity <name> <quantity> <unit>");
+                if (parts.length == 4) {
+                    inventory.decreaseQuantity(parts[1], Double.parseDouble(parts[2]), parts[3]);
+                } else {
+                    System.out.println("Usage: decreaseQuantity <name> <quantity> <unit>");
+                }
                 break;
 
             case "setAlert":
-                if (parts.length == 4) inventory.setAlert(parts[1], Double.parseDouble(parts[2]), parts[3]);
-                else System.out.println("Usage: setAlert <name> <threshold> <unit>");
+                if (parts.length == 4) {
+                    inventory.setAlert(parts[1], Double.parseDouble(parts[2]), parts[3]);
+                } else {
+                    System.out.println("Usage: setAlert <name> <threshold> <unit>");
+                }
                 break;
 
             case "checkStock":
@@ -142,8 +150,11 @@ public class IngredientInventory {
                 break;
 
             case "deleteIngredient":
-                if (parts.length == 2) inventory.deleteIngredient(parts[1]);
-                else System.out.println("Usage: deleteIngredient <name>");
+                if (parts.length == 2) {
+                    inventory.deleteIngredient(parts[1]);
+                } else {
+                    System.out.println("Usage: deleteIngredient <name>");
+                }
                 break;
 
             case "exit":
