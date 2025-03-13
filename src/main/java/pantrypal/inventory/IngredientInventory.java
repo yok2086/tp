@@ -77,7 +77,7 @@ public class IngredientInventory {
             Ingredient ingredient = inventory.get(alert.getKey());
             if (ingredient != null && ingredient.quantity <= alert.getValue()) {
                 System.out.println("Low stock: " + ingredient.name + " (" + ingredient.quantity + " " +
-                ingredient.unit + ")");
+                        ingredient.unit + ")");
                 found = true;
             }
         }
@@ -105,7 +105,9 @@ public class IngredientInventory {
             String input = scanner.nextLine();
             String[] parts = input.split(" ");
 
-            if (parts.length == 0) continue;
+            if (parts.length == 0) {
+                continue;
+            }
             String command = parts[0];
 
             switch (command) {
