@@ -1,17 +1,11 @@
 package pantrypal.general.commands;
 
-
 import pantrypal.general.control.Ui;
 
-public class HelpCommand extends Command {
-    private final Command[] COMMAND_LIST = new Command[] {
-            new ExitCommand()
-    };
-
-
+public class NullCommand extends Command {
     @Override
     public void execute(Ui ui) {
-        ui.printHelpMessage(COMMAND_LIST);
+        ui.printInvalidCommandMessage();
     }
 
     @Override
