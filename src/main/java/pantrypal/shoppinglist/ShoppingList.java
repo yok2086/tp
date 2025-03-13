@@ -24,6 +24,18 @@ public class ShoppingList {
         return items.removeIf(item -> item.getIngredientName().equalsIgnoreCase(ingredientName));
     }
 
+    // Update an existing item's quantity and unit.
+    public boolean updateItem(String ingredientName, double newQuantity, String newUnit) {
+        for (ShoppingListItem item : items) {
+            if (item.getIngredientName().equalsIgnoreCase(ingredientName)) {
+                item.setQuantity(newQuantity);
+                item.setUnit(newUnit);
+                return true;
+            }
+        }
+        return false;
+    }
+
     // Display the shopping list.
     public void displayList() {
         if (items.isEmpty()) {

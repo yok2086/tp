@@ -2,10 +2,10 @@ package pantrypal.shoppinglist;
 
 public class ShoppingListItem {
     private String ingredientName;
-    private int quantity;
+    private double quantity;
     private String unit;
 
-    public ShoppingListItem(String ingredientName, int quantity, String unit) {
+    public ShoppingListItem(String ingredientName, double quantity, String unit) {
         this.ingredientName = ingredientName;
         this.quantity = quantity;
         this.unit = unit;
@@ -19,11 +19,11 @@ public class ShoppingListItem {
         this.ingredientName = ingredientName;
     }
 
-    public int getQuantity() {
+    public double getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(double quantity) {
         this.quantity = quantity;
     }
 

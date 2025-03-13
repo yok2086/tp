@@ -59,6 +59,16 @@ public class IngredientInventory {
         }
     }
 
+    // Get low stock alert
+    public Map<String, Double> getLowStockAlerts() {
+        return lowStockAlerts;
+    }
+
+    // Get inventory
+    public Map<String, Ingredient> getInventory() {
+        return inventory;
+    }
+
     // Check stock
     public void checkStock() {
         if (inventory.isEmpty()) {
