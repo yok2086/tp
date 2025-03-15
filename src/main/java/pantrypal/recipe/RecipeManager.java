@@ -72,4 +72,53 @@ public class RecipeManager {
         }
 
     }
+
+    public void listRecipe(){
+        for (Recipe recipe : recipes) {
+            System.out.println(recipe.toString());
+        }
+    }
+
+    public void showRecipe(String recipeName) {
+        List<Recipe> filteredItems = recipes.stream()
+                .filter(item -> recipeName.equals(item.getName()))
+                .toList();
+
+        for (Recipe recipe : filteredItems) {
+            System.out.println(recipe.getContent());
+        }
+    }
+
+    public Recipe searchRecipe(String recipeName) {
+        List<Recipe> filteredItems = recipes.stream().
+                filter(recipe -> recipeName.equals(recipe.getName()))
+                .toList();
+
+        if (filteredItems.isEmpty()) {
+            System.out.println("Warning: Recipe " + recipeName + " does not exist");
+            return null;
+        }
+        else {
+            return filteredItems.get(0);
+        }
+    }
+
+    public void removeRecipe(String recipeName) {
+        List<Recipe> filteredItems = recipes.stream().
+                filter(recipe -> recipeName.equals(recipe.getName()))
+                .toList();
+
+        if (filteredItems.isEmpty()) {
+            System.out.println("Warning: Recipe " + recipeName + " does not exist");
+        }
+        else{
+            recipes.remove(filteredItems.get(0));
+        }
+    }
+
+    //For testing
+    protected ArrayList<Recipe> getRecipeList() {
+        return recipes;
+    }
+
 }

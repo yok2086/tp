@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 public class Recipe {
 
+    private static final String LINE = "_".repeat(50);
+
     private String name;
     private ArrayList<String> instructions;
     private ArrayList<String> ingredients;
@@ -19,6 +21,29 @@ public class Recipe {
 
     public String getName() {
         return name;
+    }
+
+    public String getInstructions(){
+        String allInstructions = "";
+        for (String instruction : instructions) {
+            allInstructions = allInstructions + instruction + "\n";
+        }
+        return allInstructions;
+    }
+
+    public String getIngredients(){
+        String allIngredients = "";
+        for (String ingredient : ingredients) {
+            allIngredients = allIngredients + ingredient + "\n";
+        }
+        return allIngredients;
+    }
+
+    public String getContent(){
+        String allContents = "";
+        allContents = allContents + name + "\n" + LINE + "\n" + "Instructions:" + "\n"
+                + getInstructions() + "\n" + LINE + "\n" + "Ingredients:" + "\n";
+        return allContents;
     }
 
     @Override
