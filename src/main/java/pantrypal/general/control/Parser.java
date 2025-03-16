@@ -10,9 +10,12 @@ public class Parser {
     public Command parse(String input) {
 
         switch (input) {
-            case "help": return new HelpCommand();
-            case "exit": return new ExitCommand();
-            default: return new NullCommand();
+        case "help":
+            return new HelpCommand();
+        case "exit":
+            return new ExitCommand();
+        default:
+            return new NullCommand();
         }
     }
 }
