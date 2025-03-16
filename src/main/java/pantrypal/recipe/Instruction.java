@@ -30,8 +30,12 @@ public class Instruction {
     @Override
     public boolean equals(Object obj) {
         //Return True if 2 object has the same step number
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
         Instruction instruction1 = (Instruction) obj;
         return Objects.equals(step, instruction1.step); // Compare only by step number
     }
