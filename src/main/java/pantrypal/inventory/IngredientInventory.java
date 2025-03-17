@@ -106,78 +106,78 @@ public class IngredientInventory {
         }
     }
 
-    public static void main(String[] args) {
-        IngredientInventory inventory = new IngredientInventory();
-        Scanner scanner = new Scanner(System.in);
-
-        while (true) {
-            System.out.println("\nEnter command:");
-            String input = scanner.nextLine();
-            String[] parts = input.split(" ");
-
-            if (parts.length == 0) {
-                continue;
-            }
-            String command = parts[0];
-
-            switch (command) {
-            case "addNewIngredient":
-                if (parts.length == 4) {
-                    inventory.addNewIngredient(parts[1], Double.parseDouble(parts[2]), parts[3]);
-                } else {
-                    System.out.println("Usage: addNewIngredient <name> <quantity> <unit>");
-                }
-                break;
-
-            case "increaseQuantity":
-                if (parts.length == 4) {
-                    inventory.increaseQuantity(parts[1], Double.parseDouble(parts[2]), parts[3]);
-                } else {
-                    System.out.println("Usage: increaseQuantity <name> <quantity> <unit>");
-                }
-                break;
-
-            case "decreaseQuantity":
-                if (parts.length == 4) {
-                    inventory.decreaseQuantity(parts[1], Double.parseDouble(parts[2]), parts[3]);
-                } else {
-                    System.out.println("Usage: decreaseQuantity <name> <quantity> <unit>");
-                }
-                break;
-
-            case "setAlert":
-                if (parts.length == 4) {
-                    inventory.setAlert(parts[1], Double.parseDouble(parts[2]), parts[3]);
-                } else {
-                    System.out.println("Usage: setAlert <name> <threshold> <unit>");
-                }
-                break;
-
-            case "checkStock":
-                inventory.checkStock();
-                break;
-
-            case "viewLowStock":
-                inventory.viewLowStock();
-                break;
-
-            case "deleteIngredient":
-                if (parts.length == 2) {
-                    inventory.deleteIngredient(parts[1]);
-                } else {
-                    System.out.println("Usage: deleteIngredient <name>");
-                }
-                break;
-
-            case "exit":
-                System.out.println("Exiting Inventory System...");
-                scanner.close();
-                return;
-
-            default:
-                System.out.println("Invalid command.");
-                break;
-            }
-        }
-    }
+//    public static void main(String[] args) {
+//        IngredientInventory inventory = new IngredientInventory();
+//        Scanner scanner = new Scanner(System.in);
+//
+//        while (true) {
+//            System.out.println("\nEnter command:");
+//            String input = scanner.nextLine();
+//            String[] parts = input.split(" ");
+//
+//            if (parts.length == 0) {
+//                continue;
+//            }
+//            String command = parts[0];
+//
+//            switch (command) {
+//            case "addNewIngredient":
+//                if (parts.length == 4) {
+//                    inventory.addNewIngredient(parts[1], Double.parseDouble(parts[2]), parts[3]);
+//                } else {
+//                    System.out.println("Usage: addNewIngredient <name> <quantity> <unit>");
+//                }
+//                break;
+//
+//            case "increaseQuantity":
+//                if (parts.length == 4) {
+//                    inventory.increaseQuantity(parts[1], Double.parseDouble(parts[2]), parts[3]);
+//                } else {
+//                    System.out.println("Usage: increaseQuantity <name> <quantity> <unit>");
+//                }
+//                break;
+//
+//            case "decreaseQuantity":
+//                if (parts.length == 4) {
+//                    inventory.decreaseQuantity(parts[1], Double.parseDouble(parts[2]), parts[3]);
+//                } else {
+//                    System.out.println("Usage: decreaseQuantity <name> <quantity> <unit>");
+//                }
+//                break;
+//
+//            case "setAlert":
+//                if (parts.length == 4) {
+//                    inventory.setAlert(parts[1], Double.parseDouble(parts[2]), parts[3]);
+//                } else {
+//                    System.out.println("Usage: setAlert <name> <threshold> <unit>");
+//                }
+//                break;
+//
+//            case "checkStock":
+//                inventory.checkStock();
+//                break;
+//
+//            case "viewLowStock":
+//                inventory.viewLowStock();
+//                break;
+//
+//            case "deleteIngredient":
+//                if (parts.length == 2) {
+//                    inventory.deleteIngredient(parts[1]);
+//                } else {
+//                    System.out.println("Usage: deleteIngredient <name>");
+//                }
+//                break;
+//
+//            case "exit":
+//                System.out.println("Exiting Inventory System...");
+//                scanner.close();
+//                return;
+//
+//            default:
+//                System.out.println("Invalid command.");
+//                break;
+//            }
+//        }
+//    }
 }

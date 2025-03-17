@@ -1,6 +1,8 @@
 package pantrypal.general.control;
 
 import pantrypal.general.commands.Command;
+import pantrypal.inventory.Ingredient;
+import pantrypal.inventory.IngredientInventory;
 
 public class Ui {
     private static final String LOGO =
@@ -40,4 +42,5 @@ public class Ui {
         System.out.println("Invalid command!");
         Ui.printLine();
     }
+
 }
