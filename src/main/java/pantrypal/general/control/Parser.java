@@ -1,6 +1,12 @@
 package pantrypal.general.control;
 
-import pantrypal.general.commands.*;
+import pantrypal.general.commands.Command;
+import pantrypal.general.commands.HelpCommand;
+import pantrypal.general.commands.ExitCommand;
+import pantrypal.general.commands.AddIngredientCommand;
+import pantrypal.general.commands.IncreaseQuantityCommand;
+import pantrypal.general.commands.DecreaseQuantityCommand;
+import pantrypal.general.commands.NullCommand;
 
 public class Parser {
 
@@ -32,11 +38,8 @@ public class Parser {
             quantity = Double.parseDouble(inputParts[2]);
             unit = inputParts[3];
             return new DecreaseQuantityCommand(name, quantity, unit);
-
         default:
             return new NullCommand();
         }
     }
-
-
 }
