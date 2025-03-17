@@ -40,4 +40,5 @@ public class Ui {
         System.out.println("Invalid command!");
         Ui.printLine();
     }
+
 }

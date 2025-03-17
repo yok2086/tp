@@ -1,24 +1,23 @@
 package pantrypal.general.commands;
 
-
 import pantrypal.general.control.Ui;
+import pantrypal.inventory.IngredientInventory;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class HelpCommand extends Command {
-    private Command[] commandList = new Command[]{new ExitCommand()};
+    private static final List<Command> commandList = Arrays.asList(
+            new ExitCommand(), new AddIngredientCommand(),
+            new IncreaseQuantityCommand(), new DecreaseQuantityCommand()
+    );
 
-
-    @Override
-    public void execute(Ui ui) {
-        ui.printHelpMessage(commandList);
+    public HelpCommand() {
+        super();
     }
 
     @Override
-    public String getCommandDescription() {
-        return "";
-    }
-
-    @Override
-    public String getCommandName() {
-        return "";
+    public void execute(Ui ui, IngredientInventory inventory) {
+        ui.printHelpMessage(commandList.toArray(new Command[0]));
     }
 }
