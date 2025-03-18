@@ -1,6 +1,16 @@
 package pantrypal.general.control;
 
-import pantrypal.general.commands.*;
+import pantrypal.general.commands.Command;
+import pantrypal.general.commands.HelpCommand;
+import pantrypal.general.commands.ExitCommand;
+import pantrypal.general.commands.NullCommand;
+import pantrypal.general.commands.inventory.AddIngredientCommand;
+import pantrypal.general.commands.inventory.IncreaseQuantityCommand;
+import pantrypal.general.commands.inventory.DecreaseQuantityCommand;
+import pantrypal.general.commands.inventory.SetAlertCommand;
+import pantrypal.general.commands.inventory.CheckStockCommand;
+import pantrypal.general.commands.inventory.ViewLowStockCommand;
+import pantrypal.general.commands.inventory.DeleteIngredientCommand;
 
 public class Parser {
 

@@ -1,5 +1,6 @@
-package pantrypal.general.commands;
+package pantrypal.general.commands.inventory;
 
+import pantrypal.general.commands.Command;
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
 

@@ -2,7 +2,6 @@ package pantrypal.inventory;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class IngredientInventory {
     private Map<String, Ingredient> inventory;
