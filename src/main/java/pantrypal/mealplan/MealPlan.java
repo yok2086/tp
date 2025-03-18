@@ -1,9 +1,15 @@
 package pantrypal.mealplan;
 
+/*
 import pantrypal.inventory.Ingredient;
-import pantrypal.recipe.*; //missing class from recipe package
-import java.util.ArrayList;
+import pantrypal.recipe.Instruction; //missing class from recipe package
+import pantrypal.recipe.Recipe;
+import pantrypal.recipe.RecipeManager;
 import java.util.Scanner;
+*/
+
+import java.util.ArrayList;
+
 
 public class MealPlan {
     private final int duration;

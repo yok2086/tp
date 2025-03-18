@@ -10,8 +10,8 @@ import java.util.ArrayList;
 
 
 public class PlanManager {
-    private final static int PRESET_SIZE = 11; //padding element + 10 elements
-    private final static int NUMBER_OF_MONTHS = 12;
+    private static final int PRESET_SIZE = 11; //padding element + 10 elements
+    private static final int NUMBER_OF_MONTHS = 12;
     ArrayList<Calendar> calendar;
     ArrayList<MealPlan> planPresets;
     int selectedPlan = 0; //default null value
@@ -51,11 +51,9 @@ public class PlanManager {
                 throw new NullPointerException();
             }
             System.out.println(planPresets.get(selectedPlan));
-        }
-        catch(IndexOutOfBoundsException e){
+        } catch(IndexOutOfBoundsException e){
             System.out.println("Invalid index entered");
-        }
-        catch (NullPointerException e){
+        } catch (NullPointerException e){
             System.out.println("No plans selected");
         }
     }
