@@ -3,10 +3,14 @@ package pantrypal.general.control;
 import pantrypal.general.commands.Command;
 import pantrypal.general.commands.HelpCommand;
 import pantrypal.general.commands.ExitCommand;
-import pantrypal.general.commands.AddIngredientCommand;
-import pantrypal.general.commands.IncreaseQuantityCommand;
-import pantrypal.general.commands.DecreaseQuantityCommand;
 import pantrypal.general.commands.NullCommand;
+import pantrypal.general.commands.inventory.AddIngredientCommand;
+import pantrypal.general.commands.inventory.IncreaseQuantityCommand;
+import pantrypal.general.commands.inventory.DecreaseQuantityCommand;
+import pantrypal.general.commands.inventory.SetAlertCommand;
+import pantrypal.general.commands.inventory.CheckStockCommand;
+import pantrypal.general.commands.inventory.ViewLowStockCommand;
+import pantrypal.general.commands.inventory.DeleteIngredientCommand;
 
 public class Parser {
 
@@ -38,6 +42,18 @@ public class Parser {
             quantity = Double.parseDouble(inputParts[2]);
             unit = inputParts[3];
             return new DecreaseQuantityCommand(name, quantity, unit);
+        case "setAlert":
+            name = inputParts[1];
+            double threshold = Double.parseDouble(inputParts[2]);
+            unit = inputParts[3];
+            return new SetAlertCommand(name, threshold, unit);
+        case "checkStock":
+            return new CheckStockCommand();
+        case "viewLowStock":
+            return new ViewLowStockCommand();
+        case "deleteIngredient":
+            name = inputParts[1];
+            return new DeleteIngredientCommand(name);
         default:
             return new NullCommand();
         }
