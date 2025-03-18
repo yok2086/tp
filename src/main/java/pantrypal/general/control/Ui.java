@@ -14,6 +14,7 @@ public class Ui {
     public static void printWelcomeMessage() {
         System.out.println(LOGO);
         Ui.printLine();
+        System.out.println("Welcome to PantryPal, please enter your command!");
     }
     public static void printLine() {
         System.out.println("____________________________________________________________");

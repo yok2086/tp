@@ -9,7 +9,8 @@ import java.util.List;
 public class HelpCommand extends Command {
     private static final List<Command> commandList = Arrays.asList(
             new ExitCommand(), new AddIngredientCommand(),
-            new IncreaseQuantityCommand(), new DecreaseQuantityCommand()
+            new IncreaseQuantityCommand(), new DecreaseQuantityCommand(), new SetAlertCommand(),
+            new CheckStockCommand(), new ViewLowStockCommand()
     );
 
     public HelpCommand() {
