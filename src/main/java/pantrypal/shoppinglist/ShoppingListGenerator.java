@@ -8,18 +8,13 @@ public class ShoppingListGenerator {
     private ShoppingList shoppingList;
     private IngredientInventory inventory;
 
-    public ShoppingListGenerator(ShoppingList shoppingList, IngredientInventory inventory) {
-        this.shoppingList = shoppingList;
-        this.inventory = inventory;
-    }
-
     public ShoppingListGenerator(IngredientInventory inventory) {
         this.shoppingList = new ShoppingList();
         this.inventory = inventory;
     }
 
     // Generate shopping list items for ingredients that are below their low stock alert threshold.
-    public void generateShoppingList() {
+    public ShoppingList generateShoppingList() {
         Map<String, Double> alerts = inventory.getLowStockAlerts();
         Map<String, Ingredient> ingredients = inventory.getInventory();
 
@@ -39,5 +34,7 @@ public class ShoppingListGenerator {
                 }
             }
         }
+
+        return shoppingList;
     }
 }
