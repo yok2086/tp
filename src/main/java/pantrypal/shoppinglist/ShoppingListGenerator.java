@@ -1,16 +1,20 @@
-// AutoGenerationLogic.java
 package pantrypal.shoppinglist;
 
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.inventory.Ingredient;
 import java.util.Map;
 
-public class AutoGenerationLogic {
+public class ShoppingListGenerator {
     private ShoppingList shoppingList;
     private IngredientInventory inventory;
 
-    public AutoGenerationLogic(ShoppingList shoppingList, IngredientInventory inventory) {
+    public ShoppingListGenerator(ShoppingList shoppingList, IngredientInventory inventory) {
         this.shoppingList = shoppingList;
+        this.inventory = inventory;
+    }
+
+    public ShoppingListGenerator(IngredientInventory inventory) {
+        this.shoppingList = new ShoppingList();
         this.inventory = inventory;
     }
 

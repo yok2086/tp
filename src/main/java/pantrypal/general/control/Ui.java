@@ -42,4 +42,10 @@ public class Ui {
         Ui.printLine();
     }
 
+    public void showMessage(String message) {
+        Ui.printLine();
+        System.out.println(message);
+        Ui.printLine();
+    }
+
 }
