@@ -3,7 +3,7 @@ package pantrypal.recipe;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecipeManager {
+public class RecipeManager{
 
     private final ArrayList<Recipe> recipes = new ArrayList<>();
 
@@ -27,7 +27,7 @@ public class RecipeManager {
 
         Recipe recipe = new Recipe(recipeName);
         recipes.add(recipe);
-        System.out.println("Recipe added sucessfully" + recipe);
+        System.out.println("Recipe added successfully" + recipe);
     }
 
     public void editRecipe(String command) {
@@ -47,31 +47,27 @@ public class RecipeManager {
         Recipe recipe = filteredItems.get(0);
 
         if (parts[1].equals("instruction")) {
-            if (parts[2].equals("add")) {
-                addRecipeInstruction(recipe, parts[3], parts[4]);
-            } else if (parts[2].equals("remove")) {
-                removeRecipeInstruction(recipe, parts[3]);
-            } else if (parts[2].equals("edit")) {
-                editRecipeInstruction(recipe, parts[3], parts[4]);
-            } else {
+            switch (parts[2]) {
+            case "add" -> addRecipeInstruction(recipe, parts[3], parts[4]);
+            case "remove" -> removeRecipeInstruction(recipe, parts[3]);
+            case "edit" -> editRecipeInstruction(recipe, parts[3], parts[4]);
+            default -> {
                 //throw new Exception();
                 System.out.println("Wrong editRecipe format!");
                 System.out.println("Expected add/remove/edit after 'instruction'");
             }
+            }
 
         } else if (parts[1].equals("ingredient")) {
-            if (parts[2].equals("add")) {
-                //Add function
-                recipe.addIngredient(parts[3]);
-            } else if (parts[2].equals("remove")) {
-                //Add function
-                recipe.removeIngredient(parts[3]);
-            } else if (parts[2].equals("edit")) {
-                recipe.editIngredient(parts[3], parts[4]);
-            } else {
+            switch (parts[2]) {
+            case "add" -> recipe.addIngredient(parts[3]);
+            case "remove" -> recipe.removeIngredient(parts[3]);
+            case "edit" -> recipe.editIngredient(parts[3], parts[4]);
+            default -> {
                 System.out.println("Wrong ingredient format!");
                 System.out.println("Expected add/remove/edit after 'ingredient'");
-                //throw new Excpetion()
+            }
+            //throw new Exception()
             }
         } else {
             System.out.println("Wrong editRecipe format!");
@@ -102,8 +98,7 @@ public class RecipeManager {
                 return;
             }
 
-            String instructionContent = content;
-            instruction.setInstruction(instructionContent);
+            instruction.setInstruction(content);
         } catch (NumberFormatException e) {
             System.out.println("Warning: Invalid instruction");
             System.out.println("The correct format is: editRecipe <recipe_name> instruction edit <step> <content>\n" +
@@ -158,7 +153,8 @@ public class RecipeManager {
     }
 
     //For testing
-    protected ArrayList<Recipe> getRecipeList() {
+    // modified from protected for access by MealPlan
+    public ArrayList<Recipe> getRecipeList() {
         return recipes;
     }
 
