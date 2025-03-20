@@ -12,9 +12,6 @@ public class Recipe {
     private ArrayList<Instruction> instructions;
     private ArrayList<String> ingredients;
 
-    public Recipe(){
-
-    }
 
     public Recipe(String name){
         this.name = name;
@@ -94,10 +91,8 @@ public class Recipe {
     }
 
     public String getContent(){
-        String allContents = "";
-        allContents = allContents + name + "\n" + LINE + "\n" + "Instructions:" + "\n"
-                + getAllInstructions() + "\n" + LINE + "\n" + "Ingredients:" + "\n" + getAllIngredients() + "\n";
-        return allContents;
+        return name + "\n" + LINE + "\nInstructions:\n" + getAllInstructions()
+                + "\n" + LINE + "\nIngredients:\n" + getAllIngredients() + "\n";
     }
 
     @Override

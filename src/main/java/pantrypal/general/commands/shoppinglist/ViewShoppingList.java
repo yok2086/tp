@@ -5,15 +5,15 @@ import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.shoppinglist.ShoppingList;
 
-public class viewShoppingList extends Command {
+public class ViewShoppingList extends Command {
     private ShoppingList shoppingList;
 
-    public viewShoppingList() {
-        super("generateShoppingList", "Auto-generate shopping list");
+    public ViewShoppingList() {
+        super("GenerateShoppingList", "Auto-generate shopping list");
     }
 
-    public viewShoppingList(ShoppingList shoppingList) {
-        super("generateShoppingList", "Auto-generate shopping list");
+    public ViewShoppingList(ShoppingList shoppingList) {
+        super("GenerateShoppingList", "Auto-generate shopping list");
     }
 
     @Override
