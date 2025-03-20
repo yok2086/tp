@@ -7,16 +7,16 @@ import pantrypal.shoppinglist.ShoppingList;
 import pantrypal.shoppinglist.ShoppingListGenerator;
 
 public class GenerateShoppingList extends Command {
-    private ShoppingList shoppingList = new ShoppingList();
 
     public GenerateShoppingList() {
-        super("GenerateShoppingList", "Auto-generate shopping list");
+        super("generateShoppingList", "Auto-generate shopping list");
     }
 
     @Override
-    public void execute(Ui ui, IngredientInventory inventory) {
+    public void execute(Ui ui, IngredientInventory inventory, ShoppingList shoppingList) {
         ShoppingListGenerator shoppingListGenerator = new ShoppingListGenerator(inventory);
-        shoppingList = shoppingListGenerator.generateShoppingList();
+        ShoppingList newShoppingList = shoppingListGenerator.generateShoppingList();
+        shoppingList.copyFrom(newShoppingList);
         ui.showMessage("Shopping list has been auto-generated.");
     }
 }

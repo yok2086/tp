@@ -11,6 +11,10 @@ import pantrypal.general.commands.inventory.SetAlertCommand;
 import pantrypal.general.commands.inventory.CheckStockCommand;
 import pantrypal.general.commands.inventory.ViewLowStockCommand;
 import pantrypal.general.commands.inventory.DeleteIngredientCommand;
+import pantrypal.general.commands.shoppinglist.AddShoppingItem;
+import pantrypal.general.commands.shoppinglist.GenerateShoppingList;
+import pantrypal.general.commands.shoppinglist.RemoveShoppingItem;
+import pantrypal.general.commands.shoppinglist.ViewShoppingList;
 
 public class Parser {
 
@@ -54,6 +58,18 @@ public class Parser {
         case "deleteIngredient":
             name = inputParts[1];
             return new DeleteIngredientCommand(name);
+        case "addShoppingItem":
+            name = inputParts[1];
+            quantity = Double.parseDouble(inputParts[2]);
+            unit = inputParts[3];
+            return new AddShoppingItem(name, quantity, unit);
+        case "generateShoppingList":
+            return new GenerateShoppingList();
+        case "removeShoppingItem":
+            name = inputParts[1];
+            return new RemoveShoppingItem(name);
+        case "view":
+            return new ViewShoppingList();
         default:
             return new NullCommand();
         }

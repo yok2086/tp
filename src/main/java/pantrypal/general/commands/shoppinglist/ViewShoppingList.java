@@ -6,18 +6,13 @@ import pantrypal.inventory.IngredientInventory;
 import pantrypal.shoppinglist.ShoppingList;
 
 public class ViewShoppingList extends Command {
-    private ShoppingList shoppingList;
 
     public ViewShoppingList() {
-        super("GenerateShoppingList", "Auto-generate shopping list");
-    }
-
-    public ViewShoppingList(ShoppingList shoppingList) {
-        super("GenerateShoppingList", "Auto-generate shopping list");
+        super("view", "View Shopping List");
     }
 
     @Override
-    public void execute(Ui ui, IngredientInventory inventory) {
+    public void execute(Ui ui, IngredientInventory inventory, ShoppingList shoppingList) {
         shoppingList.displayList(); // Error handling is inside the function
     }
 }

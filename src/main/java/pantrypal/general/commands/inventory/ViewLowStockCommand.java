@@ -3,6 +3,7 @@ package pantrypal.general.commands.inventory;
 import pantrypal.general.commands.Command;
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
+import pantrypal.shoppinglist.ShoppingList;
 
 public class ViewLowStockCommand extends Command {
 
@@ -11,7 +12,7 @@ public class ViewLowStockCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, IngredientInventory inventory) {
+    public void execute(Ui ui, IngredientInventory inventory, ShoppingList shoppingList) {
         inventory.viewLowStock();
     }
 }

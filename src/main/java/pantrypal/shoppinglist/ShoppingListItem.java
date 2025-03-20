@@ -14,6 +14,13 @@ public class ShoppingListItem {
         this.unit = unit;
     }
 
+    // Copy constructor
+    public ShoppingListItem(ShoppingListItem newShoppingListItem) {
+        this.ingredientName = newShoppingListItem.ingredientName;
+        this.quantity = newShoppingListItem.quantity;
+        this.unit = newShoppingListItem.unit;
+    }
+
     public String getIngredientName() {
         return ingredientName;
     }

@@ -2,6 +2,7 @@ package pantrypal.general.commands;
 
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
+import pantrypal.shoppinglist.ShoppingList;
 
 public abstract class Command {
     protected Boolean exit = false;
@@ -19,7 +20,7 @@ public abstract class Command {
         return exit;
     }
 
-    public abstract void execute(Ui ui, IngredientInventory inventory);
+    public abstract void execute(Ui ui, IngredientInventory inventory, ShoppingList shoppingList);
 
     public String getCommandDescription() {
         return commandDescription;

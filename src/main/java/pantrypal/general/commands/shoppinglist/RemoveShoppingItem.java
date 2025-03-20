@@ -7,20 +7,18 @@ import pantrypal.shoppinglist.ShoppingList;
 
 public class RemoveShoppingItem extends Command {
     private String name;
-    private ShoppingList shoppingList;
 
     public RemoveShoppingItem() {
-        super("RemoveShoppingItem <name>", "Delete an item from the ShoppingList");
+        super("removeShoppingItem <name>", "Delete an item from the ShoppingList");
     }
 
-    public RemoveShoppingItem(String name, ShoppingList shoppingList) {
-        super("RemoveShoppingItem <name>", "Delete an item from the ShoppingList");
+    public RemoveShoppingItem(String name) {
+        super("removeShoppingItem <name>", "Delete an item from the ShoppingList");
         this.name = name;
-        this.shoppingList = shoppingList;
     }
 
     @Override
-    public void execute(Ui ui, IngredientInventory inventory) {
+    public void execute(Ui ui, IngredientInventory inventory, ShoppingList shoppingList) {
         if (shoppingList == null) {
             ui.showMessage("Error: ShoppingList is not initialized.");
             return;

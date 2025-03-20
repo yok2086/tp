@@ -9,22 +9,19 @@ import pantrypal.shoppinglist.ShoppingListItem;
 public class AddShoppingItem extends Command {
     private ShoppingListItem shoppingListItem;
     private String name;
-    private ShoppingList shoppingList;
 
     public AddShoppingItem() {
-        super("AddShoppingItem <name> <quantity> <unit>", "Add an item to the shopping list");
+        super("addShoppingItem <name> <quantity> <unit>", "Add an item to the shopping list");
     }
 
-    public AddShoppingItem(String name, double quantity, String unit, ShoppingList shoppingList) {
+    public AddShoppingItem(String name, double quantity, String unit) {
         super("AddShoppingItem <name> <quantity> <unit>", "Add an item to the shopping list");
         shoppingListItem = new ShoppingListItem(name, quantity, unit);
         this.name = name;
-        this.shoppingList = shoppingList;
     }
 
     @Override
-    public void execute(Ui ui, IngredientInventory inventory) {
-
+    public void execute(Ui ui, IngredientInventory inventory, ShoppingList shoppingList) {
         shoppingList.addItem(shoppingListItem);
         ui.showMessage("Add '" + name + "' to the shopping list.");
     }

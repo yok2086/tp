@@ -56,4 +56,17 @@ public class ShoppingList {
             }
         }
     }
+
+    public void copyFrom(ShoppingList newShoppingList) {
+        if (newShoppingList != null) {
+            // Clear existing items
+            this.items.clear();
+
+            // Copy all items from the other list
+            for (ShoppingListItem item : newShoppingList.getItems()) {
+                this.items.add(new ShoppingListItem(item)); // Assuming ShoppingListItem has a copy constructor
+            }
+        }
+    }
+
 }
