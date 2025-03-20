@@ -5,16 +5,16 @@ import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.shoppinglist.ShoppingList;
 
-public class removeShoppingItem extends Command {
+public class RemoveShoppingItem extends Command {
     private String name;
     private ShoppingList shoppingList;
 
-    public removeShoppingItem() {
-        super("removeShoppingItem <name>", "Delete an item from the ShoppingList");
+    public RemoveShoppingItem() {
+        super("RemoveShoppingItem <name>", "Delete an item from the ShoppingList");
     }
 
-    public removeShoppingItem(String name, ShoppingList shoppingList) {
-        super("removeShoppingItem <name>", "Delete an item from the ShoppingList");
+    public RemoveShoppingItem(String name, ShoppingList shoppingList) {
+        super("RemoveShoppingItem <name>", "Delete an item from the ShoppingList");
         this.name = name;
         this.shoppingList = shoppingList;
     }
