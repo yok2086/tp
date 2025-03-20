@@ -19,8 +19,6 @@ public class MealPlan {
         return duration;
     }
 
-    //Leaving sanitation to CLI section
-
     public void addRecipeToPlan(RecipeManager recipeList, int recipeIndex) {
         recipes.add(recipeList.getRecipeList().get(recipeIndex));
     }
