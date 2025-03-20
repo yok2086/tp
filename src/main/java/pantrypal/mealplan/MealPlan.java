@@ -1,52 +1,40 @@
 package pantrypal.mealplan;
 
-/*
-import pantrypal.inventory.Ingredient;
-import pantrypal.recipe.Instruction; //missing class from recipe package
 import pantrypal.recipe.Recipe;
 import pantrypal.recipe.RecipeManager;
-import java.util.Scanner;
-*/
+
 
 import java.util.ArrayList;
 
 
 public class MealPlan {
     private final int duration;
-    private ArrayList<String> ingredients = new ArrayList<>(); //required ingredients
-    //private ArrayList <Recipe> recipes; //recipes that are part of this meal plan
+    private ArrayList <Recipe> recipes = new ArrayList<>(); //recipes that are part of this meal plan
 
     public MealPlan(int duration) {
         this.duration = duration;
-        //to add while loop for ingredients listing
     }
-
-    /* constructor requires allocation of scanner
-    public MealPlan(Scanner inpScan, int duration){
-        String inpLine = inputScan.nextLine();
-        while(inpLine != "exit"){
-            addIngredient(inpLine);
-        }
-
-    }
-     */
 
     public int getDuration() {
         return duration;
     }
 
-    public void addIngredient(String ingredient) {
-        ingredients.add(ingredient);
+    //Leaving sanitation to CLI section
+
+    public void addRecipeToPlan(RecipeManager recipeList, int recipeIndex) {
+        recipes.add(recipeList.getRecipeList().get(recipeIndex));
+    }
+
+    public void removeRecipeFromPlan(RecipeManager recipeList, int recipeIndex) {
+        recipes.remove(recipeList.getRecipeList().get(recipeIndex));
     }
 
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
-        res.append("Duration: ");
-        res.append(getDuration());
-        res.append("\n");
-        for (String i : ingredients) {
-            res.append(i);
+        res.append("Duration: ").append(getDuration()).append("\n");
+        for (Recipe i : recipes) {
+            res.append(i.getContent());
         }
 
         return res.toString();
