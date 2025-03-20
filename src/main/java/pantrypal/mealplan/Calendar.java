@@ -36,14 +36,14 @@ public class Calendar {
     */
 
     public void startPlan(int selectedPlan) {
-        this.selectedPlan = selectedPlan-1; //pad for input-to-index disparity
+        this.selectedPlan = selectedPlan - 1; //pad for input-to-index disparity
     }
 
     public void stopPlan(int selectedPlan) {
         this.selectedPlan = -1;
     }
 
-    public void showPlan(){
+    public void showPlan() {
         try {
             System.out.println(planPresets.get(selectedPlan));
 
@@ -51,9 +51,9 @@ public class Calendar {
                 throw new NullPointerException();
             }
             System.out.println(planPresets.get(selectedPlan));
-        } catch(IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid index entered");
-        } catch (NullPointerException e){
+        } catch (NullPointerException e) {
             System.out.println("No plans selected");
         }
     }

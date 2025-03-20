@@ -3,29 +3,32 @@ package pantrypal.general.commands.shoppinglist;
 import pantrypal.general.commands.Command;
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
+import pantrypal.mealplan.PlanPresets;
+import pantrypal.recipe.RecipeManager;
 import pantrypal.shoppinglist.ShoppingList;
+
+import java.util.Scanner;
 
 public class RemoveShoppingItem extends Command {
     private String name;
-    private ShoppingList shoppingList;
 
     public RemoveShoppingItem() {
-        super("RemoveShoppingItem <name>", "Delete an item from the ShoppingList");
+        super("removeShoppingItem <name>", "Delete an item from the ShoppingList");
     }
 
-    public RemoveShoppingItem(String name, ShoppingList shoppingList) {
-        super("RemoveShoppingItem <name>", "Delete an item from the ShoppingList");
+    public RemoveShoppingItem(String name) {
+        super("removeShoppingItem <name>", "Delete an item from the ShoppingList");
         this.name = name;
-        this.shoppingList = shoppingList;
     }
 
     @Override
-    public void execute(Ui ui, IngredientInventory inventory) {
-        if (shoppingList == null) {
+    public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
+                        RecipeManager recipes, Scanner in) {
+        if (list == null) {
             ui.showMessage("Error: ShoppingList is not initialized.");
             return;
         }
-        boolean removed = shoppingList.removeItem(name);
+        boolean removed = list.removeItem(name);
         if (removed) {
             ui.showMessage("Removed '" + name + "' from the shopping list.");
         } else {

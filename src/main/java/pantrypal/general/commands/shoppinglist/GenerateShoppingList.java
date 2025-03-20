@@ -3,20 +3,25 @@ package pantrypal.general.commands.shoppinglist;
 import pantrypal.general.commands.Command;
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
+import pantrypal.mealplan.PlanPresets;
+import pantrypal.recipe.RecipeManager;
 import pantrypal.shoppinglist.ShoppingList;
 import pantrypal.shoppinglist.ShoppingListGenerator;
 
+import java.util.Scanner;
+
 public class GenerateShoppingList extends Command {
-    private ShoppingList shoppingList = new ShoppingList();
 
     public GenerateShoppingList() {
-        super("GenerateShoppingList", "Auto-generate shopping list");
+        super("generateShoppingList", "Auto-generate shopping list");
     }
 
     @Override
-    public void execute(Ui ui, IngredientInventory inventory) {
+    public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
+                        RecipeManager recipes, Scanner in) {
         ShoppingListGenerator shoppingListGenerator = new ShoppingListGenerator(inventory);
-        shoppingList = shoppingListGenerator.generateShoppingList();
+        ShoppingList newShoppingList = shoppingListGenerator.generateShoppingList();
+        list.copyFrom(newShoppingList);
         ui.showMessage("Shopping list has been auto-generated.");
     }
 }

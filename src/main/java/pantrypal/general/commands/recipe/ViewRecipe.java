@@ -1,5 +1,6 @@
-package pantrypal.general.commands;
+package pantrypal.general.commands.recipe;
 
+import pantrypal.general.commands.Command;
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.mealplan.PlanPresets;
@@ -8,17 +9,20 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
-public class ExitCommand extends Command {
+public class ViewRecipe extends Command {
+    private String recipeName;
 
-    public ExitCommand() {
-        super("exit", "Exit the program");
+    public ViewRecipe() {
+        super("viewRecipe","View a specific recipe");
+    }
+
+    public ViewRecipe(String recipeName) {
+        this.recipeName = recipeName;
     }
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, Scanner in) {
-        exit = true;
-        ui.printExitMessage();
+        recipes.showRecipe(recipeName);
     }
-
 }

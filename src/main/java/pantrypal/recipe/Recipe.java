@@ -9,8 +9,8 @@ public class Recipe {
     private static final String LINE = "_".repeat(50);
 
     private String name;
-    private ArrayList<Instruction> instructions;
-    private ArrayList<String> ingredients;
+    private ArrayList<Instruction> instructions = new ArrayList<>();
+    private ArrayList<String> ingredients = new ArrayList<>();
 
 
     public Recipe(String name){

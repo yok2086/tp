@@ -10,24 +10,24 @@ public class RecipeManager{
     public RecipeManager() {
     }
 
-    public void addRecipe(String recipeName) {
+    public Recipe addRecipe(String recipeName) {
 
         String[] parts = recipeName.split(" ", 2);
         if (parts.length > 1) {
             System.out.println("Warning: Recipe name should not contain space. Use '_' instead.");
-            return;
+            return null;
         }
 
         List<Recipe> filteredItems = recipes.stream().filter(item -> recipeName.equals(item.getName())).toList();
 
         if (!filteredItems.isEmpty()) {
             System.out.println("Warning: Recipe " + recipeName + " already exists");
-            return;
+            return null;
         }
 
         Recipe recipe = new Recipe(recipeName);
         recipes.add(recipe);
-        System.out.println("Recipe added successfully" + recipe);
+        return recipe;
     }
 
     public void editRecipe(String command) {
@@ -48,7 +48,7 @@ public class RecipeManager{
 
         if (parts[1].equals("instruction")) {
             switch (parts[2]) {
-            case "add" -> addRecipeInstruction(recipe, parts[3], parts[4]);
+            case "add" -> addRecipeInstruction(recipe, Integer.parseInt(parts[3]), parts[4]);
             case "remove" -> removeRecipeInstruction(recipe, parts[3]);
             case "edit" -> editRecipeInstruction(recipe, parts[3], parts[4]);
             default -> {
@@ -77,10 +77,9 @@ public class RecipeManager{
 
     }
 
-    public void addRecipeInstruction(Recipe recipe, String stepString, String content) {
+    public void addRecipeInstruction(Recipe recipe, int step, String content) {
         try {
-            int stepInt = Integer.parseInt(stepString);
-            Instruction instruction = new Instruction(stepInt, content);
+            Instruction instruction = new Instruction(step, content);
             recipe.addInstruction(instruction);
         } catch (NumberFormatException e) {
             System.out.println("Warning: Invalid instruction");
@@ -118,7 +117,9 @@ public class RecipeManager{
     }
 
     public void listRecipe() {
+        int index = 1;
         for (Recipe recipe : recipes) {
+            System.out.print(index++ + ". ");
             System.out.println(recipe.toString());
         }
     }

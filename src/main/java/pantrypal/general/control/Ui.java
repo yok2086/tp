@@ -30,8 +30,8 @@ public class Ui {
         Ui.printLine();
         System.out.println("Here are all the available commands:\n");
         for (Command command : commands) {
-            System.out.print(command.getCommandName() + ": ");
-            System.out.println(command.getCommandDescription());
+            System.out.print(command.getCommandDescription() + ": ");
+            System.out.println(command.getCommandInstruction());
         }
         Ui.printLine();
     }

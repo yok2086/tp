@@ -1,4 +1,4 @@
-package pantrypal.general.commands.mealplan;
+package pantrypal.general.commands.recipe;
 
 import pantrypal.general.commands.Command;
 import pantrypal.general.control.Ui;
@@ -9,20 +9,21 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
-public class RemovePlan extends Command {
-    private int index;
+public class RemoveRecipe extends Command {
+    private String recipeName;
 
-    public RemovePlan() {
-        super("removePlan <index>","Remove Meal Plan");
+    public RemoveRecipe() {
+        super("removeRecipe <name>", "Removes a recipe");
     }
 
-    public RemovePlan(int duration) {
-        this.index = duration;
+    public RemoveRecipe(String recipeName) {
+        this.recipeName = recipeName;
     }
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, Scanner in) {
-        presets.removePlan(index);
+        recipes.removeRecipe(recipeName);
+        System.out.println(recipeName + " Recipe removed");
     }
 }
