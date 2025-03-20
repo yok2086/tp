@@ -6,11 +6,11 @@ import pantrypal.inventory.IngredientInventory;
 import pantrypal.shoppinglist.ShoppingList;
 import pantrypal.shoppinglist.ShoppingListGenerator;
 
-public class generateShoppingList extends Command {
+public class GenerateShoppingList extends Command {
     private ShoppingList shoppingList = new ShoppingList();
 
-    public generateShoppingList() {
-        super("generateShoppingList", "Auto-generate shopping list");
+    public GenerateShoppingList() {
+        super("GenerateShoppingList", "Auto-generate shopping list");
     }
 
     @Override
