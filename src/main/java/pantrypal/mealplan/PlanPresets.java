@@ -22,7 +22,9 @@ public class PlanPresets {
         plans.add(new MealPlan(duration));
     }
 
-    public void removePlan(int planIndex){ plans.remove(planIndex); }
+    public void removePlan(int planIndex) {
+        plans.remove(planIndex);
+    }
 
     public void viewPlans(){
         for (MealPlan plan : plans) {
