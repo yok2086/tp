@@ -26,7 +26,8 @@ public class SetAlertCommand extends Command {
 
 
     @Override
-    public void execute(Ui ui, IngredientInventory inventory, ShoppingList shoppingList, PlanPresets planPresets, RecipeManager recipeManager, Scanner in) {
+    public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
+                        RecipeManager recipes, Scanner in) {
         inventory.setAlert(name, threshold, unit);
     }
 }

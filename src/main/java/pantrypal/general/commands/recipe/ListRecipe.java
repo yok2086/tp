@@ -16,7 +16,8 @@ public class ListRecipe extends Command {
     }
 
     @Override
-    public void execute(Ui ui, IngredientInventory inventory, ShoppingList shoppingList, PlanPresets planPresets, RecipeManager recipeManager, Scanner in) {
-        recipeManager.listRecipe();
+    public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
+                        RecipeManager recipes, Scanner in) {
+        recipes.listRecipe();
     }
 }

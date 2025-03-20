@@ -34,8 +34,8 @@ public class HelpCommand extends Command {
             new ExitCommand(), new AddIngredientCommand(),
             new IncreaseQuantityCommand(), new DecreaseQuantityCommand(),
             new SetAlertCommand(), new CheckStockCommand(), new ViewLowStockCommand(), new AddShoppingItem(),
-            new GenerateShoppingList(), new RemoveShoppingItem(), new ViewShoppingList(), new ViewPlan(), new AddNewPlan(),
-            new RemovePlan(), new AddRecipe(), new ViewRecipe(), new RemoveRecipe(), new ListRecipe(),
+            new GenerateShoppingList(), new RemoveShoppingItem(), new ViewShoppingList(), new ViewPlan(),
+            new AddNewPlan(), new RemovePlan(), new AddRecipe(), new ViewRecipe(), new RemoveRecipe(), new ListRecipe(),
             new AddRecipeToPlan(), new RemoveRecipeFromPlan()
     );
 
@@ -44,7 +44,8 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, IngredientInventory inventory, ShoppingList shoppingList, PlanPresets planPresets, RecipeManager recipeManager, Scanner in) {
+    public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
+                        RecipeManager recipes, Scanner in) {
         ui.printHelpMessage(commandList.toArray(new Command[0]));
     }
 }

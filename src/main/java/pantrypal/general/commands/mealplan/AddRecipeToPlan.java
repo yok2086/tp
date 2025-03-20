@@ -23,8 +23,9 @@ public class AddRecipeToPlan extends Command {
     }
 
     @Override
-    public void execute(Ui ui, IngredientInventory inventory, ShoppingList shoppingList, PlanPresets planPresets, RecipeManager recipeManager, Scanner in) {
-        planPresets.addRecipeToPlan(recipeManager, recipeIndex, planIndex);
+    public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
+                        RecipeManager recipes, Scanner in) {
+        presets.addRecipeToPlan(recipes, recipeIndex, planIndex);
         System.out.println("Recipe " + recipeIndex + 1 + " added to plan " + planIndex + 1);
     }
 }

@@ -21,8 +21,9 @@ public class RemoveRecipe extends Command {
     }
 
     @Override
-    public void execute(Ui ui, IngredientInventory inventory, ShoppingList shoppingList, PlanPresets planPresets, RecipeManager recipeManager, Scanner in) {
-        recipeManager.removeRecipe(recipeName);
+    public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
+                        RecipeManager recipes, Scanner in) {
+        recipes.removeRecipe(recipeName);
         System.out.println(recipeName + " Recipe removed");
     }
 }

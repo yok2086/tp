@@ -22,12 +22,13 @@ public class RemoveShoppingItem extends Command {
     }
 
     @Override
-    public void execute(Ui ui, IngredientInventory inventory, ShoppingList shoppingList, PlanPresets planPresets, RecipeManager recipeManager, Scanner in) {
-        if (shoppingList == null) {
+    public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
+                        RecipeManager recipes, Scanner in) {
+        if (list == null) {
             ui.showMessage("Error: ShoppingList is not initialized.");
             return;
         }
-        boolean removed = shoppingList.removeItem(name);
+        boolean removed = list.removeItem(name);
         if (removed) {
             ui.showMessage("Removed '" + name + "' from the shopping list.");
         } else {

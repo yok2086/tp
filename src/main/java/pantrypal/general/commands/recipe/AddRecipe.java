@@ -22,11 +22,12 @@ public class AddRecipe extends Command {
 
 
     @Override
-    public void execute(Ui ui, IngredientInventory inventory, ShoppingList shoppingList, PlanPresets planPresets, RecipeManager recipeManager, Scanner in) {
+    public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
+                        RecipeManager recipes, Scanner in) {
         Boolean isFinished = false;
         System.out.println("Please Input Recipe Name: ");
         recipeName = in.nextLine();
-        Recipe recipe = recipeManager.addRecipe(recipeName);
+        Recipe recipe = recipes.addRecipe(recipeName);
 
         int stepNumber = 1;
         while (!isFinished) {
@@ -35,7 +36,7 @@ public class AddRecipe extends Command {
             if (stepContent.equals("exit")) {
                 isFinished = true;
             } else {
-                recipeManager.addRecipeInstruction(recipe, stepNumber++, stepContent);
+                recipes.addRecipeInstruction(recipe, stepNumber++, stepContent);
             }
         }
         System.out.println("Recipe Added Successfully!");

@@ -17,10 +17,11 @@ public class GenerateShoppingList extends Command {
     }
 
     @Override
-    public void execute(Ui ui, IngredientInventory inventory, ShoppingList shoppingList, PlanPresets planPresets, RecipeManager recipeManager, Scanner in) {
+    public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
+                        RecipeManager recipes, Scanner in) {
         ShoppingListGenerator shoppingListGenerator = new ShoppingListGenerator(inventory);
         ShoppingList newShoppingList = shoppingListGenerator.generateShoppingList();
-        shoppingList.copyFrom(newShoppingList);
+        list.copyFrom(newShoppingList);
         ui.showMessage("Shopping list has been auto-generated.");
     }
 }

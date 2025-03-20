@@ -25,8 +25,9 @@ public class AddShoppingItem extends Command {
     }
 
     @Override
-    public void execute(Ui ui, IngredientInventory inventory, ShoppingList shoppingList, PlanPresets planPresets, RecipeManager recipeManager, Scanner in) {
-        shoppingList.addItem(shoppingListItem);
+    public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
+                        RecipeManager recipes, Scanner in) {
+        list.addItem(shoppingListItem);
         ui.showMessage("Add '" + name + "' to the shopping list.");
     }
 }

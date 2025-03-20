@@ -21,8 +21,9 @@ public class AddNewPlan extends Command {
     }
 
     @Override
-    public void execute(Ui ui, IngredientInventory inventory, ShoppingList shoppingList, PlanPresets planPresets, RecipeManager recipeManager, Scanner in) {
-        planPresets.addNewPlan(duration);
+    public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
+                        RecipeManager recipes, Scanner in) {
+        presets.addNewPlan(duration);
         System.out.println("Plan added");
     }
 }
