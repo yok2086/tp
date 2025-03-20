@@ -14,7 +14,7 @@ public class IngredientInventoryTest {
     private IngredientInventory inventory;
 
     @BeforeEach
-        // Runs before every test case
+    // Runs before every test case
     void setUp() {
         inventory = new IngredientInventory();
     }
