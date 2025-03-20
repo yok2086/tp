@@ -3,7 +3,11 @@ package pantrypal.general.commands.shoppinglist;
 import pantrypal.general.commands.Command;
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
+import pantrypal.mealplan.PlanPresets;
+import pantrypal.recipe.RecipeManager;
 import pantrypal.shoppinglist.ShoppingList;
+
+import java.util.Scanner;
 
 public class RemoveShoppingItem extends Command {
     private String name;
@@ -18,7 +22,7 @@ public class RemoveShoppingItem extends Command {
     }
 
     @Override
-    public void execute(Ui ui, IngredientInventory inventory, ShoppingList shoppingList) {
+    public void execute(Ui ui, IngredientInventory inventory, ShoppingList shoppingList, PlanPresets planPresets, RecipeManager recipeManager, Scanner in) {
         if (shoppingList == null) {
             ui.showMessage("Error: ShoppingList is not initialized.");
             return;

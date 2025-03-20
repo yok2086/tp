@@ -1,4 +1,4 @@
-package pantrypal.general.commands.shoppinglist;
+package pantrypal.general.commands.recipe;
 
 import pantrypal.general.commands.Command;
 import pantrypal.general.control.Ui;
@@ -9,14 +9,14 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
-public class ViewShoppingList extends Command {
+public class ListRecipe extends Command {
 
-    public ViewShoppingList() {
-        super("view", "View Shopping List");
+    public ListRecipe() {
+        super("listRecipes", "List all recipes");
     }
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList shoppingList, PlanPresets planPresets, RecipeManager recipeManager, Scanner in) {
-        shoppingList.displayList(); // Error handling is inside the function
+        recipeManager.listRecipe();
     }
 }

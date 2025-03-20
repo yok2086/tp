@@ -1,4 +1,28 @@
 package pantrypal.general.commands.mealplan;
 
-public class AddNewPlan {
+import pantrypal.general.commands.Command;
+import pantrypal.general.control.Ui;
+import pantrypal.inventory.IngredientInventory;
+import pantrypal.mealplan.PlanPresets;
+import pantrypal.recipe.RecipeManager;
+import pantrypal.shoppinglist.ShoppingList;
+
+import java.util.Scanner;
+
+public class AddNewPlan extends Command {
+    private int duration;
+
+    public AddNewPlan() {
+        super("addNewPlan <duration>","Add New Plan");
+    }
+
+    public AddNewPlan(int duration) {
+        this.duration = duration;
+    }
+
+    @Override
+    public void execute(Ui ui, IngredientInventory inventory, ShoppingList shoppingList, PlanPresets planPresets, RecipeManager recipeManager, Scanner in) {
+        planPresets.addNewPlan(duration);
+        System.out.println("Plan added");
+    }
 }

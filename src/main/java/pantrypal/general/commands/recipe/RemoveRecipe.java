@@ -1,4 +1,4 @@
-package pantrypal.general.commands.shoppinglist;
+package pantrypal.general.commands.recipe;
 
 import pantrypal.general.commands.Command;
 import pantrypal.general.control.Ui;
@@ -9,14 +9,20 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
-public class ViewShoppingList extends Command {
+public class RemoveRecipe extends Command {
+    private String recipeName;
 
-    public ViewShoppingList() {
-        super("view", "View Shopping List");
+    public RemoveRecipe() {
+        super("removeRecipe <name>", "Removes a recipe");
+    }
+
+    public RemoveRecipe(String recipeName) {
+        this.recipeName = recipeName;
     }
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList shoppingList, PlanPresets planPresets, RecipeManager recipeManager, Scanner in) {
-        shoppingList.displayList(); // Error handling is inside the function
+        recipeManager.removeRecipe(recipeName);
+        System.out.println(recipeName + " Recipe removed");
     }
 }

@@ -4,6 +4,8 @@ import pantrypal.general.commands.Command;
 import pantrypal.general.control.Parser;
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
+import pantrypal.mealplan.PlanPresets;
+import pantrypal.recipe.RecipeManager;
 import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
@@ -19,6 +21,8 @@ public class PantryPal {
         IngredientInventory inventory = new IngredientInventory();
         Ui ui = new Ui();
         ShoppingList shoppingList = new ShoppingList();
+        PlanPresets planPresets = new PlanPresets();
+        RecipeManager recipeManager = new RecipeManager();
         String input;
 
         Ui.printWelcomeMessage();
@@ -26,7 +30,7 @@ public class PantryPal {
             input = in.nextLine();
 
             Command centralCommand = parser.parse(input);
-            centralCommand.execute(ui, inventory, shoppingList);
+            centralCommand.execute(ui, inventory, shoppingList, planPresets, recipeManager, in);
             isFinished = centralCommand.isExit();
         }
     }
