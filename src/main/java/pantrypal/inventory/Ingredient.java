@@ -2,8 +2,8 @@ package pantrypal.inventory;
 
 
 public class Ingredient {
-    String name;
-    double quantity;
+    protected String name;
+    protected double quantity;
     protected String unit;
 
     Ingredient(String name, double quantity, String unit) {

@@ -1,5 +1,6 @@
-package pantrypal.general.commands;
+package pantrypal.general.commands.inventory;
 
+import pantrypal.general.commands.Command;
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.mealplan.PlanPresets;
@@ -8,17 +9,15 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
-public class ExitCommand extends Command {
+public class ViewLowStockCommand extends Command {
 
-    public ExitCommand() {
-        super("exit", "Exit the program");
+    public ViewLowStockCommand() {
+        super("viewLowStock", "View low stock of inventory");
     }
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, Scanner in) {
-        exit = true;
-        ui.printExitMessage();
+        inventory.viewLowStock();
     }
-
 }

@@ -14,6 +14,7 @@ public class Ui {
     public static void printWelcomeMessage() {
         System.out.println(LOGO);
         Ui.printLine();
+        System.out.println("Welcome to PantryPal, please enter your command!");
     }
     public static void printLine() {
         System.out.println("____________________________________________________________");
@@ -29,8 +30,8 @@ public class Ui {
         Ui.printLine();
         System.out.println("Here are all the available commands:\n");
         for (Command command : commands) {
-            System.out.print(command.getCommandName() + ": ");
-            System.out.println(command.getCommandDescription());
+            System.out.print(command.getCommandDescription() + ": ");
+            System.out.println(command.getCommandInstruction());
         }
         Ui.printLine();
     }
@@ -40,4 +41,11 @@ public class Ui {
         System.out.println("Invalid command!");
         Ui.printLine();
     }
+
+    public void showMessage(String message) {
+        Ui.printLine();
+        System.out.println(message);
+        Ui.printLine();
+    }
+
 }

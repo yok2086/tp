@@ -6,9 +6,19 @@ public class ShoppingListItem {
     private String unit;
 
     public ShoppingListItem(String ingredientName, double quantity, String unit) {
+        assert ingredientName != null : "Ingredient name must not be null.";
+        assert unit != null : "Unit must not be null.";
+        assert quantity >= 0 : "Quantity must be non-negative.";
         this.ingredientName = ingredientName;
         this.quantity = quantity;
         this.unit = unit;
+    }
+
+    // Copy constructor
+    public ShoppingListItem(ShoppingListItem newShoppingListItem) {
+        this.ingredientName = newShoppingListItem.ingredientName;
+        this.quantity = newShoppingListItem.quantity;
+        this.unit = newShoppingListItem.unit;
     }
 
     public String getIngredientName() {
@@ -16,6 +26,7 @@ public class ShoppingListItem {
     }
 
     public void setIngredientName(String ingredientName) {
+        assert ingredientName != null : "Ingredient name must not be null.";
         this.ingredientName = ingredientName;
     }
 
@@ -24,6 +35,7 @@ public class ShoppingListItem {
     }
 
     public void setQuantity(double quantity) {
+        assert quantity >= 0 : "Quantity must be non-negative.";
         this.quantity = quantity;
     }
 
@@ -32,6 +44,7 @@ public class ShoppingListItem {
     }
 
     public void setUnit(String unit) {
+        assert unit != null : "Unit must not be null.";
         this.unit = unit;
     }
 
