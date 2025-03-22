@@ -88,8 +88,9 @@ public class Recipe {
 
     public String getAllIngredients(){
         StringBuilder allIngredients = new StringBuilder();
+        int index = 1;
         for (Ingredient ingredient : ingredients) {
-            allIngredients.append(ingredient).append("\n");
+            allIngredients.append((index++) + ". " + ingredient.toString()).append("\n");
         }
         return allIngredients.toString();
     }
@@ -103,8 +104,8 @@ public class Recipe {
     }
 
     public String getContent(){
-        return name + "\n" + LINE + "\nInstructions:\n" + getAllInstructions()
-                + "\n" + LINE + "\nIngredients:\n" + getAllIngredients() + "\n";
+        return name + "\n" + LINE + "\nIngredients:\n" + getAllIngredients() +
+                LINE + "\nInstructions:\n" + getAllInstructions() +"\n";
     }
 
     @Override
