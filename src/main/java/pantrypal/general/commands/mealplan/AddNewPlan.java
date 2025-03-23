@@ -13,7 +13,7 @@ public class AddNewPlan extends Command {
     private int duration;
 
     public AddNewPlan() {
-        super("addNewPlan <duration>","Add New Plan");
+        super("addPlan <duration>","Add New Plan");
     }
 
     public AddNewPlan(int duration) {
