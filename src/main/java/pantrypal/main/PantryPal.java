@@ -2,6 +2,7 @@ package pantrypal.main;
 
 import pantrypal.general.commands.Command;
 import pantrypal.general.control.Parser;
+import pantrypal.general.control.Storage;
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.mealplan.PlanPresets;
@@ -11,6 +12,7 @@ import pantrypal.shoppinglist.ShoppingList;
 import java.util.Scanner;
 
 public class PantryPal {
+    static final String FILE_PATH = "./data/data.txt";
     /**
      * Main entry-point for the PantryPal application.
      */
@@ -18,14 +20,16 @@ public class PantryPal {
         Scanner in = new Scanner(System.in);
         boolean isFinished = false;
         Parser parser = new Parser();
-        IngredientInventory inventory = new IngredientInventory();
         Ui ui = new Ui();
+        IngredientInventory inventory = new IngredientInventory();
         ShoppingList shoppingList = new ShoppingList();
         PlanPresets planPresets = new PlanPresets();
         RecipeManager recipeManager = new RecipeManager();
         String input;
+        Storage storage = new Storage(FILE_PATH);
 
         Ui.printWelcomeMessage();
+        storage.createFile(inventory, shoppingList, planPresets, recipeManager);
         while (!isFinished) {
             input = in.nextLine();
 

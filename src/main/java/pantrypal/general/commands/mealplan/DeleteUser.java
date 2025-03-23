@@ -1,4 +1,6 @@
 package pantrypal.general.commands.mealplan;
 
-public class DeleteUser {
+import pantrypal.general.commands.Command;
+
+public class DeleteUser extends MealPlanCommand {
 }

@@ -1,4 +1,4 @@
-package pantrypal.general.commands.inventory;
+package pantrypal.general.commands.general;
 
 import pantrypal.general.commands.Command;
 import pantrypal.general.control.Ui;
@@ -9,15 +9,17 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
-public class CheckStockCommand extends Command {
+public class ExitCommand extends GeneralCommand {
 
-    public CheckStockCommand() {
-        super("checkStock", "Checks the stock of an item in the inventory");
+    public ExitCommand() {
+        super("exit", "Exit the program");
     }
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, Scanner in) {
-        inventory.checkStock();
+        exit = true;
+        ui.printExitMessage();
     }
+
 }

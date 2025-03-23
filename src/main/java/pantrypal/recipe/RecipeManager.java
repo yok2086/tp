@@ -10,6 +10,7 @@ public class RecipeManager{
     public RecipeManager() {
     }
 
+
     public Recipe addRecipe(String recipeName) {
 
         String[] parts = recipeName.split(" ", 2);
@@ -151,6 +152,10 @@ public class RecipeManager{
         } else {
             recipes.remove(filteredItems.get(0));
         }
+    }
+
+    public void copyList(ArrayList<Recipe> recipes) {
+        this.recipes.addAll(recipes);
     }
 
     //For testing

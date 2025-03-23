@@ -9,7 +9,7 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
-public class ViewRecipe extends Command {
+public class ViewRecipe extends RecipeCommand {
     private String recipeName;
 
     public ViewRecipe() {

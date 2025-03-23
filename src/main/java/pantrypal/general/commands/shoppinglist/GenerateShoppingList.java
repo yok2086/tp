@@ -10,7 +10,7 @@ import pantrypal.shoppinglist.ShoppingListGenerator;
 
 import java.util.Scanner;
 
-public class GenerateShoppingList extends Command {
+public class GenerateShoppingList extends ShoppingLIstCommand {
 
     public GenerateShoppingList() {
         super("generateShoppingList", "Auto-generate shopping list");

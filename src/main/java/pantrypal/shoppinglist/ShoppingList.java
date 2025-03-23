@@ -69,4 +69,13 @@ public class ShoppingList {
         }
     }
 
+    public void copyList(ShoppingList newShoppingList) {
+        if (newShoppingList != null) {
+            this.items.clear();
+            for (ShoppingListItem item : newShoppingList.getItems()) {
+                this.items.add(new ShoppingListItem(item));
+            }
+        }
+    }
+
 }

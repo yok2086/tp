@@ -9,7 +9,7 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
-public class AddNewPlan extends Command {
+public class AddNewPlan extends MealPlanCommand {
     private int duration;
 
     public AddNewPlan() {

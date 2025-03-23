@@ -9,25 +9,15 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
-public class SetAlertCommand extends Command {
-    private String name;
-    private double threshold;
-    private String unit;
+public class ViewLowStock extends InventoryCommand {
 
-    public SetAlertCommand() {
-        super("setAlert <name> <threshold> <unit>", "Sets the alert for a specific ingredient");
+    public ViewLowStock() {
+        super("viewLowStock", "View low stock of inventory");
     }
-
-    public SetAlertCommand(String name, double threshold, String unit) {
-        this.name = name;
-        this.threshold = threshold;
-        this.unit = unit;
-    }
-
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, Scanner in) {
-        inventory.setAlert(name, threshold, unit);
+        inventory.viewLowStock();
     }
 }

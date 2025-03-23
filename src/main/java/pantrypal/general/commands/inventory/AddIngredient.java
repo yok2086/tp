@@ -9,15 +9,25 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
-public class ViewLowStockCommand extends Command {
+public class AddIngredient extends InventoryCommand {
+    private String name;
+    private double quantity;
+    private String unit;
 
-    public ViewLowStockCommand() {
-        super("viewLowStock", "View low stock of inventory");
+    public AddIngredient(String name, double quantity, String unit) {
+        this.name = name;
+        this.quantity = quantity;
+        this.unit = unit;
+    }
+
+    public AddIngredient() {
+        super("addNewIngredient <name> <quantity> <unit>", "Adding new ingredient");
     }
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, Scanner in) {
-        inventory.viewLowStock();
+        inventory.addNewIngredient(name, quantity, unit);
+
     }
 }

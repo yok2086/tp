@@ -9,14 +9,14 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
-public class DeleteIngredientCommand extends Command {
+public class DeleteIngredient extends InventoryCommand {
     private String name;
 
-    public DeleteIngredientCommand() {
+    public DeleteIngredient() {
         super("deleteIngredient <name>", "Delete an ingredient from the inventory");
     }
 
-    public DeleteIngredientCommand(String name) {
+    public DeleteIngredient(String name) {
         this.name = name;
     }
 
