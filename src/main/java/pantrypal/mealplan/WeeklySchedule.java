@@ -2,39 +2,40 @@ package pantrypal.mealplan;
 
 import java.util.ArrayList;
 
-/**
- * collection of daily schedules
- */
-
 public class WeeklySchedule {
 
-    PlanPresets planPresets;
     private final ArrayList<DailySchedule> days = new ArrayList<>(7);
-
+    ArrayList<MealPlan> planPresets;
 
     public WeeklySchedule(PlanPresets planPresets) {
-        this.planPresets = planPresets;
+        this.planPresets = planPresets.plans;
+
     }
 
+    private String loadPlans(String filepath){
+        StringBuilder str = new StringBuilder();
+
+        return str.toString();
+    }
 
     public void addPlan(int planIndex, int dayIndex) {
-        if (planPresets.plans.isEmpty()) {
+        if (planPresets.isEmpty()) {
             throw new NewPlanCreateException(); //prompt the user on adding a new plan to plan presets
         }
-        days.get(dayIndex-1).addPlan(planIndex); //pad for input-to-index disparity
+        days.get(dayIndex-1).getPlans().add(planPresets.get(planIndex-1)); //pad for input-to-index disparity
     }
 
     public void removePlan(int removeIndex, int dayIndex) {
-        if (days.get(dayIndex-1).isEmpty()) {
+        if (days.get(dayIndex-1).getPlans().isEmpty()) {
             throw new EmptyPlansException(); //indicate for no plans to remove
         }
-        days.get(dayIndex-1).removePlan(removeIndex);
+        days.get(dayIndex-1).getPlans().remove(removeIndex-1);
     }
 
     public void showWeek() {
         boolean isCompletelyEmpty = true;
         for (DailySchedule day : days) {
-            if (day.isEmpty()) {
+            if (day.getPlans().isEmpty()) {
                 continue;
             }
             day.showDay();
