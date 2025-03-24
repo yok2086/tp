@@ -1,6 +1,7 @@
 package pantrypal.mealplan;
 
 import java.util.ArrayList;
+import pantrypal.general.commands.mealplan.AddRecipeToPlan;
 
 /**
  * Overarching handler for created meal plans and month-based assignment of meal plans
@@ -18,8 +19,9 @@ public class PlanPresets {
         plans = new ArrayList<>();
     }
 
-    public void addNewPlan(int duration){
-        plans.add(new MealPlan(duration));
+    public void addNewPlan(){
+        plans.add(new MealPlan());
+        new AddRecipeToPlan(); //call the command to add a new recipe
     }
 
     public void removePlan(int planIndex) {
@@ -31,4 +33,6 @@ public class PlanPresets {
             System.out.println(plan);
         }
     }
+
+
 }
