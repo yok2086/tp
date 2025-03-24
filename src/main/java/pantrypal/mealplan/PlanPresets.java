@@ -1,8 +1,8 @@
 package pantrypal.mealplan;
 
-import pantrypal.recipe.RecipeManager;
-
 import java.util.ArrayList;
+import pantrypal.general.commands.mealplan.AddRecipeToPlan;
+import pantrypal.recipe.RecipeManager;
 
 /**
  * Overarching handler for created meal plans and month-based assignment of meal plans
@@ -14,31 +14,39 @@ import java.util.ArrayList;
 public class PlanPresets {
     private static final int PRESET_SIZE = 11; //padding element + 10 elements
     private static final int NUMBER_OF_MONTHS = 12;
-    protected ArrayList<MealPlan> plans;
+    ArrayList<MealPlan> plans;
 
     public PlanPresets() {
-        plans = new ArrayList<>();
+        loadPlans();
     }
 
-    public void addNewPlan(int duration) {
-        plans.add(new MealPlan(duration));
+    public void loadPlans() {
+        // load plans from file, if no file found, start afresh
+        plans = new ArrayList<MealPlan>();
     }
 
-    public void addRecipeToPlan(RecipeManager recipeList, int recipeIndex, int planIndex) {
-        plans.get(planIndex).addRecipeToPlan(recipeList, recipeIndex);
+    public void addNewPlan(){
+        plans.add(new MealPlan());
+        new AddRecipeToPlan(); //call the command to add a new recipe
     }
 
-    public void removeRecipeFromPlan(RecipeManager recipeList, int recipeIndex, int planIndex) {
-        plans.get(planIndex).removeRecipeFromPlan(recipeList, recipeIndex);
+    public void addRecipeToPlan(RecipeManager recipes, int recipeIndex, int planIndex){
+        plans.get(planIndex).addRecipe(recipes, recipeIndex);
     }
 
     public void removePlan(int planIndex) {
         plans.remove(planIndex);
     }
 
-    public void viewPlans() {
+    public void removeRecipeFromPlan(int planIndex, int recipeIndex) {
+        plans.get(recipeIndex).removeRecipe(planIndex);
+    }
+
+    public void viewPlans(){
         for (MealPlan plan : plans) {
             System.out.println(plan);
         }
     }
+
+
 }
