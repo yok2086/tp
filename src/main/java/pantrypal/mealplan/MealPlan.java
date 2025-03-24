@@ -13,12 +13,12 @@ public class MealPlan {
     public MealPlan(){
     }
 
-    public void addRecipeToPlan(RecipeManager recipeList, int recipeIndex) {
+    public void addRecipe(RecipeManager recipeList, int recipeIndex) {
         recipes.add(recipeList.getRecipeList().get(recipeIndex));
     }
 
-    public void removeRecipeFromPlan(RecipeManager recipeList, int recipeIndex) {
-        recipes.remove(recipeList.getRecipeList().get(recipeIndex));
+    public void removeRecipe(int recipeIndex) {
+        recipes.remove(recipeIndex);
     }
 
     @Override
