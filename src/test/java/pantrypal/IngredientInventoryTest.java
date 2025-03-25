@@ -37,8 +37,8 @@ public class IngredientInventoryTest {
     void testSetAlert() {
         // Add sugar
         inventory.addNewIngredient("Sugar", 2.5, "kg");
-        inventory.setAlert("Sugar", 2.0, "kg");
-        inventory.decreaseQuantity("Sugar", 1, "kg");
+        inventory.setAlert("Sugar", 2.0);
+        inventory.decreaseQuantity("Sugar", 1);
 
         // Get inventory
         Map<String, Ingredient> stock = inventory.getInventory();

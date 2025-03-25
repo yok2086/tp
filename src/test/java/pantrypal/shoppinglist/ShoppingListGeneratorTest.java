@@ -27,9 +27,9 @@ public class ShoppingListGeneratorTest {
     @Test
     public void testGenerateShoppingList_whenIngredientsBelowThreshold_thenItemsAdded() {
         // Set low stock alerts:
-        inventory.setAlert("sugar", 500, "g");
-        inventory.setAlert("flour", 300, "g");
-        inventory.setAlert("butter", 200, "g");
+        inventory.setAlert("sugar", 500);
+        inventory.setAlert("flour", 300);
+        inventory.setAlert("butter", 200);
 
         // Generate the shopping list.
         ShoppingListGenerator generator = new ShoppingListGenerator(inventory);
@@ -64,9 +64,9 @@ public class ShoppingListGeneratorTest {
     @Test
     public void testGenerateShoppingList_whenNoIngredientBelowThreshold_thenEmptyList() {
         // Set alerts so that all ingredient quantities meet or exceed their thresholds.
-        inventory.setAlert("sugar", 50, "g");   // sugar: 100 >= 50
-        inventory.setAlert("flour", 200, "g");    // flour: 300 >= 200
-        inventory.setAlert("butter", 30, "g");     // butter: 50 >= 30
+        inventory.setAlert("sugar", 50);   // sugar: 100 >= 50
+        inventory.setAlert("flour", 200);    // flour: 300 >= 200
+        inventory.setAlert("butter", 30);     // butter: 50 >= 30
 
         ShoppingListGenerator generator = new ShoppingListGenerator(inventory);
         ShoppingList shoppingList = generator.generateShoppingList();

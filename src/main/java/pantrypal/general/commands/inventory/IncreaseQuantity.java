@@ -12,22 +12,20 @@ import java.util.Scanner;
 public class IncreaseQuantity extends InventoryCommand {
     private String name;
     private double quantity;
-    private String unit;
 
     public IncreaseQuantity() {
-        super("increaseQuantity <name> <quantity> <unit>","Increase quantity of ingredient");
+        super("increaseQuantity <name> <quantity>","Increase quantity of ingredient");
     }
 
-    public IncreaseQuantity(String name, double quantity, String unit) {
+    public IncreaseQuantity(String name, double quantity) {
         this.name = name;
         this.quantity = quantity;
-        this.unit = unit;
     }
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, Scanner in) {
-        inventory.increaseQuantity(name, quantity, unit);
+        inventory.increaseQuantity(name, quantity);
     }
 
 }

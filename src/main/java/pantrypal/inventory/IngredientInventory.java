@@ -1,8 +1,9 @@
 package pantrypal.inventory;
 
+import pantrypal.general.control.Ui;
+
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class IngredientInventory {
     private Map<String, Ingredient> inventory;
@@ -15,48 +16,38 @@ public class IngredientInventory {
 
     // Add new ingredient
     public void addNewIngredient(String name, double quantity, String unit) {
-        if (!inventory.containsKey(name)) {
-            inventory.put(name, new Ingredient(name, quantity, unit));
-            System.out.println("Added " + name + ": " + quantity + " " + unit);
-        } else {
-            System.out.println(name + " already exists.");
-        }
+        inventory.put(name, new Ingredient(name, quantity, unit));
     }
 
     // Increase ingredient quantity
-    public void increaseQuantity(String name, double quantity, String unit) {
+    public void increaseQuantity(String name, double quantity) {
         Ingredient ingredient = inventory.get(name);
-        if (ingredient != null && ingredient.unit.equals(unit)) {
+        if (ingredient != null) {
             ingredient.quantity += quantity;
-            System.out.println("Increased " + name + " by " + quantity + " " + unit);
+            Ui.showMessage("Increased " + name + " by " + quantity);
         } else {
-            System.out.println("Ingredient not found or unit mismatch.(" + unit + ")");
+            Ui.showMessage("Ingredient not found");
         }
     }
 
     // Decrease ingredient quantity
-    public void decreaseQuantity(String name, double quantity, String unit) {
+    public void decreaseQuantity(String name, double quantity) {
         Ingredient ingredient = inventory.get(name);
-        if (ingredient != null && ingredient.unit.equals(unit)) {
+        if (ingredient != null) {
             if (ingredient.quantity >= quantity) {
                 ingredient.quantity -= quantity;
-                System.out.println("Decreased " + name + " by " + quantity + " " + unit);
+                Ui.showMessage("Decreased " + name + " by " + quantity);
             } else {
-                System.out.println("Not enough " + name + " in stock.");
+                Ui.showMessage("Not enough " + name + " in stock.");
             }
         } else {
-            System.out.println("Ingredient not found or unit mismatch.(" + unit + ")");
+            Ui.showMessage("Ingredient not found");
         }
     }
 
     // Set low stock alert
-    public void setAlert(String name, double threshold, String unit) {
-        if (inventory.containsKey(name)) {
-            lowStockAlerts.put(name, threshold);
-            System.out.println("Set low stock alert for " + name + " at " + threshold + " " + unit);
-        } else {
-            System.out.println("Ingredient not found.");
-        }
+    public void setAlert(String name, double threshold) {
+        lowStockAlerts.put(name, threshold);
     }
 
     // Get low stock alert
@@ -85,7 +76,7 @@ public class IngredientInventory {
         boolean found = false;
         for (Map.Entry<String, Double> alert : lowStockAlerts.entrySet()) {
             Ingredient ingredient = inventory.get(alert.getKey());
-            if (ingredient != null && ingredient.quantity <= alert.getValue()) {
+            if (ingredient != null && ingredient.quantity < alert.getValue()) {
                 System.out.println("Low stock: " + ingredient.name + " (" + ingredient.quantity + " " +
                         ingredient.unit + ")");
                 found = true;

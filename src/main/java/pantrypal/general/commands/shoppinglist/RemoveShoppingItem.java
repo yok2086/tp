@@ -25,14 +25,14 @@ public class RemoveShoppingItem extends ShoppingLIstCommand {
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, Scanner in) {
         if (list == null) {
-            ui.showMessage("Error: ShoppingList is not initialized.");
+            Ui.showMessage("Error: ShoppingList is not initialized.");
             return;
         }
         boolean removed = list.removeItem(name);
         if (removed) {
-            ui.showMessage("Removed '" + name + "' from the shopping list.");
+            Ui.showMessage("Removed '" + name + "' from the shopping list.");
         } else {
-            ui.showMessage("Item '" + name + "' not found in the shopping list.");
+            Ui.showMessage("Item '" + name + "' not found in the shopping list.");
         }
     }
 }

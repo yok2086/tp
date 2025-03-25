@@ -158,8 +158,6 @@ public class RecipeManager{
         this.recipes.addAll(recipes);
     }
 
-    //For testing
-    // modified from protected for access by MealPlan
     public ArrayList<Recipe> getRecipeList() {
         return recipes;
     }

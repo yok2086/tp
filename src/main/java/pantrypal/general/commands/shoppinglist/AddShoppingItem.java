@@ -28,6 +28,6 @@ public class AddShoppingItem extends ShoppingLIstCommand {
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, Scanner in) {
         list.addItem(shoppingListItem);
-        ui.showMessage("Add '" + name + "' to the shopping list.");
+        Ui.showMessage("Add '" + name + "' to the shopping list.");
     }
 }

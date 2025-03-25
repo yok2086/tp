@@ -28,10 +28,24 @@ public class Ui {
         System.out.println("____________________________________________________________");
     }
 
+    public static void printAddIngredientMessage(String name, double quantity, String unit) {
+        Ui.showMessage("Adding " + name + " " + quantity + " " + unit);
+    }
+
+    public static void printIngredientExists(String name) {
+        Ui.showMessage("Ingredient " + name + " already exists.");
+    }
+
+    public static void printSetAlertMessage(String name, double threshold, String unit) {
+        Ui.showMessage("Set low stock alert for " + name + " at " + threshold + " " + unit);
+    }
+
+    public static void printIngredientNotFoundMessage() {
+        Ui.showMessage("Ingredient not found.");
+    }
+
     public void printExitMessage() {
-        Ui.printLine();
-        System.out.println("See you next time!");
-        Ui.printLine();
+        Ui.showMessage("See you next time!");
     }
 
     public void printHelpMessage(Command[] commands) {
@@ -93,21 +107,17 @@ public class Ui {
     }
 
     public void printInvalidCommandMessage() {
-        Ui.printLine();
-        System.out.println("Invalid command!");
-        Ui.printLine();
+        Ui.showMessage("Invalid Command!");
     }
 
-    public void showMessage(String message) {
+    public static void showMessage(String message) {
         Ui.printLine();
         System.out.println(message);
         Ui.printLine();
     }
 
     public static void printErrorMessage(String message) {
-        Ui.printLine();
-        System.out.println(message);
-        Ui.printLine();
+        Ui.showMessage(message);
     }
 
 }

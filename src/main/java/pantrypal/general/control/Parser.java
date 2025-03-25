@@ -48,13 +48,11 @@ public class Parser {
         case "increaseQuantity":
             name = inputParts[1];
             quantity = Double.parseDouble(inputParts[2]);
-            unit = inputParts[3];
-            return new IncreaseQuantity(name, quantity, unit);
+            return new IncreaseQuantity(name, quantity);
         case "decreaseQuantity":
             name = inputParts[1];
             quantity = Double.parseDouble(inputParts[2]);
-            unit = inputParts[3];
-            return new DecreaseQuantity(name, quantity, unit);
+            return new DecreaseQuantity(name, quantity);
         case "setAlert":
             name = inputParts[1];
             double threshold = Double.parseDouble(inputParts[2]);

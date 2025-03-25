@@ -2,6 +2,7 @@ package pantrypal.general.commands.inventory;
 
 import pantrypal.general.commands.Command;
 import pantrypal.general.control.Ui;
+import pantrypal.inventory.Ingredient;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.mealplan.PlanPresets;
 import pantrypal.recipe.RecipeManager;
@@ -27,7 +28,11 @@ public class AddIngredient extends InventoryCommand {
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, Scanner in) {
-        inventory.addNewIngredient(name, quantity, unit);
-
+        if (!inventory.getInventory().containsKey(name)) {
+            inventory.addNewIngredient(name, quantity, unit);
+            Ui.printAddIngredientMessage(name, quantity, unit);
+        } else {
+            Ui.printIngredientExists(name);
+        }
     }
 }

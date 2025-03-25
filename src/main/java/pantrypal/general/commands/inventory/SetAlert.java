@@ -1,6 +1,5 @@
 package pantrypal.general.commands.inventory;
 
-import pantrypal.general.commands.Command;
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.mealplan.PlanPresets;
@@ -28,6 +27,11 @@ public class SetAlert extends InventoryCommand {
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, Scanner in) {
-        inventory.setAlert(name, threshold, unit);
+        if (inventory.getInventory().containsKey(name)) {
+            inventory.setAlert(name, threshold);
+            Ui.printSetAlertMessage(name, threshold, unit);
+        } else {
+            Ui.printIngredientNotFoundMessage();
+        }
     }
 }

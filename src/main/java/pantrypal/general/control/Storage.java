@@ -1,5 +1,6 @@
 package pantrypal.general.control;
 
+import pantrypal.inventory.Ingredient;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.mealplan.PlanPresets;
 import pantrypal.recipe.Instruction;
@@ -9,10 +10,11 @@ import pantrypal.shoppinglist.ShoppingList;
 import pantrypal.shoppinglist.ShoppingListItem;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Storage {
     private static String filePath = "";
@@ -25,7 +27,7 @@ public class Storage {
     }
 
 
-    public static void createFile(IngredientInventory inventory, ShoppingList shoppingList,PlanPresets planPresets,
+    public static void createFile(IngredientInventory inventory, ShoppingList shoppingList, PlanPresets planPresets,
                                   RecipeManager recipeManager) {
         if (file.getParentFile().mkdirs()) {
             System.out.println("Save file directory not found");
@@ -51,7 +53,7 @@ public class Storage {
         Ui.printLine();
     }
 
-    public static void loadData(IngredientInventory inventory, ShoppingList shoppingList,PlanPresets planPresets,
+    public static void loadData(IngredientInventory inventory, ShoppingList shoppingList, PlanPresets planPresets,
                                 RecipeManager recipeManager) {
         try (Scanner scanner = new Scanner(file)) {
             String currentSection = "";
@@ -77,10 +79,19 @@ public class Storage {
                     recipe = recipeManager.addRecipe(recipeName);
                 } else if (line.startsWith("[Stock]")) {
                     currentSection = "Stock";
-                    //stockList.add(line.substring(7).trim());
+                    line = line.substring("[Stock]".length()).trim();
+                    String[] stockItem = line.split(" ");
+                    String stockName = stockItem[0];
+                    double stockQuantity = Double.parseDouble(stockItem[1]);
+                    String stockUnit = stockItem[2];
+                    inventory.addNewIngredient(stockName, stockQuantity, stockUnit);
                 } else if (line.startsWith("[LowStock]")) {
                     currentSection = "LowStock";
-                    //lowStockList.add(line.substring(10).trim());
+                    line = line.substring("[LowStock]".length()).trim();
+                    String[] lowStockItem = line.split(" ");
+                    String lowStockName = lowStockItem[0];
+                    double lowStockQuantity = Double.parseDouble(lowStockItem[1]);
+                    inventory.setAlert(lowStockName, lowStockQuantity);
                 } else if (line.startsWith("[MealPlan]")) {
                     currentSection = "MealPlan";
                     //mealPlanList.add(line.substring(10).trim());
@@ -108,10 +119,6 @@ public class Storage {
                             }
                         }
                         break;
-                    case "Stock":
-                        break;
-                    case "LowStock":
-                        break;
                     case "MealPlan":
                         break;
                     default:
@@ -119,6 +126,49 @@ public class Storage {
                     }
                 }
             }
+        } catch (IOException e) {
+            Ui.printErrorMessage(e.getMessage());
+        }
+    }
+
+    public static void saveData(IngredientInventory inventory, ShoppingList shoppingList, PlanPresets planPresets,
+                                RecipeManager recipeManager) {
+        try (FileWriter fileWriter = new FileWriter(filePath)) {
+            StringBuilder fileInput = new StringBuilder();
+
+            for (ShoppingListItem item : shoppingList.getItems()) {
+                fileInput.append("[Shopping] ").append(item.getIngredientName()).append(" ")
+                        .append(item.getQuantity()).append(" ")
+                        .append(item.getUnit()).append("\n");
+            }
+
+            for (Map.Entry<String, Ingredient> ingredient : inventory.getInventory().entrySet()) {
+                Ingredient item = ingredient.getValue();
+                fileInput.append("[Stock] ").append(item.getName()).append(" ")
+                        .append(item.getQuantity())
+                        .append(" ").append(item.getUnit()).append("\n");
+            }
+
+            for (Map.Entry<String, Double> lowStockItem : inventory.getLowStockAlerts().entrySet()) {
+                String lowStockName = lowStockItem.getKey();
+                double lowStockQuantity = lowStockItem.getValue();
+                fileInput.append("[LowStock] ").append(lowStockName).append(" ").append(lowStockQuantity).append("\n");
+            }
+
+            for (Recipe recipe : recipeManager.getRecipeList()) {
+//                fileInput.append("[Recipe] ").append(recipe.getName()).append("\n");
+//
+//                // Convert ingredients list into a single string, separating each ingredient with ";"
+//                String ingredients = recipe.getIngredients().stream()
+//                        .map(ing -> ing.getName() + " " + ing.getQuantity() + " " + ing.getUnit())
+//                        .collect(Collectors.joining("; "));
+//                fileInput.append("Ingredients: ").append(ingredients).append("\n");
+//
+//                // Convert instructions list into a single string, separating steps with ";"
+//                String instructions = String.join("; ", recipe.getInstructions());
+//                fileInput.append("Instructions: ").append(instructions).append("\n\n");
+            }
+            fileWriter.write(fileInput.toString());
         } catch (IOException e) {
             Ui.printErrorMessage(e.getMessage());
         }

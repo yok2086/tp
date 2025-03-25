@@ -36,6 +36,7 @@ public class PantryPal {
             Command centralCommand = parser.parse(input);
             centralCommand.execute(ui, inventory, shoppingList, planPresets, recipeManager, in);
             isFinished = centralCommand.isExit();
+            Storage.saveData(inventory, shoppingList, planPresets, recipeManager);
         }
     }
 }
