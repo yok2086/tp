@@ -8,33 +8,30 @@ import java.util.ArrayList;
 
 
 public class MealPlan {
-    private final int duration;
     private ArrayList <Recipe> recipes = new ArrayList<>(); //recipes that are part of this meal plan
 
-    public MealPlan(int duration) {
-        this.duration = duration;
+    public MealPlan(){
     }
 
-    public int getDuration() {
-        return duration;
-    }
-
-    public void addRecipeToPlan(RecipeManager recipeList, int recipeIndex) {
+    public void addRecipe(RecipeManager recipeList, int recipeIndex) {
         recipes.add(recipeList.getRecipeList().get(recipeIndex));
     }
 
-    public void removeRecipeFromPlan(RecipeManager recipeList, int recipeIndex) {
-        recipes.remove(recipeList.getRecipeList().get(recipeIndex));
+    public void removeRecipe(int recipeIndex) {
+        recipes.remove(recipeIndex);
     }
 
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
-        res.append("Duration: ").append(getDuration()).append("\n");
         for (Recipe i : recipes) {
             res.append(i.getContent());
         }
 
         return res.toString();
+    }
+
+    public ArrayList<Recipe> getRecipes() {
+        return recipes;
     }
 }

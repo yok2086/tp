@@ -25,13 +25,43 @@ public class AddRecipe extends RecipeCommand {
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, Scanner in) {
         Boolean isFinished = false;
-        System.out.println("Please Input Recipe Name: ");
-        recipeName = in.nextLine();
+        do {
+            System.out.println("Please Input Recipe Name: ");
+            recipeName = in.nextLine();
+        } while (recipeName.trim().isEmpty());
         Recipe recipe = recipes.addRecipe(recipeName);
 
         int stepNumber = 1;
         while (!isFinished) {
-            System.out.println("Please Input Step: <When done, type exit>");
+            System.out.println("Please Input Ingredient Name: <When done, type exit>");
+            String ingredientName = in.nextLine();
+            if (ingredientName.equals("exit")) {
+                isFinished = true;
+            } else {
+                System.out.println("Please Input Ingredient Quantity:");
+                int quantity = 0;
+                try {
+                    quantity = Integer.parseInt(in.nextLine());
+                    if (quantity <= 0) {
+                        throw new ArithmeticException("Quantity must be greater than 0");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid ingredient quantity, please try again");
+                    continue;
+                } catch (ArithmeticException e) {
+                    System.out.println("Quantity must be greater than 0");
+                    continue;
+                } finally {
+                    System.out.println("Please Input Quantity Unit:");
+                    String quantityUnit = in.nextLine();
+                    recipes.addRecipeIngredients(recipe, ingredientName, quantity, quantityUnit);
+                }
+            }
+        }
+
+        isFinished = false;
+        while (!isFinished) {
+            System.out.println("Please Input Instruction Step: <When done, type exit>");
             stepContent = in.nextLine();
             if (stepContent.equals("exit")) {
                 isFinished = true;

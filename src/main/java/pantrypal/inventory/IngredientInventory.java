@@ -4,6 +4,7 @@ import pantrypal.general.control.Ui;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class IngredientInventory {
     private Map<String, Ingredient> inventory;
@@ -14,9 +15,21 @@ public class IngredientInventory {
         lowStockAlerts = new HashMap<>();
     }
 
+    private void validateIngredient(String name, double quantity, String unit) {
+        assert name != null && !name.isEmpty() : "Ingredient name cannot be null or empty";
+        assert quantity > 0 : "Quantity must be positive";
+        assert unit != null && !unit.isEmpty() : "Unit cannot be null or empty";
+    }
+
     // Add new ingredient
     public void addNewIngredient(String name, double quantity, String unit) {
-        inventory.put(name, new Ingredient(name, quantity, unit));
+        validateIngredient(name, quantity, unit);
+        if (!inventory.containsKey(name)) {
+            inventory.put(name, new Ingredient(name, quantity, unit));
+            System.out.println("Added " + name + ": " + quantity + " " + unit);
+        } else {
+            System.out.println(name + " already exists.");
+        }
     }
 
     // Increase ingredient quantity

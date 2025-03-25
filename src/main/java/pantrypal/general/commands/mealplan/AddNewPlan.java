@@ -23,7 +23,7 @@ public class AddNewPlan extends MealPlanCommand {
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, Scanner in) {
-        presets.addNewPlan(duration);
+        presets.addNewPlan();
         System.out.println("Plan added");
     }
 }
