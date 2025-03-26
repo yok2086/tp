@@ -2,6 +2,7 @@ package pantrypal.general.commands.shoppinglist;
 
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
+import pantrypal.inventory.Unit;
 import pantrypal.mealplan.PlanPresets;
 import pantrypal.recipe.RecipeManager;
 import pantrypal.shoppinglist.ShoppingList;
@@ -17,7 +18,7 @@ public class AddShoppingItem extends ShoppingLIstCommand {
         super("addShoppingItem <name> <quantity> <unit>", "Add an item to the shopping list");
     }
 
-    public AddShoppingItem(String name, double quantity, String unit) {
+    public AddShoppingItem(String name, double quantity, Unit unit) {
         super("AddShoppingItem <name> <quantity> <unit>", "Add an item to the shopping list");
         shoppingListItem = new ShoppingListItem(name, quantity, unit);
         this.name = name;

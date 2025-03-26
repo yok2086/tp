@@ -3,6 +3,8 @@ package pantrypal.shoppinglist;
 import java.util.ArrayList;
 import java.util.List;
 
+import pantrypal.inventory.Unit;
+
 public class ShoppingList {
     private List<ShoppingListItem> items;
 
@@ -30,7 +32,7 @@ public class ShoppingList {
     }
 
     // Update an existing item's quantity and unit.
-    public boolean updateItem(String ingredientName, double newQuantity, String newUnit) {
+    public boolean updateItem(String ingredientName, double newQuantity, Unit newUnit) {
         assert ingredientName != null : "Ingredient name cannot be null.";
         assert newUnit != null : "Unit cannot be null.";
         assert newQuantity >= 0 : "Quantity should be non-negative.";

@@ -1,11 +1,13 @@
 package pantrypal.shoppinglist;
 
+import pantrypal.inventory.Unit;
+
 public class ShoppingListItem {
     private String ingredientName;
     private double quantity;
-    private String unit;
+    private Unit unit;
 
-    public ShoppingListItem(String ingredientName, double quantity, String unit) {
+    public ShoppingListItem(String ingredientName, double quantity, Unit unit) {
         assert ingredientName != null : "Ingredient name must not be null.";
         assert unit != null : "Unit must not be null.";
         assert quantity >= 0 : "Quantity must be non-negative.";
@@ -39,11 +41,11 @@ public class ShoppingListItem {
         this.quantity = quantity;
     }
 
-    public String getUnit() {
+    public Unit getUnit() {
         return unit;
     }
 
-    public void setUnit(String unit) {
+    public void setUnit(Unit unit) {
         assert unit != null : "Unit must not be null.";
         this.unit = unit;
     }

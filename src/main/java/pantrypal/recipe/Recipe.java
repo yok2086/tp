@@ -1,6 +1,7 @@
 package pantrypal.recipe;
 
 import pantrypal.inventory.Ingredient;
+import pantrypal.inventory.Unit;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -81,7 +82,7 @@ public class Recipe {
 
         Ingredient ingredient = filtered.get(0);
         ingredient.setQuantity(newQuantity);
-        ingredient.setUnit(newUnit);
+        ingredient.setUnit(Unit.parseUnit(newUnit));
     }
 
 
