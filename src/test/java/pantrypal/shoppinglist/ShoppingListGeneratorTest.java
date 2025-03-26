@@ -9,6 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pantrypal.inventory.IngredientInventory;
+import pantrypal.inventory.Unit;
+
 import java.util.List;
 
 public class ShoppingListGeneratorTest {
@@ -19,9 +21,9 @@ public class ShoppingListGeneratorTest {
     public void setUp() {
         // Initialize the inventory and add some ingredients.
         inventory = new IngredientInventory();
-        inventory.addNewIngredient("sugar", 100, "g");
-        inventory.addNewIngredient("flour", 300, "g");
-        inventory.addNewIngredient("butter", 50, "g");
+        inventory.addNewIngredient("sugar", 100, Unit.parseUnit("g"));
+        inventory.addNewIngredient("flour", 300,  Unit.parseUnit("g"));
+        inventory.addNewIngredient("butter", 50, Unit.parseUnit("g"));
     }
 
     @Test
@@ -45,7 +47,7 @@ public class ShoppingListGeneratorTest {
                 .findFirst().orElse(null);
         assertNotNull(sugarItem, "Sugar item should be present.");
         assertEquals(400, sugarItem.getQuantity(), "Required sugar quantity should be 400.");
-        assertEquals("g", sugarItem.getUnit(), "Sugar unit should be 'g'.");
+        assertEquals("g", sugarItem.getUnit().toString(), "Sugar unit should be 'g'.");
 
         // Verify butter item.
         ShoppingListItem butterItem = items.stream()
@@ -53,7 +55,7 @@ public class ShoppingListGeneratorTest {
                 .findFirst().orElse(null);
         assertNotNull(butterItem, "Butter item should be present.");
         assertEquals(150, butterItem.getQuantity(), "Required butter quantity should be 150.");
-        assertEquals("g", butterItem.getUnit(), "Butter unit should be 'g'.");
+        assertEquals("g", butterItem.getUnit().toString(), "Butter unit should be 'g'.");
 
         // Ensure flour is not added.
         boolean flourPresent = items.stream()

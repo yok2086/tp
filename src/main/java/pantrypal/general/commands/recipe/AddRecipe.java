@@ -2,6 +2,7 @@ package pantrypal.general.commands.recipe;
 
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
+import pantrypal.inventory.Unit;
 import pantrypal.mealplan.PlanPresets;
 import pantrypal.recipe.Recipe;
 import pantrypal.recipe.RecipeManager;
@@ -53,7 +54,7 @@ public class AddRecipe extends RecipeCommand {
                 } finally {
                     System.out.println("Please Input Quantity Unit:");
                     String quantityUnit = in.nextLine();
-                    recipes.addRecipeIngredients(recipe, ingredientName, quantity, quantityUnit);
+                    recipes.addRecipeIngredients(recipe, ingredientName, quantity, Unit.parseUnit(quantityUnit));
                 }
             }
         }

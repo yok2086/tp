@@ -2,6 +2,7 @@ package pantrypal.general.control;
 
 import pantrypal.inventory.Ingredient;
 import pantrypal.inventory.IngredientInventory;
+import pantrypal.inventory.Unit;
 import pantrypal.mealplan.PlanPresets;
 import pantrypal.recipe.Instruction;
 import pantrypal.recipe.Recipe;
@@ -72,7 +73,7 @@ public class Storage {
                     String[] shoppingListItem = line.substring("[Shopping]".length()).trim().split(" ");
                     String name = shoppingListItem[0];
                     double quantity = Double.parseDouble(shoppingListItem[1]);
-                    String unit = shoppingListItem[2];
+                    Unit unit = Unit.parseUnit(shoppingListItem[2]);
                     shoppingList.addItem(new ShoppingListItem(name, quantity, unit));
                 } else if (line.startsWith("[Recipe]")) {
                     currentSection = "Recipe";
@@ -84,7 +85,7 @@ public class Storage {
                     String[] stockItem = line.split(" ");
                     String stockName = stockItem[0];
                     double stockQuantity = Double.parseDouble(stockItem[1]);
-                    String stockUnit = stockItem[2];
+                    Unit stockUnit = Unit.parseUnit(stockItem[2]);
                     inventory.addNewIngredient(stockName, stockQuantity, stockUnit);
                 } else if (line.startsWith("[LowStock]")) {
                     currentSection = "LowStock";
@@ -109,7 +110,7 @@ public class Storage {
                                 assert false;
                                 String ingredientName = ingredient.split("")[0];
                                 double ingredientQuantity = Double.parseDouble(ingredient.split("")[1]);
-                                String ingredientUnit = ingredient.split("")[2];
+                                Unit ingredientUnit = Unit.parseUnit(ingredient.split("")[2]);
                                 recipe.addIngredient(new Ingredient(ingredientName, ingredientQuantity,
                                         ingredientUnit));
                             }

@@ -1,15 +1,14 @@
 package pantrypal.inventory;
 
-
 import java.util.Objects;
 
 public class Ingredient {
     protected String name;
     protected double quantity;
-    protected String unit;
+    protected Unit unit;
 
     //Change the access modifier to public to be used by RecipeManager
-    public Ingredient(String name, double quantity, String unit) {
+    public Ingredient(String name, double quantity, Unit unit) {
         this.name = name;
         this.quantity = quantity;
         this.unit = unit;
@@ -23,7 +22,7 @@ public class Ingredient {
         return quantity;
     }
 
-    public String getUnit() {
+    public Unit getUnit() {
         return unit;
     }
 
@@ -31,7 +30,7 @@ public class Ingredient {
         this.quantity = quantity;
     }
 
-    public void setUnit(String unit) {
+    public void setUnit(Unit unit) {
         this.unit = unit;
     }
 

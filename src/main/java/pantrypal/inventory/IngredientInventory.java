@@ -14,14 +14,14 @@ public class IngredientInventory {
         lowStockAlerts = new HashMap<>();
     }
 
-    private void validateIngredient(String name, double quantity, String unit) {
+    private void validateIngredient(String name, double quantity, Unit unit) {
         assert name != null && !name.isEmpty() : "Ingredient name cannot be null or empty";
         assert quantity > 0 : "Quantity must be positive";
-        assert unit != null && !unit.isEmpty() : "Unit cannot be null or empty";
+        assert unit != null : "Unit cannot be null";
     }
 
     // Add new ingredient
-    public void addNewIngredient(String name, double quantity, String unit) {
+    public void addNewIngredient(String name, double quantity, Unit unit) {
         validateIngredient(name, quantity, unit);
         if (!inventory.containsKey(name)) {
             inventory.put(name, new Ingredient(name, quantity, unit));

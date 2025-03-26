@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pantrypal.inventory.Ingredient;
 import pantrypal.inventory.IngredientInventory;
+import pantrypal.inventory.Unit;
 
 public class IngredientInventoryTest {
     private IngredientInventory inventory;
@@ -22,7 +23,7 @@ public class IngredientInventoryTest {
     @Test
     void testAddNewIngredient() {
         // Add sugar
-        inventory.addNewIngredient("Sugar", 2.5, "kg");
+        inventory.addNewIngredient("Sugar", 2.5, Unit.parseUnit("kg"));
 
         // Get inventory
         Map<String, Ingredient> stock = inventory.getInventory();
@@ -30,13 +31,13 @@ public class IngredientInventoryTest {
         // Check if sugar was added
         assertTrue(stock.containsKey("Sugar")); // Contains sugar?
         assertEquals(2.5, stock.get("Sugar").getQuantity()); // Quantity correct?
-        assertEquals("kg", stock.get("Sugar").getUnit()); // Unit correct?
+        assertEquals("kg", stock.get("Sugar").getUnit().toString()); // Unit correct?
     }
 
     @Test
     void testSetAlert() {
         // Add sugar
-        inventory.addNewIngredient("Sugar", 2.5, "kg");
+        inventory.addNewIngredient("Sugar", 2.5, Unit.parseUnit("kg"));
         inventory.setAlert("Sugar", 2.0);
         inventory.decreaseQuantity("Sugar", 1);
 

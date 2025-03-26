@@ -1,6 +1,7 @@
 package pantrypal.recipe;
 
 import pantrypal.inventory.Ingredient;
+import pantrypal.inventory.Unit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +67,7 @@ public class RecipeManager{
         } else if (parts[1].equals("ingredient")) {
             //Command structure: edit ingredient add <name> <quantity> <unit>
             switch (parts[2]) {
-            case "add" -> addRecipeIngredients(recipe, parts[3], Integer.parseInt(parts[4]), parts[5]);
+            case "add" -> addRecipeIngredients(recipe, parts[3], Integer.parseInt(parts[4]), Unit.parseUnit(parts[5]));
             case "remove" -> recipe.removeIngredient(parts[3]);
             //case "edit" -> recipe.editIngredient(parts[3], parts[4]);
             default -> {
@@ -83,7 +84,7 @@ public class RecipeManager{
 
     }
 
-    public void addRecipeIngredients(Recipe recipe, String ingredientName, int quantity, String unit) {
+    public void addRecipeIngredients(Recipe recipe, String ingredientName, int quantity, Unit unit) {
         try{
             Ingredient ingredient = new Ingredient(ingredientName, quantity, unit);
             recipe.addIngredient(ingredient);
@@ -95,7 +96,7 @@ public class RecipeManager{
 
 
     public void editRecipeIngredients(Recipe recipe, String ingredientName,
-                                      String newName, int newQuantity, String newUnit) {
+                                      String newName, int newQuantity, Unit newUnit) {
         try {
             Ingredient ingredient = recipe.getIngredient(ingredientName);
             if (ingredient == null) {
