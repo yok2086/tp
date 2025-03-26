@@ -1,6 +1,8 @@
 package pantrypal.inventory;
 
 
+import java.util.Objects;
+
 public class Ingredient {
     protected String name;
     protected double quantity;
@@ -40,6 +42,11 @@ public class Ingredient {
     @Override
     public String toString() {
         return name + " " + quantity + " " + unit + " ";
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 
 }
