@@ -90,7 +90,8 @@ public class RecipeManager{
         }
     }
 
-    public void editRecipeIngredients(Recipe recipe, String ingredientName, String newName, int newQuantity, String newUnit) {
+    public void editRecipeIngredients(Recipe recipe, String ingredientName,
+                                      String newName, int newQuantity, String newUnit) {
         try {
             Ingredient ingredient = recipe.getIngredient(ingredientName);
             if (ingredient == null) {
