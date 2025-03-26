@@ -47,7 +47,7 @@ public class ShoppingListGeneratorTest {
                 .findFirst().orElse(null);
         assertNotNull(sugarItem, "Sugar item should be present.");
         assertEquals(400, sugarItem.getQuantity(), "Required sugar quantity should be 400.");
-        assertEquals("g", sugarItem.getUnit(), "Sugar unit should be 'g'.");
+        assertEquals("g", sugarItem.getUnit().toString(), "Sugar unit should be 'g'.");
 
         // Verify butter item.
         ShoppingListItem butterItem = items.stream()
@@ -55,7 +55,7 @@ public class ShoppingListGeneratorTest {
                 .findFirst().orElse(null);
         assertNotNull(butterItem, "Butter item should be present.");
         assertEquals(150, butterItem.getQuantity(), "Required butter quantity should be 150.");
-        assertEquals("g", butterItem.getUnit(), "Butter unit should be 'g'.");
+        assertEquals("g", butterItem.getUnit().toString(), "Butter unit should be 'g'.");
 
         // Ensure flour is not added.
         boolean flourPresent = items.stream()

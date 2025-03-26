@@ -33,13 +33,13 @@ public class ParserTest {
     @Test
     public void parse_addNewIngredientWithValidInputs_returnsAddIngredientCommand() {
         Parser parser = new Parser();
-        Command command = parser.parse("addNewIngredient Flour 2.5 cups");
+        Command command = parser.parse("addNewIngredient Flour 2.5 cup");
 
         assertInstanceOf(AddIngredient.class, command);
         AddIngredient addIngredientCommand = (AddIngredient) command;
         assertEquals("Flour", addIngredientCommand.getName());
         assertEquals(2.5, addIngredientCommand.getQuantity(), 0.01);
-        assertEquals("cups", addIngredientCommand.getUnit());
+        assertEquals("cup", addIngredientCommand.getUnit());
     }
 
     @Test

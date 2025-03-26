@@ -31,7 +31,7 @@ public class IngredientInventoryTest {
         // Check if sugar was added
         assertTrue(stock.containsKey("Sugar")); // Contains sugar?
         assertEquals(2.5, stock.get("Sugar").getQuantity()); // Quantity correct?
-        assertEquals("kg", stock.get("Sugar").getUnit()); // Unit correct?
+        assertEquals("kg", stock.get("Sugar").getUnit().toString()); // Unit correct?
     }
 
     @Test
