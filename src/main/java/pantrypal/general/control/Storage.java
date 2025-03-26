@@ -106,7 +106,10 @@ public class Storage {
                             String[] ingredients = line.trim().split(";;");
                             for (String ingredient : ingredients) {
                                 assert false;
-                                recipe.addIngredient(ingredient);
+                                String ingredientName = ingredient.split("")[0];
+                                double ingredientQuantity = Double.parseDouble(ingredient.split("")[1]);
+                                String ingredientUnit = ingredient.split("")[2];
+                                recipe.addIngredient(new Ingredient(ingredientName, ingredientQuantity, ingredientUnit));
                             }
                         } else if (line.startsWith("[Instructions]")) {
                             line = line.substring("[Instructions]".length()).trim();

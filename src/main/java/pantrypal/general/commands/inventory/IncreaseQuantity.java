@@ -22,6 +22,14 @@ public class IncreaseQuantity extends InventoryCommand {
         this.quantity = quantity;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public double getQuantity() {
+        return quantity;
+    }
+
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, Scanner in) {

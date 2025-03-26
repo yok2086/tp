@@ -112,7 +112,7 @@ public class Recipe {
         return instructions;
     }
 
-    public ArrayList<String> getIngredients() {
+    public ArrayList<Ingredient> getIngredients() {
         return ingredients;
     }
 

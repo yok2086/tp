@@ -25,6 +25,18 @@ public class AddIngredient extends InventoryCommand {
         super("addNewIngredient <name> <quantity> <unit>", "Adding new ingredient");
     }
 
+    public String getUnit() {
+        return unit;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getQuantity() {
+        return quantity;
+    }
+
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, Scanner in) {
