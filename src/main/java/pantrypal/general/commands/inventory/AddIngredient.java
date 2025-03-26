@@ -14,10 +14,10 @@ public class AddIngredient extends InventoryCommand {
     private double quantity;
     private String unit;
 
-    public AddIngredient(String name, double quantity, String unit) {
+    public AddIngredient(String name, double quantity, Unit unit) {
         this.name = name;
         this.quantity = quantity;
-        this.unit = unit;
+        this.unit = String.valueOf(unit);
     }
 
     public AddIngredient() {

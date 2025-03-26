@@ -24,6 +24,7 @@ import pantrypal.general.commands.shoppinglist.GenerateShoppingList;
 import pantrypal.general.commands.shoppinglist.RemoveShoppingItem;
 import pantrypal.general.commands.shoppinglist.ViewShoppingList;
 import pantrypal.general.commands.mealplan.AddRecipeToPlan;
+import pantrypal.inventory.Unit;
 
 public class Parser {
 
@@ -33,7 +34,7 @@ public class Parser {
 
         String name;
         double quantity;
-        String unit;
+        Unit unit;
 
         switch (command) {
         case "help":
@@ -43,7 +44,7 @@ public class Parser {
         case "addNewIngredient":
             name = inputParts[1];
             quantity = Double.parseDouble(inputParts[2]);
-            unit = inputParts[3];
+            unit = Unit.parseUnit(inputParts[3]);
             return new AddIngredient(name, quantity, unit);
         case "increaseQuantity":
             name = inputParts[1];
@@ -56,7 +57,7 @@ public class Parser {
         case "setAlert":
             name = inputParts[1];
             double threshold = Double.parseDouble(inputParts[2]);
-            unit = inputParts[3];
+            unit = Unit.parseUnit(inputParts[3]);
             return new SetAlert(name, threshold, unit);
         case "checkStock":
             return new CheckStock();
@@ -68,7 +69,7 @@ public class Parser {
         case "addShoppingItem":
             name = inputParts[1];
             quantity = Double.parseDouble(inputParts[2]);
-            unit = inputParts[3];
+            unit = Unit.parseUnit(inputParts[3]);
             return new AddShoppingItem(name, quantity, unit);
         case "generateShoppingList":
             return new GenerateShoppingList();
