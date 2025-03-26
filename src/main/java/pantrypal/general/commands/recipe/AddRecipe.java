@@ -1,6 +1,5 @@
 package pantrypal.general.commands.recipe;
 
-import pantrypal.general.commands.Command;
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.mealplan.PlanPresets;
@@ -10,7 +9,7 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
-public class AddRecipe extends Command {
+public class AddRecipe extends RecipeCommand {
     private String recipeName;
     private String stepContent;
     private String content;

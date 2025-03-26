@@ -1,6 +1,5 @@
 package pantrypal.general.commands.shoppinglist;
 
-import pantrypal.general.commands.Command;
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.mealplan.PlanPresets;
@@ -10,7 +9,7 @@ import pantrypal.shoppinglist.ShoppingListItem;
 
 import java.util.Scanner;
 
-public class AddShoppingItem extends Command {
+public class AddShoppingItem extends ShoppingLIstCommand {
     private ShoppingListItem shoppingListItem;
     private String name;
 
@@ -28,6 +27,6 @@ public class AddShoppingItem extends Command {
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, Scanner in) {
         list.addItem(shoppingListItem);
-        ui.showMessage("Add '" + name + "' to the shopping list.");
+        Ui.showMessage("Add '" + name + "' to the shopping list.");
     }
 }

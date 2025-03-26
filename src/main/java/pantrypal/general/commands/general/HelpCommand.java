@@ -1,11 +1,12 @@
-package pantrypal.general.commands;
+package pantrypal.general.commands.general;
 
-import pantrypal.general.commands.inventory.AddIngredientCommand;
-import pantrypal.general.commands.inventory.IncreaseQuantityCommand;
-import pantrypal.general.commands.inventory.DecreaseQuantityCommand;
-import pantrypal.general.commands.inventory.SetAlertCommand;
-import pantrypal.general.commands.inventory.CheckStockCommand;
-import pantrypal.general.commands.inventory.ViewLowStockCommand;
+import pantrypal.general.commands.Command;
+import pantrypal.general.commands.inventory.AddIngredient;
+import pantrypal.general.commands.inventory.IncreaseQuantity;
+import pantrypal.general.commands.inventory.DecreaseQuantity;
+import pantrypal.general.commands.inventory.SetAlert;
+import pantrypal.general.commands.inventory.CheckStock;
+import pantrypal.general.commands.inventory.ViewLowStock;
 import pantrypal.general.commands.mealplan.AddNewPlan;
 import pantrypal.general.commands.mealplan.AddRecipeToPlan;
 import pantrypal.general.commands.mealplan.RemovePlan;
@@ -29,18 +30,18 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class HelpCommand extends Command {
+public class HelpCommand extends GeneralCommand {
     private static final List<Command> commandList = Arrays.asList(
-            new ExitCommand(), new AddIngredientCommand(),
-            new IncreaseQuantityCommand(), new DecreaseQuantityCommand(),
-            new SetAlertCommand(), new CheckStockCommand(), new ViewLowStockCommand(), new AddShoppingItem(),
+            new ExitCommand(), new AddIngredient(),
+            new IncreaseQuantity(), new DecreaseQuantity(),
+            new SetAlert(), new CheckStock(), new ViewLowStock(), new AddShoppingItem(),
             new GenerateShoppingList(), new RemoveShoppingItem(), new ViewShoppingList(), new ViewPlan(),
             new AddNewPlan(), new RemovePlan(), new AddRecipe(), new ViewRecipe(), new RemoveRecipe(), new ListRecipe(),
-            new AddRecipeToPlan(), new RemoveRecipeFromPlan()
+            new AddRecipeToPlan(), new RemoveRecipeFromPlan(), new HelpCommand()
     );
 
     public HelpCommand() {
-        super();
+        super("help","list all commands");
     }
 
     @Override

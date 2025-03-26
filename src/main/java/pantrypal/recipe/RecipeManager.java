@@ -12,6 +12,7 @@ public class RecipeManager{
     public RecipeManager() {
     }
 
+
     public Recipe addRecipe(String recipeName) {
 
         String[] parts = recipeName.split(" ", 2);
@@ -189,8 +190,10 @@ public class RecipeManager{
         }
     }
 
-    //For testing
-    // modified from protected for access by MealPlan
+    public void copyList(ArrayList<Recipe> recipes) {
+        this.recipes.addAll(recipes);
+    }
+
     public ArrayList<Recipe> getRecipeList() {
         return recipes;
     }

@@ -119,6 +119,14 @@ public class Recipe {
                 LINE + "\nInstructions:\n" + getAllInstructions() +"\n";
     }
 
+    public ArrayList<Instruction> getInstructions() {
+        return instructions;
+    }
+
+    public ArrayList<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
     @Override
     public String toString(){
         return name;
