@@ -20,7 +20,8 @@ public class RecipeManager{
             return null;
         }
 
-        List<Recipe> filteredItems = recipes.stream().filter(item -> recipeName.equals(item.getName())).toList();
+        List<Recipe> filteredItems = recipes.stream().filter(
+                item -> recipeName.equals(item.getName())).toList();
 
         if (!filteredItems.isEmpty()) {
             System.out.println("Warning: Recipe " + recipeName + " already exists");
@@ -39,7 +40,8 @@ public class RecipeManager{
 
         String recipeName = parts[0];
 
-        List<Recipe> filteredItems = recipes.stream().filter(item -> recipeName.equals(item.getName())).toList();
+        List<Recipe> filteredItems = recipes.stream().filter(
+                item -> recipeName.equals(item.getName())).toList();
 
         if (filteredItems.isEmpty()) {
             System.out.println("Warning: Recipe " + recipeName + " does not exist");
@@ -89,6 +91,7 @@ public class RecipeManager{
             System.out.println("The correct format is: ");
         }
     }
+
 
     public void editRecipeIngredients(Recipe recipe, String ingredientName,
                                       String newName, int newQuantity, String newUnit) {

@@ -13,8 +13,15 @@ public class IngredientInventory {
         lowStockAlerts = new HashMap<>();
     }
 
+    private void validateIngredient(String name, double quantity, String unit) {
+        assert name != null && !name.isEmpty() : "Ingredient name cannot be null or empty";
+        assert quantity > 0 : "Quantity must be positive";
+        assert unit != null && !unit.isEmpty() : "Unit cannot be null or empty";
+    }
+
     // Add new ingredient
     public void addNewIngredient(String name, double quantity, String unit) {
+        validateIngredient(name, quantity, unit);
         if (!inventory.containsKey(name)) {
             inventory.put(name, new Ingredient(name, quantity, unit));
             System.out.println("Added " + name + ": " + quantity + " " + unit);
@@ -25,6 +32,7 @@ public class IngredientInventory {
 
     // Increase ingredient quantity
     public void increaseQuantity(String name, double quantity, String unit) {
+        validateIngredient(name, quantity, unit);
         Ingredient ingredient = inventory.get(name);
         if (ingredient != null && ingredient.unit.equals(unit)) {
             ingredient.quantity += quantity;
@@ -36,6 +44,7 @@ public class IngredientInventory {
 
     // Decrease ingredient quantity
     public void decreaseQuantity(String name, double quantity, String unit) {
+        validateIngredient(name, quantity, unit);
         Ingredient ingredient = inventory.get(name);
         if (ingredient != null && ingredient.unit.equals(unit)) {
             if (ingredient.quantity >= quantity) {
@@ -51,6 +60,7 @@ public class IngredientInventory {
 
     // Set low stock alert
     public void setAlert(String name, double threshold, String unit) {
+        validateIngredient(name, threshold, unit);
         if (inventory.containsKey(name)) {
             lowStockAlerts.put(name, threshold);
             System.out.println("Set low stock alert for " + name + " at " + threshold + " " + unit);
