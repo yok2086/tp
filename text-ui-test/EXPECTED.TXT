@@ -6,6 +6,11 @@ ____             _              ____       _
                            |___/
 ____________________________________________________________
 Welcome to PantryPal, please enter your command!
+Type "help" for a list of commands.
+Save file directory not found
+Save file directory created
+Save file created
+____________________________________________________________
 ____________________________________________________________
 See you next time!
 ____________________________________________________________

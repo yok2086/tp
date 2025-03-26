@@ -18,7 +18,8 @@ public class GeneralCommand extends Command {
     public GeneralCommand() {}
 
     @Override
-    public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets, RecipeManager recipes, Scanner in) {
+    public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
+                        RecipeManager recipes, Scanner in) {
 
     }
 }

@@ -6,7 +6,6 @@ import pantrypal.general.commands.inventory.InventoryCommand;
 import pantrypal.general.commands.mealplan.MealPlanCommand;
 import pantrypal.general.commands.recipe.RecipeCommand;
 import pantrypal.general.commands.shoppinglist.ShoppingLIstCommand;
-import pantrypal.recipe.Recipe;
 
 public class Ui {
     private static final String LOGO =

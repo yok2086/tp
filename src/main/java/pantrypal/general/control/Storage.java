@@ -14,11 +14,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class Storage {
     private static String filePath = "";
-    static File file;
+    private static File file;
 
 
     public Storage(String filePath) {
@@ -63,7 +62,9 @@ public class Storage {
                 String line = scanner.nextLine().trim();
 
                 // Skip empty lines
-                if (line.isEmpty()) continue;
+                if (line.isEmpty()) {
+                    continue;
+                }
 
                 // Identify sections
                 if (line.startsWith("[Shopping]")) {
@@ -109,7 +110,8 @@ public class Storage {
                                 String ingredientName = ingredient.split("")[0];
                                 double ingredientQuantity = Double.parseDouble(ingredient.split("")[1]);
                                 String ingredientUnit = ingredient.split("")[2];
-                                recipe.addIngredient(new Ingredient(ingredientName, ingredientQuantity, ingredientUnit));
+                                recipe.addIngredient(new Ingredient(ingredientName, ingredientQuantity,
+                                        ingredientUnit));
                             }
                         } else if (line.startsWith("[Instructions]")) {
                             line = line.substring("[Instructions]".length()).trim();
@@ -159,17 +161,7 @@ public class Storage {
             }
 
             for (Recipe recipe : recipeManager.getRecipeList()) {
-//                fileInput.append("[Recipe] ").append(recipe.getName()).append("\n");
-//
-//                // Convert ingredients list into a single string, separating each ingredient with ";"
-//                String ingredients = recipe.getIngredients().stream()
-//                        .map(ing -> ing.getName() + " " + ing.getQuantity() + " " + ing.getUnit())
-//                        .collect(Collectors.joining("; "));
-//                fileInput.append("Ingredients: ").append(ingredients).append("\n");
-//
-//                // Convert instructions list into a single string, separating steps with ";"
-//                String instructions = String.join("; ", recipe.getInstructions());
-//                fileInput.append("Instructions: ").append(instructions).append("\n\n");
+                //Implement in progress
             }
             fileWriter.write(fileInput.toString());
         } catch (IOException e) {
