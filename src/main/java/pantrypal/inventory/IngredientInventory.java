@@ -92,13 +92,13 @@ public class IngredientInventory {
 
         for (Ingredient ingredient : inventory.values()) {
             if (ingredient.expiryDate != null && ingredient.expiryDate.isBefore(today)) {
-                System.out.println("⚠ Warning: " + ingredient.name + " expired on " + ingredient.expiryDate + "!");
+                Ui.showMessage("⚠ Warning: " + ingredient.name + " expired on " + ingredient.expiryDate + "!");
                 expired = true;
             }
         }
 
         if (!expired) {
-            System.out.println("No expired ingredients!");
+            Ui.showMessage("No expired ingredients!");
         }
     }
 

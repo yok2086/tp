@@ -10,8 +10,9 @@ import java.util.Scanner;
 
 
 public class AlertExpiredIngredient extends InventoryCommand {
+
     public AlertExpiredIngredient() {
-        super("alertExpiredIngredient",
+        super("viewExpiredIngredient",
             "Alerts the user about expired ingredients in the inventory.");
     }
     @Override

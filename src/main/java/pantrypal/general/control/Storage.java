@@ -155,7 +155,7 @@ public class Storage {
                 Ingredient item = ingredient.getValue();
                 fileInput.append("[Stock] ").append(item.getName()).append(" ")
                         .append(item.getQuantity())
-                        .append(" ").append(item.getUnit()).append("\n");
+                        .append(" ").append(item.getUnit()).append(" ").append(item.getExpiryDate()).append("\n");
             }
 
             for (Map.Entry<String, Double> lowStockItem : inventory.getLowStockAlerts().entrySet()) {

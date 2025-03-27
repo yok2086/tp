@@ -1,5 +1,6 @@
 package pantrypal.recipe;
 
+import pantrypal.general.control.Ui;
 import pantrypal.inventory.Ingredient;
 import pantrypal.inventory.Unit;
 
@@ -19,7 +20,7 @@ public class RecipeManager{
 
         String[] parts = recipeName.split(" ", 2);
         if (parts.length > 1) {
-            System.out.println("Warning: Recipe name should not contain space. Use '_' instead.");
+            Ui.showMessage("Warning: Recipe name should not contain space. Use '_' instead.");
             return null;
         }
 
@@ -27,7 +28,7 @@ public class RecipeManager{
                 item -> recipeName.equals(item.getName())).toList();
 
         if (!filteredItems.isEmpty()) {
-            System.out.println("Warning: Recipe " + recipeName + " already exists");
+            Ui.showMessage("Warning: Recipe " + recipeName + " already exists");
             return null;
         }
 
@@ -93,8 +94,8 @@ public class RecipeManager{
             Ingredient ingredient = new Ingredient(ingredientName, quantity, unit, expiryDate);
             recipe.addIngredient(ingredient);
         } catch (Exception e){
-            System.out.println("Warning: Invalid ingredient " + ingredientName);
-            System.out.println("The correct format is: ");
+            Ui.showMessage("Warning: Invalid ingredient " + ingredientName);
+            Ui.showMessage(e.getMessage());
         }
     }
 

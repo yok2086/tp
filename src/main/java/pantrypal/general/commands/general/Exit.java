@@ -8,9 +8,9 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
-public class ExitCommand extends GeneralCommand {
+public class Exit extends GeneralCommand {
 
-    public ExitCommand() {
+    public Exit() {
         super("exit", "Exit the program");
     }
 

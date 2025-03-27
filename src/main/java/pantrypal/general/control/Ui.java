@@ -105,8 +105,8 @@ public class Ui {
         Ui.printLine();
     }
 
-    public void printInvalidCommandMessage() {
-        Ui.showMessage("Invalid Command!");
+    public void printInvalidCommandMessage(String errorMessage) {
+        Ui.showMessage(errorMessage + "Please try again.");
     }
 
     public static void showMessage(String message) {
