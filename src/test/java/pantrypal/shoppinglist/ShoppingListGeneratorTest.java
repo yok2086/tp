@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.inventory.Unit;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class ShoppingListGeneratorTest {
@@ -21,9 +22,9 @@ public class ShoppingListGeneratorTest {
     public void setUp() {
         // Initialize the inventory and add some ingredients.
         inventory = new IngredientInventory();
-        inventory.addNewIngredient("sugar", 100, Unit.parseUnit("g"));
-        inventory.addNewIngredient("flour", 300,  Unit.parseUnit("g"));
-        inventory.addNewIngredient("butter", 50, Unit.parseUnit("g"));
+        inventory.addNewIngredient("sugar", 100, Unit.parseUnit("g"), LocalDate.parse("2026-12-31"));
+        inventory.addNewIngredient("flour", 300,  Unit.parseUnit("g"), LocalDate.parse("2026-01-15"));
+        inventory.addNewIngredient("butter", 50, Unit.parseUnit("g"), LocalDate.parse("2026-02-01"));
     }
 
     @Test
@@ -48,6 +49,7 @@ public class ShoppingListGeneratorTest {
         assertNotNull(sugarItem, "Sugar item should be present.");
         assertEquals(400, sugarItem.getQuantity(), "Required sugar quantity should be 400.");
         assertEquals("g", sugarItem.getUnit().toString(), "Sugar unit should be 'g'.");
+        assertEquals(LocalDate.parse("2026-12-31"), sugarItem.getExpiryDate(), "Sugar expiry date should be 2026-12-31.");
 
         // Verify butter item.
         ShoppingListItem butterItem = items.stream()

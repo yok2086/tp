@@ -1,11 +1,14 @@
 package pantrypal.shoppinglist;
 
+import java.time.LocalDate;
+
 import pantrypal.inventory.Unit;
 
 public class ShoppingListItem {
     private String ingredientName;
     private double quantity;
     private Unit unit;
+    private LocalDate expiryDate;
 
     public ShoppingListItem(String ingredientName, double quantity, Unit unit) {
         assert ingredientName != null : "Ingredient name must not be null.";
@@ -53,5 +56,9 @@ public class ShoppingListItem {
     @Override
     public String toString() {
         return ingredientName + ": " + quantity + " " + unit;
+    }
+
+    public LocalDate getExpiryDate() {
+        return expiryDate;
     }
 }
