@@ -15,7 +15,8 @@ public class SetAlert extends InventoryCommand {
     private String unit;
 
     public SetAlert() {
-        super("setAlert <name> <threshold> <unit>", "Sets the alert for a specific ingredient");
+        super("setAlert <name> <threshold> <unit>",
+                "Sets the alert for a specific ingredient");
     }
 
     public SetAlert(String name, double threshold, Unit unit) {

@@ -108,7 +108,8 @@ public class Recipe {
     }
 
     public Ingredient getIngredient(String ingredientName) {
-        List<Ingredient> filtered = ingredients.stream().filter(i -> i.getName().equals(ingredientName)).toList();
+        List<Ingredient> filtered = ingredients.stream().filter(i -> i.getName().
+                equals(ingredientName)).toList();
         if (filtered.isEmpty()) {
             return null;
         }

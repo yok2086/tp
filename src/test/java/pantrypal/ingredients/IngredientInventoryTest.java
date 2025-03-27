@@ -33,7 +33,8 @@ public class IngredientInventoryTest {
         assertTrue(stock.containsKey("Sugar")); // Contains sugar?
         assertEquals(2.5, stock.get("Sugar").getQuantity()); // Quantity correct?
         assertEquals("kg", stock.get("Sugar").getUnit().toString()); // Unit correct?
-        assertEquals(LocalDate.parse("2026-02-01"), stock.get("Sugar").getExpiryDate(), "Expiry date of sugar should be 2026-02-01");
+        assertEquals(LocalDate.parse("2026-02-01"), stock.get("Sugar").getExpiryDate(), "Expiry date of " +
+                "sugar should be 2026-02-01");
     }
 
     @Test

@@ -13,7 +13,8 @@ public class IncreaseQuantity extends InventoryCommand {
     private double quantity;
 
     public IncreaseQuantity() {
-        super("increaseQuantity <name> <quantity>","Increase quantity of ingredient");
+        super("increaseQuantity <name> <quantity>",
+                "Increase quantity of ingredient");
     }
 
     public IncreaseQuantity(String name, double quantity) {

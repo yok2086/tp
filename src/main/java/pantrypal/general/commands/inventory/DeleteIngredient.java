@@ -12,7 +12,8 @@ public class DeleteIngredient extends InventoryCommand {
     private String name;
 
     public DeleteIngredient() {
-        super("deleteIngredient <name>", "Delete an ingredient from the inventory");
+        super("deleteIngredient <name>",
+                "Delete an ingredient from the inventory");
     }
 
     public DeleteIngredient(String name) {

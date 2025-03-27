@@ -49,7 +49,8 @@ public class ShoppingListGeneratorTest {
         assertNotNull(sugarItem, "Sugar item should be present.");
         assertEquals(400, sugarItem.getQuantity(), "Required sugar quantity should be 400.");
         assertEquals("g", sugarItem.getUnit().toString(), "Sugar unit should be 'g'.");
-        assertEquals(LocalDate.parse("2026-12-31"), sugarItem.getExpiryDate(), "Sugar expiry date should be 2026-12-31.");
+        assertEquals(LocalDate.parse("2026-12-31"), sugarItem.getExpiryDate(), "Sugar expiry date should " +
+                "be 2026-12-31.");
 
         // Verify butter item.
         ShoppingListItem butterItem = items.stream()

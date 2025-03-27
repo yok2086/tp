@@ -56,7 +56,8 @@ public class AddRecipe extends RecipeCommand {
                 } finally {
                     System.out.println("Please Input Quantity Unit:");
                     String quantityUnit = in.nextLine();
-                    recipes.addRecipeIngredients(recipe, ingredientName, quantity, Unit.parseUnit(quantityUnit), expiryDate);
+                    recipes.addRecipeIngredients(recipe, ingredientName, quantity, Unit.parseUnit(quantityUnit),
+                            expiryDate);
                 }
             }
         }

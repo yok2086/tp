@@ -13,7 +13,8 @@ public class AddRecipeToPlan extends MealPlanCommand {
     private int planIndex;
 
     public AddRecipeToPlan() {
-        super("addToPlan <recipe index> <plan index>" , "Add a recipe to a plan");
+        super("addToPlan <recipe index> <plan index>" ,
+                "Add a recipe to a plan");
     }
 
     public AddRecipeToPlan(int recipeIndex, int planIndex) {
