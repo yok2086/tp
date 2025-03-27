@@ -3,6 +3,7 @@ package pantrypal.recipe;
 import pantrypal.inventory.Ingredient;
 import pantrypal.inventory.Unit;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class RecipeManager{
     public void editRecipe(String command) {
 
         // Splitting into parts
-        String[] parts = command.split(" ", 6);
+        String[] parts = command.split(" ", 7);
 
         String recipeName = parts[0];
 
@@ -67,9 +68,11 @@ public class RecipeManager{
         } else if (parts[1].equals("ingredient")) {
             //Command structure: edit ingredient add <name> <quantity> <unit>
             switch (parts[2]) {
-            case "add" -> addRecipeIngredients(recipe, parts[3], Integer.parseInt(parts[4]), Unit.parseUnit(parts[5]));
+            case "add" -> addRecipeIngredients(recipe, parts[3], Integer.parseInt(parts[4]), Unit.parseUnit(parts[5]),
+                    LocalDate.parse(parts[6]));
             case "remove" -> recipe.removeIngredient(parts[3]);
             //case "edit" -> recipe.editIngredient(parts[3], parts[4]);
+
             default -> {
                 System.out.println("Wrong ingredient format!");
                 System.out.println("Expected add/remove/edit after 'ingredient'");
@@ -84,9 +87,10 @@ public class RecipeManager{
 
     }
 
-    public void addRecipeIngredients(Recipe recipe, String ingredientName, int quantity, Unit unit) {
+    public void addRecipeIngredients(Recipe recipe, String ingredientName, int quantity, Unit unit,
+                                     LocalDate expiryDate) {
         try{
-            Ingredient ingredient = new Ingredient(ingredientName, quantity, unit);
+            Ingredient ingredient = new Ingredient(ingredientName, quantity, unit, expiryDate);
             recipe.addIngredient(ingredient);
         } catch (Exception e){
             System.out.println("Warning: Invalid ingredient " + ingredientName);
@@ -171,7 +175,8 @@ public class RecipeManager{
     }
 
     public Recipe searchRecipe(String recipeName) {
-        List<Recipe> filteredItems = recipes.stream().filter(recipe -> recipeName.equals(recipe.getName())).toList();
+        List<Recipe> filteredItems = recipes.stream().
+                filter(recipe -> recipeName.equals(recipe.getName())).toList();
 
         if (filteredItems.isEmpty()) {
             System.out.println("Warning: Recipe " + recipeName + " does not exist");
@@ -182,7 +187,8 @@ public class RecipeManager{
     }
 
     public void removeRecipe(String recipeName) {
-        List<Recipe> filteredItems = recipes.stream().filter(recipe -> recipeName.equals(recipe.getName())).toList();
+        List<Recipe> filteredItems = recipes.stream().filter(recipe -> recipeName.
+                equals(recipe.getName())).toList();
 
         if (filteredItems.isEmpty()) {
             System.out.println("Warning: Recipe " + recipeName + " does not exist");

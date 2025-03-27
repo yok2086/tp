@@ -1,28 +1,20 @@
 package pantrypal.inventory;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Ingredient {
     protected String name;
     protected double quantity;
     protected Unit unit;
+    protected LocalDate expiryDate;
 
     //Change the access modifier to public to be used by RecipeManager
-    public Ingredient(String name, double quantity, Unit unit) {
-
-        if (name == null || name.trim().isEmpty()) {
-            throw new IllegalArgumentException("Ingredient name cannot be empty.");
-        }
-        if (quantity < 0) {
-            throw new IllegalArgumentException("Ingredient quantity cannot be negative.");
-        }
-        if (unit == null) {
-            throw new IllegalArgumentException("Unit cannot be null.");
-        }
-
+    public Ingredient(String name, double quantity, Unit unit, LocalDate expiryDate) {
         this.name = name;
         this.quantity = quantity;
         this.unit = unit;
+        setExpiryDate(expiryDate);
     }
 
     public String getName() {
@@ -37,35 +29,37 @@ public class Ingredient {
         return unit;
     }
 
+    public LocalDate getExpiryDate() {
+        return expiryDate;
+    }
+
     public void setQuantity(double quantity) {
-        if (quantity < 0) {
-            throw new IllegalArgumentException("Quantity cannot be negative.");
-        }
         this.quantity = quantity;
     }
 
     public void setUnit(Unit unit) {
-        if (unit == null) {
-            throw new IllegalArgumentException("Unit cannot be null.");
-        }
         this.unit = unit;
     }
 
     public void setName(String name) {
-        if (name == null || name.trim().isEmpty()) {
-            throw new IllegalArgumentException("Ingredient name cannot be empty.");
-        }
         this.name = name;
+    }
+
+    public void setExpiryDate(LocalDate expiryDate) {
+        if (expiryDate != null && expiryDate.isBefore(LocalDate.now())) {
+            throw new IllegalArgumentException("Expiry date cannot be in the past.");
+        }
+        this.expiryDate = expiryDate;
     }
 
     @Override
     public String toString() {
-        return name + " " + quantity + " " + unit + " ";
+        return name + " " + quantity + " " + unit +
+                (expiryDate != null ? " (Expires: " + expiryDate + ")" : "");
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(name, expiryDate);
     }
-
 }

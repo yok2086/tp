@@ -18,7 +18,8 @@ public class DecreaseQuantity extends InventoryCommand {
     }
 
     public DecreaseQuantity() {
-        super("decreaseQuantity <name> <quantity>", "Decrease quantity of ingredient");
+        super("decreaseQuantity <name> <quantity>",
+                "Decrease quantity of ingredient");
     }
 
     @Override

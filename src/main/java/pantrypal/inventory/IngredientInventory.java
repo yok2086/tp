@@ -4,6 +4,7 @@ import pantrypal.general.control.Ui;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.time.LocalDate;
 
 public class IngredientInventory {
     private Map<String, Ingredient> inventory;
@@ -14,23 +15,17 @@ public class IngredientInventory {
         lowStockAlerts = new HashMap<>();
     }
 
-    private void validateIngredient(String name, double quantity, Unit unit) {
-        if (name == null || name.trim().isEmpty()) {
-            throw new IllegalArgumentException("Ingredient name cannot be null or empty.");
-        }
-        if (quantity <= 0) {
-            throw new IllegalArgumentException("Quantity must be greater than zero.");
-        }
-        if (unit == null) {
-            throw new IllegalArgumentException("Unit cannot be null.");
-        }
+    private void validateIngredient(String name, double quantity, Unit unit, LocalDate expiryDate) {
+        assert name != null && !name.isEmpty() : "Ingredient name cannot be null or empty";
+        assert quantity > 0 : "Quantity must be positive";
+        assert unit != null : "Unit cannot be null or empty";
     }
 
     // Add new ingredient
-    public void addNewIngredient(String name, double quantity, Unit unit) {
-        validateIngredient(name, quantity, unit);
+    public void addNewIngredient(String name, double quantity, Unit unit, LocalDate expiryDate) {
+        validateIngredient(name, quantity, unit, expiryDate);
         if (!inventory.containsKey(name)) {
-            inventory.put(name, new Ingredient(name, quantity, unit));
+            inventory.put(name, new Ingredient(name, quantity, unit, expiryDate));
             System.out.println("Added " + name + ": " + quantity + " " + unit);
         } else {
             System.out.println(name + " already exists.");
@@ -39,9 +34,6 @@ public class IngredientInventory {
 
     // Increase ingredient quantity
     public void increaseQuantity(String name, double quantity) {
-        if (quantity <= 0) {
-            throw new IllegalArgumentException("Increase amount must be positive.");
-        }
         Ingredient ingredient = inventory.get(name);
         if (ingredient != null) {
             ingredient.quantity += quantity;
@@ -53,9 +45,6 @@ public class IngredientInventory {
 
     // Decrease ingredient quantity
     public void decreaseQuantity(String name, double quantity) {
-        if (quantity <= 0) {
-            throw new IllegalArgumentException("Decrease amount must be positive.");
-        }
         Ingredient ingredient = inventory.get(name);
         if (ingredient != null) {
             if (ingredient.quantity >= quantity) {
@@ -97,11 +86,6 @@ public class IngredientInventory {
 
     // View low stock ingredients
     public void viewLowStock() {
-        if (lowStockAlerts.isEmpty()) {
-            Ui.showMessage("No low stock alerts set.");
-            return;
-        }
-
         boolean found = false;
         for (Map.Entry<String, Double> alert : lowStockAlerts.entrySet()) {
             Ingredient ingredient = inventory.get(alert.getKey());
@@ -118,10 +102,6 @@ public class IngredientInventory {
 
     // Delete ingredient
     public void deleteIngredient(String name) {
-        if (!inventory.containsKey(name)) {
-            throw new IllegalArgumentException("Cannot delete. Ingredient not found: " + name);
-        }
-
         if (inventory.remove(name) != null) {
             lowStockAlerts.remove(name);
             System.out.println("Deleted " + name + " from inventory.");

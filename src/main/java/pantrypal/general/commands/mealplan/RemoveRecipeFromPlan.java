@@ -13,7 +13,8 @@ public class RemoveRecipeFromPlan extends MealPlanCommand {
     private int planIndex;
 
     public RemoveRecipeFromPlan() {
-        super("removeFromPlan <recipe index>" , "Remove a recipe to a plan");
+        super("removeFromPlan <recipe index>" ,
+                "Remove a recipe to a plan");
     }
 
     public RemoveRecipeFromPlan(int recipeIndex, int planIndex) {
