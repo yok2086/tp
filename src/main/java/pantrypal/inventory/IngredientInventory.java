@@ -84,6 +84,24 @@ public class IngredientInventory {
         }
     }
 
+    //Notify expired ingredient
+
+    public void alertExpiredIngredient() {
+        LocalDate today = LocalDate.now();
+        boolean expired = false;
+
+        for (Ingredient ingredient : inventory.values()) {
+            if (ingredient.expiryDate != null && ingredient.expiryDate.isBefore(today)) {
+                System.out.println("⚠ Warning: " + ingredient.name + " expired on " + ingredient.expiryDate + "!");
+                expired = true;
+            }
+        }
+
+        if (!expired) {
+            System.out.println("No expired ingredients!");
+        }
+    }
+
     // View low stock ingredients
     public void viewLowStock() {
         boolean found = false;
