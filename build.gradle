@@ -17,9 +17,6 @@ dependencies {
 test {
     useJUnitPlatform()
 
-    // Enable assertions during test execution
-    jvmArgs += ['-ea']
-
     testLogging {
         events "passed", "skipped", "failed"
 
@@ -44,8 +41,7 @@ checkstyle {
     toolVersion = '10.2'
 }
 
-run {
+run{
     standardInput = System.in
-    // Enable assertions when running the application
-    jvmArgs += ['-ea']
+    enableAssertions = true
 }
