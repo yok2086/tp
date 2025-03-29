@@ -1,6 +1,5 @@
 package pantrypal.general.commands.recipe;
 
-import pantrypal.general.commands.Command;
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.mealplan.PlanPresets;
@@ -9,7 +8,7 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
-public class RemoveRecipe extends Command {
+public class RemoveRecipe extends RecipeCommand {
     private String recipeName;
 
     public RemoveRecipe() {

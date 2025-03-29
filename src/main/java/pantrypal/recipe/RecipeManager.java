@@ -1,5 +1,9 @@
 package pantrypal.recipe;
 
+import pantrypal.inventory.Ingredient;
+import pantrypal.inventory.Unit;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +14,7 @@ public class RecipeManager{
     public RecipeManager() {
     }
 
+
     public Recipe addRecipe(String recipeName) {
 
         String[] parts = recipeName.split(" ", 2);
@@ -18,7 +23,8 @@ public class RecipeManager{
             return null;
         }
 
-        List<Recipe> filteredItems = recipes.stream().filter(item -> recipeName.equals(item.getName())).toList();
+        List<Recipe> filteredItems = recipes.stream().filter(
+                item -> recipeName.equals(item.getName())).toList();
 
         if (!filteredItems.isEmpty()) {
             System.out.println("Warning: Recipe " + recipeName + " already exists");
@@ -33,11 +39,12 @@ public class RecipeManager{
     public void editRecipe(String command) {
 
         // Splitting into parts
-        String[] parts = command.split(" ", 5);
+        String[] parts = command.split(" ", 7);
 
         String recipeName = parts[0];
 
-        List<Recipe> filteredItems = recipes.stream().filter(item -> recipeName.equals(item.getName())).toList();
+        List<Recipe> filteredItems = recipes.stream().filter(
+                item -> recipeName.equals(item.getName())).toList();
 
         if (filteredItems.isEmpty()) {
             System.out.println("Warning: Recipe " + recipeName + " does not exist");
@@ -48,9 +55,9 @@ public class RecipeManager{
 
         if (parts[1].equals("instruction")) {
             switch (parts[2]) {
-            case "add" -> addRecipeInstruction(recipe, Integer.parseInt(parts[3]), parts[4]);
+            case "add" -> addRecipeInstruction(recipe, Integer.parseInt(parts[3]), parts[4] + parts[5]);
             case "remove" -> removeRecipeInstruction(recipe, parts[3]);
-            case "edit" -> editRecipeInstruction(recipe, parts[3], parts[4]);
+            case "edit" -> editRecipeInstruction(recipe, parts[3], parts[4] + parts[5]);
             default -> {
                 //throw new Exception();
                 System.out.println("Wrong editRecipe format!");
@@ -59,10 +66,13 @@ public class RecipeManager{
             }
 
         } else if (parts[1].equals("ingredient")) {
+            //Command structure: edit ingredient add <name> <quantity> <unit>
             switch (parts[2]) {
-            case "add" -> recipe.addIngredient(parts[3]);
+            case "add" -> addRecipeIngredients(recipe, parts[3], Integer.parseInt(parts[4]), Unit.parseUnit(parts[5]),
+                    LocalDate.parse(parts[6]));
             case "remove" -> recipe.removeIngredient(parts[3]);
-            case "edit" -> recipe.editIngredient(parts[3], parts[4]);
+            //case "edit" -> recipe.editIngredient(parts[3], parts[4]);
+
             default -> {
                 System.out.println("Wrong ingredient format!");
                 System.out.println("Expected add/remove/edit after 'ingredient'");
@@ -77,14 +87,43 @@ public class RecipeManager{
 
     }
 
+    public void addRecipeIngredients(Recipe recipe, String ingredientName, int quantity, Unit unit,
+                                     LocalDate expiryDate) {
+        try{
+            Ingredient ingredient = new Ingredient(ingredientName, quantity, unit, expiryDate);
+            recipe.addIngredient(ingredient);
+        } catch (Exception e){
+            System.out.println("Warning: Invalid ingredient " + ingredientName);
+            System.out.println("The correct format is: ");
+        }
+    }
+
+
+    public void editRecipeIngredients(Recipe recipe, String ingredientName,
+                                      String newName, int newQuantity, Unit newUnit) {
+        try {
+            Ingredient ingredient = recipe.getIngredient(ingredientName);
+            if (ingredient == null) {
+                System.out.println("There is no ingredient of name " + ingredientName);
+                return;
+            }
+
+            ingredient.setName(newName);
+            ingredient.setQuantity(newQuantity);
+            ingredient.setUnit(newUnit);
+
+        } catch (Exception e) {
+            System.out.println("Warning: Invalid instruction");
+        }
+    }
+
     public void addRecipeInstruction(Recipe recipe, int step, String content) {
         try {
             Instruction instruction = new Instruction(step, content);
             recipe.addInstruction(instruction);
         } catch (NumberFormatException e) {
             System.out.println("Warning: Invalid instruction");
-            System.out.println("The correct format is: editRecipe <recipe_name> instruction add <step> <content>\n" +
-                    "Example: editRecipe fried_egg instruction add 3 'add salt'");
+            System.out.println("The correct format is: <content>\n");
         }
     }
 
@@ -117,6 +156,9 @@ public class RecipeManager{
     }
 
     public void listRecipe() {
+        if (recipes.isEmpty()) {
+            System.out.println("There are no recipes at the moment. You can add via addRecipe");
+        }
         int index = 1;
         for (Recipe recipe : recipes) {
             System.out.print(index++ + ". ");
@@ -133,7 +175,8 @@ public class RecipeManager{
     }
 
     public Recipe searchRecipe(String recipeName) {
-        List<Recipe> filteredItems = recipes.stream().filter(recipe -> recipeName.equals(recipe.getName())).toList();
+        List<Recipe> filteredItems = recipes.stream().
+                filter(recipe -> recipeName.equals(recipe.getName())).toList();
 
         if (filteredItems.isEmpty()) {
             System.out.println("Warning: Recipe " + recipeName + " does not exist");
@@ -144,7 +187,8 @@ public class RecipeManager{
     }
 
     public void removeRecipe(String recipeName) {
-        List<Recipe> filteredItems = recipes.stream().filter(recipe -> recipeName.equals(recipe.getName())).toList();
+        List<Recipe> filteredItems = recipes.stream().filter(recipe -> recipeName.
+                equals(recipe.getName())).toList();
 
         if (filteredItems.isEmpty()) {
             System.out.println("Warning: Recipe " + recipeName + " does not exist");
@@ -153,8 +197,10 @@ public class RecipeManager{
         }
     }
 
-    //For testing
-    // modified from protected for access by MealPlan
+    public void copyList(ArrayList<Recipe> recipes) {
+        this.recipes.addAll(recipes);
+    }
+
     public ArrayList<Recipe> getRecipeList() {
         return recipes;
     }

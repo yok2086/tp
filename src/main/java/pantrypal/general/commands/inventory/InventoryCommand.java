@@ -9,25 +9,17 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
-public class DecreaseQuantityCommand extends Command {
-    private String name;
-    private double quantity;
-    private String unit;
+public class InventoryCommand extends Command {
 
-    public DecreaseQuantityCommand(String name, double quantity, String unit) {
-        this.name = name;
-        this.quantity = quantity;
-        this.unit = unit;
+    public InventoryCommand(String commandInstruction, String commandDescription) {
+        super(commandInstruction, commandDescription);
     }
 
-    public DecreaseQuantityCommand() {
-        super("decreaseQuantity <name> <quantity> <unit>", "Decrease quantity of ingredient");
-    }
+    public InventoryCommand() {}
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, Scanner in) {
-        inventory.decreaseQuantity(name, quantity, unit);
 
     }
 }

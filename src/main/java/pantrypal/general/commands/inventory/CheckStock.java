@@ -1,6 +1,5 @@
 package pantrypal.general.commands.inventory;
 
-import pantrypal.general.commands.Command;
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.mealplan.PlanPresets;
@@ -9,20 +8,16 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
-public class DeleteIngredientCommand extends Command {
-    private String name;
+public class CheckStock extends InventoryCommand {
 
-    public DeleteIngredientCommand() {
-        super("deleteIngredient <name>", "Delete an ingredient from the inventory");
-    }
-
-    public DeleteIngredientCommand(String name) {
-        this.name = name;
+    public CheckStock() {
+        super("checkStock", "Checks the stock of an item in the " +
+                "inventory");
     }
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, Scanner in) {
-        inventory.deleteIngredient(name);
+        inventory.checkStock();
     }
 }

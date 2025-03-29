@@ -25,7 +25,7 @@ public class AutoGenerationLogic {
 
             // Retrieve the ingredient details from the inventory
             Ingredient ingredient = ingredients.get(ingredientName);
-            if (ingredient != null && ingredient.getQuantity() < threshold) {
+            if (ingredient != null && ingredient.getQuantity() <= threshold) {
                 double required = threshold - ingredient.getQuantity();
 
                 // Update existing item if present; if not, add a new item.
