@@ -88,7 +88,7 @@ public class Storage {
                     double stockQuantity = Double.parseDouble(stockItem[1]);
                     Unit stockUnit = Unit.parseUnit(stockItem[2]);
                     LocalDate expiryDate = LocalDate.parse(stockItem[3]);
-                    inventory.addNewIngredient(stockName, stockQuantity, stockUnit, expiryDate);
+                    inventory.addNewIngredient(stockName, stockQuantity, stockUnit);
                 } else if (line.startsWith("[LowStock]")) {
                     currentSection = "LowStock";
                     line = line.substring("[LowStock]".length()).trim();
@@ -115,7 +115,7 @@ public class Storage {
                                 Unit ingredientUnit = Unit.parseUnit(ingredient.split("")[2]);
                                 LocalDate expiryDate = LocalDate.parse(ingredient.split("")[3]);
                                 recipe.addIngredient(new Ingredient(ingredientName, ingredientQuantity,
-                                        ingredientUnit, expiryDate));
+                                        ingredientUnit));
                             }
                         } else if (line.startsWith("[Instructions]")) {
                             line = line.substring("[Instructions]".length()).trim();

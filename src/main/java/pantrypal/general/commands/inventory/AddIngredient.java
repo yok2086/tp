@@ -42,7 +42,7 @@ public class AddIngredient extends InventoryCommand {
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, Scanner in) {
         if (!inventory.getInventory().containsKey(name)) {
-            inventory.addNewIngredient(name, quantity, Unit.parseUnit(unit), expiryDate);
+            inventory.addNewIngredient(name, quantity, Unit.parseUnit(unit));
             Ui.printAddIngredientMessage(name, quantity, unit);
         } else {
             Ui.printIngredientExists(name);

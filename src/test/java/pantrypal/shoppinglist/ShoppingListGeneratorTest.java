@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.inventory.Unit;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class ShoppingListGeneratorTest {
@@ -22,12 +21,9 @@ public class ShoppingListGeneratorTest {
     public void setUp() {
         // Initialize the inventory and add some ingredients.
         inventory = new IngredientInventory();
-        inventory.addNewIngredient("sugar", 100, Unit.parseUnit("g"),
-                LocalDate.parse("2026-12-31"));
-        inventory.addNewIngredient("flour", 300,  Unit.parseUnit("g"),
-                LocalDate.parse("2026-01-15"));
-        inventory.addNewIngredient("butter", 50, Unit.parseUnit("g"),
-                LocalDate.parse("2026-02-01"));
+        inventory.addNewIngredient("sugar", 100, Unit.parseUnit("g"));
+        inventory.addNewIngredient("flour", 300,  Unit.parseUnit("g"));
+        inventory.addNewIngredient("butter", 50, Unit.parseUnit("g"));
     }
 
     @Test

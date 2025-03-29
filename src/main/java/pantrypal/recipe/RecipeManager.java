@@ -90,7 +90,7 @@ public class RecipeManager{
     public void addRecipeIngredients(Recipe recipe, String ingredientName, int quantity, Unit unit,
                                      LocalDate expiryDate) {
         try{
-            Ingredient ingredient = new Ingredient(ingredientName, quantity, unit, expiryDate);
+            Ingredient ingredient = new Ingredient(ingredientName, quantity, unit);
             recipe.addIngredient(ingredient);
         } catch (Exception e){
             System.out.println("Warning: Invalid ingredient " + ingredientName);
