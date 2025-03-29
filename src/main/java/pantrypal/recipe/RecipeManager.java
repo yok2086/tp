@@ -68,8 +68,7 @@ public class RecipeManager{
         } else if (parts[1].equals("ingredient")) {
             //Command structure: edit ingredient add <name> <quantity> <unit>
             switch (parts[2]) {
-            case "add" -> addRecipeIngredients(recipe, parts[3], Integer.parseInt(parts[4]), Unit.parseUnit(parts[5]),
-                    LocalDate.parse(parts[6]));
+            case "add" -> addRecipeIngredients(recipe, parts[3], Integer.parseInt(parts[4]), Unit.parseUnit(parts[5]));
             case "remove" -> recipe.removeIngredient(parts[3]);
             //case "edit" -> recipe.editIngredient(parts[3], parts[4]);
 
@@ -87,10 +86,9 @@ public class RecipeManager{
 
     }
 
-    public void addRecipeIngredients(Recipe recipe, String ingredientName, int quantity, Unit unit,
-                                     LocalDate expiryDate) {
+    public void addRecipeIngredients(Recipe recipe, String ingredientName, int quantity, Unit unit) {
         try{
-            Ingredient ingredient = new Ingredient(ingredientName, quantity, unit, expiryDate);
+            Ingredient ingredient = new Ingredient(ingredientName, quantity, unit);
             recipe.addIngredient(ingredient);
         } catch (Exception e){
             System.out.println("Warning: Invalid ingredient " + ingredientName);
