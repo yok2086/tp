@@ -84,8 +84,20 @@ public class IngredientInventory {
         }
     }
 
-    //Notify expired ingredient
+    //Find if ingredient is in stock
+    public boolean findInventory(String name, double quantity, Unit unit, LocalDate expiryDate) {
+        Ingredient ingredient = inventory.get(name);
 
+        if (ingredient != null
+                && ingredient.getQuantity() >= quantity
+                && ingredient .getUnit() == unit
+                && (expiryDate == null || ingredient.getExpiryDate().equals(expiryDate))) {
+            return true;
+        }
+        return false;
+    }
+
+    //Notify expired ingredient
     public void alertExpiredIngredient() {
         LocalDate today = LocalDate.now();
         boolean expired = false;
