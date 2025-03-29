@@ -17,6 +17,13 @@ public class Ingredient {
         setExpiryDate(expiryDate);
     }
 
+    public Ingredient(String name, double quantity, Unit unit) {
+        this.name = name;
+        this.quantity = quantity;
+        this.unit = unit;
+        this.expiryDate = null;
+    }
+
     public String getName() {
         return name;
     }
