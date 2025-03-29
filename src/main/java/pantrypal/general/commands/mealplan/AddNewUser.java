@@ -1,4 +1,5 @@
 package pantrypal.general.commands.mealplan;
 
-public class AddNewUser {
+
+public class AddNewUser extends MealPlanCommand {
 }

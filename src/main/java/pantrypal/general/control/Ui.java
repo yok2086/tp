@@ -1,6 +1,11 @@
 package pantrypal.general.control;
 
 import pantrypal.general.commands.Command;
+import pantrypal.general.commands.general.GeneralCommand;
+import pantrypal.general.commands.inventory.InventoryCommand;
+import pantrypal.general.commands.mealplan.MealPlanCommand;
+import pantrypal.general.commands.recipe.RecipeCommand;
+import pantrypal.general.commands.shoppinglist.ShoppingLIstCommand;
 
 public class Ui {
     private static final String LOGO =
@@ -15,37 +20,103 @@ public class Ui {
         System.out.println(LOGO);
         Ui.printLine();
         System.out.println("Welcome to PantryPal, please enter your command!");
+        System.out.println("Type \"help\" for a list of commands.");
     }
+
     public static void printLine() {
         System.out.println("____________________________________________________________");
     }
 
+    public static void printAddIngredientMessage(String name, double quantity, String unit) {
+        Ui.showMessage("Adding " + name + " " + quantity + " " + unit);
+    }
+
+    public static void printIngredientExists(String name) {
+        Ui.showMessage("Ingredient " + name + " already exists.");
+    }
+
+    public static void printSetAlertMessage(String name, double threshold, String unit) {
+        Ui.showMessage("Set low stock alert for " + name + " at " + threshold + " " + unit);
+    }
+
+    public static void printIngredientNotFoundMessage() {
+        Ui.showMessage("Ingredient not found.");
+    }
+
     public void printExitMessage() {
-        Ui.printLine();
-        System.out.println("See you next time!");
-        Ui.printLine();
+        Ui.showMessage("See you next time!");
     }
 
     public void printHelpMessage(Command[] commands) {
         Ui.printLine();
         System.out.println("Here are all the available commands:\n");
+
+        Ui.printLine();
+
+        System.out.println("Here are all the shopping list commands:\n");
         for (Command command : commands) {
-            System.out.print(command.getCommandDescription() + ": ");
-            System.out.println(command.getCommandInstruction());
+            if (command instanceof ShoppingLIstCommand) {
+                System.out.print(command.getCommandDescription() + ": ");
+                System.out.println(command.getCommandInstruction());
+            }
+        }
+
+        Ui.printLine();
+
+        System.out.println("Recipe commands:\n");
+        for (Command command : commands) {
+            if (command instanceof RecipeCommand) {
+                System.out.print(command.getCommandDescription() + ": ");
+                System.out.println(command.getCommandInstruction());
+            }
+        }
+
+        Ui.printLine();
+
+        System.out.println("Inventory Commands:\n");
+
+        for (Command command : commands) {
+            if (command instanceof InventoryCommand) {
+                System.out.print(command.getCommandDescription() + ": ");
+                System.out.println(command.getCommandInstruction());
+            }
+        }
+
+        Ui.printLine();
+
+        System.out.println("Meal Plan Commands:\n");
+
+        for (Command command : commands) {
+            if (command instanceof MealPlanCommand) {
+                System.out.print(command.getCommandDescription() + ": ");
+                System.out.println(command.getCommandInstruction());
+            }
+        }
+
+        Ui.printLine();
+
+        System.out.println("General commands:\n");
+        for (Command command : commands) {
+            if (command instanceof GeneralCommand) {
+                System.out.print(command.getCommandDescription() + ": ");
+                System.out.println(command.getCommandInstruction());
+            }
         }
         Ui.printLine();
     }
 
     public void printInvalidCommandMessage() {
-        Ui.printLine();
-        System.out.println("Invalid command!");
-        Ui.printLine();
+        Ui.showMessage("Invalid Command!");
     }
 
-    public void showMessage(String message) {
+    public static void showMessage(String message) {
         Ui.printLine();
         System.out.println(message);
         Ui.printLine();
+    }
+
+    public static void printErrorMessage(String message) {
+        Ui.showMessage(message);
     }
 
 }

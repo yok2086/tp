@@ -1,6 +1,7 @@
 package pantrypal.recipe;
 
 import pantrypal.inventory.Ingredient;
+import pantrypal.inventory.Unit;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -70,19 +71,30 @@ public class Recipe {
         ingredients.add(ingredient);
     }
 
-    /*
-    public void editIngredient(String ingredient, String newIngredient) {
-        if (!ingredients.contains(ingredient)) {
-            System.out.println("Error: Ingredient " + ingredient + " does not exist.");
-        }
-        ingredients.set(ingredients.indexOf(ingredient), newIngredient);
-    }
-    */
 
-    public void removeIngredient(String ingredient) {
-        if (!ingredients.contains(ingredient)) {
-            System.out.println("Error: Ingredient " + ingredient + " does not exist.");
+    public void editIngredient(String ingredientName, int newQuantity, String newUnit) {
+        List<Ingredient> filtered = ingredients.stream()
+                .filter(i -> i.getName().equals(ingredientName)).toList();
+
+        if (filtered.isEmpty()) {
+            System.out.println("Error: Ingredient " + ingredientName + " does not exist.");
         }
+
+        Ingredient ingredient = filtered.get(0);
+        ingredient.setQuantity(newQuantity);
+        ingredient.setUnit(Unit.parseUnit(newUnit));
+    }
+
+
+    public void removeIngredient(String ingredientName) {
+        List<Ingredient> filtered = ingredients.stream()
+                .filter(i -> i.getName().equals(ingredientName)).toList();
+
+        if (filtered.isEmpty()) {
+            System.out.println("Error: Ingredient " + ingredientName + " does not exist.");
+        }
+
+        Ingredient ingredient = filtered.get(0);
         ingredients.remove(ingredient);
     }
 
@@ -90,13 +102,14 @@ public class Recipe {
         StringBuilder allIngredients = new StringBuilder();
         int index = 1;
         for (Ingredient ingredient : ingredients) {
-            allIngredients.append((index++) + ". " + ingredient.toString()).append("\n");
+            allIngredients.append((index++)).append(". ").append(ingredient.toString()).append("\n");
         }
         return allIngredients.toString();
     }
 
     public Ingredient getIngredient(String ingredientName) {
-        List<Ingredient> filtered = ingredients.stream().filter(i -> i.getName().equals(ingredientName)).toList();
+        List<Ingredient> filtered = ingredients.stream().filter(i -> i.getName().
+                equals(ingredientName)).toList();
         if (filtered.isEmpty()) {
             return null;
         }
@@ -106,6 +119,14 @@ public class Recipe {
     public String getContent(){
         return name + "\n" + LINE + "\nIngredients:\n" + getAllIngredients() +
                 LINE + "\nInstructions:\n" + getAllInstructions() +"\n";
+    }
+
+    public ArrayList<Instruction> getInstructions() {
+        return instructions;
+    }
+
+    public ArrayList<Ingredient> getIngredients() {
+        return ingredients;
     }
 
     @Override

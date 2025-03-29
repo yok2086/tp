@@ -1,6 +1,5 @@
 package pantrypal.general.commands.inventory;
 
-import pantrypal.general.commands.Command;
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.mealplan.PlanPresets;
@@ -9,25 +8,32 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
-public class AddIngredientCommand extends Command {
+public class IncreaseQuantity extends InventoryCommand {
     private String name;
     private double quantity;
-    private String unit;
 
-    public AddIngredientCommand(String name, double quantity, String unit) {
-        this.name = name;
-        this.quantity = quantity;
-        this.unit = unit;
+    public IncreaseQuantity() {
+        super("increaseQuantity <name> <quantity>",
+                "Increase quantity of ingredient");
     }
 
-    public AddIngredientCommand() {
-        super("addNewIngredient <name> <quantity> <unit>", "Adding new ingredient");
+    public IncreaseQuantity(String name, double quantity) {
+        this.name = name;
+        this.quantity = quantity;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getQuantity() {
+        return quantity;
     }
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, Scanner in) {
-        inventory.addNewIngredient(name, quantity, unit);
-
+        inventory.increaseQuantity(name, quantity);
     }
+
 }

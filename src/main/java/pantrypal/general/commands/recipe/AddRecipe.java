@@ -1,19 +1,21 @@
 package pantrypal.general.commands.recipe;
 
-import pantrypal.general.commands.Command;
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
+import pantrypal.inventory.Unit;
 import pantrypal.mealplan.PlanPresets;
 import pantrypal.recipe.Recipe;
 import pantrypal.recipe.RecipeManager;
 import pantrypal.shoppinglist.ShoppingList;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
-public class AddRecipe extends Command {
+public class AddRecipe extends RecipeCommand {
     private String recipeName;
     private String stepContent;
     private String content;
+    private LocalDate expiryDate;
 
 
     public AddRecipe() {
@@ -54,7 +56,8 @@ public class AddRecipe extends Command {
                 } finally {
                     System.out.println("Please Input Quantity Unit:");
                     String quantityUnit = in.nextLine();
-                    recipes.addRecipeIngredients(recipe, ingredientName, quantity, quantityUnit);
+                    recipes.addRecipeIngredients(recipe, ingredientName, quantity, Unit.parseUnit(quantityUnit),
+                            expiryDate);
                 }
             }
         }

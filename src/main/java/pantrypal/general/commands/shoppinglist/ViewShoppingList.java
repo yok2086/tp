@@ -1,6 +1,5 @@
 package pantrypal.general.commands.shoppinglist;
 
-import pantrypal.general.commands.Command;
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.mealplan.PlanPresets;
@@ -9,7 +8,7 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
-public class ViewShoppingList extends Command {
+public class ViewShoppingList extends ShoppingLIstCommand {
 
     public ViewShoppingList() {
         super("view", "View Shopping List");

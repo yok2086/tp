@@ -1,16 +1,16 @@
 package pantrypal.general.control;
 
 import pantrypal.general.commands.Command;
-import pantrypal.general.commands.HelpCommand;
-import pantrypal.general.commands.ExitCommand;
+import pantrypal.general.commands.general.HelpCommand;
+import pantrypal.general.commands.general.ExitCommand;
 import pantrypal.general.commands.NullCommand;
-import pantrypal.general.commands.inventory.AddIngredientCommand;
-import pantrypal.general.commands.inventory.IncreaseQuantityCommand;
-import pantrypal.general.commands.inventory.DecreaseQuantityCommand;
-import pantrypal.general.commands.inventory.SetAlertCommand;
-import pantrypal.general.commands.inventory.CheckStockCommand;
-import pantrypal.general.commands.inventory.ViewLowStockCommand;
-import pantrypal.general.commands.inventory.DeleteIngredientCommand;
+import pantrypal.general.commands.inventory.AddIngredient;
+import pantrypal.general.commands.inventory.IncreaseQuantity;
+import pantrypal.general.commands.inventory.DecreaseQuantity;
+import pantrypal.general.commands.inventory.SetAlert;
+import pantrypal.general.commands.inventory.CheckStock;
+import pantrypal.general.commands.inventory.ViewLowStock;
+import pantrypal.general.commands.inventory.DeleteIngredient;
 import pantrypal.general.commands.mealplan.AddNewPlan;
 import pantrypal.general.commands.mealplan.RemovePlan;
 import pantrypal.general.commands.mealplan.RemoveRecipeFromPlan;
@@ -24,6 +24,7 @@ import pantrypal.general.commands.shoppinglist.GenerateShoppingList;
 import pantrypal.general.commands.shoppinglist.RemoveShoppingItem;
 import pantrypal.general.commands.shoppinglist.ViewShoppingList;
 import pantrypal.general.commands.mealplan.AddRecipeToPlan;
+import pantrypal.inventory.Unit;
 
 public class Parser {
 
@@ -33,7 +34,7 @@ public class Parser {
 
         String name;
         double quantity;
-        String unit;
+        Unit unit;
 
         switch (command) {
         case "help":
@@ -43,34 +44,32 @@ public class Parser {
         case "addNewIngredient":
             name = inputParts[1];
             quantity = Double.parseDouble(inputParts[2]);
-            unit = inputParts[3];
-            return new AddIngredientCommand(name, quantity, unit);
+            unit = Unit.parseUnit(inputParts[3]);
+            return new AddIngredient(name, quantity, unit);
         case "increaseQuantity":
             name = inputParts[1];
             quantity = Double.parseDouble(inputParts[2]);
-            unit = inputParts[3];
-            return new IncreaseQuantityCommand(name, quantity, unit);
+            return new IncreaseQuantity(name, quantity);
         case "decreaseQuantity":
             name = inputParts[1];
             quantity = Double.parseDouble(inputParts[2]);
-            unit = inputParts[3];
-            return new DecreaseQuantityCommand(name, quantity, unit);
+            return new DecreaseQuantity(name, quantity);
         case "setAlert":
             name = inputParts[1];
             double threshold = Double.parseDouble(inputParts[2]);
-            unit = inputParts[3];
-            return new SetAlertCommand(name, threshold, unit);
+            unit = Unit.parseUnit(inputParts[3]);
+            return new SetAlert(name, threshold, unit);
         case "checkStock":
-            return new CheckStockCommand();
+            return new CheckStock();
         case "viewLowStock":
-            return new ViewLowStockCommand();
+            return new ViewLowStock();
         case "deleteIngredient":
             name = inputParts[1];
-            return new DeleteIngredientCommand(name);
+            return new DeleteIngredient(name);
         case "addShoppingItem":
             name = inputParts[1];
             quantity = Double.parseDouble(inputParts[2]);
-            unit = inputParts[3];
+            unit = Unit.parseUnit(inputParts[3]);
             return new AddShoppingItem(name, quantity, unit);
         case "generateShoppingList":
             return new GenerateShoppingList();
