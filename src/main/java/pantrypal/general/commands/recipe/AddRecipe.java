@@ -15,6 +15,7 @@ public class AddRecipe extends RecipeCommand {
     private String recipeName;
     private String stepContent;
     private String content;
+    private LocalDate expiryDate;
 
 
     public AddRecipe() {
@@ -53,17 +54,10 @@ public class AddRecipe extends RecipeCommand {
                     System.out.println("Quantity must be greater than 0");
                     continue;
                 } finally {
-                    while (true){
-                        System.out.println("Please Input Quantity Unit:");
-                        String quantityUnit = in.nextLine();
-                        try{
-                            recipes.addRecipeIngredients(recipe, ingredientName, quantity, Unit.parseUnit(quantityUnit));
-                            break;
-                        } catch (IllegalArgumentException e) {
-                            System.out.println("Invalid ingredient quantity, please try again");
-                            continue;
-                        }
-                    }
+                    System.out.println("Please Input Quantity Unit:");
+                    String quantityUnit = in.nextLine();
+                    recipes.addRecipeIngredients(recipe, ingredientName, quantity, Unit.parseUnit(quantityUnit),
+                            expiryDate);
                 }
             }
         }
