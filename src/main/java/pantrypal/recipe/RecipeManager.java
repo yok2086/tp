@@ -3,7 +3,6 @@ package pantrypal.recipe;
 import pantrypal.inventory.Ingredient;
 import pantrypal.inventory.Unit;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -96,18 +95,6 @@ public class RecipeManager{
             System.out.println("The correct format is: ");
         }
     }
-
-    public void addRecipeIngredients(Recipe recipe, String ingredientName, int quantity, Unit unit,
-                                     LocalDate expiryDate) {
-        try{
-            Ingredient ingredient = new Ingredient(ingredientName, quantity, unit, expiryDate);
-            recipe.addIngredient(ingredient);
-        } catch (Exception e){
-            System.out.println("Warning: Invalid ingredient " + ingredientName);
-            System.out.println("The correct format is: ");
-        }
-    }
-
 
     public void editRecipeIngredients(Recipe recipe, String ingredientName,
                                       String newName, int newQuantity, Unit newUnit) {
