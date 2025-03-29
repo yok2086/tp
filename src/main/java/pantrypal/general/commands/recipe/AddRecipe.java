@@ -15,7 +15,6 @@ public class AddRecipe extends RecipeCommand {
     private String recipeName;
     private String stepContent;
     private String content;
-    private LocalDate expiryDate;
 
 
     public AddRecipe() {
