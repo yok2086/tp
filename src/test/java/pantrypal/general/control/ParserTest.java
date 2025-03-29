@@ -54,7 +54,7 @@ public class ParserTest {
     }
 
     @Test
-    public void testParseUnknownCommand() {
+    public void parse_inputInvalidCommand_returnsNullCommand() {
         Parser parser = new Parser();
         Command command = parser.parse("invalidCommand");
 

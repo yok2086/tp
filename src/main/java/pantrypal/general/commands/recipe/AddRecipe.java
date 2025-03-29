@@ -62,27 +62,15 @@ public class AddRecipe extends RecipeCommand {
                 String quantityUnit = in.nextLine();
                 unit = Unit.parseUnit(quantityUnit);
 
-                System.out.println("Enter expiry data (YYYY-MM-DD) or press Enter to skip");
-                String expiryInput = in.nextLine().trim();
-
-                if (expiryInput.isEmpty()) {
-                    expiryDate = null;
-                } else {
-                    expiryDate = LocalDate.parse(expiryInput);
-                }
-
             } catch (NumberFormatException e) {
                 Ui.printErrorMessage("Invalid ingredient quantity! Try again.");
                 continue;
             } catch (ArithmeticException e) {
                 Ui.printErrorMessage(e.getMessage() + "Try again.");
                 continue;
-            } catch (DateTimeParseException e) {
-                Ui.printErrorMessage("Invalid date format! Try again.");
-                continue;
             }
 
-            recipes.addRecipeIngredients(recipe, ingredientName, quantity, unit, expiryDate);
+            recipes.addRecipeIngredients(recipe, ingredientName, quantity, unit, null);
         }
 
         isFinished = false;
