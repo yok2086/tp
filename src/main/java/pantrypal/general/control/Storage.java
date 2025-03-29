@@ -13,7 +13,6 @@ import pantrypal.shoppinglist.ShoppingListItem;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -87,7 +86,6 @@ public class Storage {
                     String stockName = stockItem[0];
                     double stockQuantity = Double.parseDouble(stockItem[1]);
                     Unit stockUnit = Unit.parseUnit(stockItem[2]);
-                    LocalDate expiryDate = LocalDate.parse(stockItem[3]);
                     inventory.addNewIngredient(stockName, stockQuantity, stockUnit);
                 } else if (line.startsWith("[LowStock]")) {
                     currentSection = "LowStock";
@@ -113,7 +111,6 @@ public class Storage {
                                 String ingredientName = ingredient.split("")[0];
                                 double ingredientQuantity = Double.parseDouble(ingredient.split("")[1]);
                                 Unit ingredientUnit = Unit.parseUnit(ingredient.split("")[2]);
-                                LocalDate expiryDate = LocalDate.parse(ingredient.split("")[3]);
                                 recipe.addIngredient(new Ingredient(ingredientName, ingredientQuantity,
                                         ingredientUnit));
                             }

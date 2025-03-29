@@ -7,14 +7,12 @@ import pantrypal.mealplan.PlanPresets;
 import pantrypal.recipe.RecipeManager;
 import pantrypal.shoppinglist.ShoppingList;
 
-import java.time.LocalDate;
 import java.util.Scanner;
 
 public class AddIngredient extends InventoryCommand {
     private String name;
     private double quantity;
     private String unit;
-    private LocalDate expiryDate;
 
     public AddIngredient(String name, double quantity, Unit unit) {
         this.name = name;
