@@ -96,7 +96,8 @@ public class RecipeManager{
         }
     }
 
-    public void addRecipeIngredients(Recipe recipe, String ingredientName, int quantity, Unit unit, LocalDate expiryDate) {
+    public void addRecipeIngredients(Recipe recipe, String ingredientName, int quantity, Unit unit,
+                                     LocalDate expiryDate) {
         try{
             Ingredient ingredient = new Ingredient(ingredientName, quantity, unit, expiryDate);
             recipe.addIngredient(ingredient);
