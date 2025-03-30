@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class ViewShoppingList extends ShoppingListCommand {
 
     public ViewShoppingList() {
-        super("view", "View Shopping List");
+        super("viewShoppingList", "View Shopping List");
     }
 
     @Override

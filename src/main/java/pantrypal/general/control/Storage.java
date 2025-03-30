@@ -54,6 +54,15 @@ public class Storage {
         Ui.printLine();
     }
 
+    // Escape and unescape methods to handle "|"
+    private static String escapeSpecialCharacters(String input) {
+        return input.replace("|", "\\|");
+    }
+
+    private static String unescapeSpecialCharacters(String input) {
+        return input.replace("\\|", "|");
+    }
+
     public static void loadData(IngredientInventory inventory, ShoppingList shoppingList, PlanPresets planPresets,
                                 RecipeManager recipeManager) {
         try (Scanner scanner = new Scanner(file)) {
@@ -72,19 +81,19 @@ public class Storage {
                 if (line.startsWith("[Shopping]")) {
                     currentSection = "Shopping";
                     String[] shoppingListItem = line.substring("[Shopping]".length()).trim().split(" ");
-                    String name = shoppingListItem[0];
+                    String name = unescapeSpecialCharacters(shoppingListItem[0]);
                     double quantity = Double.parseDouble(shoppingListItem[1]);
                     Unit unit = Unit.parseUnit(shoppingListItem[2]);
                     shoppingList.addItem(new ShoppingListItem(name, quantity, unit));
                 } else if (line.startsWith("[Recipe]")) {
                     currentSection = "Recipe";
-                    String recipeName = line.substring("[Recipe]".length()).trim();
+                    String recipeName = unescapeSpecialCharacters(line.substring("[Recipe]".length()).trim());
                     recipe = recipeManager.addRecipe(recipeName);
                 } else if (line.startsWith("[Stock]")) {
                     currentSection = "Stock";
                     line = line.substring("[Stock]".length()).trim();
                     String[] stockItem = line.split(" ");
-                    String stockName = stockItem[0];
+                    String stockName = unescapeSpecialCharacters(stockItem[0]);
                     double stockQuantity = Double.parseDouble(stockItem[1]);
                     Unit stockUnit = Unit.parseUnit(stockItem[2]);
                     inventory.addNewIngredient(stockName, stockQuantity, stockUnit);
@@ -92,41 +101,33 @@ public class Storage {
                     currentSection = "LowStock";
                     line = line.substring("[LowStock]".length()).trim();
                     String[] lowStockItem = line.split(" ");
-                    String lowStockName = lowStockItem[0];
+                    String lowStockName = unescapeSpecialCharacters(lowStockItem[0]);
                     double lowStockQuantity = Double.parseDouble(lowStockItem[1]);
                     inventory.setAlert(lowStockName, lowStockQuantity);
                 } else if (line.startsWith("[MealPlan]")) {
                     currentSection = "MealPlan";
-                    //mealPlanList.add(line.substring(10).trim());
                 } else {
-                    // Add additional details to the last section
                     switch (currentSection) {
-                    case "Shopping":
-                        break;
                     case "Recipe":
                         if (line.startsWith("[Ingredients]")) {
                             line = line.substring("[Ingredients]".length()).trim();
-                            String[] ingredients = line.trim().split("\\|");
+                            String[] ingredients = line.trim().split(" \\|");
                             for (String ingredient : ingredients) {
-                                assert false;
-                                String ingredientName = ingredient.trim().split(" ")[0];
-                                double ingredientQuantity = Double.parseDouble(ingredient.trim().split(" ")[1]);
-                                Unit ingredientUnit = Unit.parseUnit(ingredient.trim().split(" ")[2]);
-                                recipe.addIngredient(new Ingredient(ingredientName, ingredientQuantity,
-                                        ingredientUnit));
+                                String[] parts = ingredient.trim().split(" ");
+                                String ingredientName = unescapeSpecialCharacters(parts[0]);
+                                double ingredientQuantity = Double.parseDouble(parts[1]);
+                                Unit ingredientUnit = Unit.parseUnit(parts[2]);
+                                recipe.addIngredient(new Ingredient(ingredientName, ingredientQuantity, ingredientUnit));
                             }
                         } else if (line.startsWith("[Instructions]")) {
                             line = line.substring("[Instructions]".length()).trim();
-                            String[] instructions = line.trim().split("\\|");
+                            String[] instructions = line.trim().split(" \\|");
                             int step = 1;
                             for (String instruction : instructions) {
-                                assert false;
-                                Instruction instructionObject = new Instruction(step++, instruction.trim());
+                                Instruction instructionObject = new Instruction(step++, unescapeSpecialCharacters(instruction.trim()));
                                 recipe.addInstruction(instructionObject);
                             }
                         }
-                        break;
-                    case "MealPlan":
                         break;
                     default:
                         System.out.println("Unknown data: " + line);
@@ -138,12 +139,12 @@ public class Storage {
         }
     }
 
-
     private static StringBuilder saveRecipeIngredients(ArrayList<Ingredient> ingredients, StringBuilder fileInput) {
         fileInput.append("[Ingredients] ");
         for (Ingredient ingredient : ingredients) {
-            fileInput.append(ingredient.getName()).append(" ").append(ingredient.getQuantity())
-                    .append(" ").append(ingredient.getUnit()).append(" | ");
+            fileInput.append(escapeSpecialCharacters(ingredient.getName())).append(" ")
+                    .append(ingredient.getQuantity()).append(" ")
+                    .append(ingredient.getUnit()).append(" | ");
         }
         fileInput.append("\n");
         return fileInput;
@@ -152,12 +153,11 @@ public class Storage {
     private static StringBuilder saveRecipeInstructions(ArrayList<Instruction> instructions, StringBuilder fileInput) {
         fileInput.append("[Instructions] ");
         for (Instruction instruction : instructions) {
-            fileInput.append(instruction.getInstruction()).append(" | ");
+            fileInput.append(escapeSpecialCharacters(instruction.getInstruction())).append(" | ");
         }
         fileInput.append("\n");
         return fileInput;
     }
-
 
     public static void saveData(IngredientInventory inventory, ShoppingList shoppingList, PlanPresets planPresets,
                                 RecipeManager recipeManager) {
@@ -165,26 +165,25 @@ public class Storage {
             StringBuilder fileInput = new StringBuilder();
 
             for (ShoppingListItem item : shoppingList.getItems()) {
-                fileInput.append("[Shopping] ").append(item.getIngredientName()).append(" ")
+                fileInput.append("[Shopping] ").append(escapeSpecialCharacters(item.getIngredientName())).append(" ")
                         .append(item.getQuantity()).append(" ")
                         .append(item.getUnit()).append("\n");
             }
 
             for (Map.Entry<String, Ingredient> ingredient : inventory.getInventory().entrySet()) {
                 Ingredient item = ingredient.getValue();
-                fileInput.append("[Stock] ").append(item.getName()).append(" ")
-                        .append(item.getQuantity())
-                        .append(" ").append(item.getUnit()).append("\n");
+                fileInput.append("[Stock] ").append(escapeSpecialCharacters(item.getName())).append(" ")
+                        .append(item.getQuantity()).append(" ").append(item.getUnit()).append("\n");
             }
 
             for (Map.Entry<String, Double> lowStockItem : inventory.getLowStockAlerts().entrySet()) {
-                String lowStockName = lowStockItem.getKey();
+                String lowStockName = escapeSpecialCharacters(lowStockItem.getKey());
                 double lowStockQuantity = lowStockItem.getValue();
                 fileInput.append("[LowStock] ").append(lowStockName).append(" ").append(lowStockQuantity).append("\n");
             }
 
             for (Recipe recipe : recipeManager.getRecipeList()) {
-                String recipeName = recipe.getName();
+                String recipeName = escapeSpecialCharacters(recipe.getName());
                 ArrayList<Ingredient> ingredients = recipe.getIngredients();
                 ArrayList<Instruction> instructions = recipe.getInstructions();
                 fileInput.append("[Recipe] ").append(recipeName).append("\n");
@@ -195,7 +194,5 @@ public class Storage {
         } catch (IOException e) {
             Ui.printErrorMessage(e.getMessage());
         }
-
-
     }
 }

@@ -66,13 +66,12 @@ public class Parser {
                 quantity = Double.parseDouble(inputParts[2]);
                 return new DecreaseQuantity(name, quantity);
             case "setAlert":
-                if (inputParts.length < 4) {
+                if (inputParts.length < 3) {
                     throw new IllegalArgumentException("Insufficient arguments for setAlert command.");
                 }
                 name = inputParts[1].toUpperCase();
                 double threshold = Double.parseDouble(inputParts[2]);
-                unit = Unit.parseUnit(inputParts[3]);
-                return new SetAlert(name, threshold, unit);
+                return new SetAlert(name, threshold);
             case "checkStock":
                 return new CheckStock();
             case "viewLowStock":
@@ -99,7 +98,7 @@ public class Parser {
                 }
                 name = inputParts[1].toUpperCase();
                 return new RemoveShoppingItem(name);
-            case "view":
+            case "viewShoppingList":
                 return new ViewShoppingList();
             case "viewPlan":
                 return new ViewPlan();
@@ -129,7 +128,7 @@ public class Parser {
                 }
                 name = inputParts[1].toUpperCase();
                 return new RemoveRecipe(name);
-            case "listRecipes":
+            case "viewRecipeList":
                 return new ListRecipe();
             case "addRecipeToPlan":
                 if (inputParts.length < 3) {

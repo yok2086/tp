@@ -15,14 +15,13 @@ public class SetAlert extends InventoryCommand {
     private String unit;
 
     public SetAlert() {
-        super("setAlert <name> <threshold> <unit>",
+        super("setAlert <name> <threshold>",
                 "Sets the alert for a specific ingredient");
     }
 
-    public SetAlert(String name, double threshold, Unit unit) {
+    public SetAlert(String name, double threshold) {
         this.name = name;
         this.threshold = threshold;
-        this.unit = String.valueOf(unit);
     }
 
 
@@ -31,7 +30,7 @@ public class SetAlert extends InventoryCommand {
                         RecipeManager recipes, Scanner in) {
         if (inventory.getInventory().containsKey(name)) {
             inventory.setAlert(name, threshold);
-            Ui.printSetAlertMessage(name, threshold, unit);
+            Ui.printSetAlertMessage(name, threshold);
         } else {
             Ui.printIngredientNotFoundMessage();
         }

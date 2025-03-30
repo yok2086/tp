@@ -35,8 +35,8 @@ public class Ui {
         Ui.showMessage("Ingredient " + name + " already exists.");
     }
 
-    public static void printSetAlertMessage(String name, double threshold, String unit) {
-        Ui.showMessage("Set low stock alert for " + name + " at " + threshold + " " + unit);
+    public static void printSetAlertMessage(String name, double threshold) {
+        Ui.showMessage("Set low stock alert for " + name + " at " + threshold);
     }
 
     public static void printIngredientNotFoundMessage() {
