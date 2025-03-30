@@ -4,7 +4,6 @@ import pantrypal.general.control.Ui;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.time.LocalDate;
 
 public class IngredientInventory {
     private Map<String, Ingredient> inventory;

@@ -117,14 +117,16 @@ public class Storage {
                                 String ingredientName = unescapeSpecialCharacters(parts[0]);
                                 double ingredientQuantity = Double.parseDouble(parts[1]);
                                 Unit ingredientUnit = Unit.parseUnit(parts[2]);
-                                recipe.addIngredient(new Ingredient(ingredientName, ingredientQuantity, ingredientUnit));
+                                recipe.addIngredient(new Ingredient(ingredientName, ingredientQuantity,
+                                        ingredientUnit));
                             }
                         } else if (line.startsWith("[Instructions]")) {
                             line = line.substring("[Instructions]".length()).trim();
                             String[] instructions = line.trim().split(" \\|");
                             int step = 1;
                             for (String instruction : instructions) {
-                                Instruction instructionObject = new Instruction(step++, unescapeSpecialCharacters(instruction.trim()));
+                                Instruction instructionObject = new Instruction(step++,
+                                        unescapeSpecialCharacters(instruction.trim()));
                                 recipe.addInstruction(instructionObject);
                             }
                         }

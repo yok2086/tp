@@ -37,7 +37,7 @@ public class ParserTest {
 
         assertInstanceOf(AddIngredient.class, command);
         AddIngredient addIngredientCommand = (AddIngredient) command;
-        assertEquals("Flour", addIngredientCommand.getName());
+        assertEquals("FLOUR", addIngredientCommand.getName());
         assertEquals(2.5, addIngredientCommand.getQuantity(), 0.01);
         assertEquals("cup", addIngredientCommand.getUnit());
     }
@@ -49,7 +49,7 @@ public class ParserTest {
 
         assertInstanceOf(IncreaseQuantity.class, command);
         IncreaseQuantity increaseQuantityCommand = (IncreaseQuantity) command;
-        assertEquals("Sugar", increaseQuantityCommand.getName());
+        assertEquals("SUGAR", increaseQuantityCommand.getName());
         assertEquals(1.5, increaseQuantityCommand.getQuantity(), 0.01);
     }
 
