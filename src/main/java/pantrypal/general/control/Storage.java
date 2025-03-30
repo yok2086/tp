@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -87,8 +88,8 @@ public class Storage {
                     String stockName = stockItem[0];
                     double stockQuantity = Double.parseDouble(stockItem[1]);
                     Unit stockUnit = Unit.parseUnit(stockItem[2]);
-                    LocalDate expiryDate = LocalDate.parse(stockItem[3]);
-                    inventory.addNewIngredient(stockName, stockQuantity, stockUnit, expiryDate);
+                    //LocalDate expiryDate = LocalDate.parse(stockItem[3]);
+                    inventory.addNewIngredient(stockName, stockQuantity, stockUnit, null);
                 } else if (line.startsWith("[LowStock]")) {
                     currentSection = "LowStock";
                     line = line.substring("[LowStock]".length()).trim();
@@ -107,23 +108,22 @@ public class Storage {
                     case "Recipe":
                         if (line.startsWith("[Ingredients]")) {
                             line = line.substring("[Ingredients]".length()).trim();
-                            String[] ingredients = line.trim().split(";;");
+                            String[] ingredients = line.trim().split("\\|");
                             for (String ingredient : ingredients) {
                                 assert false;
-                                String ingredientName = ingredient.split("")[0];
-                                double ingredientQuantity = Double.parseDouble(ingredient.split("")[1]);
-                                Unit ingredientUnit = Unit.parseUnit(ingredient.split("")[2]);
-                                LocalDate expiryDate = LocalDate.parse(ingredient.split("")[3]);
+                                String ingredientName = ingredient.trim().split(" ")[0];
+                                double ingredientQuantity = Double.parseDouble(ingredient.trim().split(" ")[1]);
+                                Unit ingredientUnit = Unit.parseUnit(ingredient.trim().split(" ")[2]);
                                 recipe.addIngredient(new Ingredient(ingredientName, ingredientQuantity,
-                                        ingredientUnit, expiryDate));
+                                        ingredientUnit, null));
                             }
                         } else if (line.startsWith("[Instructions]")) {
                             line = line.substring("[Instructions]".length()).trim();
-                            String[] instructions = line.trim().split(";;");
+                            String[] instructions = line.trim().split("\\|");
                             int step = 1;
                             for (String instruction : instructions) {
                                 assert false;
-                                Instruction instructionObject = new Instruction(step++, instruction);
+                                Instruction instructionObject = new Instruction(step++, instruction.trim());
                                 recipe.addInstruction(instructionObject);
                             }
                         }
@@ -139,6 +139,27 @@ public class Storage {
             Ui.printErrorMessage(e.getMessage());
         }
     }
+
+
+    private static StringBuilder saveRecipeIngredients(ArrayList<Ingredient> ingredients, StringBuilder fileInput) {
+        fileInput.append("[Ingredients] ");
+        for (Ingredient ingredient : ingredients) {
+            fileInput.append(ingredient.getName()).append(" ").append(ingredient.getQuantity())
+                    .append(" ").append(ingredient.getUnit()).append(" | ");
+        }
+        fileInput.append("\n");
+        return fileInput;
+    }
+
+    private static StringBuilder saveRecipeInstructions(ArrayList<Instruction> instructions, StringBuilder fileInput) {
+        fileInput.append("[Instructions] ");
+        for (Instruction instruction : instructions) {
+            fileInput.append(instruction.getInstruction()).append(" | ");
+        }
+        fileInput.append("\n");
+        return fileInput;
+    }
+
 
     public static void saveData(IngredientInventory inventory, ShoppingList shoppingList, PlanPresets planPresets,
                                 RecipeManager recipeManager) {
@@ -165,7 +186,12 @@ public class Storage {
             }
 
             for (Recipe recipe : recipeManager.getRecipeList()) {
-                //Implement in progress
+                String recipeName = recipe.getName();
+                ArrayList<Ingredient> ingredients = recipe.getIngredients();
+                ArrayList<Instruction> instructions = recipe.getInstructions();
+                fileInput.append("[Recipe] ").append(recipeName).append("\n");
+                fileInput = saveRecipeIngredients(ingredients, fileInput);
+                fileInput = saveRecipeInstructions(instructions, fileInput);
             }
             fileWriter.write(fileInput.toString());
         } catch (IOException e) {

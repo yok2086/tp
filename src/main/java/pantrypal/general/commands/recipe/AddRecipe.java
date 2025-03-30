@@ -9,7 +9,6 @@ import pantrypal.recipe.RecipeManager;
 import pantrypal.shoppinglist.ShoppingList;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class AddRecipe extends RecipeCommand {
@@ -67,6 +66,9 @@ public class AddRecipe extends RecipeCommand {
                 continue;
             } catch (ArithmeticException e) {
                 Ui.printErrorMessage(e.getMessage() + "Try again.");
+                continue;
+            } catch (IllegalArgumentException e) {
+                Ui.printErrorMessage("Invalid ingredient unit! Try again.");
                 continue;
             }
 

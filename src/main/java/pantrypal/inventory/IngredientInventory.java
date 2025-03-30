@@ -24,12 +24,7 @@ public class IngredientInventory {
     // Add new ingredient
     public void addNewIngredient(String name, double quantity, Unit unit, LocalDate expiryDate) {
         validateIngredient(name, quantity, unit, expiryDate);
-        if (!inventory.containsKey(name)) {
-            inventory.put(name, new Ingredient(name, quantity, unit, expiryDate));
-            System.out.println("Added " + name + ": " + quantity + " " + unit);
-        } else {
-            System.out.println(name + " already exists.");
-        }
+        inventory.put(name, new Ingredient(name, quantity, unit, expiryDate));
     }
 
     // Increase ingredient quantity
@@ -90,7 +85,7 @@ public class IngredientInventory {
 
         if (ingredient != null
                 && ingredient.getQuantity() >= quantity
-                && ingredient .getUnit() == unit
+                && ingredient.getUnit() == unit
                 && (expiryDate == null || ingredient.getExpiryDate().equals(expiryDate))) {
             return true;
         }
