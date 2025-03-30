@@ -1,5 +1,6 @@
 package pantrypal.recipe;
 
+import pantrypal.general.control.Ui;
 import pantrypal.inventory.Ingredient;
 import pantrypal.inventory.Unit;
 
@@ -18,7 +19,7 @@ public class RecipeManager{
 
         String[] parts = recipeName.split(" ", 2);
         if (parts.length > 1) {
-            System.out.println("Warning: Recipe name should not contain space. Use '_' instead.");
+            Ui.showMessage("Warning: Recipe name should not contain space. Use '_' instead.");
             return null;
         }
 
@@ -26,7 +27,7 @@ public class RecipeManager{
                 item -> recipeName.equals(item.getName())).toList();
 
         if (!filteredItems.isEmpty()) {
-            System.out.println("Warning: Recipe " + recipeName + " already exists");
+            Ui.showMessage("Warning: Recipe " + recipeName + " already exists");
             return null;
         }
 
@@ -176,7 +177,7 @@ public class RecipeManager{
                 filter(recipe -> recipeName.equals(recipe.getName())).toList();
 
         if (filteredItems.isEmpty()) {
-            System.out.println("Warning: Recipe " + recipeName + " does not exist");
+            Ui.showMessage("Warning: Recipe " + recipeName + " does not exist");
             return null;
         } else {
             return filteredItems.get(0);
@@ -188,9 +189,10 @@ public class RecipeManager{
                 equals(recipe.getName())).toList();
 
         if (filteredItems.isEmpty()) {
-            System.out.println("Warning: Recipe " + recipeName + " does not exist");
+            Ui.showMessage("Warning: Recipe " + recipeName + " does not exist");
         } else {
             recipes.remove(filteredItems.get(0));
+            Ui.showMessage("Recipe " + recipeName + " has been removed");
         }
     }
 

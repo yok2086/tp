@@ -38,7 +38,10 @@ public class Ingredient {
         this.name = name;
     }
 
-
+    @Override
+    public String toString() {
+        return name + " " + quantity + " " + unit;
+    }
 
     @Override
     public int hashCode() {

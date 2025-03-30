@@ -23,12 +23,7 @@ public class IngredientInventory {
     // Add new ingredient
     public void addNewIngredient(String name, double quantity, Unit unit) {
         validateIngredient(name, quantity, unit);
-        if (!inventory.containsKey(name)) {
-            inventory.put(name, new Ingredient(name, quantity, unit));
-            System.out.println("Added " + name + ": " + quantity + " " + unit);
-        } else {
-            System.out.println(name + " already exists.");
-        }
+        inventory.put(name, new Ingredient(name, quantity, unit));
     }
 
     // Increase ingredient quantity

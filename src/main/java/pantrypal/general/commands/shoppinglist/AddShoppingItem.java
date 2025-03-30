@@ -10,7 +10,7 @@ import pantrypal.shoppinglist.ShoppingListItem;
 
 import java.util.Scanner;
 
-public class AddShoppingItem extends ShoppingLIstCommand {
+public class AddShoppingItem extends ShoppingListCommand {
     private ShoppingListItem shoppingListItem;
     private String name;
 
