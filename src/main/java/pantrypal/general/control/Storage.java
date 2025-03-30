@@ -13,7 +13,6 @@ import pantrypal.shoppinglist.ShoppingListItem;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
@@ -88,8 +87,7 @@ public class Storage {
                     String stockName = stockItem[0];
                     double stockQuantity = Double.parseDouble(stockItem[1]);
                     Unit stockUnit = Unit.parseUnit(stockItem[2]);
-                    //LocalDate expiryDate = LocalDate.parse(stockItem[3]);
-                    inventory.addNewIngredient(stockName, stockQuantity, stockUnit, null);
+                    inventory.addNewIngredient(stockName, stockQuantity, stockUnit);
                 } else if (line.startsWith("[LowStock]")) {
                     currentSection = "LowStock";
                     line = line.substring("[LowStock]".length()).trim();
@@ -111,11 +109,11 @@ public class Storage {
                             String[] ingredients = line.trim().split("\\|");
                             for (String ingredient : ingredients) {
                                 assert false;
-                                String ingredientName = ingredient.trim().split(" ")[0];
-                                double ingredientQuantity = Double.parseDouble(ingredient.trim().split(" ")[1]);
-                                Unit ingredientUnit = Unit.parseUnit(ingredient.trim().split(" ")[2]);
+                                String ingredientName = ingredient.split(" ")[0];
+                                double ingredientQuantity = Double.parseDouble(ingredient.split(" ")[1]);
+                                Unit ingredientUnit = Unit.parseUnit(ingredient.split(" ")[2]);
                                 recipe.addIngredient(new Ingredient(ingredientName, ingredientQuantity,
-                                        ingredientUnit, null));
+                                        ingredientUnit));
                             }
                         } else if (line.startsWith("[Instructions]")) {
                             line = line.substring("[Instructions]".length()).trim();
@@ -176,7 +174,7 @@ public class Storage {
                 Ingredient item = ingredient.getValue();
                 fileInput.append("[Stock] ").append(item.getName()).append(" ")
                         .append(item.getQuantity())
-                        .append(" ").append(item.getUnit()).append(" ").append(item.getExpiryDate()).append("\n");
+                        .append(" ").append(item.getUnit()).append("\n");
             }
 
             for (Map.Entry<String, Double> lowStockItem : inventory.getLowStockAlerts().entrySet()) {
