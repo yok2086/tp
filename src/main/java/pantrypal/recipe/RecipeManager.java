@@ -178,7 +178,7 @@ public class RecipeManager{
                 filter(recipe -> recipeName.equals(recipe.getName())).toList();
 
         if (filteredItems.isEmpty()) {
-            System.out.println("Warning: Recipe " + recipeName + " does not exist");
+            Ui.showMessage("Warning: Recipe " + recipeName + " does not exist");
             return null;
         } else {
             return filteredItems.get(0);
@@ -190,9 +190,10 @@ public class RecipeManager{
                 equals(recipe.getName())).toList();
 
         if (filteredItems.isEmpty()) {
-            System.out.println("Warning: Recipe " + recipeName + " does not exist");
+            Ui.showMessage("Warning: Recipe " + recipeName + " does not exist");
         } else {
             recipes.remove(filteredItems.get(0));
+            Ui.showMessage("Recipe " + recipeName + " has been removed");
         }
     }
 

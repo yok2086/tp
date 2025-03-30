@@ -41,7 +41,7 @@ public class Help extends GeneralCommand {
     );
 
     public Help() {
-        super("help","list all commands");
+        super("help","List all commands");
     }
 
     @Override

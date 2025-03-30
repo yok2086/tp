@@ -5,7 +5,7 @@ import pantrypal.general.commands.general.GeneralCommand;
 import pantrypal.general.commands.inventory.InventoryCommand;
 import pantrypal.general.commands.mealplan.MealPlanCommand;
 import pantrypal.general.commands.recipe.RecipeCommand;
-import pantrypal.general.commands.shoppinglist.ShoppingLIstCommand;
+import pantrypal.general.commands.shoppinglist.ShoppingListCommand;
 
 public class Ui {
     private static final String LOGO =
@@ -53,11 +53,11 @@ public class Ui {
 
         Ui.printLine();
 
-        System.out.println("Here are all the shopping list commands:\n");
+        System.out.println("Shopping list commands:\n");
         for (Command command : commands) {
-            if (command instanceof ShoppingLIstCommand) {
+            if (command instanceof ShoppingListCommand) {
                 System.out.print(command.getCommandDescription() + ": ");
-                System.out.println(command.getCommandInstruction());
+                System.out.println("\"" + command.getCommandInstruction() + "\"");
             }
         }
 
@@ -67,7 +67,7 @@ public class Ui {
         for (Command command : commands) {
             if (command instanceof RecipeCommand) {
                 System.out.print(command.getCommandDescription() + ": ");
-                System.out.println(command.getCommandInstruction());
+                System.out.println("\"" + command.getCommandInstruction() + "\"");
             }
         }
 
@@ -78,7 +78,7 @@ public class Ui {
         for (Command command : commands) {
             if (command instanceof InventoryCommand) {
                 System.out.print(command.getCommandDescription() + ": ");
-                System.out.println(command.getCommandInstruction());
+                System.out.println("\"" + command.getCommandInstruction() + "\"");
             }
         }
 
@@ -89,7 +89,7 @@ public class Ui {
         for (Command command : commands) {
             if (command instanceof MealPlanCommand) {
                 System.out.print(command.getCommandDescription() + ": ");
-                System.out.println(command.getCommandInstruction());
+                System.out.println("\"" + command.getCommandInstruction() + "\"");
             }
         }
 
@@ -99,7 +99,7 @@ public class Ui {
         for (Command command : commands) {
             if (command instanceof GeneralCommand) {
                 System.out.print(command.getCommandDescription() + ": ");
-                System.out.println(command.getCommandInstruction());
+                System.out.println("\"" + command.getCommandInstruction() + "\"");
             }
         }
         Ui.printLine();
