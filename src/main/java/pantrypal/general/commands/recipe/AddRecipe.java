@@ -72,7 +72,7 @@ public class AddRecipe extends RecipeCommand {
                 continue;
             }
 
-            recipes.addRecipeIngredients(recipe, ingredientName, quantity, unit, null);
+            recipes.addRecipeIngredients(recipe, ingredientName, quantity, unit);
         }
 
         isFinished = false;

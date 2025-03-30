@@ -1,5 +1,6 @@
 package pantrypal.recipe;
 
+import pantrypal.general.control.Ui;
 import pantrypal.inventory.Ingredient;
 import pantrypal.inventory.Unit;
 

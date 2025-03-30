@@ -109,9 +109,9 @@ public class Storage {
                             String[] ingredients = line.trim().split("\\|");
                             for (String ingredient : ingredients) {
                                 assert false;
-                                String ingredientName = ingredient.split(" ")[0];
-                                double ingredientQuantity = Double.parseDouble(ingredient.split(" ")[1]);
-                                Unit ingredientUnit = Unit.parseUnit(ingredient.split(" ")[2]);
+                                String ingredientName = ingredient.trim().split(" ")[0];
+                                double ingredientQuantity = Double.parseDouble(ingredient.trim().split(" ")[1]);
+                                Unit ingredientUnit = Unit.parseUnit(ingredient.trim().split(" ")[2]);
                                 recipe.addIngredient(new Ingredient(ingredientName, ingredientQuantity,
                                         ingredientUnit));
                             }

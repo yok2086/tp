@@ -6,7 +6,6 @@ import pantrypal.general.commands.general.Exit;
 import pantrypal.general.commands.NullCommand;
 import pantrypal.general.commands.general.UnitList;
 import pantrypal.general.commands.inventory.AddIngredient;
-import pantrypal.general.commands.inventory.AlertExpiredIngredient;
 import pantrypal.general.commands.inventory.IncreaseQuantity;
 import pantrypal.general.commands.inventory.DecreaseQuantity;
 import pantrypal.general.commands.inventory.SetAlert;
@@ -146,8 +145,6 @@ public class Parser {
                 int deleteRecipeIndex = Integer.parseInt(inputParts[1]) - 1;
                 int deletePlanIndex = Integer.parseInt(inputParts[2]) - 1;
                 return new RemoveRecipeFromPlan(deleteRecipeIndex, deletePlanIndex);
-            case "viewExpiredIngredient":
-                return new AlertExpiredIngredient();
             case "unitList":
                 return new UnitList();
             default:

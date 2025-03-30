@@ -2,7 +2,6 @@ package pantrypal.general.commands.general;
 
 import pantrypal.general.commands.Command;
 import pantrypal.general.commands.inventory.AddIngredient;
-import pantrypal.general.commands.inventory.AlertExpiredIngredient;
 import pantrypal.general.commands.inventory.IncreaseQuantity;
 import pantrypal.general.commands.inventory.DecreaseQuantity;
 import pantrypal.general.commands.inventory.SetAlert;
@@ -38,7 +37,7 @@ public class Help extends GeneralCommand {
             new SetAlert(), new CheckStock(), new ViewLowStock(), new AddShoppingItem(),
             new GenerateShoppingList(), new RemoveShoppingItem(), new ViewShoppingList(), new ViewPlan(),
             new AddNewPlan(), new RemovePlan(), new AddRecipe(), new ViewRecipe(), new RemoveRecipe(), new ListRecipe(),
-            new AddRecipeToPlan(), new RemoveRecipeFromPlan(), new Help(), new AlertExpiredIngredient(), new UnitList()
+            new AddRecipeToPlan(), new RemoveRecipeFromPlan(), new Help(), new UnitList()
     );
 
     public Help() {
