@@ -1,7 +1,6 @@
 package pantrypal.mealplan;
 
 import java.util.ArrayList;
-import pantrypal.general.commands.mealplan.AddRecipeToPlan;
 import pantrypal.recipe.RecipeManager;
 
 /**
@@ -12,41 +11,72 @@ import pantrypal.recipe.RecipeManager;
 
 
 public class PlanPresets {
-    private static final int PRESET_SIZE = 11; //padding element + 10 elements
-    private static final int NUMBER_OF_MONTHS = 12;
-    ArrayList<MealPlan> plans;
+    private ArrayList<MealPlan> plans;
 
     public PlanPresets() {
         loadPlans();
     }
 
-    public void loadPlans() {
+    private void loadPlans() {
         // load plans from file, if no file found, start afresh
-        plans = new ArrayList<MealPlan>();
+        plans = new ArrayList<>();
     }
 
-    public void addNewPlan(){
-        plans.add(new MealPlan());
-        new AddRecipeToPlan(); //call the command to add a new recipe
+    private String getMealName(int mealIndex) {
+        switch(mealIndex){
+        case 1 -> {
+            return "Breakfast";
+        }
+        case 2 -> {
+            return "Lunch";
+        }
+        case 3 -> {
+            return "Dinner";
+        }
+        default -> {
+            return  "NULL";
+        }
+        }
     }
 
-    public void addRecipeToPlan(RecipeManager recipes, int recipeIndex, int planIndex){
-        plans.get(planIndex).addRecipe(recipes, recipeIndex);
+    public void addNewPlan(String planName){
+        plans.add(new MealPlan(planName.isEmpty() ? "default" : planName));
+    }
+
+    public String addRecipeToPlan(RecipeManager recipes, int recipeIndex, int planIndex, int mealIndex) {
+        plans.get(planIndex).addRecipe(recipes, recipeIndex, mealIndex);
+        return getMealName(mealIndex);
     }
 
     public void removePlan(int planIndex) {
         plans.remove(planIndex);
     }
 
-    public void removeRecipeFromPlan(int planIndex, int recipeIndex) {
-        plans.get(recipeIndex).removeRecipe(planIndex);
+    public String removeRecipeFromPlan(int planIndex, int mealIndex) {
+        plans.get(planIndex).removeRecipe(mealIndex);
+        return getMealName(mealIndex);
     }
 
-    public void viewPlans(){
+    public void viewPresets(){
+        int count = 1;
         for (MealPlan plan : plans) {
-            System.out.println(plan);
+            System.out.println(count++ + ": " + plan.getPlanName());
         }
     }
 
+    public void viewPlan(int planIndex) {
+        System.out.println(plans.get(planIndex).toString());
+    }
 
+    public void findPresets(String planName){
+        for (MealPlan plan : plans) {
+            if (plan.getPlanName().contains(planName)){
+                System.out.println(plan.getPlanName());
+            }
+        }
+    }
+
+    public ArrayList<MealPlan> getPlans() {
+        return plans;
+    }
 }

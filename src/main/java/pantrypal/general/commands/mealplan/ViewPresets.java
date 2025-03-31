@@ -8,15 +8,15 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
-public class ViewPlan extends MealPlanCommand {
+public class ViewPresets extends MealPlanCommand {
 
-    public ViewPlan() {
+    public ViewPresets() {
         super("viewPlan","View Meal Plan");
     }
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, Scanner in) {
-        presets.viewPlans();
+        presets.viewPresets();
     }
 }
