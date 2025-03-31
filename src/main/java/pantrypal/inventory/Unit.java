@@ -31,6 +31,6 @@ public enum Unit {
                 return unit;
             }
         }
-        throw new IllegalArgumentException("Invalid unit: " + text);
+        throw new IllegalArgumentException("Invalid unit: " + text + "\nType unitList for list of valid units");
     }
 }

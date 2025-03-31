@@ -1,9 +1,9 @@
 package pantrypal.recipe;
 
+import pantrypal.general.control.Ui;
 import pantrypal.inventory.Ingredient;
 import pantrypal.inventory.Unit;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class RecipeManager{
 
         String[] parts = recipeName.split(" ", 2);
         if (parts.length > 1) {
-            System.out.println("Warning: Recipe name should not contain space. Use '_' instead.");
+            Ui.showMessage("Warning: Recipe name should not contain space. Use '_' instead.");
             return null;
         }
 
@@ -27,7 +27,7 @@ public class RecipeManager{
                 item -> recipeName.equals(item.getName())).toList();
 
         if (!filteredItems.isEmpty()) {
-            System.out.println("Warning: Recipe " + recipeName + " already exists");
+            Ui.showMessage("Warning: Recipe " + recipeName + " already exists");
             return null;
         }
 
@@ -68,8 +68,7 @@ public class RecipeManager{
         } else if (parts[1].equals("ingredient")) {
             //Command structure: edit ingredient add <name> <quantity> <unit>
             switch (parts[2]) {
-            case "add" -> addRecipeIngredients(recipe, parts[3], Integer.parseInt(parts[4]), Unit.parseUnit(parts[5]),
-                    LocalDate.parse(parts[6]));
+            case "add" -> addRecipeIngredients(recipe, parts[3], Integer.parseInt(parts[4]), Unit.parseUnit(parts[5]));
             case "remove" -> recipe.removeIngredient(parts[3]);
             //case "edit" -> recipe.editIngredient(parts[3], parts[4]);
 
@@ -87,17 +86,16 @@ public class RecipeManager{
 
     }
 
-    public void addRecipeIngredients(Recipe recipe, String ingredientName, int quantity, Unit unit,
-                                     LocalDate expiryDate) {
+    //addIngredient with no expiry date
+    public void addRecipeIngredients(Recipe recipe, String ingredientName, int quantity, Unit unit) {
         try{
-            Ingredient ingredient = new Ingredient(ingredientName, quantity, unit, expiryDate);
+            Ingredient ingredient = new Ingredient(ingredientName, quantity, unit);
             recipe.addIngredient(ingredient);
         } catch (Exception e){
             System.out.println("Warning: Invalid ingredient " + ingredientName);
             System.out.println("The correct format is: ");
         }
     }
-
 
     public void editRecipeIngredients(Recipe recipe, String ingredientName,
                                       String newName, int newQuantity, Unit newUnit) {
@@ -179,7 +177,7 @@ public class RecipeManager{
                 filter(recipe -> recipeName.equals(recipe.getName())).toList();
 
         if (filteredItems.isEmpty()) {
-            System.out.println("Warning: Recipe " + recipeName + " does not exist");
+            Ui.showMessage("Warning: Recipe " + recipeName + " does not exist");
             return null;
         } else {
             return filteredItems.get(0);
@@ -191,9 +189,10 @@ public class RecipeManager{
                 equals(recipe.getName())).toList();
 
         if (filteredItems.isEmpty()) {
-            System.out.println("Warning: Recipe " + recipeName + " does not exist");
+            Ui.showMessage("Warning: Recipe " + recipeName + " does not exist");
         } else {
             recipes.remove(filteredItems.get(0));
+            Ui.showMessage("Recipe " + recipeName + " has been removed");
         }
     }
 

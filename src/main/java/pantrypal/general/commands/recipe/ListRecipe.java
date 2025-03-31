@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class ListRecipe extends RecipeCommand {
 
     public ListRecipe() {
-        super("listRecipes", "List all recipes");
+        super("viewRecipeList", "List all recipes");
     }
 
     @Override
