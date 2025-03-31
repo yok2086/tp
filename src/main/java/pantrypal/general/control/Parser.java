@@ -15,7 +15,7 @@ import pantrypal.general.commands.inventory.DeleteIngredient;
 import pantrypal.general.commands.mealplan.AddNewPlan;
 import pantrypal.general.commands.mealplan.RemovePlan;
 import pantrypal.general.commands.mealplan.RemoveRecipeFromPlan;
-import pantrypal.general.commands.mealplan.ViewPlan;
+import pantrypal.general.commands.mealplan.ViewPresets;
 import pantrypal.general.commands.recipe.AddRecipe;
 import pantrypal.general.commands.recipe.ListRecipe;
 import pantrypal.general.commands.recipe.RemoveRecipe;
@@ -101,13 +101,13 @@ public class Parser {
             case "viewShoppingList":
                 return new ViewShoppingList();
             case "viewPlan":
-                return new ViewPlan();
+                return new ViewPresets();
             case "addPlan":
                 if (inputParts.length < 2) {
                     throw new IllegalArgumentException("Insufficient arguments for addPlan command.");
                 }
-                int duration = Integer.parseInt(inputParts[1]);
-                return new AddNewPlan(duration);
+                String planName = inputParts[1];
+                return new AddNewPlan(planName);
             case "removePlan":
                 if (inputParts.length < 2) {
                     throw new IllegalArgumentException("Insufficient arguments for removePlan command.");
@@ -136,7 +136,8 @@ public class Parser {
                 }
                 int recipeIndex = Integer.parseInt(inputParts[1]) - 1;
                 int planIndex = Integer.parseInt(inputParts[2]) - 1;
-                return new AddRecipeToPlan(recipeIndex, planIndex);
+                int mealIndex = Integer.parseInt(inputParts[3]) - 1;
+                return new AddRecipeToPlan(recipeIndex, planIndex, mealIndex);
             case "removeRecipeFromPlan":
                 if (inputParts.length < 3) {
                     throw new IllegalArgumentException("Insufficient arguments for removeRecipeFromPlan command.");
