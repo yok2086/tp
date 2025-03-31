@@ -11,7 +11,7 @@ import pantrypal.general.commands.mealplan.AddNewPlan;
 import pantrypal.general.commands.mealplan.AddRecipeToPlan;
 import pantrypal.general.commands.mealplan.RemovePlan;
 import pantrypal.general.commands.mealplan.RemoveRecipeFromPlan;
-import pantrypal.general.commands.mealplan.ViewPlan;
+import pantrypal.general.commands.mealplan.ViewPresets;
 import pantrypal.general.commands.recipe.AddRecipe;
 import pantrypal.general.commands.recipe.ListRecipe;
 import pantrypal.general.commands.recipe.RemoveRecipe;
@@ -30,18 +30,18 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class HelpCommand extends GeneralCommand {
+public class Help extends GeneralCommand {
     private static final List<Command> commandList = Arrays.asList(
-            new ExitCommand(), new AddIngredient(),
+            new Exit(), new AddIngredient(),
             new IncreaseQuantity(), new DecreaseQuantity(),
             new SetAlert(), new CheckStock(), new ViewLowStock(), new AddShoppingItem(),
-            new GenerateShoppingList(), new RemoveShoppingItem(), new ViewShoppingList(), new ViewPlan(),
+            new GenerateShoppingList(), new RemoveShoppingItem(), new ViewShoppingList(), new ViewPresets(),
             new AddNewPlan(), new RemovePlan(), new AddRecipe(), new ViewRecipe(), new RemoveRecipe(), new ListRecipe(),
-            new AddRecipeToPlan(), new RemoveRecipeFromPlan(), new HelpCommand()
+            new AddRecipeToPlan(), new RemoveRecipeFromPlan(), new Help(), new UnitList()
     );
 
-    public HelpCommand() {
-        super("help","list all commands");
+    public Help() {
+        super("help","List all commands");
     }
 
     @Override

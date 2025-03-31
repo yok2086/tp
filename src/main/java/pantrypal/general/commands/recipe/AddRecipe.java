@@ -24,20 +24,30 @@ public class AddRecipe extends RecipeCommand {
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, Scanner in) {
-        Boolean isFinished = false;
+        boolean isFinished = false;
+        boolean isValidRecipe = false;
+
         do {
             System.out.println("Please Input Recipe Name: ");
             recipeName = in.nextLine();
         } while (recipeName.trim().isEmpty());
-        Recipe recipe = recipes.addRecipe(recipeName);
+
+        Recipe recipe = recipes.addRecipe(recipeName.trim().toUpperCase());
 
         int stepNumber = 1;
         while (!isFinished) {
             System.out.println("Please Input Ingredient Name: <When done, type exit>");
-            String ingredientName = in.nextLine();
-            if (ingredientName.equals("exit")) {
+            String ingredientName = in.nextLine().trim().toUpperCase();
+
+            if (ingredientName.equals("EXIT")) {
                 isFinished = true;
-            } else {
+                continue;
+            }
+
+            int quantity = 0;
+            Unit unit = null;
+
+            try {
                 System.out.println("Please Input Ingredient Quantity:");
                 int quantity = 0;
                 try {
@@ -56,13 +66,33 @@ public class AddRecipe extends RecipeCommand {
                     String quantityUnit = in.nextLine();
                     recipes.addRecipeIngredients(recipe, ingredientName, quantity, Unit.parseUnit(quantityUnit));
                 }
+
+                System.out.println("Please Input Quantity Unit:");
+                String quantityUnit = in.nextLine();
+                unit = Unit.parseUnit(quantityUnit);
+
+            } catch (NumberFormatException e) {
+                Ui.printErrorMessage("Invalid ingredient quantity! Try again.");
+                continue;
+            } catch (ArithmeticException e) {
+                Ui.printErrorMessage(e.getMessage() + "Try again.");
+                continue;
+            } catch (IllegalArgumentException e) {
+                Ui.printErrorMessage("Invalid ingredient unit! Try again.");
+                continue;
             }
+
+            recipes.addRecipeIngredients(recipe, ingredientName, quantity, unit);
         }
 
         isFinished = false;
         while (!isFinished) {
             System.out.println("Please Input Instruction Step: <When done, type exit>");
             stepContent = in.nextLine();
+            if (stepContent.isBlank()) {
+                Ui.printErrorMessage("Instruction cannot be blank. Try again.");
+                continue;
+            }
             if (stepContent.equals("exit")) {
                 isFinished = true;
             } else {

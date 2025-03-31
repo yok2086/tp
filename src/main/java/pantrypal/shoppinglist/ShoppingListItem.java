@@ -55,5 +55,4 @@ public class ShoppingListItem {
         return ingredientName + ": " + quantity + " " + unit;
     }
 
-
 }

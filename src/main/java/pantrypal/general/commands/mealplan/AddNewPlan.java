@@ -9,20 +9,20 @@ import pantrypal.shoppinglist.ShoppingList;
 import java.util.Scanner;
 
 public class AddNewPlan extends MealPlanCommand {
-    private int duration;
+    String planName;
 
     public AddNewPlan() {
-        super("addPlan <duration>","Add New Plan");
+        super("addPlan <name>","Add New Plan");
     }
 
-    public AddNewPlan(int duration) {
-        this.duration = duration;
+    public AddNewPlan(String name) {
+        this.planName = name;
     }
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, Scanner in) {
-        presets.addNewPlan();
+        presets.addNewPlan(planName);
         System.out.println("Plan added");
     }
 }

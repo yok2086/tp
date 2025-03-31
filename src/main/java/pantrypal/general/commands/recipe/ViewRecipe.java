@@ -12,7 +12,7 @@ public class ViewRecipe extends RecipeCommand {
     private String recipeName;
 
     public ViewRecipe() {
-        super("viewRecipe","View a specific recipe");
+        super("viewRecipe <Recipe Name>","View a specific recipe");
     }
 
     public ViewRecipe(String recipeName) {

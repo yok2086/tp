@@ -49,7 +49,6 @@ public class ShoppingListGeneratorTest {
         assertEquals(400, sugarItem.getQuantity(), "Required sugar quantity should be 400.");
         assertEquals("g", sugarItem.getUnit().toString(), "Sugar unit should be 'g'.");
 
-
         // Verify butter item.
         ShoppingListItem butterItem = items.stream()
                 .filter(item -> item.getIngredientName().equalsIgnoreCase("butter"))
