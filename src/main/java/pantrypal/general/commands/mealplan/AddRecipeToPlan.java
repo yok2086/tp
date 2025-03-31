@@ -11,21 +11,29 @@ import java.util.Scanner;
 public class AddRecipeToPlan extends MealPlanCommand {
     private int recipeIndex;
     private int planIndex;
+    private int mealIndex;
 
     public AddRecipeToPlan() {
-        super("addToPlan <recipe index> <plan index>" ,
+        super("addToPlan <recipe index> <plan index> <meal index>",
                 "Add a recipe to a plan");
     }
 
-    public AddRecipeToPlan(int recipeIndex, int planIndex) {
+    public AddRecipeToPlan(int recipeIndex, int planIndex, int mealIndex) {
         this.recipeIndex = recipeIndex;
         this.planIndex = planIndex;
+        this.mealIndex = mealIndex;
     }
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, Scanner in) {
-        presets.addRecipeToPlan(recipes, recipeIndex, planIndex);
-        System.out.println("Recipe " + recipeIndex + 1 + " added to plan " + planIndex + 1);
+        String mealName = presets.addRecipeToPlan(recipes, recipeIndex, planIndex, mealIndex);
+        if (mealName.equals("NULL")) {
+            System.out.println("Invalid meal index entered");
+        } else {
+            System.out.println("Recipe " + recipes.getRecipeList().get(recipeIndex-1).getName() +
+                    " added to plan " + (planIndex-1) + " for " + mealName);
+        }
+
     }
 }

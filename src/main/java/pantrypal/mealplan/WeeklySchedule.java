@@ -1,44 +1,24 @@
 package pantrypal.mealplan;
 
-import java.util.ArrayList;
-
 /**
- * collection of daily schedules
+ * week view of daily schedules
  */
 
 public class WeeklySchedule {
-
-    PlanPresets planPresets;
-    private final ArrayList<DailySchedule> days = new ArrayList<>(7);
-
+    private static final int NUMBER_OF_DAYS = 7;
+    private DailySchedule[] weeklySchedule;
 
     public WeeklySchedule(PlanPresets planPresets) {
-        this.planPresets = planPresets;
-    }
-
-
-    public void addPlan(int planIndex, int dayIndex) {
-        if (planPresets.plans.isEmpty()) {
-            throw new NewPlanCreateException(); //prompt the user on adding a new plan to plan presets
-        }
-        days.get(dayIndex-1).addPlan(planIndex); //pad for input-to-index disparity
-    }
-
-    public void removePlan(int removeIndex, int dayIndex) {
-        if (days.get(dayIndex-1).isEmpty()) {
-            throw new EmptyPlansException(); //indicate for no plans to remove
-        }
-        days.get(dayIndex-1).removePlan(removeIndex);
+        this.weeklySchedule = new DailySchedule[NUMBER_OF_DAYS];
     }
 
     public void showWeek() {
         boolean isCompletelyEmpty = true;
-        for (DailySchedule day : days) {
-            if (day.isEmpty()) {
-                continue;
+        for (DailySchedule day : weeklySchedule) {
+            if (day.planIsUsed()) {
+                day.showDay();
+                isCompletelyEmpty = false;
             }
-            day.showDay();
-            isCompletelyEmpty = false;
         }
         if (isCompletelyEmpty) {
             throw new EmptyPlansException(); //indicate that no plans can be shown
