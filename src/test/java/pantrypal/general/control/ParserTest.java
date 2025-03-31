@@ -3,8 +3,8 @@ package pantrypal.general.control;
 import org.junit.jupiter.api.Test;
 import pantrypal.general.commands.Command;
 import pantrypal.general.commands.NullCommand;
-import pantrypal.general.commands.general.ExitCommand;
-import pantrypal.general.commands.general.HelpCommand;
+import pantrypal.general.commands.general.Exit;
+import pantrypal.general.commands.general.Help;
 import pantrypal.general.commands.inventory.AddIngredient;
 import pantrypal.general.commands.inventory.IncreaseQuantity;
 
@@ -19,7 +19,7 @@ public class ParserTest {
         Parser parser = new Parser();
         Command command = parser.parse("help");
 
-        assertInstanceOf(HelpCommand.class, command);
+        assertInstanceOf(Help.class, command);
     }
 
     @Test
@@ -27,7 +27,7 @@ public class ParserTest {
         Parser parser = new Parser();
         Command command = parser.parse("exit");
 
-        assertInstanceOf(ExitCommand.class, command);
+        assertInstanceOf(Exit.class, command);
     }
 
     @Test
@@ -37,7 +37,7 @@ public class ParserTest {
 
         assertInstanceOf(AddIngredient.class, command);
         AddIngredient addIngredientCommand = (AddIngredient) command;
-        assertEquals("Flour", addIngredientCommand.getName());
+        assertEquals("FLOUR", addIngredientCommand.getName());
         assertEquals(2.5, addIngredientCommand.getQuantity(), 0.01);
         assertEquals("cup", addIngredientCommand.getUnit());
     }
@@ -49,12 +49,12 @@ public class ParserTest {
 
         assertInstanceOf(IncreaseQuantity.class, command);
         IncreaseQuantity increaseQuantityCommand = (IncreaseQuantity) command;
-        assertEquals("Sugar", increaseQuantityCommand.getName());
+        assertEquals("SUGAR", increaseQuantityCommand.getName());
         assertEquals(1.5, increaseQuantityCommand.getQuantity(), 0.01);
     }
 
     @Test
-    public void testParseUnknownCommand() {
+    public void parse_inputInvalidCommand_returnsNullCommand() {
         Parser parser = new Parser();
         Command command = parser.parse("invalidCommand");
 

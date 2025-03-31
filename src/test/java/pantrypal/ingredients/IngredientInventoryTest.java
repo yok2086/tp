@@ -3,7 +3,6 @@ package pantrypal.ingredients;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.time.LocalDate;
 import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -24,7 +23,7 @@ public class IngredientInventoryTest {
     @Test
     void testAddNewIngredient() {
         // Add sugar
-        inventory.addNewIngredient("Sugar", 2.5, Unit.parseUnit("kg"), LocalDate.parse("2026-02-01"));
+        inventory.addNewIngredient("Sugar", 2.5, Unit.parseUnit("kg"));
 
         // Get inventory
         Map<String, Ingredient> stock = inventory.getInventory();
@@ -33,14 +32,12 @@ public class IngredientInventoryTest {
         assertTrue(stock.containsKey("Sugar")); // Contains sugar?
         assertEquals(2.5, stock.get("Sugar").getQuantity()); // Quantity correct?
         assertEquals("kg", stock.get("Sugar").getUnit().toString()); // Unit correct?
-        assertEquals(LocalDate.parse("2026-02-01"), stock.get("Sugar").getExpiryDate(), "Expiry date of " +
-                "sugar should be 2026-02-01");
     }
 
     @Test
     void testSetAlert() {
         // Add sugar
-        inventory.addNewIngredient("Sugar", 2.5, Unit.parseUnit("kg"), LocalDate.parse("2026-02-01"));
+        inventory.addNewIngredient("Sugar", 2.5, Unit.parseUnit("kg"));
         inventory.setAlert("Sugar", 2.0);
         inventory.decreaseQuantity("Sugar", 1);
 

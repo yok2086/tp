@@ -23,6 +23,5 @@ public class RemoveRecipe extends RecipeCommand {
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, Scanner in) {
         recipes.removeRecipe(recipeName);
-        System.out.println(recipeName + " Recipe removed");
     }
 }

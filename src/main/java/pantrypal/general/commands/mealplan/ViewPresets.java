@@ -1,4 +1,5 @@
-package pantrypal.general.commands.inventory;
+
+package pantrypal.general.commands.mealplan;
 
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
@@ -8,16 +9,15 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
+public class ViewPresets extends MealPlanCommand {
 
-public class AlertExpiredIngredient extends InventoryCommand {
-    public AlertExpiredIngredient() {
-        super("alertExpiredIngredient",
-            "Alerts the user about expired ingredients in the inventory.");
+    public ViewPresets() {
+        super("viewPlan","View Meal Plan");
     }
+
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, Scanner in) {
-        inventory.alertExpiredIngredient();
+        presets.viewPresets();
     }
 }
-

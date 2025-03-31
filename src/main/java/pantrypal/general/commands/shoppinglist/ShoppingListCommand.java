@@ -9,18 +9,16 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
-public class ShoppingLIstCommand extends Command {
+public abstract class ShoppingListCommand extends Command {
 
 
-    public ShoppingLIstCommand(String commandInstruction, String commandDescription) {
+    public ShoppingListCommand(String commandInstruction, String commandDescription) {
         super(commandInstruction, commandDescription);
     }
 
-    public ShoppingLIstCommand() {}
+    public ShoppingListCommand() {}
 
     @Override
-    public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
-                        RecipeManager recipes, Scanner in) {
-
-    }
+    public abstract void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
+                        RecipeManager recipes, Scanner in);
 }

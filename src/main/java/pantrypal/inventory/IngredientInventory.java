@@ -4,7 +4,6 @@ import pantrypal.general.control.Ui;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.time.LocalDate;
 
 public class IngredientInventory {
     private Map<String, Ingredient> inventory;
@@ -15,21 +14,16 @@ public class IngredientInventory {
         lowStockAlerts = new HashMap<>();
     }
 
-    private void validateIngredient(String name, double quantity, Unit unit, LocalDate expiryDate) {
+    private void validateIngredient(String name, double quantity, Unit unit) {
         assert name != null && !name.isEmpty() : "Ingredient name cannot be null or empty";
         assert quantity > 0 : "Quantity must be positive";
         assert unit != null : "Unit cannot be null or empty";
     }
 
     // Add new ingredient
-    public void addNewIngredient(String name, double quantity, Unit unit, LocalDate expiryDate) {
-        validateIngredient(name, quantity, unit, expiryDate);
-        if (!inventory.containsKey(name)) {
-            inventory.put(name, new Ingredient(name, quantity, unit, expiryDate));
-            System.out.println("Added " + name + ": " + quantity + " " + unit);
-        } else {
-            System.out.println(name + " already exists.");
-        }
+    public void addNewIngredient(String name, double quantity, Unit unit) {
+        validateIngredient(name, quantity, unit);
+        inventory.put(name, new Ingredient(name, quantity, unit));
     }
 
     // Increase ingredient quantity
@@ -84,22 +78,16 @@ public class IngredientInventory {
         }
     }
 
-    //Notify expired ingredient
+    //Find if ingredient is in stock
+    public boolean findInventory(String name, double quantity, Unit unit) {
+        Ingredient ingredient = inventory.get(name);
 
-    public void alertExpiredIngredient() {
-        LocalDate today = LocalDate.now();
-        boolean expired = false;
-
-        for (Ingredient ingredient : inventory.values()) {
-            if (ingredient.expiryDate != null && ingredient.expiryDate.isBefore(today)) {
-                System.out.println("⚠ Warning: " + ingredient.name + " expired on " + ingredient.expiryDate + "!");
-                expired = true;
-            }
+        if (ingredient != null
+                && ingredient.getQuantity() >= quantity
+                && ingredient .getUnit() == unit) {
+            return true;
         }
-
-        if (!expired) {
-            System.out.println("No expired ingredients!");
-        }
+        return false;
     }
 
     // View low stock ingredients
