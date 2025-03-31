@@ -179,6 +179,10 @@ public class RecipeManager{
     public void showRecipe(String recipeName) {
         List<Recipe> filteredItems = recipes.stream().filter(item -> recipeName.equals(item.getName())).toList();
 
+        if (filteredItems.isEmpty()) {
+            System.out.println("There is no recipe with name " + recipeName);
+        }
+
         for (Recipe recipe : filteredItems) {
             System.out.println(recipe.getContent());
         }
