@@ -19,11 +19,12 @@ public class EditShoppingItem extends ShoppingListCommand {
     private Unit newUnit;
 
     public EditShoppingItem() {
-        super("editShoppingItem <index> <newIngredientName> " +
-                "<newQuantity> <newUnit>", "Edit a shopping list item");
+        super("editShoppingItem <index> <newIngredientName> "
+                + "<newQuantity> <newUnit>", "Edit a shopping list item");
     }
 
-    public EditShoppingItem(int index, String newIngredientName, double newQuantity, Unit newUnit, ShoppingList shoppingList) {
+    public EditShoppingItem(int index, String newIngredientName, double newQuantity, Unit newUnit,
+                            ShoppingList shoppingList) {
         super("editShoppingItem <index> <newIngredientName> <newQuantity> <newUnit>",
                 "Edit a shopping list item");
         this.index = index;
@@ -34,7 +35,8 @@ public class EditShoppingItem extends ShoppingListCommand {
     }
 
     @Override
-    public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets, RecipeManager recipes, Scanner in) {
+    public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
+                        RecipeManager recipes, Scanner in) {
         boolean success = shoppingList.editItem(index, newIngredientName, newQuantity, newUnit);
         if (success) {
             ui.showMessage("Item at index " + index + " updated successfully.");
