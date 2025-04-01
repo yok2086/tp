@@ -7,8 +7,6 @@ import pantrypal.recipe.RecipeManager;
 import pantrypal.shoppinglist.ShoppingList;
 import pantrypal.shoppinglist.ShoppingListItem;
 import pantrypal.inventory.Unit;
-
-import java.util.List;
 import java.util.Scanner;
 
 public class EditShoppingItem extends ShoppingListCommand {
@@ -21,11 +19,13 @@ public class EditShoppingItem extends ShoppingListCommand {
     private Unit newUnit;
 
     public EditShoppingItem() {
-        super("editShoppingItem <index> <newIngredientName> <newQuantity> <newUnit>", "Edit a shopping list item");
+        super("editShoppingItem <index> <newIngredientName> " +
+                "<newQuantity> <newUnit>", "Edit a shopping list item");
     }
 
     public EditShoppingItem(int index, String newIngredientName, double newQuantity, Unit newUnit, ShoppingList shoppingList) {
-        super("editShoppingItem <index> <newIngredientName> <newQuantity> <newUnit>", "Edit a shopping list item");
+        super("editShoppingItem <index> <newIngredientName> <newQuantity> <newUnit>",
+                "Edit a shopping list item");
         this.index = index;
         this.newIngredientName = newIngredientName;
         this.newQuantity = newQuantity;
