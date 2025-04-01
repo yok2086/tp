@@ -63,7 +63,7 @@ The following sequence diagram illustrates the interaction between the user, the
 ![img_3.png](img_3.png)
 
 ### Why It Is Implemented This Way
-The Parser feature is implemented this way to ensure a clear and maintainable structure. By using separate command classes, we can easily extend the functionality of the application without modifying the core parsing logic.
+By using separate command classes, we can easily extend the functionality of the application without modifying the core parsing logic.
 By encapsulating the command logic within individual classes, we adhere to the Single Responsibility Principle, making the codebase easier to understand and maintain.
 
 # Implementation of the Storage Feature
@@ -86,3 +86,5 @@ The following sequence diagram illustrates the interaction between the `Storage`
 The key lists include: `StockList`, `LowStockList`, `RecipeList`, `ShoppingList`
 
 ![img.png](img.png)
+
+
