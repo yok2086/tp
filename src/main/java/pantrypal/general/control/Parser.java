@@ -131,20 +131,20 @@ public class Parser {
             case "viewRecipeList":
                 return new ListRecipe();
             case "addRecipeToPlan":
-                if (inputParts.length < 3) {
+                if (inputParts.length < 4) {
                     throw new IllegalArgumentException("Insufficient arguments for addRecipeToPlan command.");
                 }
                 int recipeIndex = Integer.parseInt(inputParts[1]) - 1;
                 int planIndex = Integer.parseInt(inputParts[2]) - 1;
-                int mealIndex = Integer.parseInt(inputParts[3]) - 1;
-                return new AddRecipeToPlan(recipeIndex, planIndex, mealIndex);
+                String mealName = inputParts[3];
+                return new AddRecipeToPlan(recipeIndex, planIndex, mealName);
             case "removeRecipeFromPlan":
                 if (inputParts.length < 3) {
                     throw new IllegalArgumentException("Insufficient arguments for removeRecipeFromPlan command.");
                 }
                 int deleteRecipeIndex = Integer.parseInt(inputParts[1]) - 1;
-                int deletePlanIndex = Integer.parseInt(inputParts[2]) - 1;
-                return new RemoveRecipeFromPlan(deleteRecipeIndex, deletePlanIndex);
+                String deleteMealName = inputParts[2];
+                return new RemoveRecipeFromPlan(deleteRecipeIndex, deleteMealName);
             case "unitList":
                 return new UnitList();
             default:

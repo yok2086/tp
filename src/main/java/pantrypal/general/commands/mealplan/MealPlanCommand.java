@@ -17,6 +17,15 @@ public abstract class MealPlanCommand extends Command {
 
     public MealPlanCommand() {}
 
+    protected static String getMealName(String mealName) {
+        return switch (mealName.toUpperCase()) {
+        case "BREAKFAST", "LUNCH", "DINNER" -> mealName;
+        default -> "NULL";
+        };
+
+        //find way to handle NULL case
+    }
+
     @Override
     public abstract void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, Scanner in);
