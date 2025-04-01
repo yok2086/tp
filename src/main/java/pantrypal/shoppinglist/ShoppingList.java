@@ -46,6 +46,21 @@ public class ShoppingList {
         return false;
     }
 
+    // Edit an item by its index in the list.
+    public boolean editItem(int index, String newIngredientName, double newQuantity, Unit newUnit) {
+        assert newIngredientName != null : "Ingredient name cannot be null.";
+        assert newUnit != null : "Unit cannot be null.";
+        assert newQuantity >= 0 : "Quantity must be non-negative.";
+        if (index < 0 || index >= items.size()) {
+            return false;
+        }
+        ShoppingListItem item = items.get(index);
+        item.setIngredientName(newIngredientName);
+        item.setQuantity(newQuantity);
+        item.setUnit(newUnit);
+        return true;
+    }
+
     // Display the shopping list.
     public void displayList() {
         assert items != null : "Items list should not be null when displaying.";
@@ -53,8 +68,8 @@ public class ShoppingList {
             System.out.println("Shopping list is empty.");
         } else {
             System.out.println("Shopping List:");
-            for (ShoppingListItem item : items) {
-                System.out.println("- " + item);
+            for (int i = 0; i < items.size(); i++) {
+                System.out.println(i + ": " + items.get(i));
             }
         }
     }
