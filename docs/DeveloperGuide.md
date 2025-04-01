@@ -54,7 +54,7 @@ The Parser feature is designed to be modular and extensible, allowing for easy a
 
 3. **Command Execution**: Once the command is parsed and instantiated, it is executed by calling the `execute` method on the command object. This method contains the logic for performing the action associated with the command.
 
-4. **Error Handling**: The Parser feature includes robust error handling to manage invalid input and provide feedback to the user. If the input cannot be parsed or if the command is not recognized, an appropriate error message is displayed.
+4. **Error Handling**: The Parser feature includes error handling to manage invalid input and provide feedback to the user. If the input cannot be parsed or if the command is not recognized, an appropriate error message is displayed.
 
 # Sequence Diagram
 
@@ -85,4 +85,4 @@ The Storage feature is designed to be modular and extensible, allowing for easy 
 The following sequence diagram illustrates the interaction between the `Storage` class and the other key lists in the application during the loading and saving of data:
 The key lists include: `StockList`, `LowStockList`, `RecipeList`, `ShoppingList`
 
-![img_2.png](img_2.png)
+![img.png](img.png)
