@@ -51,7 +51,7 @@ The core components of the Command classes include:
 2. **Execute Method**: Each command class implements an `execute` method, which contains the logic for performing the action associated with that command. This method is called when the parser returns the command object to the main program.
 
 # Class Diagram
-<img src="img_2.png" alt="drawing" style="width:1300px;"/>
+<img src="img_2.png" alt="drawing" style="width:1500px;"/>
 
 
 
