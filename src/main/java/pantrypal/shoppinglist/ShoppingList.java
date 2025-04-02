@@ -74,6 +74,18 @@ public class ShoppingList {
         }
     }
 
+    // Mark an item as purchased by its ingredient name.
+    public boolean markItemAsPurchased(String ingredientName) {
+        assert ingredientName != null : "Ingredient name cannot be null.";
+        for (ShoppingListItem item : items) {
+            if (item.getIngredientName().equalsIgnoreCase(ingredientName)) {
+                item.setPurchased(true);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void copyFrom(ShoppingList newShoppingList) {
         if (newShoppingList != null) {
             // Clear existing items
