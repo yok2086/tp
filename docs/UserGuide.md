@@ -21,6 +21,70 @@ plan their meals, and store recipes.
 ### Recipe Commands
 
 ### Inventory Commands
+# Ingredient Inventory System
+
+## Add New Ingredient
+**Command:**
+```
+addNewIngredient <ingredient_name> <quantity> <unit>
+```
+**Example:**
+```
+addNewIngredient milk 200 ml
+```
+
+## Increase Specific Quantity to Existing Ingredient
+**Command:**
+```
+increaseQuantity <ingredient_name> <quantity> <unit>
+```
+**Example:**
+```
+increaseQuantity milk 200 ml
+```
+
+## Decrease Specific Quantity to Existing Ingredient
+**Command:**
+```
+decreaseQuantity <ingredient_name> <quantity> <unit>
+```
+**Example:**
+```
+decreaseQuantity milk 200 ml
+```
+
+## Set Low Stock Ingredient Alert
+**Command:**
+```
+setAlert <ingredient_name> <threshold_quantity> <unit>
+```
+**Example:**
+```
+setAlert flour 10 g
+```
+
+## Check Ingredient Stock
+**Command:**
+```
+checkStock
+```
+
+## View Low Stock Ingredients
+**Command:**
+```
+viewLowStock
+```
+
+## Delete Ingredient Entirely
+**Command:**
+```
+deleteIngredient <ingredient_name>
+```
+**Example:**
+```
+deleteIngredient salt
+```
+
 
 ### Meal Plan Commands
 
@@ -37,7 +101,6 @@ plan their meals, and store recipes.
 #### Exit the program: `exit`
 * **Format**: `exit`
 * **Description**: Exits the program.
-
 
 
 ## FAQ
