@@ -3,10 +3,8 @@ package pantrypal.shoppinglist;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import pantrypal.inventory.Unit;
 
 public class ShoppingListItemTest {
@@ -73,17 +71,24 @@ public class ShoppingListItemTest {
     public void testCopyConstructor() {
         item.setPurchased(true);
         ShoppingListItem copy = new ShoppingListItem(item);
-        assertEquals(item.getIngredientName(), copy.getIngredientName(), "Copied item should have the same ingredient name.");
-        assertEquals(item.getQuantity(), copy.getQuantity(), "Copied item should have the same quantity.");
-        assertEquals(item.getUnit(), copy.getUnit(), "Copied item should have the same unit.");
-        assertEquals(item.isPurchased(), copy.isPurchased(), "Copied item should have the same purchased status.");
+        assertEquals(item.getIngredientName(), copy.getIngredientName(),
+                "Copied item should have the same ingredient name.");
+        assertEquals(item.getQuantity(), copy.getQuantity(),
+                "Copied item should have the same quantity.");
+        assertEquals(item.getUnit(), copy.getUnit(),
+                "Copied item should have the same unit.");
+        assertEquals(item.isPurchased(), copy.isPurchased(),
+                "Copied item should have the same purchased status.");
 
         // Modify original and ensure copy remains unchanged.
         item.setIngredientName("milk");
         item.setQuantity(50);
         item.setPurchased(false);
-        assertEquals("sugar", copy.getIngredientName(), "Copy's ingredient name should remain 'sugar'.");
-        assertEquals(100, copy.getQuantity(), "Copy's quantity should remain 100.");
-        assertTrue(copy.isPurchased(), "Copy's purchased flag should remain true.");
+        assertEquals("sugar", copy.getIngredientName(),
+                "Copy's ingredient name should remain 'sugar'.");
+        assertEquals(100, copy.getQuantity(),
+                "Copy's quantity should remain 100.");
+        assertTrue(copy.isPurchased(),
+                "Copy's purchased flag should remain true.");
     }
 }
