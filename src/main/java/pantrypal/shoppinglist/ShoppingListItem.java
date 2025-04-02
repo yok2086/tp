@@ -63,6 +63,9 @@ public class ShoppingListItem {
 
     @Override
     public String toString() {
-        return ingredientName + ": " + quantity + " " + unit + (purchased ? " (Purchased)" : "");
+        // Format quantity: if it's a whole number, print without decimal.
+        String quantityStr = (quantity % 1 == 0) ? String.format("%d", (long) quantity)
+                : String.valueOf(quantity);
+        return ingredientName + ": " + quantityStr + " " + unit + (purchased ? " (Purchased)" : "");
     }
 }
