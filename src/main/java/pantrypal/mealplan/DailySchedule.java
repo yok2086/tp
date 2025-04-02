@@ -41,7 +41,8 @@ public class DailySchedule {
         }
     }
 
-    /** attempt to carry out removal. If this fails, add to a running list of
+    /**
+     * attempt to carry out removal. If this fails, add to a running list of
      * Ingredients and the values the Recipe requires
      *
      * @param inventory attached user inventory
