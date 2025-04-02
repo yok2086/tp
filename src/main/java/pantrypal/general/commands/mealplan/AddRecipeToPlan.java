@@ -31,8 +31,8 @@ public class AddRecipeToPlan extends MealPlanCommand {
         if (mealName.equals("NULL")) {
             System.out.println("Invalid meal index entered");
         } else {
-            System.out.println("Recipe " + recipes.getRecipeList().get(recipeIndex-1).getName() +
-                    " added to plan " + (planIndex-1) + " for " + mealName);
+            System.out.println("Recipe " + recipes.getRecipeList().get(recipeIndex).getName() +
+                    " added to plan " + (planIndex) + " for " + mealName);
         }
 
     }

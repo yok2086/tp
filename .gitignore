@@ -16,3 +16,5 @@ bin/
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
 /data/data.txt
+docs/team/zhanhao.puml
+docs/team/ZhanHao_DG.md

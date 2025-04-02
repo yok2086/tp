@@ -1,6 +1,7 @@
 package pantrypal.mealplan;
 
 import java.util.ArrayList;
+
 import pantrypal.recipe.RecipeManager;
 
 /**
@@ -23,7 +24,7 @@ public class PlanPresets {
     }
 
     private String getMealName(int mealIndex) {
-        switch(mealIndex){
+        switch (mealIndex) {
         case 1 -> {
             return "Breakfast";
         }
@@ -34,12 +35,12 @@ public class PlanPresets {
             return "Dinner";
         }
         default -> {
-            return  "NULL";
+            return "NULL";
         }
         }
     }
 
-    public void addNewPlan(String planName){
+    public void addNewPlan(String planName) {
         plans.add(new MealPlan(planName.isEmpty() ? "default" : planName));
     }
 
@@ -57,7 +58,7 @@ public class PlanPresets {
         return getMealName(mealIndex);
     }
 
-    public void viewPresets(){
+    public void viewPresets() {
         int count = 1;
         for (MealPlan plan : plans) {
             System.out.println(count++ + ": " + plan.getPlanName());
@@ -68,9 +69,9 @@ public class PlanPresets {
         System.out.println(plans.get(planIndex).toString());
     }
 
-    public void findPresets(String planName){
+    public void findPresets(String planName) {
         for (MealPlan plan : plans) {
-            if (plan.getPlanName().contains(planName)){
+            if (plan.getPlanName().contains(planName)) {
                 System.out.println(plan.getPlanName());
             }
         }

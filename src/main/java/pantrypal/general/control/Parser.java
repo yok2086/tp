@@ -72,7 +72,7 @@ public class Parser {
                 name = inputParts[1].toUpperCase();
                 double threshold = Double.parseDouble(inputParts[2]);
                 return new SetAlert(name, threshold);
-            case "checkStock":
+            case "viewStock":
                 return new CheckStock();
             case "viewLowStock":
                 return new ViewLowStock();
@@ -131,7 +131,7 @@ public class Parser {
             case "viewRecipeList":
                 return new ListRecipe();
             case "addRecipeToPlan":
-                if (inputParts.length < 3) {
+                if (inputParts.length < 4) {
                     throw new IllegalArgumentException("Insufficient arguments for addRecipeToPlan command.");
                 }
                 int recipeIndex = Integer.parseInt(inputParts[1]) - 1;

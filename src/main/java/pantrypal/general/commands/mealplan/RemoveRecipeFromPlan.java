@@ -13,7 +13,7 @@ public class RemoveRecipeFromPlan extends MealPlanCommand {
     private int mealIndex;
 
     public RemoveRecipeFromPlan() {
-        super("removeFromPlan <recipe index>" ,
+        super("removeFromPlan <recipe index>",
                 "Remove a recipe to a plan");
     }
 
@@ -29,7 +29,7 @@ public class RemoveRecipeFromPlan extends MealPlanCommand {
         if (mealName.equals("NULL")) {
             System.out.println("The corresponding meal did not have a recipe allocated.");
         } else {
-            System.out.println("Recipe for " + mealName + " removed from plan  " + (planIndex-1));
+            System.out.println("Recipe for " + mealName + " removed from plan  " + (planIndex - 1));
         }
 
     }

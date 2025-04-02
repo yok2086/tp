@@ -86,7 +86,6 @@ public class RecipeManager{
 
     }
 
-    //addIngredient with no expiry date
     public void addRecipeIngredients(Recipe recipe, String ingredientName, int quantity, Unit unit) {
         try{
             Ingredient ingredient = new Ingredient(ingredientName, quantity, unit);
