@@ -38,6 +38,21 @@
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
 
 
+# Implementation of Command Classes
+
+## Overview
+The Command classes are responsible for encapsulating the logic and parameters associated with each command in the application.
+
+## Design and Implementation
+The Command classes are designed to be modular and expandable, allowing for easy addition of new commands and functionalities.
+The core components of the Command classes include:
+1. **Command Classes**: Each command is represented by a separate class, which encapsulates the logic and parameters associated with that command. This design allows for clear separation of concerns and makes it easy to add new commands in the future.
+2. **Command Types**: Each command inherits from a specific command type, which is used to identify the command's functionality group. This allows for better organization and management of commands within the application.
+2. **Execute Method**: Each command class implements an `execute` method, which contains the logic for performing the action associated with that command. This method is called when the parser returns the command object to the main program.
+
+# Class Diagram
+<img src="img_2.png" alt="drawing" style="width:1300px;"/>
+
 
 
 # Implementation of the Parser Feature
@@ -60,7 +75,8 @@ The Parser feature is designed to be modular and extensible, allowing for easy a
 
 The following sequence diagram illustrates the interaction between the user, the `Parser`, and the `Command` classes during the execution of a command:
 
-![img_3.png](img_3.png)
+<img src="img_1.png" alt="drawing" style="width:900px;"/>
+
 
 ### Why It Is Implemented This Way
 By using separate command classes, we can easily extend the functionality of the application without modifying the core parsing logic.
@@ -84,8 +100,7 @@ The Storage feature is designed to be modular and extensible, allowing for easy 
 
 The following sequence diagram illustrates the interaction between the `Storage` class and the other key lists in the application during the loading and saving of data:
 The key lists include: `StockList`, `LowStockList`, `RecipeList`, `ShoppingList`
-
-![img.png](img.png)
+<img src="img_3.png" alt="drawing" style="width:1000px;"/>
 
 # Implementation of the Ingredient and Ingredient Inventory Features
 
@@ -139,7 +154,8 @@ Management and Shopping Lists. The core components of the Ingredient Inventory f
 The following sequence diagram illustrates the interaction between the user, the Ingredient Inventory, and the
 Ingredient feature during ingredient management:
 
-![img_4.png](img_4.png)
+<img src="img_4.png" alt="drawing" style="width:500px;"/>
+
 ### Why It Is Implemented This Way
 The Ingredient and Ingredient Inventory features follow a modular design to ensure flexibility, scalability, and
 maintainability. The Single Responsibility Principle is adhered to, with the Ingredient class managing individual
