@@ -19,7 +19,11 @@ public class AddNewWeek extends MealPlanCommand {
     }
 
     public AddNewWeek(PlanPresets preset) {
-        this.week = new WeeklySchedule(preset);
+        week = new WeeklySchedule(preset);
+    }
+
+    public WeeklySchedule getWeeklySchedule() {
+        return week;
     }
 
     @Override

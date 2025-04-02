@@ -102,6 +102,94 @@ The following sequence diagram illustrates the interaction between the `Storage`
 The key lists include: `StockList`, `LowStockList`, `RecipeList`, `ShoppingList`
 <img src="img_3.png" alt="drawing" style="width:1000px;"/>
 
+# Implementation of the Meal Plan, Plan Presets and Viewing features
+
+## Meal Plan Feature
+
+### Overview
+The Meal Plan feature is the core feature of the PantryPal application, and is responsible for the cohesion of the
+Recipe and IngredientInventory features. A Meal Plan instance encapsulates the meals attribute, which holds the recipes
+used by that meal plan. Each Meal Plan instance is created and stored in an overarching PlanPresets instance, and is
+used to instantiate a DailySchedule instance for purposes of viewing.
+
+### Design and Implementation
+The MealPlan feature is designed for quick interfacing and adaptation of a user's plans. It allows the user to quickly
+modify their plans for any particular day using the given methods.
+
+- **MealPlan Class**: Represents a meal plan instance created by the user with attributes for an identifying name and used recipes. It includes the methods to add, edit and remove certain recipes from the plan.
+
+### Core Functionalities
+- **Add Recipe to Plan**: allows the user to add a particular created recipe into a meal plan, through specification by the user on whether it is for breakfast, lunch or dinner.
+- **Remove Recipe from Plan**: allows the user to completely remove a selected recipe from a meal plan.
+
+## Plan Presets Feature
+
+The Plan Presets feature holds a collection of meal plans that can be quickly added to a DailySchedule instance for
+quick re-iterations of a same meal plan. It encapsulates an ArrayList of plans that have been created by the user, and draws
+from this to substantiate a DailySchedule instance with a created meal plan.
+
+### Design and Implementation
+The Plan Presets feature is designed for convenience, allowing the user to re-use a same plan for purposes of
+a diet, without having to painstakingly enter the details for every duplicate meal plan they are planning to add to their
+viewing schedule.
+
+- **PlanPresets Class**: Represents an individual set of meal plans created by the user that contains the collection of plans.
+- **Find Plan feature**: Allows the user to locate a plan with a particular name through matching of string contents.
+
+### Core Functionalities
+- **Add Plan**: Instantiates a new Meal Plan instance with a name optionally keyed by the user
+- **Remove Plan**: Removes a plan from the currently created preset
+- **Add recipe to plan**: Facilitates the procedure of adding a recipe to the indicated meal plan as decided by the user
+- **Remove recipe from plan**: Facilitates the procedure of removing a recipe from the indicated meal plan as decided by the user
+
+
+## Viewing Features
+
+### Overview
+The Viewing features includes WeeklySchedule and DailySchedule, which provide the user with a packaged view of the
+summarised contents of a meal plan assigned to a particular day of the week (in the case of WeeklySchedule), and the
+detailed view of a meal plan (in the case of DailySchedule).
+
+## DailySchedule Feature
+
+Provides the user with a proper interface to consolidate their meal plans for a particular day and execute upon them to
+indicate the completion of the meal plan.
+
+### Design and Implementation
+
+- **DailySchedule Class**: Represents the individual day that a user plans for, with functionalities to modify details of the selected plan as necessary.
+- **Execute Plan Feature**: Attempts to remove the ingredients used by the meal plan from the inventory, and marks the plan as acted upon. If insufficient items are in the inventory, prompts the user with the missing ingredients before allowing execution
+
+### Core Functionalities
+- **Set Plan** Select a plan to duplicate from and assign to the dailySchedule
+- **Remove Plan** Remove the current selected plan from dailySchedule
+- **Execute Plan** Marks the plan as done and reduces the stock of ingredients used by the plan. Does not execute if there is a lack in count for any ingredient, and will prompt the user with all missing ingredients
+- **Edit Plan** Able to pick from any detail amongst the plan to modify
+- **View Plan** Able to view the full details of the plan, including the content of each meal's recipe
+
+## WeeklySchedule Feature
+
+Provides the user with an interface to interact with each individual DailySchedule for a weekly plan. 
+
+### Design and Implementation
+
+- **DailySchedule Class**: Represents the individual day that a user plans for, with functionalities to modify details of the selected plan as necessary.
+- **Execute Plan Feature**: Attempts to remove the ingredients used by the meal plan from the inventory, and marks the plan as acted upon. If insufficient items are in the inventory, prompts the user with the missing ingredients before allowing execution
+
+### Core Functionalities
+- **Set Plan** Select a plan to duplicate from and assign to the dailySchedule
+- **Remove Plan** Remove the current selected plan from dailySchedule
+- **Execute Plan** Marks the plan as done and reduces the stock of ingredients used by the plan. Does not execute if there is a lack in count for any ingredient, and will prompt the user with all missing ingredients
+- **Edit Plan** Able to pick from any detail amongst the plan to modify
+- **View Plan** Shows a summarized view of the meal plans in each DailySchedule
+
+### Sequence Diagram
+
+The following sequence diagram illustrates the interactions between the user, PlanPreset, each MealPlan within
+PlanPreset, DailySchedule, WeeklySchedule, each MealPlan within DailySchedule, IngredientInventory and each Recipe
+amongst all created MealPlan 
+
+
 # Implementation of the Ingredient and Ingredient Inventory Features
 
 ## Ingredient Feature
@@ -115,8 +203,7 @@ modified, and retrieved when needed.
 The Ingredient feature is designed for flexibility and accuracy, ensuring seamless interaction with other components
 like the Ingredient Inventory and Recipe Manager. The core components of the Ingredient feature include:
 
-- **Ingredient Class**: Represents an individual ingredient with attributes for name, quantity, and unit. It includes
-- methods to get and set these attributes, ensuring proper data encapsulation.
+- **Ingredient Class**: Represents an individual ingredient with attributes for name, quantity, and unit. It includes methods to get and set these attributes, ensuring proper data encapsulation.
 - **Unit Feature**: Standardizes measurement units for ingredients, ensuring consistency.
 
 ### Core Functionalities
@@ -150,7 +237,7 @@ Management and Shopping Lists. The core components of the Ingredient Inventory f
 - **Deleting Ingredients**: Users can remove ingredients from the inventory, ensuring accurate stock representation.
 - **Low-Stock Alerts**: The system supports configurable alerts to notify users when ingredients are running low.
 
-### Sequence Diagram
+## Sequence Diagram
 The following sequence diagram illustrates the interaction between the user, the Ingredient Inventory, and the
 Ingredient feature during ingredient management:
 
