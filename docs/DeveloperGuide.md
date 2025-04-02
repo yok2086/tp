@@ -87,4 +87,64 @@ The key lists include: `StockList`, `LowStockList`, `RecipeList`, `ShoppingList`
 
 ![img.png](img.png)
 
+# Implementation of the Ingredient and Ingredient Inventory Features
+
+## Ingredient Feature
+
+### Overview
+The Ingredient feature represents individual ingredients in the system. Each ingredient instance encapsulates essential
+attributes such as name, quantity, and unit. This modular design ensures that ingredients can be easily created,
+modified, and retrieved when needed.
+
+### Design and Implementation
+The Ingredient feature is designed for flexibility and accuracy, ensuring seamless interaction with other components
+like the Ingredient Inventory and Recipe Manager. The core components of the Ingredient feature include:
+
+- **Ingredient Class**: Represents an individual ingredient with attributes for name, quantity, and unit. It includes
+- methods to get and set these attributes, ensuring proper data encapsulation.
+- **Unit Feature**: Standardizes measurement units for ingredients, ensuring consistency.
+
+### Core Functionalities
+- **Creating Ingredient**: Allows creating ingredients with specified attributes.
+- **Updating Ingredient**: Provides methods to modify an ingredient’s name, quantity, and unit.
+- **Unit Management**: Ensures valid unit selection and provides functionality for unit conversion.
+
+
+## Ingredient Inventory Feature
+
+### Overview
+The Ingredient Inventory feature is responsible for managing a collection of ingredients, tracking their quantities, and
+ensuring users can monitor their stock. This feature enables users to add, update, and remove ingredients while
+supporting low-stock alerts.
+
+### Design and Implementation
+The Ingredient Inventory feature is modular and extensible, allowing for seamless integration with features like Recipe
+Management and Shopping Lists. The core components of the Ingredient Inventory feature include:
+
+- **Ingredient Inventory Class**: Manages the collection of ingredients, allowing users to add, update, and delete
+- items.
+- **Low-Stock Alert System**: Enables users to set and retrieve low-stock alerts, notifying them when ingredients fall
+- below a set threshold.
+- **Integration with Ingredient Feature**: Uses the Ingredient class to ensure consistency and modularity in ingredient
+- representation.
+
+### Core Functionalities
+- **Adding and Managing Ingredients**: Users can add new ingredients with a name, quantity, and unit while ensuring
+- valid input through validation checks.
+- **Updating Ingredient Quantities**: The feature allows increasing or decreasing ingredient quantities.
+- **Deleting Ingredients**: Users can remove ingredients from the inventory, ensuring accurate stock representation.
+- **Low-Stock Alerts**: The system supports configurable alerts to notify users when ingredients are running low.
+
+### Sequence Diagram
+The following sequence diagram illustrates the interaction between the user, the Ingredient Inventory, and the
+Ingredient feature during ingredient management:
+
+![img_4.png](img_4.png)
+### Why It Is Implemented This Way
+The Ingredient and Ingredient Inventory features follow a modular design to ensure flexibility, scalability, and
+maintainability. The Single Responsibility Principle is adhered to, with the Ingredient class managing individual
+ingredient attributes (name, quantity, unit) and the Ingredient Inventory class handling the collection of ingredients.
+This clear separation makes the system easy to understand, maintain, and modify without affecting other components.
+
+
 

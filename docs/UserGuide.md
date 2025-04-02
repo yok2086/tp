@@ -17,10 +17,152 @@ plan their meals, and store recipes.
 ## Features 
 
 ### Shopping List Commands
+PantryPal's Shopping List feature helps you manage your grocery needs efficiently. You can manually add items, automatically generate a list based on low-stock alerts, edit existing items, and mark items as purchased. This ensures you never miss out on essential ingredients.
+
+#### **addShoppingItem**
+Command:
+```
+addShoppingItem <ingredient_name> <quantity> <unit>
+```
+Example:
+```
+addShoppingItem sugar 500 g
+```
+Description:
+Manually adds an item to your shopping list. Use this command when you want to include items not
+currently flagged by low-stock alerts or if you want to quickly update your list.
+
+#### **generateShoppingList**
+Command:
+```
+generateShoppingList
+```
+Example:
+```
+generateShoppingList
+```
+Description:
+Automatically generates your shopping list by comparing your current ingredient stock with preset low-stock alerts.
+This command calculates the required amount for each ingredient that needs replenishment.
+
+#### **removeShoppingItem**
+Command:
+```
+removeShoppingItem <ingredient_name>
+```
+Example:
+```
+removeShoppingItem sugar
+```
+Description:
+Removes a specified item from your shopping list. Use this command if you decide you no longer need to purchase that ingredient.
+
+#### **viewShoppingList**
+Command:
+```
+viewShoppingList
+```
+Example:
+```
+viewShoppingList
+```
+Description:
+Displays all items in your shopping list, including index numbers next to each item.
+This makes it easy to reference items when you need to edit or mark them as purchased.
+
+#### **editShoppingItem**
+Command:
+```
+editShoppingItem <index> <new_ingredient_name> <new_quantity> <new_unit>
+```
+Example:
+```
+editShoppingItem 1 milk 250 ml
+```
+Description:
+Allows you to edit an existing shopping list item by specifying its index (as shown in `viewShoppingList`).
+Use this command to update the ingredient name, quantity, or unit if your shopping needs change.
+
+#### **markItemAsPurchased**
+Command:
+```
+markItemAsPurchased <ingredient_name>
+```
+Example:
+```
+markItemAsPurchased sugar
+```
+Description:
+Marks an item in your shopping list as purchased. The item will be visually updated (e.g., with a “(Purchased)” tag)
+so you can easily track which items have already been bought.
 
 ### Recipe Commands
 
 ### Inventory Commands
+#### Ingredient Inventory System
+
+#### Add New Ingredient
+Command:
+```
+addNewIngredient <ingredient_name> <quantity> <unit>
+```
+Example:
+```
+addNewIngredient milk 200 ml
+```
+
+#### Increase Specific Quantity to Existing Ingredient
+Command:
+```
+increaseQuantity <ingredient_name> <quantity> <unit>
+```
+Example:
+```
+increaseQuantity milk 200 ml
+```
+
+#### Decrease Specific Quantity to Existing Ingredient
+Command:
+```
+decreaseQuantity <ingredient_name> <quantity> <unit>
+```
+Example:
+```
+decreaseQuantity milk 200 ml
+```
+
+#### Set Low Stock Ingredient Alert
+Command:
+```
+setAlert <ingredient_name> <threshold_quantity> <unit>
+```
+Example:
+```
+setAlert flour 10 g
+```
+
+#### Check Ingredient Stock
+Command:
+```
+checkStock
+```
+
+#### View Low Stock Ingredients
+Command:
+```
+viewLowStock
+```
+
+#### Delete Ingredient Entirely
+Command:
+```
+deleteIngredient <ingredient_name>
+```
+Example:
+```
+deleteIngredient salt
+```
+
 
 ### Meal Plan Commands
 
@@ -37,7 +179,6 @@ plan their meals, and store recipes.
 #### Exit the program: `exit`
 * **Format**: `exit`
 * **Description**: Exits the program.
-
 
 
 ## FAQ
@@ -94,6 +235,10 @@ plan their meals, and store recipes.
     * **Format**: `removeShoppingItem <name>`
 * **viewShoppingList**: View the shopping list
     * **Format**: `viewShoppingList`
+* **editShoppingItem**: Edit an existing item by its index
+  * **Format**: `editShoppingItem <index> <new_name> <new_quantity> <new_unit>`
+* **markItemAsPurchased**: Mark an item as purchased
+  * **Format**: `markItemAsPurchased <name>`
 
 ### Meal Plan Commands
 * **viewPlan**: View meal plan presets

@@ -15,32 +15,48 @@ public class MealPlan {
         this.planName = planName;
     }
 
-    public void addRecipe(RecipeManager recipeList, int recipeIndex, int mealIndex) {
+
+
+    private int getMealIndex(String mealName) {
+        switch (mealName) {
+        case "BREAKFAST" -> {
+            return 0;
+        }
+        case "LUNCH" -> {
+            return 1;
+        }
+        case "DINNER" -> {
+            return 2;
+        }
+        default -> throw new InvalidMealIndexException("Invalid meal index");
+        }
+    }
+
+    public void addRecipe(RecipeManager recipeList, int recipeIndex, String mealName) {
+
+        int mealIndex;
 
         try {
-            switch (mealIndex) {
-            case 1:
-            case 2:
-            case 3:
-                if (recipeIndex <= 0 || recipeIndex >= recipeList.getRecipeList().size()) {
-                    throw new InvalidRecipeIndexException("Invalid recipe index");
-                }
-                recipes[mealIndex] = recipeList.getRecipeList().get(recipeIndex);
-                break;
+            mealIndex = getMealIndex(mealName);
 
-            default:
-                throw new InvalidMealIndexException("Invalid meal index");
+            if (recipeIndex <= 0 || recipeIndex >= recipeList.getRecipeList().size()) {
+                throw new InvalidRecipeIndexException("Invalid recipe index");
             }
+            recipes[mealIndex] = recipeList.getRecipeList().get(recipeIndex);
+
         } catch (InvalidMealIndexException e) {
             System.out.println(e.getMessage());
+
         } catch (InvalidRecipeIndexException e) {
             System.out.println(e.getMessage());
             System.out.println(e.getMessage());
         }
     }
 
-    public void removeRecipe(int mealIndex) {
-        recipes[mealIndex] = null;
+
+
+    public void removeRecipe(String mealName) {
+        recipes[getMealIndex(mealName)] = null;
     }
 
     @Override
@@ -57,6 +73,10 @@ public class MealPlan {
 
     public String getPlanName() {
         return planName;
+    }
+
+    public Recipe[] getRecipes(){
+        return recipes;
     }
 
 }

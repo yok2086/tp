@@ -1,7 +1,6 @@
 package pantrypal.mealplan;
 
 import java.util.ArrayList;
-
 import pantrypal.recipe.RecipeManager;
 
 /**
@@ -23,42 +22,23 @@ public class PlanPresets {
         plans = new ArrayList<>();
     }
 
-    private String getMealName(int mealIndex) {
-        switch (mealIndex) {
-        case 1 -> {
-            return "Breakfast";
-        }
-        case 2 -> {
-            return "Lunch";
-        }
-        case 3 -> {
-            return "Dinner";
-        }
-        default -> {
-            return "NULL";
-        }
-        }
-    }
-
-    public void addNewPlan(String planName) {
+    public void addNewPlan(String planName){
         plans.add(new MealPlan(planName.isEmpty() ? "default" : planName));
     }
 
-    public String addRecipeToPlan(RecipeManager recipes, int recipeIndex, int planIndex, int mealIndex) {
-        plans.get(planIndex).addRecipe(recipes, recipeIndex, mealIndex);
-        return getMealName(mealIndex);
+    public void addRecipeToPlan(RecipeManager recipes, int recipeIndex, int planIndex, String mealName) {
+        plans.get(planIndex).addRecipe(recipes, recipeIndex, mealName);
     }
 
     public void removePlan(int planIndex) {
         plans.remove(planIndex);
     }
 
-    public String removeRecipeFromPlan(int planIndex, int mealIndex) {
-        plans.get(planIndex).removeRecipe(mealIndex);
-        return getMealName(mealIndex);
+    public void removeRecipeFromPlan(int planIndex, String mealName) {
+        plans.get(planIndex).removeRecipe(mealName);
     }
 
-    public void viewPresets() {
+    public void viewPresets(){
         int count = 1;
         for (MealPlan plan : plans) {
             System.out.println(count++ + ": " + plan.getPlanName());
@@ -69,9 +49,9 @@ public class PlanPresets {
         System.out.println(plans.get(planIndex).toString());
     }
 
-    public void findPresets(String planName) {
+    public void findPresets(String planName){
         for (MealPlan plan : plans) {
-            if (plan.getPlanName().contains(planName)) {
+            if (plan.getPlanName().contains(planName)){
                 System.out.println(plan.getPlanName());
             }
         }

@@ -11,29 +11,28 @@ import java.util.Scanner;
 public class AddRecipeToPlan extends MealPlanCommand {
     private int recipeIndex;
     private int planIndex;
-    private int mealIndex;
+    private String mealName;
 
     public AddRecipeToPlan() {
-        super("addToPlan <recipe index> <plan index> <meal index>",
-                "Add a recipe to a plan");
+        super("addToPlan <recipe index> <plan index> <meal name>",
+                "Add a recipe to a particular meal of a plan");
     }
 
-    public AddRecipeToPlan(int recipeIndex, int planIndex, int mealIndex) {
+    public AddRecipeToPlan(int recipeIndex, int planIndex, String mealName) {
         this.recipeIndex = recipeIndex;
         this.planIndex = planIndex;
-        this.mealIndex = mealIndex;
+        this.mealName = getMealName(mealName);
     }
+
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, Scanner in) {
-        String mealName = presets.addRecipeToPlan(recipes, recipeIndex, planIndex, mealIndex);
-        if (mealName.equals("NULL")) {
-            System.out.println("Invalid meal index entered");
-        } else {
-            System.out.println("Recipe " + recipes.getRecipeList().get(recipeIndex).getName() +
-                    " added to plan " + (planIndex) + " for " + mealName);
-        }
+
+        presets.addRecipeToPlan(recipes, recipeIndex, planIndex, this.mealName);
+
+        System.out.println("Recipe " + recipes.getRecipeList().get(recipeIndex).getName() +
+                " added to plan " + planIndex + " for " + this.mealName);
 
     }
 }
