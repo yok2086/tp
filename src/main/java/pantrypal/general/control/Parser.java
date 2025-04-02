@@ -72,7 +72,7 @@ public class Parser {
                 name = inputParts[1].toUpperCase();
                 double threshold = Double.parseDouble(inputParts[2]);
                 return new SetAlert(name, threshold);
-            case "checkStock":
+            case "viewStock":
                 return new CheckStock();
             case "viewLowStock":
                 return new ViewLowStock();

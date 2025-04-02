@@ -21,12 +21,10 @@ public class Storage {
     private static String filePath = "";
     private static File file;
 
-
     public Storage(String filePath) {
         Storage.filePath = filePath;
         file = new File(filePath);
     }
-
 
     public static void createFile(IngredientInventory inventory, ShoppingList shoppingList, PlanPresets planPresets,
                                   RecipeManager recipeManager) {
@@ -72,72 +70,96 @@ public class Storage {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine().trim();
 
-                // Skip empty lines
                 if (line.isEmpty()) {
                     continue;
                 }
 
-                // Identify sections
                 if (line.startsWith("[Shopping]")) {
                     currentSection = "Shopping";
-                    String[] shoppingListItem = line.substring("[Shopping]".length()).trim().split(" ");
-                    String name = unescapeSpecialCharacters(shoppingListItem[0]);
-                    double quantity = Double.parseDouble(shoppingListItem[1]);
-                    Unit unit = Unit.parseUnit(shoppingListItem[2]);
-                    shoppingList.addItem(new ShoppingListItem(name, quantity, unit));
+                    processShoppingLine(line, shoppingList);
                 } else if (line.startsWith("[Recipe]")) {
                     currentSection = "Recipe";
-                    String recipeName = unescapeSpecialCharacters(line.substring("[Recipe]".length()).trim());
-                    recipe = recipeManager.addRecipe(recipeName);
+                    recipe = processRecipeLine(line, recipeManager);
                 } else if (line.startsWith("[Stock]")) {
                     currentSection = "Stock";
-                    line = line.substring("[Stock]".length()).trim();
-                    String[] stockItem = line.split(" ");
-                    String stockName = unescapeSpecialCharacters(stockItem[0]);
-                    double stockQuantity = Double.parseDouble(stockItem[1]);
-                    Unit stockUnit = Unit.parseUnit(stockItem[2]);
-                    inventory.addNewIngredient(stockName, stockQuantity, stockUnit);
+                    processStockLine(line, inventory);
                 } else if (line.startsWith("[LowStock]")) {
                     currentSection = "LowStock";
-                    line = line.substring("[LowStock]".length()).trim();
-                    String[] lowStockItem = line.split(" ");
-                    String lowStockName = unescapeSpecialCharacters(lowStockItem[0]);
-                    double lowStockQuantity = Double.parseDouble(lowStockItem[1]);
-                    inventory.setAlert(lowStockName, lowStockQuantity);
+                    processLowStockLine(line, inventory);
                 } else if (line.startsWith("[MealPlan]")) {
                     currentSection = "MealPlan";
                 } else {
-                    switch (currentSection) {
-                    case "Recipe":
-                        if (line.startsWith("[Ingredients]")) {
-                            line = line.substring("[Ingredients]".length()).trim();
-                            String[] ingredients = line.trim().split(" \\|");
-                            for (String ingredient : ingredients) {
-                                String[] parts = ingredient.trim().split(" ");
-                                String ingredientName = unescapeSpecialCharacters(parts[0]);
-                                double ingredientQuantity = Double.parseDouble(parts[1]);
-                                Unit ingredientUnit = Unit.parseUnit(parts[2]);
-                                recipe.addIngredient(new Ingredient(ingredientName, ingredientQuantity,
-                                        ingredientUnit));
-                            }
-                        } else if (line.startsWith("[Instructions]")) {
-                            line = line.substring("[Instructions]".length()).trim();
-                            String[] instructions = line.trim().split(" \\|");
-                            int step = 1;
-                            for (String instruction : instructions) {
-                                Instruction instructionObject = new Instruction(step++,
-                                        unescapeSpecialCharacters(instruction.trim()));
-                                recipe.addInstruction(instructionObject);
-                            }
-                        }
-                        break;
-                    default:
-                        System.out.println("Unknown data: " + line);
-                    }
+                    processSectionLine(currentSection, line, recipe);
                 }
             }
         } catch (IOException e) {
             Ui.printErrorMessage(e.getMessage());
+        }
+    }
+
+    private static void processShoppingLine(String line, ShoppingList shoppingList) {
+        String[] shoppingListItem = line.substring("[Shopping]".length()).trim().split(" ");
+        String name = unescapeSpecialCharacters(shoppingListItem[0]);
+        double quantity = Double.parseDouble(shoppingListItem[1]);
+        Unit unit = Unit.parseUnit(shoppingListItem[2]);
+        shoppingList.addItem(new ShoppingListItem(name, quantity, unit));
+    }
+
+    private static Recipe processRecipeLine(String line, RecipeManager recipeManager) {
+        String recipeName = unescapeSpecialCharacters(line.substring("[Recipe]".length()).trim());
+        return recipeManager.addRecipe(recipeName);
+    }
+
+    private static void processStockLine(String line, IngredientInventory inventory) {
+        line = line.substring("[Stock]".length()).trim();
+        String[] stockItem = line.split(" ");
+        String stockName = unescapeSpecialCharacters(stockItem[0]);
+        double stockQuantity = Double.parseDouble(stockItem[1]);
+        Unit stockUnit = Unit.parseUnit(stockItem[2]);
+        inventory.addNewIngredient(stockName, stockQuantity, stockUnit);
+    }
+
+    private static void processLowStockLine(String line, IngredientInventory inventory) {
+        line = line.substring("[LowStock]".length()).trim();
+        String[] lowStockItem = line.split(" ");
+        String lowStockName = unescapeSpecialCharacters(lowStockItem[0]);
+        double lowStockQuantity = Double.parseDouble(lowStockItem[1]);
+        inventory.setAlert(lowStockName, lowStockQuantity);
+    }
+
+    private static void processSectionLine(String currentSection, String line, Recipe recipe) {
+        switch (currentSection) {
+        case "Recipe":
+            if (line.startsWith("[Ingredients]")) {
+                processRecipeIngredients(line, recipe);
+            } else if (line.startsWith("[Instructions]")) {
+                processRecipeInstructions(line, recipe);
+            }
+            break;
+        default:
+            System.out.println("Unknown data: " + line);
+        }
+    }
+
+    private static void processRecipeIngredients(String line, Recipe recipe) {
+        line = line.substring("[Ingredients]".length()).trim();
+        String[] ingredients = line.trim().split(" \\|");
+        for (String ingredient : ingredients) {
+            String[] parts = ingredient.trim().split(" ");
+            String ingredientName = unescapeSpecialCharacters(parts[0]);
+            double ingredientQuantity = Double.parseDouble(parts[1]);
+            Unit ingredientUnit = Unit.parseUnit(parts[2]);
+            recipe.addIngredient(new Ingredient(ingredientName, ingredientQuantity, ingredientUnit));
+        }
+    }
+
+    private static void processRecipeInstructions(String line, Recipe recipe) {
+        line = line.substring("[Instructions]".length()).trim();
+        String[] instructions = line.trim().split(" \\|");
+        int step = 1;
+        for (String instruction : instructions) {
+            Instruction instructionObject = new Instruction(step++, unescapeSpecialCharacters(instruction.trim()));
+            recipe.addInstruction(instructionObject);
         }
     }
 
