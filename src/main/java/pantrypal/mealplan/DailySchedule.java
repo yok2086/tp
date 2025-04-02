@@ -13,12 +13,24 @@ public class DailySchedule {
     private boolean used = false;
     private boolean executed = false;
 
-    public DailySchedule() {
+    public DailySchedule(PlanPresets preset, int planIndex) {
+        setPlan(preset, planIndex);
     }
 
     public void setPlan(PlanPresets planPresets, int planIndex){
-        selectedMealPlan = planPresets.getPlans().get(planIndex);
+        MealPlan planToCopy = planPresets.getPlans(planIndex);
+        this.selectedMealPlan = new MealPlan(planToCopy.getPlanName());
+        this.selectedMealPlan.setRecipes(planToCopy.getRecipes());
         this.used = true;
+    }
+
+    public void removePlan(){
+        this.selectedMealPlan = null;
+        this.used = false;
+    }
+
+    public void editPlan(){
+
     }
 
     public void showDay(){
@@ -29,9 +41,15 @@ public class DailySchedule {
         }
     }
 
+    /** attempt to carry out removal. If this fails, add to a running list of
+     * Ingredients and the values the Recipe requires
+     *
+     * @param inventory attached user inventory
+     */
+
     public void executePlan(IngredientInventory inventory){
         for (Recipe recipe : selectedMealPlan.getRecipes()){
-            
+            System.out.println(recipe.toString());
         }
     }
 
