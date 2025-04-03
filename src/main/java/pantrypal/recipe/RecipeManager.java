@@ -188,6 +188,7 @@ public class RecipeManager{
 
         if (filteredItems.isEmpty()) {
             System.out.println("There is no recipe with name " + recipeName);
+            return;
         }
 
         for (Recipe recipe : filteredItems) {

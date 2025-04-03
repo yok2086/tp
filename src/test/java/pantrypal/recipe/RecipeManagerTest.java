@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -144,10 +146,49 @@ class RecipeManagerTest {
 
     @Test
     void removeRecipeIngredient() {
+        recipeManager.addRecipe("fried_egg");
+        Recipe fried_egg = recipeManager.searchRecipe("fried_egg");
+        recipeManager.addRecipeIngredients(fried_egg, "eggs", 50, Unit.parseUnit("g"));
+        recipeManager.addRecipeIngredients(fried_egg, "oil", 50, Unit.parseUnit("ml"));
+
+        recipeManager.removeRecipeIngredient(fried_egg, "oil");
+        assertEquals(1, fried_egg.getIngredients().size());
+        assertEquals("eggs", fried_egg.getIngredients().get(0).getName());
+
+        recipeManager.removeRecipeIngredient(fried_egg, "pizza");
+        assertEquals(1, fried_egg.getIngredients().size());
+        assertEquals("eggs", fried_egg.getIngredients().get(0).getName());
     }
 
     @Test
     void listRecipe() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outContent));
+
+        try {
+            // Act: Call the method that prints output
+            recipeManager.listRecipe();
+
+            // Assert: Check if the output is as expected
+            String expectedOutput = "There are no recipes at the moment. You can add via addRecipe\r\n";
+            assertEquals(expectedOutput, outContent.toString(),
+                    "Printed output: " + outContent.toString() + " does not match expected output: "
+                        + expectedOutput);
+
+
+            recipeManager.addRecipe("fried_egg");
+            recipeManager.addRecipe("milk");
+
+            String ExpectedOutput = "1. fried_egg\n" +
+                    "2. milk";
+            assertEquals(expectedOutput, outContent.toString(),
+                    "Printed output: " + outContent.toString() + " does not match expected output: "
+                        + expectedOutput);
+        } finally {
+            // Restore System.out
+            System.setOut(originalOut);
+        }
     }
 
     @Test

@@ -53,7 +53,7 @@ public class Recipe {
             System.out.println("Error: Instruction at step " + index + " does not exist.");
             return;
         }
-        instructions.remove(index);
+        instructions.remove(filtered.get(0));
     }
 
     public String getAllInstructions(){
