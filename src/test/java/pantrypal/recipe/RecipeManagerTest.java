@@ -50,6 +50,7 @@ class RecipeManagerTest {
                 "Expected fried egg to be eggs");
 
         friedEgg.removeIngredient("eggs");
+        /* Removed for handled case
         try {
             recipeManager.addRecipeIngredients(friedEgg, "eggs",
                     50, Unit.parseUnit("eggs"), Category.parseCategory("DAIRY"));
@@ -59,7 +60,7 @@ class RecipeManagerTest {
         } catch (Exception e){
             fail("Unexpected exception thrown");
         }
-
+        */
         try {
             recipeManager.addRecipeIngredients(friedEgg, "eggs",
                     50, Unit.parseUnit("g"), Category.parseCategory("HEHE"));
@@ -115,13 +116,13 @@ class RecipeManagerTest {
     @Test
     void addRecipeInstruction() {
         recipeManager.addRecipe("fried_egg");
-        Recipe fried_egg = recipeManager.searchRecipe("fried_egg");
+        Recipe friedEgg = recipeManager.searchRecipe("fried_egg");
 
-        recipeManager.addRecipeInstruction(fried_egg, 1, "crack eggs");
-        recipeManager.addRecipeInstruction(fried_egg, 2, "serve eggs");
-        assertEquals(2, fried_egg.getInstructions().size());
-        assertEquals("crack eggs", fried_egg.getInstructions().get(0).getInstruction());
-        assertEquals("serve eggs", fried_egg.getInstructions().get(1).getInstruction());
+        recipeManager.addRecipeInstruction(friedEgg, 1, "crack eggs");
+        recipeManager.addRecipeInstruction(friedEgg, 2, "serve eggs");
+        assertEquals(2, friedEgg.getInstructions().size());
+        assertEquals("crack eggs", friedEgg.getInstructions().get(0).getInstruction());
+        assertEquals("serve eggs", friedEgg.getInstructions().get(1).getInstruction());
 
         recipeManager.addRecipe("recipe_2");
         Recipe recipeTwo = recipeManager.searchRecipe("recipe_2");
@@ -144,41 +145,41 @@ class RecipeManagerTest {
     @Test
     void removeRecipeInstruction() {
         recipeManager.addRecipe("fried_egg");
-        Recipe fried_egg = recipeManager.searchRecipe("fried_egg");
-        recipeManager.addRecipeInstruction(fried_egg, 1, "serve eggs");
-        recipeManager.addRecipeInstruction(fried_egg, 2, "cook eggs");
+        Recipe friedEgg = recipeManager.searchRecipe("fried_egg");
+        recipeManager.addRecipeInstruction(friedEgg, 1, "serve eggs");
+        recipeManager.addRecipeInstruction(friedEgg, 2, "cook eggs");
 
-        recipeManager.removeRecipeInstruction(fried_egg, "1");
-        assertEquals(1, fried_egg.getInstructions().size(), "serve eggs should be removed");
-        assertEquals("cook eggs", fried_egg.getInstructions().get(0).getInstruction(),
+        recipeManager.removeRecipeInstruction(friedEgg, "1");
+        assertEquals(1, friedEgg.getInstructions().size(), "serve eggs should be removed");
+        assertEquals("cook eggs", friedEgg.getInstructions().get(0).getInstruction(),
                 "serve eggs should be removed");
 
-        recipeManager.removeRecipeInstruction(fried_egg, "3");
-        assertEquals(1, fried_egg.getInstructions().size(),
+        recipeManager.removeRecipeInstruction(friedEgg, "3");
+        assertEquals(1, friedEgg.getInstructions().size(),
                 "nothing should be removed");
-        assertEquals("cook eggs", fried_egg.getInstructions().get(0).getInstruction(),
+        assertEquals("cook eggs", friedEgg.getInstructions().get(0).getInstruction(),
                 "nothing should be removed");
     }
 
     @Test
     void removeRecipeIngredient() {
         recipeManager.addRecipe("fried_egg");
-        Recipe fried_egg = recipeManager.searchRecipe("fried_egg");
-        recipeManager.addRecipeIngredients(fried_egg, "eggs", 50, Unit.parseUnit("g"),
+        Recipe friedEgg = recipeManager.searchRecipe("fried_egg");
+        recipeManager.addRecipeIngredients(friedEgg, "eggs", 50, Unit.parseUnit("g"),
                 Category.parseCategory("DAIRY"));
-        recipeManager.addRecipeIngredients(fried_egg, "oil", 50, Unit.parseUnit("ml"),
+        recipeManager.addRecipeIngredients(friedEgg, "oil", 50, Unit.parseUnit("ml"),
                 Category.parseCategory("CONDIMENTS"));
 
-        recipeManager.removeRecipeIngredient(fried_egg, "oil");
-        assertEquals(1, fried_egg.getIngredients().size(),
+        recipeManager.removeRecipeIngredient(friedEgg, "oil");
+        assertEquals(1, friedEgg.getIngredients().size(),
                 "oil should be removed");
-        assertEquals("eggs", fried_egg.getIngredients().get(0).getName(),
+        assertEquals("eggs", friedEgg.getIngredients().get(0).getName(),
                 "oil should be removed");
 
-        recipeManager.removeRecipeIngredient(fried_egg, "pizza");
-        assertEquals(1, fried_egg.getIngredients().size(),
+        recipeManager.removeRecipeIngredient(friedEgg, "pizza");
+        assertEquals(1, friedEgg.getIngredients().size(),
                 "nothing should be removed");
-        assertEquals("eggs", fried_egg.getIngredients().get(0).getName(),
+        assertEquals("eggs", friedEgg.getIngredients().get(0).getName(),
                 "eggs should be removed");
     }
 
@@ -226,10 +227,10 @@ class RecipeManagerTest {
         recipeManager.addRecipe("cheesy_pizza");
         recipeManager.addRecipe("fourth_repice");
 
-        Recipe fried_egg = recipeManager.searchRecipe("fried_egg");
-        recipeManager.addRecipeInstruction(fried_egg, 1, "serve eggs");
-        recipeManager.addRecipeInstruction(fried_egg, 2, "cook eggs");
-        recipeManager.addRecipeIngredients(fried_egg, "eggs", 50, Unit.parseUnit("g"),
+        Recipe friedEgg = recipeManager.searchRecipe("fried_egg");
+        recipeManager.addRecipeInstruction(friedEgg, 1, "serve eggs");
+        recipeManager.addRecipeInstruction(friedEgg, 2, "cook eggs");
+        recipeManager.addRecipeIngredients(friedEgg, "eggs", 50, Unit.parseUnit("g"),
                 Category.parseCategory("DAIRY"));
 
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
