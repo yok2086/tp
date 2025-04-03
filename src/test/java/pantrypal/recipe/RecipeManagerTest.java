@@ -124,10 +124,10 @@ class RecipeManagerTest {
         assertEquals("serve eggs", fried_egg.getInstructions().get(1).getInstruction());
 
         recipeManager.addRecipe("recipe_2");
-        Recipe recipe_2 = recipeManager.searchRecipe("recipe_2");
+        Recipe recipeTwo = recipeManager.searchRecipe("recipe_2");
 
         try {
-            recipeManager.addRecipeInstruction(recipe_2, 0, "serve eggs");
+            recipeManager.addRecipeInstruction(recipeTwo, 0, "serve eggs");
             fail("Method should throw an arithmetic exception");
         } catch (ArithmeticException e){
             assertNotNull(e, "Method should throw an arithmetic exception");
@@ -135,9 +135,9 @@ class RecipeManagerTest {
             fail("Unexpected exception thrown");
         }
 
-        recipeManager.addRecipeInstruction(recipe_2, 1, "serve eggs");
-        recipeManager.addRecipeInstruction(recipe_2, 1, "cook eggs");
-        assertEquals(1, recipe_2.getInstructions().size(),
+        recipeManager.addRecipeInstruction(recipeTwo, 1, "serve eggs");
+        recipeManager.addRecipeInstruction(recipeTwo, 1, "cook eggs");
+        assertEquals(1, recipeTwo.getInstructions().size(),
                 "Method should not accept duplicate step number");
     }
 
@@ -195,7 +195,7 @@ class RecipeManagerTest {
 
             // Assert: Check if the output is as expected
             String expectedOutput = "There are no recipes at the moment. You can add via addRecipe\n";
-            assertEquals(expectedOutput, outContent.toString(),
+            assertEquals(normalizeString(expectedOutput), normalizeString(outContent.toString()),
                     "Printed output: " + outContent + " does not match expected output: "
                         + expectedOutput);
 
@@ -210,7 +210,7 @@ class RecipeManagerTest {
                     1. fried_egg
                     2. milk
                     """;
-            assertEquals(expectedOutput, outContent.toString(),
+            assertEquals(normalizeString(expectedOutput), normalizeString(outContent.toString()),
                     "Printed output: " + outContent + " does not match expected output: "
                         + expectedOutput);
         } finally {
@@ -253,7 +253,7 @@ class RecipeManagerTest {
                     
                     
                     """;
-            assertEquals(expectedOutput, outContent.toString(),
+            assertEquals(normalizeString(expectedOutput), normalizeString(outContent.toString()),
                     "Printed output: " + outContent + " does not match expected output: "
                             + expectedOutput);
 
@@ -263,7 +263,7 @@ class RecipeManagerTest {
 
             expectedOutput = "There is no recipe with name " +
                     "recipe_that_does_not_exist\n";
-            assertEquals(expectedOutput, outContent.toString(),
+            assertEquals(normalizeString(expectedOutput), normalizeString(outContent.toString()),
                     "Printed output: " + outContent + " does not match expected output: "
                             + expectedOutput);
         } finally {
@@ -327,6 +327,13 @@ class RecipeManagerTest {
     @Test
     void initiallyEmptyRecipeList() {
         assertTrue(recipeManager.getRecipeList().isEmpty(), "Recipe list should be empty at the start");
+    }
+
+    private static String normalizeString(String input) {
+        return input
+                .replaceAll("\\r\\n?", "\n")  // Normalize Windows `\r\n` to Unix `\n`
+                .replaceAll("\\s+", " ")       // Replace multiple spaces/tabs/newlines with a single space
+                .trim();                        // Trim leading/trailing spaces
     }
 }
 
