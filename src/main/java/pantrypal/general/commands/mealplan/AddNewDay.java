@@ -26,6 +26,5 @@ public class AddNewDay extends MealPlanCommand {
                         RecipeManager recipes, Scanner in) {
 
 
-
     }
 }
