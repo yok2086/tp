@@ -194,7 +194,7 @@ class RecipeManagerTest {
             recipeManager.listRecipe();
 
             // Assert: Check if the output is as expected
-            String expectedOutput = "There are no recipes at the moment. You can add via addRecipe\r\n";
+            String expectedOutput = "There are no recipes at the moment. You can add via addRecipe\n";
             assertEquals(expectedOutput, outContent.toString(),
                     "Printed output: " + outContent + " does not match expected output: "
                         + expectedOutput);
@@ -207,8 +207,8 @@ class RecipeManagerTest {
             recipeManager.listRecipe();
 
             expectedOutput = """
-                    1. fried_egg\r
-                    2. milk\r
+                    1. fried_egg
+                    2. milk
                     """;
             assertEquals(expectedOutput, outContent.toString(),
                     "Printed output: " + outContent + " does not match expected output: "
@@ -251,7 +251,7 @@ class RecipeManagerTest {
                     1. serve eggs
                     2. cook eggs
                     
-                    \r
+                    
                     """;
             assertEquals(expectedOutput, outContent.toString(),
                     "Printed output: " + outContent + " does not match expected output: "
@@ -262,7 +262,7 @@ class RecipeManagerTest {
             recipeManager.showRecipe("recipe_that_does_not_exist");
 
             expectedOutput = "There is no recipe with name " +
-                    "recipe_that_does_not_exist\r\n";
+                    "recipe_that_does_not_exist\n";
             assertEquals(expectedOutput, outContent.toString(),
                     "Printed output: " + outContent + " does not match expected output: "
                             + expectedOutput);
