@@ -2,6 +2,7 @@ package pantrypal.ingredients;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -155,5 +156,38 @@ public class IngredientInventoryTest {
 
         // Assert the exception message is what we expect
         assertEquals("Invalid category: " + invalidCategory + "\nType categoryList for a list of valid categories.", exception.getMessage());
+    }
+
+    @Test
+    public void testConvertIngredient() {
+        // Add "Sugar" with 2.5 grams to the inventory
+        inventory.addNewIngredient("Sugar", 2.5, Unit.parseUnit("g"),
+                Category.parseCategory("CONDIMENTS"));
+
+        // Convert "Sugar" from GRAM to KILOGRAM
+        double convertedQuantity = inventory.convertIngredient("Sugar", Unit.KILOGRAM);
+
+        // Get ingredient after conversion
+        Map<String, Ingredient> stock = inventory.getInventory();
+        Ingredient sugar = stock.get("Sugar");
+
+        // Check if sugar was converted
+        assertNotNull(sugar); // Sugar exists
+        assertEquals(0.0025, sugar.getQuantity(), 0.0001); //  2.5g -> 0.0025kg
+        assertEquals("kg", sugar.getUnit().toString()); // Unit should be kg
+    }
+
+    @Test
+    public void testViewIngredientsByCategory() {
+        // Add ingredients to inventory
+        inventory.addNewIngredient("Sugar", 2.5, Unit.parseUnit("g"), Category.parseCategory("CONDIMENTS"));
+
+        String result = inventory.viewIngredientsByCategory(Category.parseCategory("CONDIMENTS"));
+
+        // Check if the output contains "Sugar"
+        assertTrue(result.contains("Sugar"));
+        
+        String expectedOutput = "Sugar 2.5 g Condiments\n";
+        assertEquals(expectedOutput, result);
     }
 }

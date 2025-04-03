@@ -127,17 +127,20 @@ public class IngredientInventory {
         return convertedQuantity;
     }
 
-    public void viewIngredientsByCategory(Category category) {
+    public String viewIngredientsByCategory(Category category) {
         boolean found = false;
+        StringBuilder result = new StringBuilder(); // Use StringBuilder to collect output
+
         for (Ingredient ingredient : inventory.values()) {
             if (ingredient.getCategory() == category) {
-                System.out.println(ingredient);
+                result.append(ingredient).append("\n"); // Append ingredient to result
                 found = true;
             }
         }
         if (!found) {
-            System.out.println("No ingredients found in category: " + category);
+            result.append("No ingredients found in category: ").append(category);
         }
+        return result.toString(); // Return the result as a string
     }
 
     public void validateIngredientCategory(String category) {
