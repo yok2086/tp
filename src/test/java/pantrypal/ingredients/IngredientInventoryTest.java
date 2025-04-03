@@ -127,11 +127,9 @@ public class IngredientInventoryTest {
 
     @Test
     void testNullCategoryThrowsException() {
-        // Arrange: Set up the necessary objects
         IngredientInventory inventory = new IngredientInventory();
         String nullCategory = null;  // Null category input
 
-        // Act and Assert: Use assertThrows to expect the IllegalArgumentException
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             // Call the method that should throw the exception
             inventory.validateIngredientCategory(nullCategory);
@@ -145,11 +143,9 @@ public class IngredientInventoryTest {
 
     @Test
     void testInvalidCategoryThrowsException() {
-        // Arrange: Set up the necessary objects
         IngredientInventory inventory = new IngredientInventory();
         String invalidCategory = "INVALID_CATEGORY";  // Example invalid category
 
-        // Act and Assert: Use assertThrows to expect the IllegalArgumentException
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             // Call the method that should throw the exception
             inventory.validateIngredientCategory(invalidCategory);

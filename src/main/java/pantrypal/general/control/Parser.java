@@ -92,12 +92,18 @@ public class Parser {
                 if (inputParts.length < 3) {
                     throw new IllegalArgumentException("Insufficient arguments for convertIngredient command.");
                 }
-                return new ConvertIngredient();
+
+                String ingredientName = inputParts[1]; // Extract ingredient name
+                Unit targetUnit = Unit.parseUnit(inputParts[2]); // Parse target unit
+
+                return new ConvertIngredient(ingredientName, targetUnit);
+
             case "viewIngredientsByCategory":
                 if (inputParts.length < 2) {
                     throw new IllegalArgumentException("Insufficient arguments for viewIngredientsByCategory command.");
                 }
-                return new ViewIngredientsByCategory();
+                category = Category.parseCategory(inputParts[1]);
+                return new ViewIngredientsByCategory(category);
             case "addShoppingItem":
                 if (inputParts.length < 4) {
                     throw new IllegalArgumentException("Insufficient arguments for addShoppingItem command.");
