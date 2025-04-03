@@ -201,7 +201,7 @@ modified, and retrieved when needed.
 
 ### Design and Implementation
 The Ingredient feature is designed for flexibility and accuracy, ensuring seamless interaction with other components
-like the Ingredient Inventory and Recipe Manager. The core components of the Ingredient feature include:
+like the Ingredient Inventory, Recipe, and Recipe Manager. The core components of the Ingredient feature include:
 
 - **Ingredient Class**: Represents an individual ingredient with attributes for name, quantity, and unit. It includes methods to get and set these attributes, ensuring proper data encapsulation.
 - **Unit Feature**: Standardizes measurement units for ingredients, ensuring consistency.
@@ -293,4 +293,59 @@ The following sequence diagram illustrates the interaction between the user, Sho
 ### Why It Is Implemented This Way
 The Shopping List Item and Shopping List features follow a modular design to ensure flexibility, scalability, and maintainability. The Single Responsibility Principle is adhered to, with the ShoppingListItem class managing individual item attributes and the ShoppingList class handling the collection of items. This clear separation makes the system easy to understand, maintain, and modify without affecting other components.
 
+# Implementation of the Instruction, Recipe and Recipe Management Features
 
+## Instruction Feature
+
+### Overview
+
+The Instruction Feature represents all the instructions in the Recipe. Each instruction instance encapsulates essential attributes such as step number and instruction content. This modular desgin ensures that instructions and instruction list can be easily created, modified, and retrieved when needed.
+
+### Design and Implementation
+
+The Instruction feature is designed for flexibility and accuracy, ensuring seamless interaction with other components like the Recipe and Recipe Manager. The core components of the Ingredient feature include:
+
+- **Instruction Class**: Represents an instruction inside Recipe, with attributes for step number and instruction content. It includes methods to get and set these attributes, ensuring proper data encapsulation.
+
+### Core Functionalities
+- **Creating Instruction**: Allows creating instructions with specified attributes.
+-**Updating Instruction**: Provides methods to modify an instruction's step number or content.
+-**Retrieving Instruction**: Provides methods to return instruction's step number or content for other uses.
+
+## Recipe Feature
+
+The Recipe feature represents individual recipes in the system. Each recipe instance encapsulates essential attributes such as name, instructions, and ingredients. This modular design ensures that recipes can be easily created, modified, and retrieved when needed.
+
+## Design and Implementation
+The Recipe feature is designed for flexibility, accuracy and consistency, ensuring proper integration with the Recipe Manager. The core componenets of Recipe feature include:
+
+- **Recipe Class**: Represents an individual recipe with attributes for name, instructions, and ingredients. It includes methods to get and set these attributes, ensuring proper data encapsulation.
+- **Integration with Ingredient Class**: Uses the Ingredient class to ensure consistency, accuracy and modularity in the ingredient representation
+- **Integration with Instruction Class**: Uses the Instruction class to ensure consistency, accuracy and modularity in the instruction representation
+
+### Core Functionalities
+- **Adding and Managing Recipe Ingredients**: Users can add new ingredients with a name, quantity, and unit while ensuring valid input through validation checks.
+- **Adding and Managing Recipe Instructions**: Users can add new instructions with a step number and their content.
+- **Get Ingredients and Instructions**: Users can retrieve the unique ingredients and instructions associated with a recipe to change their content.
+- **Deleting Ingredients**: Users can remove ingredients from the recipe, ensuring accurate recipe information.
+- **Deleting Instructions**: Users can remove instructions from the recipe, ensuring accurate recipe information.
+
+## Recipe Management Feature
+
+### Overview
+The Recipe Management feature is responsible for managing a collection of recipes, tracking their name, ingredients and instructions. This feature enables users to add recipes, update recipe's ingredients and instructions, and remove recipes.
+
+### Design and Implementation
+The Recipe Management feature is modular and extensible, as well as maintaining accuracy, allowing it to be used seamlessly by other features. The core componenets of the Recipe Management feature include:
+
+- **Recipe Manager Class**: Manages the collection of recipes, allowing users to add, remove, or update the recipe's content.
+- **Edit Ingredient**: Edits the chosen recipe's ingredient's name, quantity, or unit, ensuring the recipe's accuracy.
+- **Edit Instruction**: Edits the chosen recipe's instruction step number or content, ensuring the recipe's accuracy
+
+## Sequence Diagram
+The following sequence diagram illustrates the interaction between the user, the Recipe Manager, the Recipe, the Ingredient, and the Instruction feature during recipe management:
+
+<img src="img_6.png" alt="drawing" style="width:600px;"/>
+
+### Why It Is Implemented This Way
+The Instruction, Recipe, and Recipe Management features follow a modular design to ensure it is easy to be maintained or modified when necessary. The Single Responsibility Principle is adhered to, with Instruction manages only the recipe instructions, while Recipe acts as collection of Instruction and Ingredient, and Recipe Management acts as collection of Instruction only. By separating into smaller classes, it helps the developer understand, maintain without heavy coupling with other components.
