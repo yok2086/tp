@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pantrypal.inventory.Category;
 import pantrypal.inventory.Unit;
 
 public class ShoppingListItemTest {
@@ -14,7 +15,7 @@ public class ShoppingListItemTest {
     @BeforeEach
     public void setUp() {
         // Assuming Unit.G represents grams and is a valid enum constant.
-        item = new ShoppingListItem("sugar", 100, Unit.GRAM);
+        item = new ShoppingListItem("sugar", 100, Unit.GRAM, Category.CONDIMENTS);
         // Plain Java assert to ensure initialization.
         assert item != null : "ShoppingListItem instance should be initialized.";
     }

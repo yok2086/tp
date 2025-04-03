@@ -1,23 +1,34 @@
 package pantrypal.inventory;
 
 public enum Unit {
-    GRAM("g"),
-    KILOGRAM("kg"),
-    TEASPOON("tsp"),
-    TABLESPOON("tbsp"),
-    CUP("cup"),
-    OUNCE("oz"),
-    LITER("L"),
-    MILLILITER("mL"),
-    POUND("lb");
-    private final String unit;
+    GRAM("g", 1.0),
+    KILOGRAM("kg", 1000.0),
+    TEASPOON("tsp", 4.2),
+    TABLESPOON("tbsp", 14.3),
+    CUP("cup", 240.0),
+    OUNCE("oz", 28.35),
+    LITER("L", 1000.0),
+    MILLILITER("mL", 1.0),
+    POUND("lb", 453.59);
 
-    Unit(String unit) {
+    private final String unit;
+    private final double conversion; // NEW
+
+    Unit(String unit, double conversion) {
         this.unit = unit;
+        this.conversion = conversion;
     }
 
     public String getUnit() {
         return unit;
+    }
+
+    public double getConversion() {
+        return conversion;
+    }
+
+    public static double convert(double quantity, Unit from, Unit to) {
+        return (quantity * from.getConversion()) / to.getConversion();
     }
 
     @Override
