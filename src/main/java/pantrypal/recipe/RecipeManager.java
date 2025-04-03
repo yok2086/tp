@@ -127,6 +127,10 @@ public class RecipeManager{
     }
 
     public void addRecipeInstruction(Recipe recipe, int step, String content) {
+        if (step <= 0) {
+            throw new ArithmeticException("Step must be greater than 0");
+        }
+
         try {
             Instruction instruction = new Instruction(step, content);
             recipe.addInstruction(instruction);

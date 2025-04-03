@@ -99,10 +99,47 @@ class RecipeManagerTest {
 
     @Test
     void addRecipeInstruction() {
+        recipeManager.addRecipe("fried_egg");
+        Recipe fried_egg = recipeManager.searchRecipe("fried_egg");
+
+        recipeManager.addRecipeInstruction(fried_egg, 1, "crack eggs");
+        recipeManager.addRecipeInstruction(fried_egg, 2, "serve eggs");
+        assertEquals(2, fried_egg.getInstructions().size());
+        assertEquals("crack eggs", fried_egg.getInstructions().get(0).getInstruction());
+        assertEquals("serve eggs", fried_egg.getInstructions().get(1).getInstruction());
+
+        recipeManager.addRecipe("recipe_2");
+        Recipe recipe_2 = recipeManager.searchRecipe("recipe_2");
+
+        try {
+            recipeManager.addRecipeInstruction(recipe_2, 0, "serve eggs");
+            fail("Method should throw an arithmetic exception");
+        } catch (ArithmeticException e){
+            assertNotNull(e, "Method should throw an arithmetic exception");
+        } catch (Exception e) {
+            fail("Unexpected exception thrown");
+        }
+
+        recipeManager.addRecipeInstruction(recipe_2, 1, "serve eggs");
+        recipeManager.addRecipeInstruction(recipe_2, 1, "cook eggs");
+        assertEquals(1, recipe_2.getInstructions().size(),
+                "Method should not accept duplicate step number");
     }
 
     @Test
     void removeRecipeInstruction() {
+        recipeManager.addRecipe("fried_egg");
+        Recipe fried_egg = recipeManager.searchRecipe("fried_egg");
+        recipeManager.addRecipeInstruction(fried_egg, 1, "serve eggs");
+        recipeManager.addRecipeInstruction(fried_egg, 2, "cook eggs");
+
+        recipeManager.removeRecipeInstruction(fried_egg, "1");
+        assertEquals(1, fried_egg.getInstructions().size());
+        assertEquals("cook eggs", fried_egg.getInstructions().get(0).getInstruction());
+
+        recipeManager.removeRecipeInstruction(fried_egg, "3");
+        assertEquals(1, fried_egg.getInstructions().size());
+        assertEquals("cook eggs", fried_egg.getInstructions().get(0).getInstruction());
     }
 
     @Test
