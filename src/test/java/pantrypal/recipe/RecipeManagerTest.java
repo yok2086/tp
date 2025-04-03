@@ -164,10 +164,11 @@ class RecipeManagerTest {
     void listRecipe() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         PrintStream originalOut = System.out;
-        System.setOut(new PrintStream(outContent));
 
         try {
             // Act: Call the method that prints output
+            outContent = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outContent));
             recipeManager.listRecipe();
 
             // Assert: Check if the output is as expected
@@ -179,9 +180,12 @@ class RecipeManagerTest {
 
             recipeManager.addRecipe("fried_egg");
             recipeManager.addRecipe("milk");
+            outContent = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outContent));
+            recipeManager.listRecipe();
 
-            String ExpectedOutput = "1. fried_egg\n" +
-                    "2. milk";
+            expectedOutput = "1. fried_egg\r\n" +
+                    "2. milk\r\n";
             assertEquals(expectedOutput, outContent.toString(),
                     "Printed output: " + outContent.toString() + " does not match expected output: "
                         + expectedOutput);
@@ -193,14 +197,80 @@ class RecipeManagerTest {
 
     @Test
     void showRecipe() {
+        recipeManager.addRecipe("fried_egg");
+        recipeManager.addRecipe("milk");
+        recipeManager.addRecipe("cheesy_pizza");
+        recipeManager.addRecipe("fourth_repice");
+
+        Recipe fried_egg = recipeManager.searchRecipe("fried_egg");
+        recipeManager.addRecipeInstruction(fried_egg, 1, "serve eggs");
+        recipeManager.addRecipeInstruction(fried_egg, 2, "cook eggs");
+        recipeManager.addRecipeIngredients(fried_egg, "eggs", 50, Unit.parseUnit("g"));
+
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outContent));
+
+        try {
+            // Act: Call the method that prints output
+            recipeManager.showRecipe("fried_egg");
+
+            // Assert: Check if the output is as expected
+            String expectedOutput = "fried_egg\n" +
+                    "__________________________________________________\n" +
+                    "Ingredients:\n" +
+                    "1. eggs 50.0 g\n" +
+                    "__________________________________________________\n" +
+                    "Instructions:\n" +
+                    "1. serve eggs\n" +
+                    "2. cook eggs\n\n\r\n";
+            assertEquals(expectedOutput, outContent.toString(),
+                    "Printed output: " + outContent.toString() + " does not match expected output: "
+                            + expectedOutput);
+
+            outContent = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outContent));
+            recipeManager.showRecipe("recipe_that_does_not_exist");
+
+            expectedOutput = "There is no recipe with name " +
+                    "recipe_that_does_not_exist\r\n";
+            assertEquals(expectedOutput, outContent.toString(),
+                    "Printed output: " + outContent.toString() + " does not match expected output: "
+                            + expectedOutput);
+        } finally {
+            // Restore System.out
+            System.setOut(originalOut);
+        }
     }
 
     @Test
     void searchRecipe() {
+        recipeManager.addRecipe("fried_egg");
+        recipeManager.addRecipe("milk");
+        recipeManager.addRecipe("cheesy_pizza");
+        ArrayList<Recipe> recipes = recipeManager.getRecipeList();
+
+        assertNull(recipeManager.searchRecipe("no_eggs"));
+        assertEquals(recipes.get(0), recipeManager.searchRecipe("fried_egg"));
+        assertEquals(recipes.get(1), recipeManager.searchRecipe("milk"));
+        assertEquals(recipes.get(2), recipeManager.searchRecipe("cheesy_pizza"));
+
     }
 
     @Test
     void removeRecipe() {
+        recipeManager.addRecipe("fried_egg");
+        recipeManager.addRecipe("milk");
+        recipeManager.addRecipe("cheesy_pizza");
+        ArrayList<Recipe> recipes = recipeManager.getRecipeList();
+
+        recipeManager.removeRecipe("fried_egg");
+        assertEquals(recipes.get(0), recipeManager.searchRecipe("milk"));
+        assertEquals(2, recipes.size());
+
+        recipeManager.removeRecipe("no_egg");
+        assertEquals(recipes.get(0), recipeManager.searchRecipe("milk"));
+        assertEquals(2,recipes.size());
     }
 
     @Test
@@ -209,5 +279,10 @@ class RecipeManagerTest {
 
     @Test
     void getRecipeList() {
+    }
+
+    @Test
+    void initiallyEmptyRecipeList() {
+        assertTrue(recipeManager.getRecipeList().isEmpty(), "Recipe list should be empty at the start");
     }
 }
