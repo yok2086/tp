@@ -136,12 +136,15 @@ class RecipeManagerTest {
         recipeManager.addRecipeInstruction(fried_egg, 2, "cook eggs");
 
         recipeManager.removeRecipeInstruction(fried_egg, "1");
-        assertEquals(1, fried_egg.getInstructions().size());
-        assertEquals("cook eggs", fried_egg.getInstructions().get(0).getInstruction());
+        assertEquals(1, fried_egg.getInstructions().size(), "serve eggs should be removed");
+        assertEquals("cook eggs", fried_egg.getInstructions().get(0).getInstruction(),
+                "serve eggs should be removed");
 
         recipeManager.removeRecipeInstruction(fried_egg, "3");
-        assertEquals(1, fried_egg.getInstructions().size());
-        assertEquals("cook eggs", fried_egg.getInstructions().get(0).getInstruction());
+        assertEquals(1, fried_egg.getInstructions().size(),
+                "nothing should be removed");
+        assertEquals("cook eggs", fried_egg.getInstructions().get(0).getInstruction(),
+                "nothing should be removed");
     }
 
     @Test
@@ -152,12 +155,16 @@ class RecipeManagerTest {
         recipeManager.addRecipeIngredients(fried_egg, "oil", 50, Unit.parseUnit("ml"));
 
         recipeManager.removeRecipeIngredient(fried_egg, "oil");
-        assertEquals(1, fried_egg.getIngredients().size());
-        assertEquals("eggs", fried_egg.getIngredients().get(0).getName());
+        assertEquals(1, fried_egg.getIngredients().size(),
+                "oil should be removed");
+        assertEquals("eggs", fried_egg.getIngredients().get(0).getName(),
+                "oil should be removed");
 
         recipeManager.removeRecipeIngredient(fried_egg, "pizza");
-        assertEquals(1, fried_egg.getIngredients().size());
-        assertEquals("eggs", fried_egg.getIngredients().get(0).getName());
+        assertEquals(1, fried_egg.getIngredients().size(),
+                "nothing should be removed");
+        assertEquals("eggs", fried_egg.getIngredients().get(0).getName(),
+                "eggs should be removed");
     }
 
     @Test
@@ -251,9 +258,12 @@ class RecipeManagerTest {
         ArrayList<Recipe> recipes = recipeManager.getRecipeList();
 
         assertNull(recipeManager.searchRecipe("no_eggs"));
-        assertEquals(recipes.get(0), recipeManager.searchRecipe("fried_egg"));
-        assertEquals(recipes.get(1), recipeManager.searchRecipe("milk"));
-        assertEquals(recipes.get(2), recipeManager.searchRecipe("cheesy_pizza"));
+        assertEquals(recipes.get(0), recipeManager.searchRecipe("fried_egg"),
+                "recipe returned from searchRecipe should be the same object");
+        assertEquals(recipes.get(1), recipeManager.searchRecipe("milk"),
+                "recipe returned from searchRecipe should be the same object");
+        assertEquals(recipes.get(2), recipeManager.searchRecipe("cheesy_pizza"),
+                "recipe returned from searchRecipe should be the same object");
 
     }
 
@@ -265,20 +275,31 @@ class RecipeManagerTest {
         ArrayList<Recipe> recipes = recipeManager.getRecipeList();
 
         recipeManager.removeRecipe("fried_egg");
-        assertEquals(recipes.get(0), recipeManager.searchRecipe("milk"));
-        assertEquals(2, recipes.size());
+        assertEquals(recipes.get(0), recipeManager.searchRecipe("milk"),
+                "fried_egg should be removed");
+        assertEquals(2, recipes.size(),
+                "fried_egg should be removed");
 
         recipeManager.removeRecipe("no_egg");
-        assertEquals(recipes.get(0), recipeManager.searchRecipe("milk"));
-        assertEquals(2,recipes.size());
-    }
-
-    @Test
-    void copyList() {
+        assertEquals(recipes.get(0), recipeManager.searchRecipe("milk"),
+                "nothing should be removed");
+        assertEquals(2,recipes.size(),
+                "nothing should be removed");
     }
 
     @Test
     void getRecipeList() {
+        assertEquals(ArrayList.class, recipeManager.getRecipeList().getClass(),
+                "getRecipeList should return ArrayList");
+        assertNull(recipeManager.getRecipeList(),
+                "recipe list should be null at the start");
+        recipeManager.addRecipe("fried_egg");
+        assertEquals(Recipe.class, recipeManager.getRecipeList().get(0).getClass(),
+                "recipe list should contain object of type Recipe");
+        assertEquals("fried_egg", recipeManager.getRecipeList().get(0).getName(),
+                "fried_egg is expected as the first object");
+        assertEquals(1, recipeManager.getRecipeList().size(),
+                "fried_egg should be added");
     }
 
     @Test
