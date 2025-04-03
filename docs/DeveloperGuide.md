@@ -174,6 +174,7 @@ The following sequence diagram illustrates the interactions between the user, Pl
 PlanPreset, DailySchedule, WeeklySchedule, each MealPlan within DailySchedule, IngredientInventory and each Recipe
 amongst all created MealPlan 
 
+![img_6.png](img_6.png)
 
 # Implementation of the Ingredient and Ingredient Inventory Features
 
