@@ -9,20 +9,17 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
-public class RemovePlan extends MealPlanCommand {
-    private int index;
+public class ViewWeek extends MealPlanCommand {
 
-    public RemovePlan() {
-        super("removePlan <index>","Remove Meal Plan");
-    }
 
-    public RemovePlan(int index) {
-        this.index = index;
+    public ViewWeek() {
+        super("addNewDay <plan index> <day index>",
+                "Add New Day To Week");
     }
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
-                        RecipeManager recipes, WeeklySchedule week, Scanner in) {
-        presets.removePlan(index);
+                        RecipeManager recipes,WeeklySchedule week, Scanner in) {
+        week.showWeek();
     }
 }

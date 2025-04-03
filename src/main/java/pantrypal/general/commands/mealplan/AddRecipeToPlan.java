@@ -3,6 +3,7 @@ package pantrypal.general.commands.mealplan;
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.mealplan.PlanPresets;
+import pantrypal.mealplan.WeeklySchedule;
 import pantrypal.recipe.RecipeManager;
 import pantrypal.shoppinglist.ShoppingList;
 
@@ -27,12 +28,15 @@ public class AddRecipeToPlan extends MealPlanCommand {
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
-                        RecipeManager recipes, Scanner in) {
+                        RecipeManager recipes, WeeklySchedule week, Scanner in) {
 
-        presets.addRecipeToPlan(recipes, recipeIndex, planIndex, this.mealName);
+        if (recipes.getRecipeList().size() < recipeIndex) {
+            System.out.println("Recipe index out of bounds.");
+        } else {
+            presets.addRecipeToPlan(recipes, recipeIndex, planIndex, mealName);
 
-        System.out.println("Recipe " + recipes.getRecipeList().get(recipeIndex).getName() +
-                " added to plan " + planIndex + " for " + this.mealName);
-
+            System.out.println("Recipe " + recipes.getRecipeList().get(recipeIndex).getName() +
+                    " added to plan " + planIndex + " for " + mealName);
+        }
     }
 }

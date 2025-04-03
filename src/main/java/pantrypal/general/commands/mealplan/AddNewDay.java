@@ -11,19 +11,25 @@ import java.util.Scanner;
 
 public class AddNewDay extends MealPlanCommand {
 
-    WeeklySchedule assignedWeeklySchedule;
+    int planIndex;
+    int dayIndex;
 
     public AddNewDay() {
-        super("addNewDay <week index>","Add New Day To Week");
+        super("addNewDay <plan index> <day index>",
+                "Add New Day To Week");
     }
 
-    public AddNewDay(WeeklySchedule week) {
-        this.assignedWeeklySchedule = week;
+    public AddNewDay(int planIndex, int dayIndex) {
+        this.planIndex = planIndex;
+        this.dayIndex = dayIndex;
     }
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
-                        RecipeManager recipes, Scanner in) {
-        
+                        RecipeManager recipes,WeeklySchedule week, Scanner in) {
+
+        week.addDay(presets, planIndex, dayIndex);
+
+        System.out.println("Day added");
     }
 }
