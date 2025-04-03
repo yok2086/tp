@@ -30,13 +30,12 @@ public class AddRecipeToPlan extends MealPlanCommand {
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, WeeklySchedule week, Scanner in) {
 
-        if (recipes.getRecipeList().size() < recipeIndex) {
-            System.out.println("Recipe index out of bounds.");
-        } else {
+        if (validateRecipeSize(recipes, recipeIndex)) {
             presets.addRecipeToPlan(recipes, recipeIndex, planIndex, mealName);
-
             System.out.println("Recipe " + recipes.getRecipeList().get(recipeIndex).getName() +
-                    " added to plan " + planIndex + " for " + mealName);
+                                " added to plan " + planIndex + " for " + mealName);
+        } else {
+            System.out.println("Recipe index out of bounds.");
         }
     }
 }

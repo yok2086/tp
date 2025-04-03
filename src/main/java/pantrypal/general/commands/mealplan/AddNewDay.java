@@ -28,8 +28,12 @@ public class AddNewDay extends MealPlanCommand {
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes,WeeklySchedule week, Scanner in) {
 
-        week.addDay(presets, planIndex, dayIndex);
+        if(validateWeeklySchedule(week,true)){
+            week.addDay(presets, planIndex, dayIndex);
+            System.out.println("Day added");
+        } else{
+            System.out.println("There is no capacity in the week to add plans");
+        }
 
-        System.out.println("Day added");
     }
 }

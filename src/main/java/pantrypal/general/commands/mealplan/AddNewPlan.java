@@ -13,7 +13,7 @@ public class AddNewPlan extends MealPlanCommand {
     String planName;
 
     public AddNewPlan() {
-        super("addPlan <name>","Add New Plan");
+        super("addNewPlan <name>","Add New Plan");
     }
 
     public AddNewPlan(String name) {

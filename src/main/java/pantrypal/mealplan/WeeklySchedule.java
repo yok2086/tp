@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class WeeklySchedule {
     private static final int NUMBER_OF_DAYS = 7;
     private DailySchedule[] days;
+    private boolean[] usedDays = new boolean[7];
 
     public WeeklySchedule(PlanPresets planPresets) {
         this.days = new DailySchedule[NUMBER_OF_DAYS];
@@ -18,9 +19,11 @@ public class WeeklySchedule {
 
     public void addDay(PlanPresets presets, int planIndex, int dayIndex){
         days[dayIndex].setPlan(presets, planIndex);
+        usedDays[dayIndex] = true;
     }
 
     public void removeDay(int dayIndex){
+        usedDays[dayIndex] = false;
         days[dayIndex].removePlan();
     }
 
@@ -54,6 +57,10 @@ public class WeeklySchedule {
         if (isCompletelyEmpty) {
             throw new EmptyPlansException(); //indicate that no plans can be shown
         }
+    }
+
+    public boolean[] getUsedDays() {
+        return usedDays;
     }
 
 
