@@ -166,6 +166,10 @@ deleteIngredient salt
 
 ### Meal Plan Commands
 
+
+
+
+
 ### General Commands
 
 #### List all available commands: `help`
