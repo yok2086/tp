@@ -21,9 +21,9 @@ public class IngredientInventory {
     }
 
     // Add new ingredient
-    public void addNewIngredient(String name, double quantity, Unit unit) {
+    public void addNewIngredient(String name, double quantity, Unit unit, Category category) {
         validateIngredient(name, quantity, unit);
-        inventory.put(name, new Ingredient(name, quantity, unit));
+        inventory.put(name, new Ingredient(name, quantity, unit, category));
     }
 
     // Increase ingredient quantity
@@ -113,6 +113,45 @@ public class IngredientInventory {
             System.out.println("Deleted " + name + " from inventory.");
         } else {
             System.out.println("Ingredient not found.");
+        }
+    }
+
+    public double convertIngredient(String name, Unit targetUnit) {
+        Ingredient ingredient = inventory.get(name);
+        if (ingredient == null) {
+            throw new IllegalArgumentException("Ingredient not found.");
+        }
+        double convertedQuantity = Unit.convert(ingredient.getQuantity(), ingredient.getUnit(), targetUnit);
+        ingredient.setQuantity(convertedQuantity);
+        ingredient.setUnit(targetUnit);
+        return convertedQuantity;
+    }
+
+    public void viewIngredientsByCategory(Category category) {
+        boolean found = false;
+        for (Ingredient ingredient : inventory.values()) {
+            if (ingredient.getCategory() == category) {
+                System.out.println(ingredient);
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("No ingredients found in category: " + category);
+        }
+    }
+
+    public void validateIngredientCategory(String category) {
+        if (category == null) {
+            throw new IllegalArgumentException("Category cannot be null.\nType categoryList for a list of valid " +
+                    "categories.");
+        }
+
+        try {
+            Category parsedCategory = Category.parseCategory(category);
+            System.out.println("Valid category: " + parsedCategory);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid category: " + category +
+                    "\nType categoryList for a list of valid categories.");
         }
     }
 }

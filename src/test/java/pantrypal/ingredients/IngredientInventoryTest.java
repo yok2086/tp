@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pantrypal.inventory.Category;
 import pantrypal.inventory.Ingredient;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.inventory.Unit;
@@ -17,6 +18,7 @@ public class IngredientInventoryTest {
     private IngredientInventory inventory;
 
     @BeforeEach
+
     // Runs before every test case
     void setUp() {
         inventory = new IngredientInventory();
@@ -25,7 +27,8 @@ public class IngredientInventoryTest {
     @Test
     void testAddNewIngredient() {
         // Add sugar
-        inventory.addNewIngredient("Sugar", 2.5, Unit.parseUnit("kg"));
+        inventory.addNewIngredient("Sugar", 2.5, Unit.parseUnit("kg"),
+                Category.parseCategory("CONDIMENTS"));
 
         // Get inventory
         Map<String, Ingredient> stock = inventory.getInventory();
@@ -39,7 +42,8 @@ public class IngredientInventoryTest {
     @Test
     void testSetAlert() {
         // Add sugar
-        inventory.addNewIngredient("Sugar", 2.5, Unit.parseUnit("kg"));
+        inventory.addNewIngredient("Sugar", 2.5, Unit.parseUnit("kg"),
+                Category.parseCategory("CONDIMENTS"));
         inventory.setAlert("Sugar", 2.0);
         inventory.decreaseQuantity("Sugar", 1);
 
@@ -61,7 +65,7 @@ public class IngredientInventoryTest {
 
     @Test
     void testIncreaseQuantity() {
-        inventory.addNewIngredient("Flour", 1.0, Unit.KILOGRAM);
+        inventory.addNewIngredient("Flour", 1.0, Unit.KILOGRAM, Category.parseCategory("GRAINS"));
         inventory.increaseQuantity("Flour", 0.5);
         assertEquals(1.5, inventory.getInventory().get("Flour").getQuantity(), "Flour quantity should"
                 + " be 1.5 kg");
@@ -69,7 +73,7 @@ public class IngredientInventoryTest {
 
     @Test
     void testDecreaseQuantity() {
-        inventory.addNewIngredient("Milk", 2.0, Unit.LITER);
+        inventory.addNewIngredient("Milk", 2.0, Unit.LITER, Category.parseCategory("DAIRY"));
         inventory.decreaseQuantity("Milk", 1.5);
         assertEquals(0.5, inventory.getInventory().get("Milk").getQuantity(), "Milk quantity " +
                 "should be" +
@@ -78,7 +82,7 @@ public class IngredientInventoryTest {
 
     @Test
     void testDecreaseQuantityInsufficientStock() {
-        inventory.addNewIngredient("Butter", 0.2, Unit.KILOGRAM);
+        inventory.addNewIngredient("Butter", 0.2, Unit.KILOGRAM, Category.parseCategory("DAIRY"));
         inventory.decreaseQuantity("Butter", 0.5);
         assertEquals(0.2, inventory.getInventory().get("Butter").getQuantity(), "Butter " +
                 "quantity should remain 0.2 kg");
@@ -86,14 +90,14 @@ public class IngredientInventoryTest {
 
     @Test
     void testDeleteIngredient() {
-        inventory.addNewIngredient("Eggs", 12, Unit.POUND);
+        inventory.addNewIngredient("Eggs", 12, Unit.POUND, Category.parseCategory("DAIRY"));
         inventory.deleteIngredient("Eggs");
         assertFalse(inventory.getInventory().containsKey("Eggs"), "Eggs should be removed from inventory");
     }
 
     @Test
     void testFindInventory() {
-        inventory.addNewIngredient("Cheese", 0.5, Unit.KILOGRAM);
+        inventory.addNewIngredient("Cheese", 0.5, Unit.KILOGRAM, Category.parseCategory("DAIRY"));
         assertTrue(inventory.findInventory("Cheese", 0.3, Unit.KILOGRAM), "Cheese should " +
                 "be in inventory with enough quantity");
         assertFalse(inventory.findInventory("Cheese", 0.6, Unit.KILOGRAM), "Cheese should " +
@@ -107,9 +111,49 @@ public class IngredientInventoryTest {
 
     @Test
     void testValidateIngredientThrowsException() {
-        assertThrows(AssertionError.class, () -> inventory.addNewIngredient("", 1.0, Unit.GRAM));
-        assertThrows(AssertionError.class, () -> inventory.addNewIngredient("Salt", -1.0, Unit.GRAM));
-        assertThrows(AssertionError.class, () -> inventory.addNewIngredient("Pepper", 1.0, null));
+        // Test for invalid name
+        assertThrows(AssertionError.class, () -> inventory.addNewIngredient("", 1.0, Unit.GRAM,
+                Category.parseCategory("GRAINS")));
+
+        // Test for invalid quantity
+        assertThrows(AssertionError.class, () -> inventory.addNewIngredient("Salt", -1.0, Unit.GRAM,
+                Category.parseCategory("GRAINS")));
+
+        // Test for invalid unit
+        assertThrows(AssertionError.class, () -> inventory.addNewIngredient("Pepper", 1.0, null,
+                Category.parseCategory("SPICES")));
     }
 
+    @Test
+    void testNullCategoryThrowsException() {
+        // Arrange: Set up the necessary objects
+        IngredientInventory inventory = new IngredientInventory();
+        String nullCategory = null;  // Null category input
+
+        // Act and Assert: Use assertThrows to expect the IllegalArgumentException
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            // Call the method that should throw the exception
+            inventory.validateIngredientCategory(nullCategory);
+        });
+
+        // Assert the exception message is what we expect
+        assertEquals("Category cannot be null.\nType categoryList for a list of valid categories.", exception.getMessage());
+    }
+
+
+    @Test
+    void testInvalidCategoryThrowsException() {
+        // Arrange: Set up the necessary objects
+        IngredientInventory inventory = new IngredientInventory();
+        String invalidCategory = "INVALID_CATEGORY";  // Example invalid category
+
+        // Act and Assert: Use assertThrows to expect the IllegalArgumentException
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            // Call the method that should throw the exception
+            inventory.validateIngredientCategory(invalidCategory);
+        });
+
+        // Assert the exception message is what we expect
+        assertEquals("Invalid category: " + invalidCategory + "\nType categoryList for a list of valid categories.", exception.getMessage());
+    }
 }

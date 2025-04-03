@@ -1,5 +1,6 @@
 package pantrypal.general.control;
 
+import pantrypal.inventory.Category;
 import pantrypal.inventory.Ingredient;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.inventory.Unit;
@@ -116,7 +117,8 @@ public class Storage {
         String stockName = unescapeSpecialCharacters(stockItem[0]);
         double stockQuantity = Double.parseDouble(stockItem[1]);
         Unit stockUnit = Unit.parseUnit(stockItem[2]);
-        inventory.addNewIngredient(stockName, stockQuantity, stockUnit);
+        Category stockCategory = Category.parseCategory(stockItem[3]);
+        inventory.addNewIngredient(stockName, stockQuantity, stockUnit, stockCategory);
     }
 
     private static void processLowStockLine(String line, IngredientInventory inventory) {
@@ -149,7 +151,9 @@ public class Storage {
             String ingredientName = unescapeSpecialCharacters(parts[0]);
             double ingredientQuantity = Double.parseDouble(parts[1]);
             Unit ingredientUnit = Unit.parseUnit(parts[2]);
-            recipe.addIngredient(new Ingredient(ingredientName, ingredientQuantity, ingredientUnit));
+            Category ingredientCategory = Category.valueOf(parts[3].toUpperCase());
+            recipe.addIngredient(new Ingredient(ingredientName, ingredientQuantity, ingredientUnit,
+                    ingredientCategory));
         }
     }
 

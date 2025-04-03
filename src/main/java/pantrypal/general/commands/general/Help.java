@@ -2,10 +2,12 @@ package pantrypal.general.commands.general;
 
 import pantrypal.general.commands.Command;
 import pantrypal.general.commands.inventory.AddIngredient;
+import pantrypal.general.commands.inventory.ConvertIngredient;
 import pantrypal.general.commands.inventory.IncreaseQuantity;
 import pantrypal.general.commands.inventory.DecreaseQuantity;
 import pantrypal.general.commands.inventory.SetAlert;
 import pantrypal.general.commands.inventory.CheckStock;
+import pantrypal.general.commands.inventory.ViewIngredientsByCategory;
 import pantrypal.general.commands.inventory.ViewLowStock;
 import pantrypal.general.commands.mealplan.AddNewPlan;
 import pantrypal.general.commands.mealplan.AddRecipeToPlan;
@@ -34,10 +36,11 @@ public class Help extends GeneralCommand {
     private static final List<Command> commandList = Arrays.asList(
             new Exit(), new AddIngredient(),
             new IncreaseQuantity(), new DecreaseQuantity(),
-            new SetAlert(), new CheckStock(), new ViewLowStock(), new AddShoppingItem(),
+            new SetAlert(), new CheckStock(), new ViewLowStock(), new ConvertIngredient(),
+            new ViewIngredientsByCategory(), new AddShoppingItem(),
             new GenerateShoppingList(), new RemoveShoppingItem(), new ViewShoppingList(), new ViewPresets(),
             new AddNewPlan(), new RemovePlan(), new AddRecipe(), new ViewRecipe(), new RemoveRecipe(), new ListRecipe(),
-            new AddRecipeToPlan(), new RemoveRecipeFromPlan(), new Help(), new UnitList()
+            new AddRecipeToPlan(), new RemoveRecipeFromPlan(), new Help(), new UnitList(), new CategoryList()
     );
 
     public Help() {
