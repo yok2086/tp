@@ -2,10 +2,12 @@ package pantrypal.general.commands.general;
 
 import pantrypal.general.commands.Command;
 import pantrypal.general.commands.inventory.AddIngredient;
+import pantrypal.general.commands.inventory.ConvertIngredient;
 import pantrypal.general.commands.inventory.IncreaseQuantity;
 import pantrypal.general.commands.inventory.DecreaseQuantity;
 import pantrypal.general.commands.inventory.SetAlert;
 import pantrypal.general.commands.inventory.CheckStock;
+import pantrypal.general.commands.inventory.ViewIngredientsByCategory;
 import pantrypal.general.commands.inventory.ViewLowStock;
 import pantrypal.general.commands.mealplan.AddNewDay;
 import pantrypal.general.commands.mealplan.RemoveDay;
@@ -40,11 +42,12 @@ public class Help extends GeneralCommand {
     private static final List<Command> commandList = Arrays.asList(
             new Exit(), new AddIngredient(),
             new IncreaseQuantity(), new DecreaseQuantity(),
-            new SetAlert(), new CheckStock(), new ViewLowStock(), new AddShoppingItem(),
+            new SetAlert(), new CheckStock(), new ViewLowStock(), new AddShoppingItem(), new ConvertIngredient(),
             new GenerateShoppingList(), new RemoveShoppingItem(), new ViewShoppingList(), new AddRecipe(),
-            new ViewRecipe(), new RemoveRecipe(), new ListRecipe(), new AddNewDay(), new RemoveDay(),
-            new RemovePlan(), new AddRecipeToPlan(), new RemoveRecipeFromPlan(), new AddNewPlan(),
-            new ViewPresets(), new ViewWeek(), new ViewDay(), new ExecuteDay(), new Help(), new UnitList()
+            new ViewIngredientsByCategory(), new ViewRecipe(), new RemoveRecipe(), new ListRecipe(), new AddNewDay(),
+            new RemoveDay(), new RemovePlan(), new AddRecipeToPlan(), new RemoveRecipeFromPlan(), new AddNewPlan(),
+            new ViewPresets(), new ViewWeek(), new ViewDay(), new ExecuteDay(), new Help(), new UnitList(),
+            new CategoryList()
     );
 
     public Help() {

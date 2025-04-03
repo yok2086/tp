@@ -2,6 +2,7 @@ package pantrypal.shoppinglist;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pantrypal.inventory.Category;
 import pantrypal.inventory.Unit;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -24,8 +25,9 @@ public class ShoppingListTest {
 
     @Test
     public void testAddAndGetItems() {
-        ShoppingListItem item1 = new ShoppingListItem("sugar", 100, Unit.GRAM);
-        ShoppingListItem item2 = new ShoppingListItem("flour", 200, Unit.GRAM);
+        ShoppingListItem item1 = new ShoppingListItem("sugar", 100, Unit.GRAM,
+                Category.CONDIMENTS);
+        ShoppingListItem item2 = new ShoppingListItem("flour", 200, Unit.GRAM, Category.GRAINS);
         shoppingList.addItem(item1);
         shoppingList.addItem(item2);
         List<ShoppingListItem> items = shoppingList.getItems();
@@ -36,8 +38,10 @@ public class ShoppingListTest {
 
     @Test
     public void testRemoveItem() {
-        ShoppingListItem item1 = new ShoppingListItem("sugar", 100, Unit.GRAM);
-        ShoppingListItem item2 = new ShoppingListItem("flour", 200, Unit.GRAM);
+        ShoppingListItem item1 = new ShoppingListItem("sugar", 100, Unit.GRAM,
+                Category.CONDIMENTS);
+        ShoppingListItem item2 = new ShoppingListItem("flour", 200, Unit.GRAM,
+                Category.GRAINS);
         shoppingList.addItem(item1);
         shoppingList.addItem(item2);
         boolean removed = shoppingList.removeItem("sugar");
@@ -49,37 +53,45 @@ public class ShoppingListTest {
 
     @Test
     public void testUpdateItem() {
-        ShoppingListItem item1 = new ShoppingListItem("sugar", 100, Unit.GRAM);
+        ShoppingListItem item1 = new ShoppingListItem("sugar", 100, Unit.GRAM,
+                Category.CONDIMENTS);
         shoppingList.addItem(item1);
-        boolean updated = shoppingList.updateItem("sugar", 150, Unit.GRAM);
+        boolean updated = shoppingList.updateItem("sugar", 150, Unit.GRAM,
+                Category.CONDIMENTS);
         assertTrue(updated, "Update should return true when the item exists.");
         ShoppingListItem updatedItem = shoppingList.getItems().get(0);
         assertEquals(150, updatedItem.getQuantity(), "Quantity should be updated to 150.");
         // Attempt to update a non-existent item.
-        boolean updateNonExistent = shoppingList.updateItem("flour", 200, Unit.GRAM);
+        boolean updateNonExistent = shoppingList.updateItem("flour", 200, Unit.GRAM,
+                Category.GRAINS);
         assertFalse(updateNonExistent, "Updating non-existent item should return false.");
     }
 
     @Test
     public void testEditItem() {
-        ShoppingListItem item1 = new ShoppingListItem("sugar", 100, Unit.GRAM);
-        ShoppingListItem item2 = new ShoppingListItem("flour", 200, Unit.GRAM);
+        ShoppingListItem item1 = new ShoppingListItem("sugar", 100, Unit.GRAM,
+                Category.CONDIMENTS);
+        ShoppingListItem item2 = new ShoppingListItem("flour", 200, Unit.GRAM, Category.GRAINS);
         shoppingList.addItem(item1);
         shoppingList.addItem(item2);
         // Valid edit: edit item at index 1 (flour).
-        boolean edited = shoppingList.editItem(1, "flour", 250, Unit.GRAM);
+        boolean edited = shoppingList.editItem(1, "flour", 250, Unit.GRAM,
+                Category.GRAINS);
         assertTrue(edited, "Editing valid index should return true.");
         ShoppingListItem editedItem = shoppingList.getItems().get(1);
-        assertEquals("flour", editedItem.getIngredientName(), "Ingredient name should remain 'flour'.");
+        assertEquals("flour", editedItem.getIngredientName(),
+                "Ingredient name should remain 'flour'.");
         assertEquals(250, editedItem.getQuantity(), "Quantity should be updated to 250.");
         // Invalid edit: index out of bounds.
-        boolean invalidEdit = shoppingList.editItem(5, "milk", 300, Unit.MILLILITER);
+        boolean invalidEdit = shoppingList.editItem(5, "milk", 300,
+                Unit.MILLILITER, Category.DAIRY);
         assertFalse(invalidEdit, "Editing an invalid index should return false.");
     }
 
     @Test
     public void testMarkItemAsPurchased() {
-        ShoppingListItem item1 = new ShoppingListItem("sugar", 100, Unit.GRAM);
+        ShoppingListItem item1 = new ShoppingListItem("sugar", 100, Unit.GRAM,
+                Category.CONDIMENTS);
         shoppingList.addItem(item1);
         boolean marked = shoppingList.markItemAsPurchased("sugar");
         assertTrue(marked, "Marking an existing item as purchased should return true.");
@@ -91,8 +103,9 @@ public class ShoppingListTest {
 
     @Test
     public void testCopyFromAndCopyList() {
-        ShoppingListItem item1 = new ShoppingListItem("sugar", 100, Unit.GRAM);
-        ShoppingListItem item2 = new ShoppingListItem("flour", 200, Unit.GRAM);
+        ShoppingListItem item1 = new ShoppingListItem("sugar", 100, Unit.GRAM,
+                Category.CONDIMENTS);
+        ShoppingListItem item2 = new ShoppingListItem("flour", 200, Unit.GRAM, Category.GRAINS);
         shoppingList.addItem(item1);
         shoppingList.addItem(item2);
 
@@ -102,7 +115,8 @@ public class ShoppingListTest {
         assertEquals(2, newItems.size(), "Copied list should have 2 items.");
         // Verify deep copy: newList items should not be the same instance as original.
         assertNotSame(item1, newItems.get(0), "Item should be a deep copy.");
-        assertEquals("sugar", newItems.get(0).getIngredientName(), "Copied item should have correct name.");
+        assertEquals("sugar", newItems.get(0).getIngredientName(),
+                "Copied item should have correct name.");
 
         // Test copyList similarly.
         ShoppingList anotherList = new ShoppingList();
@@ -114,7 +128,8 @@ public class ShoppingListTest {
     @Test
     public void testDisplayList() {
         // Prepare to capture the console output.
-        ShoppingListItem item1 = new ShoppingListItem("sugar", 100, Unit.GRAM);
+        ShoppingListItem item1 = new ShoppingListItem("sugar", 100, Unit.GRAM,
+                Category.CONDIMENTS);
         shoppingList.addItem(item1);
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         PrintStream originalOut = System.out;
@@ -126,6 +141,7 @@ public class ShoppingListTest {
         System.setOut(originalOut);
         String output = outContent.toString();
         assertTrue(output.contains("Shopping List:"), "Display output should contain header.");
-        assertTrue(output.contains("sugar: 100 " + Unit.GRAM), "Display output should contain the item details.");
+        assertTrue(output.contains("sugar: 100 " + Unit.GRAM), "Display output should contain the " +
+                "item details.");
     }
 }

@@ -1,5 +1,6 @@
 package pantrypal.shoppinglist;
 
+import pantrypal.inventory.Category;
 import pantrypal.inventory.Unit;
 
 public class ShoppingListItem {
@@ -7,8 +8,9 @@ public class ShoppingListItem {
     private double quantity;
     private Unit unit;
     private boolean purchased;
+    private Category category;
 
-    public ShoppingListItem(String ingredientName, double quantity, Unit unit) {
+    public ShoppingListItem(String ingredientName, double quantity, Unit unit, Category category) {
         assert ingredientName != null : "Ingredient name must not be null.";
         assert unit != null : "Unit must not be null.";
         assert quantity >= 0 : "Quantity must be non-negative.";
