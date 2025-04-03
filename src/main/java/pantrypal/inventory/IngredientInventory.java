@@ -118,15 +118,14 @@ public class IngredientInventory {
         }
     }
 
-    public double convertIngredient(String name, Unit targetUnit) {
-        Ingredient ingredient = inventory.get(name.toUpperCase());
+    public void convertIngredient(String name, Unit targetUnit) {
+        Ingredient ingredient = inventory.get(name);
         if (ingredient == null) {
             throw new IllegalArgumentException("Ingredient not found.");
         }
         double convertedQuantity = Unit.convert(ingredient.getQuantity(), ingredient.getUnit(), targetUnit);
         ingredient.setQuantity(convertedQuantity);
         ingredient.setUnit(targetUnit);
-        return convertedQuantity;
     }
 
     public String viewIngredientsByCategory(Category category) {

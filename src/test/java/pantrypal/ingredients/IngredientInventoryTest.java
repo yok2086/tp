@@ -168,7 +168,7 @@ public class IngredientInventoryTest {
                 Category.parseCategory("CONDIMENTS"));
 
         // Convert "Sugar" from GRAM to KILOGRAM
-        double convertedQuantity = inventory.convertIngredient("Sugar", Unit.KILOGRAM);
+        inventory.convertIngredient("Sugar", Unit.KILOGRAM);
 
         // Get ingredient after conversion
         Map<String, Ingredient> stock = inventory.getInventory();

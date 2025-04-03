@@ -37,15 +37,22 @@ public enum Unit {
     }
 
     public static Unit parseUnit(String text) {
+        Unit result = null;
+        boolean found = false;
         try {
             for (Unit unit : Unit.values()) {
                 if (unit.unit.equalsIgnoreCase(text) || unit.name().equalsIgnoreCase(text)) {
-                    return unit;
+                    result = unit;
+                    found = true;
+                    break;
                 }
             }
-            throw new IllegalArgumentException("Invalid unit: " + text + "\nType unitList for list of valid units");
-        } catch(IllegalArgumentException e){
-
+            if (!found) {
+                throw new IllegalArgumentException("Invalid unit: " + text + "\nType unitList for list of valid units");
+            }
+        }catch(IllegalArgumentException e){
+            e.getMessage();
         }
+        return result;
     }
 }
