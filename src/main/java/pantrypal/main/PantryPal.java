@@ -6,6 +6,7 @@ import pantrypal.general.control.Storage;
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.mealplan.PlanPresets;
+import pantrypal.mealplan.WeeklySchedule;
 import pantrypal.recipe.RecipeManager;
 import pantrypal.shoppinglist.ShoppingList;
 
@@ -24,6 +25,7 @@ public class PantryPal {
         IngredientInventory inventory = new IngredientInventory();
         ShoppingList shoppingList = new ShoppingList();
         PlanPresets planPresets = new PlanPresets();
+        WeeklySchedule weeklySchedule = new WeeklySchedule(planPresets);
         RecipeManager recipeManager = new RecipeManager();
         String input;
         Storage storage = new Storage(FILE_PATH);

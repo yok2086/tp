@@ -12,8 +12,8 @@ public class WeeklySchedule {
         this.weeklySchedule = new DailySchedule[NUMBER_OF_DAYS];
     }
 
-    public void addDay(PlanPresets presets, int planIndex, int index){
-        weeklySchedule[index].setPlan(presets, planIndex);
+    public void addDay(PlanPresets presets, int planIndex, int dayIndex){
+        weeklySchedule[dayIndex].setPlan(presets, planIndex);
     }
 
     public void removePlan(int index){
