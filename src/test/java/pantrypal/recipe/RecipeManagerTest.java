@@ -42,16 +42,16 @@ class RecipeManagerTest {
     @Test
     void addRecipeIngredients() {
         recipeManager.addRecipe("fried_egg");
-        Recipe fried_egg = recipeManager.searchRecipe("fried_egg");
+        Recipe friedEgg = recipeManager.searchRecipe("fried_egg");
 
-        recipeManager.addRecipeIngredients(fried_egg, "eggs", 50, Unit.parseUnit("g"),
+        recipeManager.addRecipeIngredients(friedEgg, "eggs", 50, Unit.parseUnit("g"),
                 Category.parseCategory("DAIRY"));
-        assertEquals("eggs", fried_egg.getIngredients().get(0).getName(),
+        assertEquals("eggs", friedEgg.getIngredients().get(0).getName(),
                 "Expected fried egg to be eggs");
 
-        fried_egg.removeIngredient("eggs");
+        friedEgg.removeIngredient("eggs");
         try {
-            recipeManager.addRecipeIngredients(fried_egg, "eggs",
+            recipeManager.addRecipeIngredients(friedEgg, "eggs",
                     50, Unit.parseUnit("eggs"), Category.parseCategory("DAIRY"));
             fail("Method should throw an unsupported unit exception");
         } catch (IllegalArgumentException e) {
@@ -61,7 +61,7 @@ class RecipeManagerTest {
         }
 
         try {
-            recipeManager.addRecipeIngredients(fried_egg, "eggs",
+            recipeManager.addRecipeIngredients(friedEgg, "eggs",
                     50, Unit.parseUnit("g"), Category.parseCategory("HEHE"));
             fail("Method should throw an unsupported unit exception");
         } catch (IllegalArgumentException e) {
@@ -70,11 +70,11 @@ class RecipeManagerTest {
             fail("Unexpected exception thrown");
         }
 
-        fried_egg.removeIngredient("eggs");
+        friedEgg.removeIngredient("eggs");
         try {
             Method method = RecipeManager.class.getMethod("addRecipeIngredients",
                     Recipe.class, String.class, int.class, Unit.class, Category.class);
-            method.invoke(recipeManager, fried_egg, "milk", "eggs", Unit.parseUnit("g"),
+            method.invoke(recipeManager, friedEgg, "milk", "eggs", Unit.parseUnit("g"),
                     Category.parseCategory("DAIRY"));
             fail("Method should throw a number format exception");
         } catch (InvocationTargetException e) {
@@ -91,9 +91,9 @@ class RecipeManagerTest {
             fail("Unexpected exception thrown");
         }
 
-        fried_egg.removeIngredient("eggs");
+        friedEgg.removeIngredient("eggs");
         try {
-            recipeManager.addRecipeIngredients(fried_egg, "eggs", 0, Unit.parseUnit("g"),
+            recipeManager.addRecipeIngredients(friedEgg, "eggs", 0, Unit.parseUnit("g"),
                     Category.parseCategory("DAIRY"));
             fail("Method should throw an arithmetic exception");
         } catch (ArithmeticException e){
