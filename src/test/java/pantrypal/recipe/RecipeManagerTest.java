@@ -95,9 +95,9 @@ class RecipeManagerTest {
         try {
             recipeManager.addRecipeIngredients(friedEgg, "eggs", 0, Unit.parseUnit("g"),
                     Category.parseCategory("DAIRY"));
-            fail("Method should throw an arithmetic exception");
-        } catch (ArithmeticException e){
-            assertNotNull(e, "Method should throw an arithmetic exception");
+            fail("Method should throw an assertion exception");
+        } catch (AssertionError e){
+            assertNotNull(e, "Method should throw an assertion exception");
         } catch (Exception e) {
             fail("Unexpected exception thrown");
         }
@@ -128,9 +128,9 @@ class RecipeManagerTest {
 
         try {
             recipeManager.addRecipeInstruction(recipeTwo, 0, "serve eggs");
-            fail("Method should throw an arithmetic exception");
-        } catch (ArithmeticException e){
-            assertNotNull(e, "Method should throw an arithmetic exception");
+            fail("Method should throw an assertion exception");
+        } catch (AssertionError e){
+            assertNotNull(e, "Method should throw an assertion exception");
         } catch (Exception e) {
             fail("Unexpected exception thrown");
         }
