@@ -2,6 +2,7 @@ package pantrypal.recipe;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pantrypal.inventory.Category;
 import pantrypal.inventory.Unit;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -46,14 +47,15 @@ class RecipeManagerTest {
         recipeManager.addRecipe("fried_egg");
         Recipe fried_egg = recipeManager.searchRecipe("fried_egg");
 
-        recipeManager.addRecipeIngredients(fried_egg, "eggs", 50, Unit.parseUnit("g"));
+        recipeManager.addRecipeIngredients(fried_egg, "eggs", 50, Unit.parseUnit("g"),
+                Category.parseCategory("DAIRY"));
         assertEquals("eggs", fried_egg.getIngredients().get(0).getName(),
                 "Expected fried egg to be eggs");
 
         fried_egg.removeIngredient("eggs");
         try {
             recipeManager.addRecipeIngredients(fried_egg, "eggs",
-                    50, Unit.parseUnit("eggs"));
+                    50, Unit.parseUnit("eggs"), Category.parseCategory("DAIRY"));
             fail("Method should throw an unsupported unit exception");
         } catch (IllegalArgumentException e) {
             assertNotNull(e, "Method should throw an unsupported unit exception");
@@ -61,10 +63,20 @@ class RecipeManagerTest {
             fail("Unexpected exception thrown");
         }
 
+        try {
+            recipeManager.addRecipeIngredients(fried_egg, "eggs",
+                    50, Unit.parseUnit("g"), Category.parseCategory("HEHE"));
+            fail("Method should throw an unsupported unit exception");
+        } catch (IllegalArgumentException e) {
+            assertNotNull(e, "Method should throw an unsupported category exception");
+        } catch (Exception e){
+            fail("Unexpected exception thrown");
+        }
+
         fried_egg.removeIngredient("eggs");
         try {
             Method method = RecipeManager.class.getMethod("addRecipeIngredients",
-                    Recipe.class, String.class, int.class, Unit.class);
+                    Recipe.class, String.class, int.class, Unit.class, Category.class);
             method.invoke(recipeManager, fried_egg, "milk", "eggs", Unit.parseUnit("g"));
             fail("Method should throw a number format exception");
         } catch (InvocationTargetException e) {
@@ -83,7 +95,8 @@ class RecipeManagerTest {
 
         fried_egg.removeIngredient("eggs");
         try {
-            recipeManager.addRecipeIngredients(fried_egg, "eggs", 0, Unit.parseUnit("g"));
+            recipeManager.addRecipeIngredients(fried_egg, "eggs", 0, Unit.parseUnit("g"),
+                    Category.parseCategory("DAIRY"));
             fail("Method should throw an arithmetic exception");
         } catch (ArithmeticException e){
             assertNotNull(e, "Method should throw an arithmetic exception");
@@ -93,8 +106,10 @@ class RecipeManagerTest {
 
         recipeManager.addRecipe("new_recipe");
         Recipe newRecipe = recipeManager.searchRecipe("new_recipe");
-        recipeManager.addRecipeIngredients(newRecipe, "news", 50, Unit.parseUnit("g"));
-        recipeManager.addRecipeIngredients(newRecipe, "news", 50, Unit.parseUnit("g"));
+        recipeManager.addRecipeIngredients(newRecipe, "news", 50, Unit.parseUnit("g"),
+                Category.parseCategory("FRUITS"));
+        recipeManager.addRecipeIngredients(newRecipe, "news", 50, Unit.parseUnit("g"),
+                Category.parseCategory("FRUITS"));
         assertEquals(1, newRecipe.getIngredients().size(),
                 "Method should not accept duplicate ingredients");
     }
@@ -151,8 +166,10 @@ class RecipeManagerTest {
     void removeRecipeIngredient() {
         recipeManager.addRecipe("fried_egg");
         Recipe fried_egg = recipeManager.searchRecipe("fried_egg");
-        recipeManager.addRecipeIngredients(fried_egg, "eggs", 50, Unit.parseUnit("g"));
-        recipeManager.addRecipeIngredients(fried_egg, "oil", 50, Unit.parseUnit("ml"));
+        recipeManager.addRecipeIngredients(fried_egg, "eggs", 50, Unit.parseUnit("g"),
+                Category.parseCategory("DAIRY"));
+        recipeManager.addRecipeIngredients(fried_egg, "oil", 50, Unit.parseUnit("ml"),
+                Category.parseCategory("CONDIMENTS"));
 
         recipeManager.removeRecipeIngredient(fried_egg, "oil");
         assertEquals(1, fried_egg.getIngredients().size(),
@@ -212,7 +229,8 @@ class RecipeManagerTest {
         Recipe fried_egg = recipeManager.searchRecipe("fried_egg");
         recipeManager.addRecipeInstruction(fried_egg, 1, "serve eggs");
         recipeManager.addRecipeInstruction(fried_egg, 2, "cook eggs");
-        recipeManager.addRecipeIngredients(fried_egg, "eggs", 50, Unit.parseUnit("g"));
+        recipeManager.addRecipeIngredients(fried_egg, "eggs", 50, Unit.parseUnit("g"),
+                Category.parseCategory("DAIRY"));
 
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         PrintStream originalOut = System.out;
@@ -226,7 +244,7 @@ class RecipeManagerTest {
             String expectedOutput = "fried_egg\n" +
                     "__________________________________________________\n" +
                     "Ingredients:\n" +
-                    "1. eggs 50.0 g\n" +
+                    "1. eggs 50.0 g Dairy\n" +
                     "__________________________________________________\n" +
                     "Instructions:\n" +
                     "1. serve eggs\n" +
@@ -291,7 +309,7 @@ class RecipeManagerTest {
     void getRecipeList() {
         assertEquals(ArrayList.class, recipeManager.getRecipeList().getClass(),
                 "getRecipeList should return ArrayList");
-        assertNull(recipeManager.getRecipeList(),
+        assertEquals(0, recipeManager.getRecipeList().size(),
                 "recipe list should be null at the start");
         recipeManager.addRecipe("fried_egg");
         assertEquals(Recipe.class, recipeManager.getRecipeList().get(0).getClass(),
