@@ -19,6 +19,9 @@ public class ViewPresets extends MealPlanCommand {
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, WeeklySchedule week, Scanner in) {
+        if (presets.getPlans().isEmpty()){
+            System.out.println("No presets found.");
+        }
         presets.viewPresets();
     }
 }

@@ -7,7 +7,7 @@ public class Ingredient {
     protected double quantity;
     protected Unit unit;
 
-    //Change the access modifier to public to be used by RecipeManager
+    //Change the access modifier to public for use by RecipeManager
     public Ingredient(String name, double quantity, Unit unit) {
         this.name = name;
         this.quantity = quantity;

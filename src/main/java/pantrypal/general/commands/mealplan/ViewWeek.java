@@ -9,27 +9,17 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
-public class AddNewDay extends MealPlanCommand {
+public class ViewWeek extends MealPlanCommand {
 
-    int planIndex;
-    int dayIndex;
 
-    public AddNewDay() {
+    public ViewWeek() {
         super("addNewDay <plan index> <day index>",
                 "Add New Day To Week");
-    }
-
-    public AddNewDay(int planIndex, int dayIndex) {
-        this.planIndex = planIndex;
-        this.dayIndex = dayIndex;
     }
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes,WeeklySchedule week, Scanner in) {
-
-        week.addDay(presets, planIndex, dayIndex);
-
-        System.out.println("Day added");
+        week.showWeek();
     }
 }

@@ -7,11 +7,16 @@ import pantrypal.general.commands.inventory.DecreaseQuantity;
 import pantrypal.general.commands.inventory.SetAlert;
 import pantrypal.general.commands.inventory.CheckStock;
 import pantrypal.general.commands.inventory.ViewLowStock;
+import pantrypal.general.commands.mealplan.AddNewDay;
+import pantrypal.general.commands.mealplan.RemoveDay;
+import pantrypal.general.commands.mealplan.ViewDay;
 import pantrypal.general.commands.mealplan.AddNewPlan;
-import pantrypal.general.commands.mealplan.AddRecipeToPlan;
 import pantrypal.general.commands.mealplan.RemovePlan;
-import pantrypal.general.commands.mealplan.RemoveRecipeFromPlan;
+import pantrypal.general.commands.mealplan.ExecuteDay;
 import pantrypal.general.commands.mealplan.ViewPresets;
+import pantrypal.general.commands.mealplan.ViewWeek;
+import pantrypal.general.commands.mealplan.RemoveRecipeFromPlan;
+import pantrypal.general.commands.mealplan.AddRecipeToPlan;
 import pantrypal.general.commands.recipe.AddRecipe;
 import pantrypal.general.commands.recipe.ListRecipe;
 import pantrypal.general.commands.recipe.RemoveRecipe;
@@ -36,9 +41,10 @@ public class Help extends GeneralCommand {
             new Exit(), new AddIngredient(),
             new IncreaseQuantity(), new DecreaseQuantity(),
             new SetAlert(), new CheckStock(), new ViewLowStock(), new AddShoppingItem(),
-            new GenerateShoppingList(), new RemoveShoppingItem(), new ViewShoppingList(), new ViewPresets(),
-            new AddNewPlan(), new RemovePlan(), new AddRecipe(), new ViewRecipe(), new RemoveRecipe(), new ListRecipe(),
-            new AddRecipeToPlan(), new RemoveRecipeFromPlan(), new Help(), new UnitList()
+            new GenerateShoppingList(), new RemoveShoppingItem(), new ViewShoppingList(), new AddRecipe(),
+            new ViewRecipe(), new RemoveRecipe(), new ListRecipe(), new AddNewDay(), new RemoveDay(),
+            new RemovePlan(), new AddRecipeToPlan(), new RemoveRecipeFromPlan(), new AddNewPlan(),
+            new ViewPresets(), new ViewWeek(), new ViewDay(), new ExecuteDay(), new Help(), new UnitList()
     );
 
     public Help() {
