@@ -1,6 +1,7 @@
 package pantrypal.recipe;
 
 import pantrypal.general.control.Ui;
+import pantrypal.inventory.Category;
 import pantrypal.inventory.Ingredient;
 import pantrypal.inventory.Unit;
 
@@ -68,7 +69,8 @@ public class RecipeManager{
         } else if (parts[1].equals("ingredient")) {
             //Command structure: edit ingredient add <name> <quantity> <unit>
             switch (parts[2]) {
-            case "add" -> addRecipeIngredients(recipe, parts[3], Integer.parseInt(parts[4]), Unit.parseUnit(parts[5]));
+            case "add" -> addRecipeIngredients(recipe, parts[3], Integer.parseInt(parts[4]), Unit.parseUnit(parts[5]),
+                    Category.parseCategory(parts[6]));
             case "remove" -> recipe.removeIngredient(parts[3]);
             //case "edit" -> recipe.editIngredient(parts[3], parts[4]);
 
@@ -86,9 +88,9 @@ public class RecipeManager{
 
     }
 
-    public void addRecipeIngredients(Recipe recipe, String ingredientName, int quantity, Unit unit) {
+    public void addRecipeIngredients(Recipe recipe, String ingredientName, int quantity, Unit unit, Category category) {
         try{
-            Ingredient ingredient = new Ingredient(ingredientName, quantity, unit);
+            Ingredient ingredient = new Ingredient(ingredientName, quantity, unit, category);
             recipe.addIngredient(ingredient);
         } catch (Exception e){
             System.out.println("Warning: Invalid ingredient " + ingredientName);

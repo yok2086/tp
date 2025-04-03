@@ -3,6 +3,7 @@ package pantrypal.shoppinglist;
 import java.util.ArrayList;
 import java.util.List;
 
+import pantrypal.inventory.Category;
 import pantrypal.inventory.Unit;
 
 public class ShoppingList {
@@ -32,10 +33,11 @@ public class ShoppingList {
     }
 
     // Update an existing item's quantity and unit.
-    public boolean updateItem(String ingredientName, double newQuantity, Unit newUnit) {
+    public boolean updateItem(String ingredientName, double newQuantity, Unit newUnit, Category newCategory) {
         assert ingredientName != null : "Ingredient name cannot be null.";
         assert newUnit != null : "Unit cannot be null.";
         assert newQuantity >= 0 : "Quantity should be non-negative.";
+        assert newCategory != null: "Category cannot be null.";
         for (ShoppingListItem item : items) {
             if (item.getIngredientName().equalsIgnoreCase(ingredientName)) {
                 item.setQuantity(newQuantity);
@@ -47,10 +49,12 @@ public class ShoppingList {
     }
 
     // Edit an item by its index in the list.
-    public boolean editItem(int index, String newIngredientName, double newQuantity, Unit newUnit) {
+    public boolean editItem(int index, String newIngredientName, double newQuantity, Unit newUnit,
+                            Category newCategory) {
         assert newIngredientName != null : "Ingredient name cannot be null.";
         assert newUnit != null : "Unit cannot be null.";
         assert newQuantity >= 0 : "Quantity must be non-negative.";
+        assert newCategory != null: "Category cannot be null.";
         if (index < 0 || index >= items.size()) {
             return false;
         }
