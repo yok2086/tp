@@ -7,16 +7,11 @@ import pantrypal.inventory.Unit;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.List;
 import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -77,7 +72,8 @@ class RecipeManagerTest {
         try {
             Method method = RecipeManager.class.getMethod("addRecipeIngredients",
                     Recipe.class, String.class, int.class, Unit.class, Category.class);
-            method.invoke(recipeManager, fried_egg, "milk", "eggs", Unit.parseUnit("g"));
+            method.invoke(recipeManager, fried_egg, "milk", "eggs", Unit.parseUnit("g"),
+                    Category.parseCategory("DAIRY"));
             fail("Method should throw a number format exception");
         } catch (InvocationTargetException e) {
             Throwable cause = e.getCause();
@@ -186,7 +182,7 @@ class RecipeManagerTest {
 
     @Test
     void listRecipe() {
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        ByteArrayOutputStream outContent;
         PrintStream originalOut = System.out;
 
         try {
@@ -198,7 +194,7 @@ class RecipeManagerTest {
             // Assert: Check if the output is as expected
             String expectedOutput = "There are no recipes at the moment. You can add via addRecipe\r\n";
             assertEquals(expectedOutput, outContent.toString(),
-                    "Printed output: " + outContent.toString() + " does not match expected output: "
+                    "Printed output: " + outContent + " does not match expected output: "
                         + expectedOutput);
 
 
@@ -208,10 +204,12 @@ class RecipeManagerTest {
             System.setOut(new PrintStream(outContent));
             recipeManager.listRecipe();
 
-            expectedOutput = "1. fried_egg\r\n" +
-                    "2. milk\r\n";
+            expectedOutput = """
+                    1. fried_egg\r
+                    2. milk\r
+                    """;
             assertEquals(expectedOutput, outContent.toString(),
-                    "Printed output: " + outContent.toString() + " does not match expected output: "
+                    "Printed output: " + outContent + " does not match expected output: "
                         + expectedOutput);
         } finally {
             // Restore System.out
@@ -241,16 +239,20 @@ class RecipeManagerTest {
             recipeManager.showRecipe("fried_egg");
 
             // Assert: Check if the output is as expected
-            String expectedOutput = "fried_egg\n" +
-                    "__________________________________________________\n" +
-                    "Ingredients:\n" +
-                    "1. eggs 50.0 g Dairy\n" +
-                    "__________________________________________________\n" +
-                    "Instructions:\n" +
-                    "1. serve eggs\n" +
-                    "2. cook eggs\n\n\r\n";
+            String expectedOutput = """
+                    fried_egg
+                    __________________________________________________
+                    Ingredients:
+                    1. eggs 50.0 g Dairy
+                    __________________________________________________
+                    Instructions:
+                    1. serve eggs
+                    2. cook eggs
+                    
+                    \r
+                    """;
             assertEquals(expectedOutput, outContent.toString(),
-                    "Printed output: " + outContent.toString() + " does not match expected output: "
+                    "Printed output: " + outContent + " does not match expected output: "
                             + expectedOutput);
 
             outContent = new ByteArrayOutputStream();
@@ -260,7 +262,7 @@ class RecipeManagerTest {
             expectedOutput = "There is no recipe with name " +
                     "recipe_that_does_not_exist\r\n";
             assertEquals(expectedOutput, outContent.toString(),
-                    "Printed output: " + outContent.toString() + " does not match expected output: "
+                    "Printed output: " + outContent + " does not match expected output: "
                             + expectedOutput);
         } finally {
             // Restore System.out
