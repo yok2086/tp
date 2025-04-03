@@ -91,8 +91,8 @@ class RecipeManagerTest {
 
         recipeManager.addRecipe("new_recipe");
         Recipe newRecipe = recipeManager.searchRecipe("new_recipe");
-        recipeManager.addRecipeIngredients(newRecipe, "eggs", 50, Unit.parseUnit("g"));
-        recipeManager.addRecipeIngredients(newRecipe, "eggs", 50, Unit.parseUnit("g"));
+        recipeManager.addRecipeIngredients(newRecipe, "news", 50, Unit.parseUnit("g"));
+        recipeManager.addRecipeIngredients(newRecipe, "news", 50, Unit.parseUnit("g"));
         assertEquals(1, newRecipe.getIngredients().size(),
                 "Method should not accept duplicate ingredients");
     }

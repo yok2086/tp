@@ -92,6 +92,7 @@ public class Recipe {
 
         if (filtered.isEmpty()) {
             System.out.println("Error: Ingredient " + ingredientName + " does not exist.");
+            return;
         }
 
         Ingredient ingredient = filtered.get(0);
