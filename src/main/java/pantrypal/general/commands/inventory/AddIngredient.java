@@ -50,7 +50,7 @@ public class AddIngredient extends InventoryCommand {
                         RecipeManager recipes, WeeklySchedule week, Scanner in) {
         if (!inventory.getInventory().containsKey(name)) {
             inventory.addNewIngredient(name, quantity, Unit.parseUnit(unit), Category.parseCategory(category));
-            Ui.printAddIngredientMessage(name, quantity, unit);
+            Ui.printAddIngredientMessage(name, quantity, unit, category);
         } else {
             Ui.printIngredientExists(name);
         }

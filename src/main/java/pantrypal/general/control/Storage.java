@@ -202,7 +202,8 @@ public class Storage {
             for (Map.Entry<String, Ingredient> ingredient : inventory.getInventory().entrySet()) {
                 Ingredient item = ingredient.getValue();
                 fileInput.append("[Stock] ").append(escapeSpecialCharacters(item.getName())).append(" ")
-                        .append(item.getQuantity()).append(" ").append(item.getUnit()).append("\n");
+                        .append(item.getQuantity()).append(" ").append(item.getUnit()).append(" ")
+                        .append(item.getCategory().toString().toUpperCase()).append("\n");
             }
 
             for (Map.Entry<String, Double> lowStockItem : inventory.getLowStockAlerts().entrySet()) {

@@ -23,17 +23,10 @@ public class ConvertIngredient extends InventoryCommand {
         this.targetUnit = targetUnit;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public Unit getTargetUnit() {
-        return targetUnit;
-    }
-
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, WeeklySchedule week, Scanner in) {
+
         inventory.convertIngredient(name, targetUnit);
     }
 }
