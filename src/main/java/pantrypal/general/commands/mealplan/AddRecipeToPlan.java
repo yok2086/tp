@@ -32,8 +32,7 @@ public class AddRecipeToPlan extends MealPlanCommand {
 
         if (recipes.getRecipeList().size() < recipeIndex) {
             System.out.println("Recipe index out of bounds.");
-        }
-        else {
+        } else {
             presets.addRecipeToPlan(recipes, recipeIndex, planIndex, mealName);
 
             System.out.println("Recipe " + recipes.getRecipeList().get(recipeIndex).getName() +

@@ -33,7 +33,6 @@ import pantrypal.general.commands.shoppinglist.AddShoppingItem;
 import pantrypal.general.commands.shoppinglist.GenerateShoppingList;
 import pantrypal.general.commands.shoppinglist.RemoveShoppingItem;
 import pantrypal.general.commands.shoppinglist.ViewShoppingList;
-import pantrypal.general.commands.mealplan.AddRecipeToPlan;
 import pantrypal.inventory.Category;
 import pantrypal.inventory.Unit;
 

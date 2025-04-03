@@ -9,7 +9,7 @@ public class Ingredient {
     protected Category category;
 
     //Change the access modifier to public for use by RecipeManager
-    public Ingredient(String name, double quantity, Unit unit) {
+    public Ingredient(String name, double quantity, Unit unit, Category category) {
         this.name = name;
         this.quantity = quantity;
         this.unit = unit;

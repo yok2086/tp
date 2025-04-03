@@ -3,6 +3,7 @@ package pantrypal.general.commands.inventory;
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.mealplan.PlanPresets;
+import pantrypal.mealplan.WeeklySchedule;
 import pantrypal.recipe.RecipeManager;
 import pantrypal.shoppinglist.ShoppingList;
 import pantrypal.inventory.Unit;
@@ -32,7 +33,7 @@ public class ConvertIngredient extends InventoryCommand {
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
-                        RecipeManager recipes, Scanner in) {
+                        RecipeManager recipes, WeeklySchedule week, Scanner in) {
         inventory.convertIngredient(name, targetUnit);
     }
 }
