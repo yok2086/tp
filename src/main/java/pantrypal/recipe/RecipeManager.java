@@ -4,6 +4,7 @@ import pantrypal.general.control.Ui;
 import pantrypal.inventory.Ingredient;
 import pantrypal.inventory.Unit;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,12 +88,23 @@ public class RecipeManager{
     }
 
     public void addRecipeIngredients(Recipe recipe, String ingredientName, int quantity, Unit unit) {
+
+        if (quantity <= 0) {
+            throw new ArithmeticException("Quantity must be greater than 0");
+        }
+
+        List<Ingredient> ingredientFilteredList = recipe.getIngredients().stream()
+                .filter(i -> i.getName().equals(ingredientName)).toList();
+        if (!ingredientFilteredList.isEmpty()) {
+            System.out.println("Warning: Recipe " + recipe.getName() + " already exists");
+            return;
+        }
+
         try{
             Ingredient ingredient = new Ingredient(ingredientName, quantity, unit);
             recipe.addIngredient(ingredient);
         } catch (Exception e){
             System.out.println("Warning: Invalid ingredient " + ingredientName);
-            System.out.println("The correct format is: ");
         }
     }
 
