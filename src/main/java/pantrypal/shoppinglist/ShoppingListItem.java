@@ -6,6 +6,7 @@ public class ShoppingListItem {
     private String ingredientName;
     private double quantity;
     private Unit unit;
+    private boolean purchased;
 
     public ShoppingListItem(String ingredientName, double quantity, Unit unit) {
         assert ingredientName != null : "Ingredient name must not be null.";
@@ -14,6 +15,7 @@ public class ShoppingListItem {
         this.ingredientName = ingredientName;
         this.quantity = quantity;
         this.unit = unit;
+        this.purchased = false; // Default: not purchased
     }
 
     // Copy constructor
@@ -21,6 +23,7 @@ public class ShoppingListItem {
         this.ingredientName = newShoppingListItem.ingredientName;
         this.quantity = newShoppingListItem.quantity;
         this.unit = newShoppingListItem.unit;
+        this.purchased = newShoppingListItem.purchased;
     }
 
     public String getIngredientName() {
@@ -50,9 +53,19 @@ public class ShoppingListItem {
         this.unit = unit;
     }
 
-    @Override
-    public String toString() {
-        return ingredientName + ": " + quantity + " " + unit;
+    public boolean isPurchased() {
+        return purchased;
     }
 
+    public void setPurchased(boolean purchased) {
+        this.purchased = purchased;
+    }
+
+    @Override
+    public String toString() {
+        // Format quantity: if it's a whole number, print without decimal.
+        String quantityStr = (quantity % 1 == 0) ? String.format("%d", (long) quantity)
+                : String.valueOf(quantity);
+        return ingredientName + ": " + quantityStr + " " + unit + (purchased ? " (Purchased)" : "");
+    }
 }

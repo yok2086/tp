@@ -12,6 +12,14 @@ public class WeeklySchedule {
         this.weeklySchedule = new DailySchedule[NUMBER_OF_DAYS];
     }
 
+    public void addDay(PlanPresets presets, int planIndex, int index){
+        weeklySchedule[index].setPlan(presets, planIndex);
+    }
+
+    public void removePlan(int index){
+        weeklySchedule[index].removePlan();
+    }
+
     public void showWeek() {
         boolean isCompletelyEmpty = true;
         for (DailySchedule day : weeklySchedule) {

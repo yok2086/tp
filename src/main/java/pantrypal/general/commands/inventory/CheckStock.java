@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class CheckStock extends InventoryCommand {
 
     public CheckStock() {
-        super("checkStock", "Checks the stock of an item in the " +
+        super("viewStock", "Checks the stock of an item in the " +
                 "inventory");
     }
 
