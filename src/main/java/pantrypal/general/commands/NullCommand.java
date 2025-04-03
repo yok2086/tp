@@ -9,10 +9,16 @@ import pantrypal.shoppinglist.ShoppingList;
 import java.util.Scanner;
 
 public class NullCommand extends Command {
+    private String errorMessage;
+
+    public NullCommand(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, Scanner in) {
-        ui.printInvalidCommandMessage();
+        ui.printInvalidCommandMessage(errorMessage);
     }
 
 }

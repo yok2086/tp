@@ -15,8 +15,8 @@ public class RemovePlan extends MealPlanCommand {
         super("removePlan <index>","Remove Meal Plan");
     }
 
-    public RemovePlan(int duration) {
-        this.index = duration;
+    public RemovePlan(int index) {
+        this.index = index;
     }
 
     @Override
