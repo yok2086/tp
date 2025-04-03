@@ -97,7 +97,9 @@ public class Parser {
                 if (inputParts.length < 3) {
                     throw new IllegalArgumentException("Insufficient arguments for convertIngredient command.");
                 }
-                return new ConvertIngredient();
+                name = inputParts[1].toUpperCase();
+                unit = Unit.parseUnit(inputParts[2]);
+                return new ConvertIngredient(name, unit);
             case "viewIngredientsByCategory":
                 if (inputParts.length < 2) {
                     throw new IllegalArgumentException("Insufficient arguments for viewIngredientsByCategory command.");

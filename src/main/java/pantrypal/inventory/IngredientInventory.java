@@ -119,7 +119,7 @@ public class IngredientInventory {
     }
 
     public double convertIngredient(String name, Unit targetUnit) {
-        Ingredient ingredient = inventory.get(name);
+        Ingredient ingredient = inventory.get(name.toUpperCase());
         if (ingredient == null) {
             throw new IllegalArgumentException("Ingredient not found.");
         }
