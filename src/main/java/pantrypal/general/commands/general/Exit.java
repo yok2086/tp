@@ -3,6 +3,7 @@ package pantrypal.general.commands.general;
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.mealplan.PlanPresets;
+import pantrypal.mealplan.WeeklySchedule;
 import pantrypal.recipe.RecipeManager;
 import pantrypal.shoppinglist.ShoppingList;
 
@@ -16,7 +17,7 @@ public class Exit extends GeneralCommand {
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
-                        RecipeManager recipes, Scanner in) {
+                                 RecipeManager recipes, WeeklySchedule week, Scanner in) {
         exit = true;
         ui.printExitMessage();
     }

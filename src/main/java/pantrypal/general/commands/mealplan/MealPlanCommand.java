@@ -4,6 +4,7 @@ import pantrypal.general.commands.Command;
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.mealplan.PlanPresets;
+import pantrypal.mealplan.WeeklySchedule;
 import pantrypal.recipe.RecipeManager;
 import pantrypal.shoppinglist.ShoppingList;
 
@@ -28,7 +29,7 @@ public abstract class MealPlanCommand extends Command {
 
     @Override
     public abstract void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
-                        RecipeManager recipes, Scanner in);
+                                 RecipeManager recipes, WeeklySchedule week, Scanner in);
 
 
 }

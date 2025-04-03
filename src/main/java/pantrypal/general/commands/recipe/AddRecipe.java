@@ -4,6 +4,7 @@ import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.inventory.Unit;
 import pantrypal.mealplan.PlanPresets;
+import pantrypal.mealplan.WeeklySchedule;
 import pantrypal.recipe.Recipe;
 import pantrypal.recipe.RecipeManager;
 import pantrypal.shoppinglist.ShoppingList;
@@ -25,7 +26,7 @@ public class AddRecipe extends RecipeCommand {
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
-                        RecipeManager recipes, Scanner in) {
+                        RecipeManager recipes, WeeklySchedule week, Scanner in) {
         boolean isFinished = false;
         boolean isValidRecipe = false;
 
