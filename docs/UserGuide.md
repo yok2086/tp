@@ -97,6 +97,66 @@ Marks an item in your shopping list as purchased. The item will be visually upda
 so you can easily track which items have already been bought.
 
 ### Recipe Commands
+#### Add New Recipe
+Command:
+```
+addRecipe {enter}
+<recipe_name> (no whitespace allowed, use _ instead) {enter}
+<ingredient_name/exit> {enter}
+<ingredient_quantity> {enter}
+<unit_of_measurement> {enter}
+<instructions/exit> {enter}
+```
+Example:
+```
+addRecipe {enter}
+fried_egg {enter}
+egg {enter}
+50 {enter}
+g {enter}
+exit {enter}
+cook egg {enter}
+serve egg {enter}
+exit {enter}
+```
+
+Description:
+Add a recipe to the recipe repository. You will be prompted to add the recipe name, the ingredients and their information, and the instructions.
+
+#### View A Specific Recipe
+Command:
+```
+viewRecipe <recipe_name>
+```
+Example:
+```
+viewRecipe fried_egg
+```
+
+Description:
+View a specific recipe's full information (ingredients and instructions).
+
+#### Remove A Recipe
+Command:
+```
+removeRecipe <recipe_name>
+```
+Example:
+```
+removeRecipe fried_egg
+```
+
+Description:
+Remove the specified recipe from the recipe repository.
+
+#### List All Recipes
+Command:
+```
+viewRecipeList
+```
+
+Description:
+View the name of all the recipes available in the repository.
 
 ### Inventory Commands
 #### Ingredient Inventory System
