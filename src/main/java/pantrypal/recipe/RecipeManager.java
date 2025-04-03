@@ -89,12 +89,23 @@ public class RecipeManager{
     }
 
     public void addRecipeIngredients(Recipe recipe, String ingredientName, int quantity, Unit unit, Category category) {
+
+        if (quantity <= 0) {
+            throw new ArithmeticException("Quantity must be greater than 0");
+        }
+
+        List<Ingredient> ingredientFilteredList = recipe.getIngredients().stream()
+                .filter(i -> i.getName().equals(ingredientName)).toList();
+        if (!ingredientFilteredList.isEmpty()) {
+            System.out.println("Warning: Recipe " + recipe.getName() + " already exists");
+            return;
+        }
+
         try{
             Ingredient ingredient = new Ingredient(ingredientName, quantity, unit, category);
             recipe.addIngredient(ingredient);
         } catch (Exception e){
             System.out.println("Warning: Invalid ingredient " + ingredientName);
-            System.out.println("The correct format is: ");
         }
     }
 
@@ -117,6 +128,10 @@ public class RecipeManager{
     }
 
     public void addRecipeInstruction(Recipe recipe, int step, String content) {
+        if (step <= 0) {
+            throw new ArithmeticException("Step must be greater than 0");
+        }
+
         try {
             Instruction instruction = new Instruction(step, content);
             recipe.addInstruction(instruction);
@@ -174,6 +189,7 @@ public class RecipeManager{
 
         if (filteredItems.isEmpty()) {
             System.out.println("There is no recipe with name " + recipeName);
+            return;
         }
 
         for (Recipe recipe : filteredItems) {
@@ -214,3 +230,5 @@ public class RecipeManager{
     }
 
 }
+
+
