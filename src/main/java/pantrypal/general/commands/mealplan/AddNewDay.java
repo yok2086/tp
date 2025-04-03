@@ -24,6 +24,6 @@ public class AddNewDay extends MealPlanCommand {
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, Scanner in) {
-
+        
     }
 }
