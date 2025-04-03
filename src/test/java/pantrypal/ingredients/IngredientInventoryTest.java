@@ -38,6 +38,7 @@ public class IngredientInventoryTest {
         assertTrue(stock.containsKey("Sugar")); // Contains sugar?
         assertEquals(2.5, stock.get("Sugar").getQuantity()); // Quantity correct?
         assertEquals("kg", stock.get("Sugar").getUnit().toString()); // Unit correct?
+        assertEquals("Condiments", stock.get("Sugar").getCategory().toString());
     }
 
     @Test
@@ -167,7 +168,7 @@ public class IngredientInventoryTest {
                 Category.parseCategory("CONDIMENTS"));
 
         // Convert "Sugar" from GRAM to KILOGRAM
-        double convertedQuantity = inventory.convertIngredient("Sugar", Unit.KILOGRAM);
+        inventory.convertIngredient("Sugar", Unit.KILOGRAM);
 
         // Get ingredient after conversion
         Map<String, Ingredient> stock = inventory.getInventory();

@@ -14,15 +14,16 @@ public class IngredientInventory {
         lowStockAlerts = new HashMap<>();
     }
 
-    private void validateIngredient(String name, double quantity, Unit unit) {
+    private void validateIngredient(String name, double quantity, Unit unit, Category category) {
         assert name != null && !name.isEmpty() : "Ingredient name cannot be null or empty";
         assert quantity > 0 : "Quantity must be positive";
         assert unit != null : "Unit cannot be null or empty";
+        assert category != null : "Category cannot be null or empty";
     }
 
     // Add new ingredient
     public void addNewIngredient(String name, double quantity, Unit unit, Category category) {
-        validateIngredient(name, quantity, unit);
+        validateIngredient(name, quantity, unit, category);
         inventory.put(name, new Ingredient(name, quantity, unit, category));
     }
 
@@ -73,7 +74,8 @@ public class IngredientInventory {
             System.out.println("Inventory is empty.");
         } else {
             inventory.forEach((name, ingredient) -> {
-                System.out.println(name + ": " + ingredient.quantity + " " + ingredient.unit);
+                System.out.println(name + ": " + ingredient.quantity + " " +
+                        ingredient.unit + " " + ingredient.category);
             });
         }
     }
@@ -116,7 +118,7 @@ public class IngredientInventory {
         }
     }
 
-    public double convertIngredient(String name, Unit targetUnit) {
+    public void convertIngredient(String name, Unit targetUnit) {
         Ingredient ingredient = inventory.get(name);
         if (ingredient == null) {
             throw new IllegalArgumentException("Ingredient not found.");
@@ -124,7 +126,6 @@ public class IngredientInventory {
         double convertedQuantity = Unit.convert(ingredient.getQuantity(), ingredient.getUnit(), targetUnit);
         ingredient.setQuantity(convertedQuantity);
         ingredient.setUnit(targetUnit);
-        return convertedQuantity;
     }
 
     public String viewIngredientsByCategory(Category category) {

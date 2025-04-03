@@ -4,6 +4,7 @@ import pantrypal.general.control.Ui;
 import pantrypal.inventory.Category;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.mealplan.PlanPresets;
+import pantrypal.mealplan.WeeklySchedule;
 import pantrypal.recipe.RecipeManager;
 import pantrypal.shoppinglist.ShoppingList;
 import pantrypal.shoppinglist.ShoppingListItem;
@@ -38,7 +39,7 @@ public class EditShoppingItem extends ShoppingListCommand {
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
-                        RecipeManager recipes, Scanner in) {
+                        RecipeManager recipes, WeeklySchedule week, Scanner in) {
         boolean success = shoppingList.editItem(index, newIngredientName, newQuantity, newUnit, newCategory);
         if (success) {
             ui.showMessage("Item at index " + index + " updated successfully.");

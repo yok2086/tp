@@ -174,37 +174,37 @@ addNewIngredient milk 200 ml
 #### Increase Specific Quantity to Existing Ingredient
 Command:
 ```
-increaseQuantity <ingredient_name> <quantity> <unit>
+increaseQuantity <ingredient_name> <quantity>
 ```
 Example:
 ```
-increaseQuantity milk 200 ml
+increaseQuantity milk 200
 ```
 
 #### Decrease Specific Quantity to Existing Ingredient
 Command:
 ```
-decreaseQuantity <ingredient_name> <quantity> <unit>
+decreaseQuantity <ingredient_name> <quantity> 
 ```
 Example:
 ```
-decreaseQuantity milk 200 ml
+decreaseQuantity milk 200 
 ```
 
 #### Set Low Stock Ingredient Alert
 Command:
 ```
-setAlert <ingredient_name> <threshold_quantity> <unit>
+setAlert <ingredient_name> <threshold_quantity>
 ```
 Example:
 ```
-setAlert flour 10 g
+setAlert flour 10 
 ```
 
 #### Check Ingredient Stock
 Command:
 ```
-checkStock
+viewStock
 ```
 
 #### View Low Stock Ingredients
