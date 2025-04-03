@@ -23,8 +23,11 @@ public class ViewDay extends MealPlanCommand {
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, WeeklySchedule week, Scanner in) {
-
-        week.viewDay(dayIndex);
+        if (validateWeeklySchedule(week, false)) {
+            System.out.println("There are no days in the week to show");
+        } else{
+            week.viewDay(dayIndex);
+        }
 
     }
 }

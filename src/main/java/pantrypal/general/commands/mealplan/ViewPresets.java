@@ -21,7 +21,8 @@ public class ViewPresets extends MealPlanCommand {
                         RecipeManager recipes, WeeklySchedule week, Scanner in) {
         if (presets.getPlans().isEmpty()){
             System.out.println("No presets found.");
+        } else {
+            presets.viewPresets();
         }
-        presets.viewPresets();
     }
 }

@@ -23,6 +23,10 @@ public class RemovePlan extends MealPlanCommand {
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, WeeklySchedule week, Scanner in) {
-        presets.removePlan(index);
+        if (validatePresetsSize(presets)) {
+            presets.removePlan(index);
+        } else {
+            System.out.println("There are no meal plans to remove");
+        }
     }
 }

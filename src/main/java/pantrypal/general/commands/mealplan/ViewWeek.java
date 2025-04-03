@@ -20,6 +20,10 @@ public class ViewWeek extends MealPlanCommand {
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes,WeeklySchedule week, Scanner in) {
-        week.showWeek();
+        if (validateWeeklySchedule(week, false)) {
+            week.showWeek();
+        } else {
+            System.out.println("There are no days in the week to show");
+        }
     }
 }

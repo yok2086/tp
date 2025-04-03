@@ -26,8 +26,11 @@ public class RemoveRecipeFromPlan extends MealPlanCommand {
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, WeeklySchedule week, Scanner in) {
-        presets.removeRecipeFromPlan(planIndex, mealName);
-        System.out.println("Recipe for " + mealName + " removed from plan " + planIndex);
-
+        if (validatePresetsSize(presets)) {
+            presets.removeRecipeFromPlan(planIndex, mealName);
+            System.out.println("Recipe for " + mealName + " removed from plan " + planIndex);
+        } else {
+            System.out.println("Preset index out of bounds.");
+        }
     }
 }

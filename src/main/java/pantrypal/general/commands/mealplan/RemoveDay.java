@@ -25,9 +25,11 @@ public class RemoveDay extends MealPlanCommand {
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes,WeeklySchedule week, Scanner in) {
-
-        week.removeDay(dayIndex);
-
-        System.out.println("Day added");
+        if(validateWeeklySchedule(week,false)){
+            week.removeDay(dayIndex);
+            System.out.println("Day removed");
+        } else{
+            System.out.println("There is nothing in the week to remove");
+        }
     }
 }
