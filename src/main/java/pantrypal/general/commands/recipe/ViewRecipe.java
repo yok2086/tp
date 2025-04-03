@@ -23,6 +23,7 @@ public class ViewRecipe extends RecipeCommand {
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, WeeklySchedule week, Scanner in) {
+        
         recipes.showRecipe(recipeName);
     }
 }
