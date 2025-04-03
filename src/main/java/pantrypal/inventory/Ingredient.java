@@ -6,12 +6,14 @@ public class Ingredient {
     protected String name;
     protected double quantity;
     protected Unit unit;
+    protected Category category;
 
     //Change the access modifier to public to be used by RecipeManager
-    public Ingredient(String name, double quantity, Unit unit) {
+    public Ingredient(String name, double quantity, Unit unit, Category category) {
         this.name = name;
         this.quantity = quantity;
         this.unit = unit;
+        this.category = category;
     }
 
     public String getName() {
@@ -38,9 +40,17 @@ public class Ingredient {
         this.name = name;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     @Override
     public String toString() {
-        return name + " " + quantity + " " + unit;
+        return name + " " + quantity + " " + unit + " " + category;
     }
 
     @Override
