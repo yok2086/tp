@@ -89,7 +89,7 @@ public class RecipeManager{
 
     }
 
-    public void addRecipeIngredients(Recipe recipe, String ingredientName, int quantity, Unit unit) {
+    public void addRecipeIngredients(Recipe recipe, String ingredientName, int quantity, Unit unit, Category category) {
 
         if (quantity <= 0) {
             throw new ArithmeticException("Quantity must be greater than 0");
