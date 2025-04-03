@@ -90,9 +90,7 @@ public class RecipeManager{
 
     public void addRecipeIngredients(Recipe recipe, String ingredientName, int quantity, Unit unit, Category category) {
 
-        if (quantity <= 0) {
-            throw new ArithmeticException("Quantity must be greater than 0");
-        }
+        assert quantity > 0 : "Quantity must be positive";
 
         List<Ingredient> ingredientFilteredList = recipe.getIngredients().stream()
                 .filter(i -> i.getName().equals(ingredientName)).toList();
@@ -118,6 +116,8 @@ public class RecipeManager{
                 return;
             }
 
+            assert newQuantity > 0 : "Quantity must be positive";
+
             ingredient.setName(newName);
             ingredient.setQuantity(newQuantity);
             ingredient.setUnit(newUnit);
@@ -128,9 +128,7 @@ public class RecipeManager{
     }
 
     public void addRecipeInstruction(Recipe recipe, int step, String content) {
-        if (step <= 0) {
-            throw new ArithmeticException("Step must be greater than 0");
-        }
+        assert step > 0 : "Step must be positive";
 
         try {
             Instruction instruction = new Instruction(step, content);
