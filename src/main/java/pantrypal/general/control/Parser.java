@@ -105,7 +105,8 @@ public class Parser {
                 name = inputParts[1].toUpperCase();
                 quantity = Double.parseDouble(inputParts[2]);
                 unit = Unit.parseUnit(inputParts[3]);
-                return new AddShoppingItem(name, quantity, unit);
+                category = Category.parseCategory(inputParts[4]);
+                return new AddShoppingItem(name, quantity, unit, category);
             case "generateShoppingList":
                 return new GenerateShoppingList();
             case "removeShoppingItem":

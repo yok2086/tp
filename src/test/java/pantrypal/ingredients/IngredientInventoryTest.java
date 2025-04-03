@@ -138,7 +138,8 @@ public class IngredientInventoryTest {
         });
 
         // Assert the exception message is what we expect
-        assertEquals("Category cannot be null.\nType categoryList for a list of valid categories.", exception.getMessage());
+        assertEquals("Category cannot be null.\nType categoryList for a list of valid categories.",
+                exception.getMessage());
     }
 
 
@@ -155,7 +156,8 @@ public class IngredientInventoryTest {
         });
 
         // Assert the exception message is what we expect
-        assertEquals("Invalid category: " + invalidCategory + "\nType categoryList for a list of valid categories.", exception.getMessage());
+        assertEquals("Invalid category: " + invalidCategory + "\nType categoryList for a " +
+                "list of valid categories.", exception.getMessage());
     }
 
     @Test
@@ -180,13 +182,14 @@ public class IngredientInventoryTest {
     @Test
     public void testViewIngredientsByCategory() {
         // Add ingredients to inventory
-        inventory.addNewIngredient("Sugar", 2.5, Unit.parseUnit("g"), Category.parseCategory("CONDIMENTS"));
+        inventory.addNewIngredient("Sugar", 2.5, Unit.parseUnit("g"),
+                Category.parseCategory("CONDIMENTS"));
 
         String result = inventory.viewIngredientsByCategory(Category.parseCategory("CONDIMENTS"));
 
         // Check if the output contains "Sugar"
         assertTrue(result.contains("Sugar"));
-        
+
         String expectedOutput = "Sugar 2.5 g Condiments\n";
         assertEquals(expectedOutput, result);
     }
