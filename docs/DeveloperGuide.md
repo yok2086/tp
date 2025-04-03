@@ -51,7 +51,7 @@ The core components of the Command classes include:
 2. **Execute Method**: Each command class implements an `execute` method, which contains the logic for performing the action associated with that command. This method is called when the parser returns the command object to the main program.
 
 # Class Diagram
-<img src="img_2.png" alt="drawing" style="width:1500px;"/>
+<img src="Commands_Class_Diagram.png" alt="drawing" style="width:1500px;"/>
 
 
 
@@ -75,7 +75,7 @@ The Parser feature is designed to be modular and extensible, allowing for easy a
 
 The following sequence diagram illustrates the interaction between the user, the `Parser`, and the `Command` classes during the execution of a command:
 
-<img src="img_1.png" alt="drawing" style="width:900px;"/>
+<img src="Parser_Sequence_Diagram.png" alt="drawing" style="width:900px;"/>
 
 
 ### Why It Is Implemented This Way
@@ -189,7 +189,7 @@ The following sequence diagram illustrates the interactions between the user, Pl
 PlanPreset, DailySchedule, WeeklySchedule, each MealPlan within DailySchedule, IngredientInventory and each Recipe
 amongst all created MealPlan 
 
-![img_6.png](img_6.png)
+![img_6.png](Meal_Plan_Sequence_Diagram.png)
 
 # Implementation of the Ingredient and Ingredient Inventory Features
 
@@ -242,7 +242,7 @@ Management and Shopping Lists. The core components of the Ingredient Inventory f
 The following sequence diagram illustrates the interaction between the user, the Ingredient Inventory, and the
 Ingredient feature during ingredient management:
 
-<img src="img_4.png" alt="drawing" style="width:500px;"/>
+<img src="Ingredients_Sequence_Diagram.png" alt="drawing" style="width:500px;"/>
 
 ### Why It Is Implemented This Way
 The Ingredient and Ingredient Inventory features follow a modular design to ensure flexibility, scalability, and
@@ -289,7 +289,7 @@ The Shopping List feature is modular and extensible, allowing for seamless integ
 ## Sequence Diagram
 The following sequence diagram illustrates the interaction between the user, Shopping List, Shopping List Item, and Ingredient Inventory when managing shopping items:
 
-<img src="img_5.png" alt="drawing" style="width:600px;"/>
+<img src="Shopping_List_Sequence_Diagram.png" alt="drawing" style="width:600px;"/>
 
 ### Why It Is Implemented This Way
 The Shopping List Item and Shopping List features follow a modular design to ensure flexibility, scalability, and maintainability. The Single Responsibility Principle is adhered to, with the ShoppingListItem class managing individual item attributes and the ShoppingList class handling the collection of items. This clear separation makes the system easy to understand, maintain, and modify without affecting other components.
