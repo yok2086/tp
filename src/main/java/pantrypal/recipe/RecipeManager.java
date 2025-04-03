@@ -152,6 +152,10 @@ public class RecipeManager{
         }
     }
 
+    public void removeRecipeIngredient(Recipe recipe, String ingredientName) {
+        recipe.removeIngredient(ingredientName);
+    }
+
     public void listRecipe() {
         if (recipes.isEmpty()) {
             System.out.println("There are no recipes at the moment. You can add via addRecipe");
