@@ -4,8 +4,7 @@ import pantrypal.general.control.Ui;
 import pantrypal.inventory.Category;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.inventory.Unit;
-import pantrypal.mealplan.PlanPresets;
-import pantrypal.mealplan.WeeklySchedule;
+import pantrypal.mealplan.MealPlanManager;
 import pantrypal.recipe.RecipeManager;
 import pantrypal.shoppinglist.ShoppingList;
 
@@ -46,8 +45,8 @@ public class AddIngredient extends InventoryCommand {
     }
 
     @Override
-    public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
-                        RecipeManager recipes, WeeklySchedule week, Scanner in) {
+    public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, RecipeManager recipes,
+                        MealPlanManager plans, Scanner in) {
         if (!inventory.getInventory().containsKey(name)) {
             inventory.addNewIngredient(name, quantity, Unit.parseUnit(unit), Category.parseCategory(category));
             Ui.printAddIngredientMessage(name, quantity, unit, category);
