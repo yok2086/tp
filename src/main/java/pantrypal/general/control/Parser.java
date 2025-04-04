@@ -136,7 +136,7 @@ public class Parser {
                 }
                 int recipeIndex = Integer.parseInt(inputParts[1]) - 1;
                 int planIndex = Integer.parseInt(inputParts[2]) - 1;
-                String mealName = inputParts[3];
+                String mealName = inputParts[3].toUpperCase();
                 return new AddRecipeToPlan(recipeIndex, planIndex, mealName);
             case "removeRecipeFromPlan":
                 if (inputParts.length < 3) {

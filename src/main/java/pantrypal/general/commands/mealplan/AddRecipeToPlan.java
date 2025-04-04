@@ -14,7 +14,7 @@ public class AddRecipeToPlan extends MealPlanCommand {
     private String mealName;
 
     public AddRecipeToPlan() {
-        super("addToPlan <recipe index> <plan index> <meal name>",
+        super("addRecipeToPlan <recipe index> <plan index> <meal name>",
                 "Add a recipe to a particular meal of a plan");
     }
 
