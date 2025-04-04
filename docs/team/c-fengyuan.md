@@ -1,6 +1,15 @@
-# Feng Yuan - Project Portfolio Page
+# Feng Yuan's Project Portfolio Page
 
-## Overview
+## Project: PantryPal
 
+PantryPal is an all-in-one application designed to help students manage their meals.
+The application allows users to keep track of their ingredients, automatically generate shopping lists,
+plan their meals, and store recipes.
 
-### Summary of Contributions
+## Given below are my contributions to the project:
+
+## MealPlan class
+
+## PlanPresets class
+
+##
