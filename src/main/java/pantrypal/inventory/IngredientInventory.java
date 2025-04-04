@@ -126,6 +126,7 @@ public class IngredientInventory {
         double convertedQuantity = Unit.convert(ingredient.getQuantity(), ingredient.getUnit(), targetUnit);
         ingredient.setQuantity(convertedQuantity);
         ingredient.setUnit(targetUnit);
+        System.out.println(name + " converted " + convertedQuantity + " to " + targetUnit);
     }
 
     public String viewIngredientsByCategory(Category category) {
