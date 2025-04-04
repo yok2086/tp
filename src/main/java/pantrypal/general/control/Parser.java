@@ -5,17 +5,26 @@ import pantrypal.general.commands.general.Help;
 import pantrypal.general.commands.general.Exit;
 import pantrypal.general.commands.NullCommand;
 import pantrypal.general.commands.general.UnitList;
+import pantrypal.general.commands.general.CategoryList;
 import pantrypal.general.commands.inventory.AddIngredient;
+import pantrypal.general.commands.inventory.ConvertIngredient;
 import pantrypal.general.commands.inventory.IncreaseQuantity;
 import pantrypal.general.commands.inventory.DecreaseQuantity;
 import pantrypal.general.commands.inventory.SetAlert;
 import pantrypal.general.commands.inventory.CheckStock;
+import pantrypal.general.commands.inventory.ViewIngredientsByCategory;
 import pantrypal.general.commands.inventory.ViewLowStock;
 import pantrypal.general.commands.inventory.DeleteIngredient;
+import pantrypal.general.commands.mealplan.AddNewDay;
+import pantrypal.general.commands.mealplan.RemoveDay;
+import pantrypal.general.commands.mealplan.ViewDay;
 import pantrypal.general.commands.mealplan.AddNewPlan;
 import pantrypal.general.commands.mealplan.RemovePlan;
-import pantrypal.general.commands.mealplan.RemoveRecipeFromPlan;
+import pantrypal.general.commands.mealplan.ExecuteDay;
 import pantrypal.general.commands.mealplan.ViewPresets;
+import pantrypal.general.commands.mealplan.ViewWeek;
+import pantrypal.general.commands.mealplan.RemoveRecipeFromPlan;
+import pantrypal.general.commands.mealplan.AddRecipeToPlan;
 import pantrypal.general.commands.recipe.AddRecipe;
 import pantrypal.general.commands.recipe.ListRecipe;
 import pantrypal.general.commands.recipe.RemoveRecipe;
@@ -24,7 +33,7 @@ import pantrypal.general.commands.shoppinglist.AddShoppingItem;
 import pantrypal.general.commands.shoppinglist.GenerateShoppingList;
 import pantrypal.general.commands.shoppinglist.RemoveShoppingItem;
 import pantrypal.general.commands.shoppinglist.ViewShoppingList;
-import pantrypal.general.commands.mealplan.AddRecipeToPlan;
+import pantrypal.inventory.Category;
 import pantrypal.inventory.Unit;
 
 public class Parser {
@@ -36,6 +45,7 @@ public class Parser {
         String name;
         double quantity;
         Unit unit;
+        Category category;
 
         try {
             switch (command) {
@@ -44,13 +54,14 @@ public class Parser {
             case "exit":
                 return new Exit();
             case "addNewIngredient":
-                if (inputParts.length < 4) {
+                if (inputParts.length < 5) {
                     throw new IllegalArgumentException("Insufficient arguments for addNewIngredient command.");
                 }
                 name = inputParts[1].toUpperCase();
                 quantity = Double.parseDouble(inputParts[2]);
                 unit = Unit.parseUnit(inputParts[3]);
-                return new AddIngredient(name, quantity, unit);
+                category = Category.parseCategory(inputParts[4]);
+                return new AddIngredient(name, quantity, unit, category);
             case "increaseQuantity":
                 if (inputParts.length < 3) {
                     throw new IllegalArgumentException("Insufficient arguments for increaseQuantity command.");
@@ -82,6 +93,19 @@ public class Parser {
                 }
                 name = inputParts[1].toUpperCase();
                 return new DeleteIngredient(name);
+            case "convertIngredient":
+                if (inputParts.length < 3) {
+                    throw new IllegalArgumentException("Insufficient arguments for convertIngredient command.");
+                }
+                name = inputParts[1].toUpperCase();
+                unit = Unit.parseUnit(inputParts[2]);
+                return new ConvertIngredient(name, unit);
+            case "viewIngredientsByCategory":
+                if (inputParts.length < 2) {
+                    throw new IllegalArgumentException("Insufficient arguments for viewIngredientsByCategory command.");
+                }
+                Category categoryName = Category.parseCategory(inputParts[1]);
+                return new ViewIngredientsByCategory(categoryName);
             case "addShoppingItem":
                 if (inputParts.length < 4) {
                     throw new IllegalArgumentException("Insufficient arguments for addShoppingItem command.");
@@ -89,7 +113,8 @@ public class Parser {
                 name = inputParts[1].toUpperCase();
                 quantity = Double.parseDouble(inputParts[2]);
                 unit = Unit.parseUnit(inputParts[3]);
-                return new AddShoppingItem(name, quantity, unit);
+                category = Category.parseCategory(inputParts[4]);
+                return new AddShoppingItem(name, quantity, unit, category);
             case "generateShoppingList":
                 return new GenerateShoppingList();
             case "removeShoppingItem":
@@ -100,20 +125,6 @@ public class Parser {
                 return new RemoveShoppingItem(name);
             case "viewShoppingList":
                 return new ViewShoppingList();
-            case "viewPlan":
-                return new ViewPresets();
-            case "addPlan":
-                if (inputParts.length < 2) {
-                    throw new IllegalArgumentException("Insufficient arguments for addPlan command.");
-                }
-                String planName = inputParts[1];
-                return new AddNewPlan(planName);
-            case "removePlan":
-                if (inputParts.length < 2) {
-                    throw new IllegalArgumentException("Insufficient arguments for removePlan command.");
-                }
-                int index = Integer.parseInt(inputParts[1]) - 1;
-                return new RemovePlan(index);
             case "addRecipe":
                 return new AddRecipe();
             case "viewRecipe":
@@ -130,6 +141,18 @@ public class Parser {
                 return new RemoveRecipe(name);
             case "viewRecipeList":
                 return new ListRecipe();
+            case "addNewPlan":
+                if (inputParts.length < 2) {
+                    throw new IllegalArgumentException("Insufficient arguments for addNewPlan command.");
+                }
+                String planName = inputParts[1];
+                return new AddNewPlan(planName);
+            case "removePlan":
+                if (inputParts.length < 2) {
+                    throw new IllegalArgumentException("Insufficient arguments for removePlan command.");
+                }
+                int index = Integer.parseInt(inputParts[1]) - 1;
+                return new RemovePlan(index);
             case "addRecipeToPlan":
                 if (inputParts.length < 4) {
                     throw new IllegalArgumentException("Insufficient arguments for addRecipeToPlan command.");
@@ -145,8 +168,40 @@ public class Parser {
                 int deleteRecipeIndex = Integer.parseInt(inputParts[1]) - 1;
                 String deleteMealName = inputParts[2];
                 return new RemoveRecipeFromPlan(deleteRecipeIndex, deleteMealName);
+            case "addNewDay":
+                if (inputParts.length < 3) {
+                    throw new IllegalArgumentException("Insufficient arguments for addNewDay command.");
+                }
+                int dayPlanIndex = Integer.parseInt(inputParts[1]) - 1;
+                int addDayIndex = Integer.parseInt(inputParts[2]) - 1;
+                return new AddNewDay(dayPlanIndex, addDayIndex);
+            case "removeDay":
+                if (inputParts.length < 4) {
+                    throw new IllegalArgumentException("Insufficient arguments for removeDay command.");
+                }
+                int deleteDayIndex = Integer.parseInt(inputParts[1]) - 1;
+                return new RemoveDay(deleteDayIndex);
+            case "viewDay":
+                if (inputParts.length < 2) {
+                    throw new IllegalArgumentException("Insufficient arguments for viewDay command.");
+                }
+                int viewDayIndex = Integer.parseInt(inputParts[1]) - 1;
+                return new ViewDay(viewDayIndex);
+            case "executeDay":
+                if (inputParts.length < 2) {
+                    throw new IllegalArgumentException("Insufficient arguments for executeDay command.");
+                }
+                int executeDayIndex = Integer.parseInt(inputParts[1]) - 1;
+                return new ExecuteDay(executeDayIndex);
+            case "viewPresets":
+                return new ViewPresets();
+            case "viewWeek":
+                return new ViewWeek();
+
             case "unitList":
                 return new UnitList();
+            case "CategoryList":
+                return new CategoryList();
             default:
                 return new NullCommand("Invalid Command! ");
             }

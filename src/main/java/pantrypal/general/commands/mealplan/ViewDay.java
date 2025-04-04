@@ -1,4 +1,4 @@
-package pantrypal.general.commands.inventory;
+package pantrypal.general.commands.mealplan;
 
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
@@ -9,16 +9,25 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
-public class CheckStock extends InventoryCommand {
+public class ViewDay extends MealPlanCommand {
+    private int dayIndex;
 
-    public CheckStock() {
-        super("viewStock", "Checks the stock of an item in the " +
-                "inventory");
+    public ViewDay() {
+        super("viewDay <dayIndex>", "View Details Of Current Day");
+    }
+
+    public ViewDay(int dayIndex) {
+        this.dayIndex = dayIndex;
     }
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, WeeklySchedule week, Scanner in) {
-        inventory.checkStock();
+        if (validateWeeklySchedule(week, false)) {
+            System.out.println("There are no days in the week to show");
+        } else{
+            week.viewDay(dayIndex);
+        }
+
     }
 }

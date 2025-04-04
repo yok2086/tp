@@ -97,6 +97,67 @@ Marks an item in your shopping list as purchased. The item will be visually upda
 so you can easily track which items have already been bought.
 
 ### Recipe Commands
+#### Add New Recipe
+Command:
+```
+addRecipe {enter}
+<recipe_name> (no whitespace allowed, use _ instead) {enter}
+<ingredient_name/exit> {enter}
+<ingredient_quantity> {enter}
+<unit_of_measurement> {enter}
+<instructions/exit> {enter}
+```
+Example:
+```
+addRecipe {enter}
+fried_egg {enter}
+egg {enter}
+50 {enter}
+g {enter}
+exit {enter}
+cook egg {enter}
+serve egg {enter}
+exit {enter}
+```
+
+Description:
+Add a recipe to the recipe repository. You will be prompted to add the recipe name, the ingredients and their information, and the instructions.
+
+#### View A Specific Recipe
+Command:
+```
+viewRecipe <recipe_name>
+```
+Example:
+```
+viewRecipe fried_egg
+```
+
+Description:
+View a specific recipe's full information (ingredients and instructions).
+
+#### Remove A Recipe
+Command:
+```
+removeRecipe <recipe_name>
+```
+Example:
+```
+removeRecipe fried_egg
+```
+
+Description:
+Remove the specified recipe from the recipe repository.
+
+#### List All Recipes
+Command:
+```
+viewRecipeList
+```
+
+Description:
+View the name of all the recipes available in the repository.
+
 
 ### Inventory Commands
 #### Ingredient Inventory System
@@ -110,48 +171,54 @@ Example:
 ```
 addNewIngredient milk 200 ml
 ```
+Description: Adds a new ingredient with a specified quantity and unit to the inventory.
 
 #### Increase Specific Quantity to Existing Ingredient
 Command:
 ```
-increaseQuantity <ingredient_name> <quantity> <unit>
+increaseQuantity <ingredient_name> <quantity>
 ```
 Example:
 ```
-increaseQuantity milk 200 ml
+increaseQuantity milk 200
 ```
+Description: Increases the quantity of an existing ingredient by the specified amount.
 
 #### Decrease Specific Quantity to Existing Ingredient
 Command:
 ```
-decreaseQuantity <ingredient_name> <quantity> <unit>
+decreaseQuantity <ingredient_name> <quantity> 
 ```
 Example:
 ```
-decreaseQuantity milk 200 ml
+decreaseQuantity milk 200 
 ```
+Description: Decreases the quantity of an existing ingredient by the specified amount.
 
 #### Set Low Stock Ingredient Alert
 Command:
 ```
-setAlert <ingredient_name> <threshold_quantity> <unit>
+setAlert <ingredient_name> <threshold_quantity>
 ```
 Example:
 ```
-setAlert flour 10 g
+setAlert flour 10 
 ```
+Description: Sets a threshold quantity to trigger a low-stock alert for an ingredient.
 
 #### Check Ingredient Stock
 Command:
 ```
-checkStock
+viewStock
 ```
+Description: Displays all current ingredients and their quantities in the inventory.
 
 #### View Low Stock Ingredients
 Command:
 ```
 viewLowStock
 ```
+Description: Displays all ingredients that are below their specified low-stock thresholds.
 
 #### Delete Ingredient Entirely
 Command:
@@ -162,10 +229,35 @@ Example:
 ```
 deleteIngredient salt
 ```
+Description: Removes an ingredient from the inventory.
+
+#### Convert Ingredient Unit
+Command:
+```
+convertIngredient <name> <targetUnit>
+```
+Example:
+```
+convertIngredient Sugar kg
+```
+Description: Converts the quantity of the specified ingredient to the target unit.
+
+#### View Ingredients by Category
+Command:
+```
+viewIngredientsByCategory <category>
+```
+Example:
+```
+viewIngredientsByCategory CONDIMENTS
+```
+Description: Displays all ingredients that belong to the specified category.
+
 
 
 ### Meal Plan Commands
 
+`Coming Soon`
 
 
 

@@ -9,15 +9,15 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
-public class EditPlanInWeek extends MealPlanCommand {
+public class ExecuteDay extends MealPlanCommand {
     private int dayIndex;
 
-    public EditPlanInWeek() {
-        super("EditPlanInWeek < dayIndex >",
-                "Modify details of a plan in a day of the week");
+    public ExecuteDay() {
+        super("executeDay <dayIndex>",
+                "Execute a meal plan");
     }
 
-    public EditPlanInWeek(int dayIndex) {
+    public ExecuteDay(int dayIndex) {
         this.dayIndex = dayIndex;
     }
 
@@ -25,10 +25,12 @@ public class EditPlanInWeek extends MealPlanCommand {
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
                         RecipeManager recipes, WeeklySchedule week, Scanner in) {
-
-        week.editDay(dayIndex, in);
-
-        System.out.println("You edited the day " + dayIndex + ".");
+        if (validateWeeklySchedule(week, false)) {
+            week.executeDay(inventory, dayIndex);
+            System.out.println("You have marked the day " + dayIndex + " as executed.");
+        } else {
+            System.out.println("There are no days in the week");
+        }
 
     }
 }

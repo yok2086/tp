@@ -3,6 +3,7 @@ package pantrypal.general.commands.mealplan;
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.mealplan.PlanPresets;
+import pantrypal.mealplan.WeeklySchedule;
 import pantrypal.recipe.RecipeManager;
 import pantrypal.shoppinglist.ShoppingList;
 
@@ -24,9 +25,12 @@ public class RemoveRecipeFromPlan extends MealPlanCommand {
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
-                        RecipeManager recipes, Scanner in) {
-        presets.removeRecipeFromPlan(planIndex, mealName);
-        System.out.println("Recipe for " + mealName + " removed from plan " + planIndex);
-
+                        RecipeManager recipes, WeeklySchedule week, Scanner in) {
+        if (validatePresetsSize(presets)) {
+            presets.removeRecipeFromPlan(planIndex, mealName);
+            System.out.println("Recipe for " + mealName + " removed from plan " + planIndex);
+        } else {
+            System.out.println("Preset index out of bounds.");
+        }
     }
 }

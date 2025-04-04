@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pantrypal.inventory.Category;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.inventory.Unit;
 
@@ -21,9 +22,9 @@ public class ShoppingListGeneratorTest {
     public void setUp() {
         // Initialize the inventory and add some ingredients.
         inventory = new IngredientInventory();
-        inventory.addNewIngredient("sugar", 100, Unit.parseUnit("g"));
-        inventory.addNewIngredient("flour", 300,  Unit.parseUnit("g"));
-        inventory.addNewIngredient("butter", 50, Unit.parseUnit("g"));
+        inventory.addNewIngredient("sugar", 100, Unit.parseUnit("g"), Category.parseCategory("CONDIMENTS"));
+        inventory.addNewIngredient("flour", 300,  Unit.parseUnit("g"), Category.parseCategory("GRAINS"));
+        inventory.addNewIngredient("butter", 50, Unit.parseUnit("g"), Category.parseCategory("DAIRY"));
     }
 
     @Test

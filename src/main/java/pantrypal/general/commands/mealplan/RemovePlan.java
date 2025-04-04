@@ -3,6 +3,7 @@ package pantrypal.general.commands.mealplan;
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.mealplan.PlanPresets;
+import pantrypal.mealplan.WeeklySchedule;
 import pantrypal.recipe.RecipeManager;
 import pantrypal.shoppinglist.ShoppingList;
 
@@ -21,7 +22,11 @@ public class RemovePlan extends MealPlanCommand {
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
-                        RecipeManager recipes, Scanner in) {
-        presets.removePlan(index);
+                        RecipeManager recipes, WeeklySchedule week, Scanner in) {
+        if (validatePresetsSize(presets)) {
+            presets.removePlan(index);
+        } else {
+            System.out.println("There are no meal plans to remove");
+        }
     }
 }

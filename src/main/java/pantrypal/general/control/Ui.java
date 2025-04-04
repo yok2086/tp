@@ -27,7 +27,7 @@ public class Ui {
         System.out.println("____________________________________________________________");
     }
 
-    public static void printAddIngredientMessage(String name, double quantity, String unit) {
+    public static void printAddIngredientMessage(String name, double quantity, String unit, String category) {
         Ui.showMessage("Adding " + name + " " + quantity + " " + unit);
     }
 

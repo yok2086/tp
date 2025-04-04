@@ -1,6 +1,7 @@
 package pantrypal.recipe;
 
 import pantrypal.general.control.Ui;
+import pantrypal.inventory.Category;
 import pantrypal.inventory.Ingredient;
 import pantrypal.inventory.Unit;
 
@@ -68,7 +69,8 @@ public class RecipeManager{
         } else if (parts[1].equals("ingredient")) {
             //Command structure: edit ingredient add <name> <quantity> <unit>
             switch (parts[2]) {
-            case "add" -> addRecipeIngredients(recipe, parts[3], Integer.parseInt(parts[4]), Unit.parseUnit(parts[5]));
+            case "add" -> addRecipeIngredients(recipe, parts[3], Integer.parseInt(parts[4]), Unit.parseUnit(parts[5]),
+                    Category.parseCategory(parts[6]));
             case "remove" -> recipe.removeIngredient(parts[3]);
             //case "edit" -> recipe.editIngredient(parts[3], parts[4]);
 
@@ -86,13 +88,22 @@ public class RecipeManager{
 
     }
 
-    public void addRecipeIngredients(Recipe recipe, String ingredientName, int quantity, Unit unit) {
+    public void addRecipeIngredients(Recipe recipe, String ingredientName, int quantity, Unit unit, Category category) {
+
+        assert quantity > 0 : "Quantity must be positive";
+
+        List<Ingredient> ingredientFilteredList = recipe.getIngredients().stream()
+                .filter(i -> i.getName().equals(ingredientName)).toList();
+        if (!ingredientFilteredList.isEmpty()) {
+            System.out.println("Warning: Recipe " + recipe.getName() + " already exists");
+            return;
+        }
+
         try{
-            Ingredient ingredient = new Ingredient(ingredientName, quantity, unit);
+            Ingredient ingredient = new Ingredient(ingredientName, quantity, unit, category);
             recipe.addIngredient(ingredient);
         } catch (Exception e){
             System.out.println("Warning: Invalid ingredient " + ingredientName);
-            System.out.println("The correct format is: ");
         }
     }
 
@@ -105,6 +116,8 @@ public class RecipeManager{
                 return;
             }
 
+            assert newQuantity > 0 : "Quantity must be positive";
+
             ingredient.setName(newName);
             ingredient.setQuantity(newQuantity);
             ingredient.setUnit(newUnit);
@@ -115,6 +128,8 @@ public class RecipeManager{
     }
 
     public void addRecipeInstruction(Recipe recipe, int step, String content) {
+        assert step > 0 : "Step must be positive";
+
         try {
             Instruction instruction = new Instruction(step, content);
             recipe.addInstruction(instruction);
@@ -172,6 +187,7 @@ public class RecipeManager{
 
         if (filteredItems.isEmpty()) {
             System.out.println("There is no recipe with name " + recipeName);
+            return;
         }
 
         for (Recipe recipe : filteredItems) {
@@ -212,3 +228,5 @@ public class RecipeManager{
     }
 
 }
+
+

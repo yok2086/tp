@@ -57,7 +57,11 @@ public class PlanPresets {
         }
     }
 
-    public MealPlan getPlans(int index) {
+    public MealPlan getPlanDetails(int index) {
         return plans.get(index);
+    }
+
+    public ArrayList<MealPlan> getPlans() {
+        return plans;
     }
 }

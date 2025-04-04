@@ -9,26 +9,21 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
-public class AddNewWeek extends MealPlanCommand {
+public class ViewWeek extends MealPlanCommand {
 
-    WeeklySchedule week;
 
-    public AddNewWeek() {
-        super("AddNewWeek",
-                "Create weekly container for daily executable meal plans");
-    }
-
-    public AddNewWeek(PlanPresets preset) {
-        week = new WeeklySchedule(preset);
-    }
-
-    public WeeklySchedule getWeeklySchedule() {
-        return week;
+    public ViewWeek() {
+        super("addNewDay <plan index> <day index>",
+                "Add New Day To Week");
     }
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
-                        RecipeManager recipes, Scanner in) {
-
+                        RecipeManager recipes,WeeklySchedule week, Scanner in) {
+        if (validateWeeklySchedule(week, false)) {
+            week.showWeek();
+        } else {
+            System.out.println("There are no days in the week to show");
+        }
     }
 }

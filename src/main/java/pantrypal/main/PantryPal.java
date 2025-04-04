@@ -24,21 +24,21 @@ public class PantryPal {
         Ui ui = new Ui();
         IngredientInventory inventory = new IngredientInventory();
         ShoppingList shoppingList = new ShoppingList();
-        PlanPresets planPresets = new PlanPresets();
-        WeeklySchedule weeklySchedule = new WeeklySchedule(planPresets);
-        RecipeManager recipeManager = new RecipeManager();
+        PlanPresets presets = new PlanPresets();
+        WeeklySchedule week = new WeeklySchedule(presets);
+        RecipeManager recipes = new RecipeManager();
         String input;
         Storage storage = new Storage(FILE_PATH);
 
         Ui.printWelcomeMessage();
-        storage.createFile(inventory, shoppingList, planPresets, recipeManager);
+        storage.createFile(inventory, shoppingList, presets, recipes);
         while (!isFinished) {
             input = in.nextLine();
 
             Command centralCommand = parser.parse(input);
-            centralCommand.execute(ui, inventory, shoppingList, planPresets, recipeManager, in);
+            centralCommand.execute(ui, inventory, shoppingList, presets, recipes, week, in);
             isFinished = centralCommand.isExit();
-            Storage.saveData(inventory, shoppingList, planPresets, recipeManager);
+            Storage.saveData(inventory, shoppingList, presets, recipes);
         }
     }
 }
