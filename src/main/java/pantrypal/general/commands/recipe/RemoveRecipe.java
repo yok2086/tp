@@ -2,8 +2,7 @@ package pantrypal.general.commands.recipe;
 
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
-import pantrypal.mealplan.PlanPresets;
-import pantrypal.mealplan.WeeklySchedule;
+import pantrypal.mealplan.MealPlanManager;
 import pantrypal.recipe.RecipeManager;
 import pantrypal.shoppinglist.ShoppingList;
 
@@ -21,8 +20,8 @@ public class RemoveRecipe extends RecipeCommand {
     }
 
     @Override
-    public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
-                        RecipeManager recipes, WeeklySchedule week, Scanner in) {
+    public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, RecipeManager recipes,
+                        MealPlanManager plans, Scanner in) {
         recipes.removeRecipe(recipeName);
     }
 }

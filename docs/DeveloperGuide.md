@@ -100,7 +100,7 @@ The Storage feature is designed to be modular and extensible, allowing for easy 
 
 The following sequence diagram illustrates the interaction between the `Storage` class and the other key lists in the application during the loading and saving of data:
 The key lists include: `StockList`, `LowStockList`, `RecipeList`, `ShoppingList`
-<img src="img_3.png" alt="drawing" style="width:1000px;"/>
+<img src="Storage_Sequence_Diagram.png" alt="drawing" style="width:1000px;"/>
 
 # Implementation of the Meal Plan, Plan Presets and Viewing features
 
