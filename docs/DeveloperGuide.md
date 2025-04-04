@@ -224,19 +224,23 @@ supporting low-stock alerts.
 The Ingredient Inventory feature is modular and extensible, allowing for seamless integration with features like Recipe
 Management and Shopping Lists. The core components of the Ingredient Inventory feature include:
 
-- **Ingredient Inventory Class**: Manages the collection of ingredients, allowing users to add, update, and delete
+- **Ingredient Inventory Class**: Manages the collection of ingredients, allowing users to add, edit, and delete
 - items.
-- **Low-Stock Alert System**: Enables users to set and retrieve low-stock alerts, notifying them when ingredients fall
+- **Low-Stock Alert System**: Enables users to set and receive low-stock alerts, notifying them when ingredients fall
 - below a set threshold.
 - **Integration with Ingredient Feature**: Uses the Ingredient class to ensure consistency and modularity in ingredient
 - representation.
+- **Unit Conversion System**: Enables users to convert ingredient quantities between different units (e.g. kg to g) for consistency in recipes and inventory tracking.
+- **Category Management**: Allows ingredients to be categorized (e.g. Dairy, Condiments, Spices) for easier organization and filtering.
 
 ### Core Functionalities
-- **Adding and Managing Ingredients**: Users can add new ingredients with a name, quantity, and unit while ensuring
+- **Adding and Managing Ingredients**: Users can add new ingredients with a name, quantity, unit, and category while ensuring
 - valid input through validation checks.
 - **Updating Ingredient Quantities**: The feature allows increasing or decreasing ingredient quantities.
 - **Deleting Ingredients**: Users can remove ingredients from the inventory, ensuring accurate stock representation.
 - **Low-Stock Alerts**: The system supports configurable alerts to notify users when ingredients are running low.
+- **Unit Conversion**: Users can add and convert ingredient quantities between different units using predefined conversion factors to maintain consistency.
+- **Categorizing Ingredients**: Users can assign categories to ingredients to improve organization and facilitate searching.
 
 ## Sequence Diagram
 The following sequence diagram illustrates the interaction between the user, the Ingredient Inventory, and the
@@ -247,8 +251,10 @@ Ingredient feature during ingredient management:
 ### Why It Is Implemented This Way
 The Ingredient and Ingredient Inventory features follow a modular design to ensure flexibility, scalability, and
 maintainability. The Single Responsibility Principle is adhered to, with the Ingredient class managing individual
-ingredient attributes (name, quantity, unit) and the Ingredient Inventory class handling the collection of ingredients.
-This clear separation makes the system easy to understand, maintain, and modify without affecting other components.
+ingredient attributes (name, quantity, unit) and the Ingredient Inventory class handling the collection of ingredients, conversions, and stock alerts.
+The addition of unit conversion ensures consistency across different ingredient measurements, making it 
+easier to track inventory. Categorization improves usability by allowing users to group and filter
+ingredients based on type.
 
 # Implementation of the Shopping List Item and Shopping List Features
 
