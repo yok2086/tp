@@ -226,6 +226,7 @@ deleteIngredient salt
 
 ### Meal Plan Commands
 
+`Coming Soon`
 
 
 
