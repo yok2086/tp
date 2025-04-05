@@ -29,7 +29,7 @@ public class IngredientInventoryTest {
     void testAddNewIngredient() {
         // Add sugar
         inventory.addNewIngredient("Sugar", 2.5, Unit.parseUnit("kg"),
-                Category.parseCategory("CONDIMENTS"));
+                Category.parseCategory("CONDIMENT"));
 
         // Get inventory
         Map<String, Ingredient> stock = inventory.getInventory();
@@ -38,14 +38,14 @@ public class IngredientInventoryTest {
         assertTrue(stock.containsKey("Sugar")); // Contains sugar?
         assertEquals(2.5, stock.get("Sugar").getQuantity()); // Quantity correct?
         assertEquals("kg", stock.get("Sugar").getUnit().toString()); // Unit correct?
-        assertEquals("Condiments", stock.get("Sugar").getCategory().toString());
+        assertEquals("Condiment", stock.get("Sugar").getCategory().toString());
     }
 
     @Test
     void testSetAlert() {
         // Add sugar
         inventory.addNewIngredient("Sugar", 2.5, Unit.parseUnit("kg"),
-                Category.parseCategory("CONDIMENTS"));
+                Category.parseCategory("CONDIMENT"));
         inventory.setAlert("Sugar", 2.0);
         inventory.decreaseQuantity("Sugar", 1);
 
@@ -67,7 +67,7 @@ public class IngredientInventoryTest {
 
     @Test
     void testIncreaseQuantity() {
-        inventory.addNewIngredient("Flour", 1.0, Unit.KILOGRAM, Category.parseCategory("GRAINS"));
+        inventory.addNewIngredient("Flour", 1.0, Unit.KILOGRAM, Category.parseCategory("GRAIN"));
         inventory.increaseQuantity("Flour", 0.5);
         assertEquals(1.5, inventory.getInventory().get("Flour").getQuantity(), "Flour quantity should"
                 + " be 1.5 kg");
@@ -115,15 +115,15 @@ public class IngredientInventoryTest {
     void testValidateIngredientThrowsException() {
         // Test for invalid name
         assertThrows(AssertionError.class, () -> inventory.addNewIngredient("", 1.0, Unit.GRAM,
-                Category.parseCategory("GRAINS")));
+                Category.parseCategory("GRAIN")));
 
         // Test for invalid quantity
         assertThrows(AssertionError.class, () -> inventory.addNewIngredient("Salt", -1.0, Unit.GRAM,
-                Category.parseCategory("GRAINS")));
+                Category.parseCategory("GRAIN")));
 
         // Test for invalid unit
         assertThrows(AssertionError.class, () -> inventory.addNewIngredient("Pepper", 1.0, null,
-                Category.parseCategory("SPICES")));
+                Category.parseCategory("SPICE")));
     }
 
     @Test
@@ -165,7 +165,7 @@ public class IngredientInventoryTest {
     public void testConvertIngredient() {
         // Add "Sugar" with 2.5 grams to the inventory
         inventory.addNewIngredient("Sugar", 2.5, Unit.parseUnit("g"),
-                Category.parseCategory("CONDIMENTS"));
+                Category.parseCategory("CONDIMENT"));
 
         // Convert "Sugar" from GRAM to KILOGRAM
         inventory.convertIngredient("Sugar", Unit.KILOGRAM);
@@ -184,14 +184,14 @@ public class IngredientInventoryTest {
     public void testViewIngredientsByCategory() {
         // Add ingredients to inventory
         inventory.addNewIngredient("Sugar", 2.5, Unit.parseUnit("g"),
-                Category.parseCategory("CONDIMENTS"));
+                Category.parseCategory("CONDIMENT"));
 
-        String result = inventory.viewIngredientsByCategory(Category.parseCategory("CONDIMENTS"));
+        String result = inventory.viewIngredientsByCategory(Category.parseCategory("CONDIMENT"));
 
         // Check if the output contains "Sugar"
         assertTrue(result.contains("Sugar"));
 
-        String expectedOutput = "Sugar 2.5 g Condiments\n";
+        String expectedOutput = "Sugar 2.5 g Condiment\n";
         assertEquals(expectedOutput, result);
     }
 }
