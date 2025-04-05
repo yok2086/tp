@@ -20,10 +20,10 @@ public class AddShoppingItem extends ShoppingListCommand {
                 "Add an item to the shopping list");
     }
 
-    public AddShoppingItem(String name, double quantity, Unit unit, Category category) {
-        super("AddShoppingItem <name> <quantity> <unit> <category>",
+    public AddShoppingItem(String name, double quantity, Unit unit) {
+        super("AddShoppingItem <name> <quantity> <unit>",
                 "Add an item to the shopping list");
-        shoppingListItem = new ShoppingListItem(name, quantity, unit, category);
+        shoppingListItem = new ShoppingListItem(name, quantity, unit);
         this.name = name;
     }
 

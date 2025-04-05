@@ -29,11 +29,9 @@ public class AutoGenerationLogic {
                 double required = threshold - ingredient.getQuantity();
 
                 // Update existing item if present; if not, add a new item.
-                boolean updated = shoppingList.updateItem(ingredientName, required, ingredient.getUnit(),
-                        ingredient.getCategory());
+                boolean updated = shoppingList.updateItem(ingredientName, required, ingredient.getUnit());
                 if (!updated) {
-                    shoppingList.addItem(new ShoppingListItem(ingredientName, required, ingredient.getUnit(),
-                            ingredient.getCategory()));
+                    shoppingList.addItem(new ShoppingListItem(ingredientName, required, ingredient.getUnit()));
                 }
             }
         }

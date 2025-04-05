@@ -39,7 +39,7 @@ public class EditShoppingItem extends ShoppingListCommand {
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list,
                         RecipeManager recipes, MealPlanManager plans, Scanner in) {
-        boolean success = shoppingList.editItem(index, newIngredientName, newQuantity, newUnit, newCategory);
+        boolean success = shoppingList.editItem(index, newIngredientName, newQuantity, newUnit);
         if (success) {
             ui.showMessage("Item at index " + index + " updated successfully.");
         } else {

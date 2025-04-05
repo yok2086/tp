@@ -19,10 +19,7 @@ import pantrypal.general.commands.recipe.AddRecipe;
 import pantrypal.general.commands.recipe.ListRecipe;
 import pantrypal.general.commands.recipe.RemoveRecipe;
 import pantrypal.general.commands.recipe.ViewRecipe;
-import pantrypal.general.commands.shoppinglist.AddShoppingItem;
-import pantrypal.general.commands.shoppinglist.GenerateShoppingList;
-import pantrypal.general.commands.shoppinglist.RemoveShoppingItem;
-import pantrypal.general.commands.shoppinglist.ViewShoppingList;
+import pantrypal.general.commands.shoppinglist.*;
 import pantrypal.inventory.Category;
 import pantrypal.inventory.Unit;
 
@@ -122,6 +119,10 @@ public class Parser {
                 return new RemoveShoppingItem(name);
             case "viewShoppingList":
                 return new ViewShoppingList();
+            case "editShoppingItem":
+                return new EditShoppingItem();
+            case "markShoppingItemAsPurchased":
+                return new MarkShoppingItemAsPurchased();
             //From here on are commands for Recipe
             case "addRecipe":
                 return new AddRecipe();

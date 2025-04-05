@@ -103,8 +103,7 @@ public class Storage {
         String name = unescapeSpecialCharacters(shoppingListItem[0]);
         double quantity = Double.parseDouble(shoppingListItem[1]);
         Unit unit = Unit.parseUnit(shoppingListItem[2]);
-        Category category = Category.parseCategory(shoppingListItem[3]);
-        shoppingList.addItem(new ShoppingListItem(name, quantity, unit, category));
+        shoppingList.addItem(new ShoppingListItem(name, quantity, unit));
     }
 
     private static Recipe processRecipeLine(String line, RecipeManager recipeManager) {
