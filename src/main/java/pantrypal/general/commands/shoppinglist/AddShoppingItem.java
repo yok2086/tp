@@ -37,6 +37,7 @@ public class AddShoppingItem extends ShoppingListCommand {
         }
         else{
             Ui.showMessage("Add '" + name + "' to the shopping list.");
+            Ui.printLine();
         }
     }
 }

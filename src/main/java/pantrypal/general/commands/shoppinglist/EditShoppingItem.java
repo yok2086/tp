@@ -41,5 +41,6 @@ public class EditShoppingItem extends ShoppingListCommand {
         } else {
             ui.showMessage("Error: Invalid index provided. No item updated.");
         }
+        Ui.printLine();
     }
 }

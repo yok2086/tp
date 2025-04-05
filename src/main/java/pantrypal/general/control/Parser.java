@@ -108,6 +108,9 @@ public class Parser {
                 name = inputParts[1].toUpperCase();
                 quantity = Double.parseDouble(inputParts[2]);
                 unit = Unit.parseUnit(inputParts[3]);
+                if(quantity < 0){
+                    throw new IllegalArgumentException("Negative quantity is not allowed for addShoppingItem command.");
+                }
                 return new AddShoppingItem(name, quantity, unit);
             case "generateShoppingList":
                 return new GenerateShoppingList();
@@ -126,6 +129,9 @@ public class Parser {
                 index = Integer.parseInt(inputParts[1]);
                 name = inputParts[2].toUpperCase();
                 quantity = Double.parseDouble(inputParts[3]);
+                if(quantity < 0){
+                    throw new IllegalArgumentException("Negative quantity is not allowed for addShoppingItem command.");
+                }
                 unit = Unit.parseUnit(inputParts[4]);
                 return new EditShoppingItem(index, name, quantity, unit);
             case "markShoppingItemAsPurchased":
