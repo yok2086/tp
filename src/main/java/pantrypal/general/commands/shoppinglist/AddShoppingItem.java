@@ -3,7 +3,6 @@ package pantrypal.general.commands.shoppinglist;
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.inventory.Unit;
-import pantrypal.inventory.Category;
 import pantrypal.mealplan.MealPlanManager;
 import pantrypal.recipe.RecipeManager;
 import pantrypal.shoppinglist.ShoppingList;
@@ -16,21 +15,28 @@ public class AddShoppingItem extends ShoppingListCommand {
     private String name;
 
     public AddShoppingItem() {
-        super("addShoppingItem <name> <quantity> <unit> <category>",
+        super("addShoppingItem <name> <quantity> <unit>",
                 "Add an item to the shopping list");
     }
 
-    public AddShoppingItem(String name, double quantity, Unit unit, Category category) {
-        super("AddShoppingItem <name> <quantity> <unit> <category>",
+    public AddShoppingItem(String name, double quantity, Unit unit) {
+        super("AddShoppingItem <name> <quantity> <unit>",
                 "Add an item to the shopping list");
-        shoppingListItem = new ShoppingListItem(name, quantity, unit, category);
+        shoppingListItem = new ShoppingListItem(name, quantity, unit);
         this.name = name;
     }
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list,
                         RecipeManager recipes, MealPlanManager plans, Scanner in) {
-        list.addItem(shoppingListItem);
-        Ui.showMessage("Add '" + name + "' to the shopping list.");
+        boolean success = list.addItem(shoppingListItem);
+        if(!success){
+            System.out.println("Item '" + name + "' already exists. Please use editShoppingItem to update the item.");
+            Ui.printLine();
+        }
+        else{
+            Ui.showMessage("Add '" + name + "' to the shopping list.");
+            Ui.printLine();
+        }
     }
 }

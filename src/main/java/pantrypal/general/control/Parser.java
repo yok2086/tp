@@ -29,9 +29,11 @@ import pantrypal.general.commands.recipe.ListRecipe;
 import pantrypal.general.commands.recipe.RemoveRecipe;
 import pantrypal.general.commands.recipe.ViewRecipe;
 import pantrypal.general.commands.shoppinglist.AddShoppingItem;
-import pantrypal.general.commands.shoppinglist.GenerateShoppingList;
 import pantrypal.general.commands.shoppinglist.RemoveShoppingItem;
 import pantrypal.general.commands.shoppinglist.ViewShoppingList;
+import pantrypal.general.commands.shoppinglist.EditShoppingItem;
+import pantrypal.general.commands.shoppinglist.GenerateShoppingList;
+import pantrypal.general.commands.shoppinglist.MarkShoppingItemAsPurchased;
 import pantrypal.inventory.Category;
 import pantrypal.inventory.Unit;
 
@@ -44,6 +46,7 @@ public class Parser {
         String name;
         double quantity;
         Unit unit;
+        int index;
         Category category;
 
         try {
@@ -119,8 +122,10 @@ public class Parser {
                 name = inputParts[1].toUpperCase();
                 quantity = Double.parseDouble(inputParts[2]);
                 unit = Unit.parseUnit(inputParts[3]);
-                category = Category.parseCategory(inputParts[4]);
-                return new AddShoppingItem(name, quantity, unit, category);
+                if(quantity < 0){
+                    throw new IllegalArgumentException("Negative quantity is not allowed for addShoppingItem command.");
+                }
+                return new AddShoppingItem(name, quantity, unit);
             case "generateShoppingList":
                 return new GenerateShoppingList();
             case "removeShoppingItem":
@@ -131,6 +136,25 @@ public class Parser {
                 return new RemoveShoppingItem(name);
             case "viewShoppingList":
                 return new ViewShoppingList();
+            case "editShoppingItem":
+                if (inputParts.length < 5) {
+                    throw new IllegalArgumentException("Insufficient arguments for editShoppingItem command.");
+                }
+                index = Integer.parseInt(inputParts[1]);
+                name = inputParts[2].toUpperCase();
+                quantity = Double.parseDouble(inputParts[3]);
+                if(quantity < 0){
+                    throw new IllegalArgumentException("Negative quantity is not allowed for addShoppingItem command.");
+                }
+                unit = Unit.parseUnit(inputParts[4]);
+                return new EditShoppingItem(index, name, quantity, unit);
+            case "markShoppingItemAsPurchased":
+                if (inputParts.length < 2) {
+                    throw new IllegalArgumentException
+                            ("Insufficient arguments for markShoppingItemAsPurchased command.");
+                }
+                name = inputParts[1].toUpperCase();
+                return new MarkShoppingItemAsPurchased(name);
             //From here on are commands for Recipe
             case "addRecipe":
                 return new AddRecipe();

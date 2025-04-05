@@ -29,5 +29,6 @@ public class MarkShoppingItemAsPurchased extends ShoppingListCommand {
         } else {
             ui.showMessage("Item '" + ingredientName + "' not found in the shopping list.");
         }
+        Ui.printLine();
     }
 }
