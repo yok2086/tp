@@ -15,9 +15,16 @@ public class ShoppingList {
     }
 
     // Add a new item to the shopping list.
-    public void addItem(ShoppingListItem item) {
+    public boolean addItem(ShoppingListItem item) {
         assert item != null : "ShoppingListItem cannot be null.";
+        // Check for an existing item with the same name.
+        for (ShoppingListItem existingItem : items) {
+            if (existingItem.getIngredientName().equalsIgnoreCase(item.getIngredientName())) {
+                return false;
+            }
+        }
         items.add(item);
+        return true;
     }
 
     // Get the list of shopping items.

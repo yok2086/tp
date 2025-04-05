@@ -30,7 +30,13 @@ public class AddShoppingItem extends ShoppingListCommand {
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list,
                         RecipeManager recipes, MealPlanManager plans, Scanner in) {
-        list.addItem(shoppingListItem);
-        Ui.showMessage("Add '" + name + "' to the shopping list.");
+        boolean success = list.addItem(shoppingListItem);
+        if(!success){
+            System.out.println("Item '" + name + "' already exists. Please use editShoppingItem to update the item.");
+            Ui.printLine();
+        }
+        else{
+            Ui.showMessage("Add '" + name + "' to the shopping list.");
+        }
     }
 }
