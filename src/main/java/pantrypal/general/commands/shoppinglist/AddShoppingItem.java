@@ -33,8 +33,7 @@ public class AddShoppingItem extends ShoppingListCommand {
         if(!success){
             System.out.println("Item '" + name + "' already exists. Please use editShoppingItem to update the item.");
             Ui.printLine();
-        }
-        else{
+        } else{
             Ui.showMessage("Add '" + name + "' to the shopping list.");
             Ui.printLine();
         }
