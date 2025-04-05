@@ -15,7 +15,7 @@ public class ShoppingListItemTest {
     @BeforeEach
     public void setUp() {
         // Assuming Unit.G represents grams and is a valid enum constant.
-        item = new ShoppingListItem("sugar", 100, Unit.GRAM, Category.CONDIMENTS);
+        item = new ShoppingListItem("sugar", 100, Unit.GRAM, Category.CONDIMENT);
         // Plain Java assert to ensure initialization.
         assert item != null : "ShoppingListItem instance should be initialized.";
     }

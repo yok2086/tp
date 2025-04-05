@@ -4,6 +4,7 @@ public enum Unit {
     GRAM("g", 1.0),
     KILOGRAM("kg", 1000.0),
     MILLILITER("mL", 1.0),
+    CUP("cup", 240.0),
     LITER("L", 1000.0),
     OUNCE("oz", 28.35),
     POUND("lb", 453.59),

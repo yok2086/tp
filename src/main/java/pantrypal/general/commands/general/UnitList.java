@@ -21,6 +21,7 @@ public class UnitList extends GeneralCommand {
                 "GRAM(g)" + "\n" +
                 "KILOGRAM(kg)" + "\n" +
                 "MILLILITER(mL)" + "\n" +
+                "CUP(cup)" + "\n" +
                 "LITER(L)" + "\n" +
                 "OUNCE(oz)" + "\n" +
                 "POUND(lb)" + "\n" +
