@@ -75,59 +75,102 @@ public class Storage {
                     continue;
                 }
 
-                if (line.startsWith("[Shopping]")) {
-                    currentSection = "Shopping";
-                    processShoppingLine(line, shoppingList);
-                } else if (line.startsWith("[Recipe]")) {
-                    currentSection = "Recipe";
-                    recipe = processRecipeLine(line, recipeManager);
-                } else if (line.startsWith("[Stock]")) {
-                    currentSection = "Stock";
-                    processStockLine(line, inventory);
-                } else if (line.startsWith("[LowStock]")) {
-                    currentSection = "LowStock";
-                    processLowStockLine(line, inventory);
-                } else if (line.startsWith("[MealPlan]")) {
-                    currentSection = "MealPlan";
-                } else {
-                    processSectionLine(currentSection, line, recipe);
+                try {
+                    if (line.startsWith("[Shopping]")) {
+                        currentSection = "Shopping";
+                        processShoppingLine(line, shoppingList);
+                    } else if (line.startsWith("[Recipe]")) {
+                        currentSection = "Recipe";
+                        recipe = processRecipeLine(line, recipeManager);
+                    } else if (line.startsWith("[Stock]")) {
+                        currentSection = "Stock";
+                        processStockLine(line, inventory);
+                    } else if (line.startsWith("[LowStock]")) {
+                        currentSection = "LowStock";
+                        processLowStockLine(line, inventory);
+                    } else if (line.startsWith("[MealPlan]")) {
+                        currentSection = "MealPlan";
+                    } else {
+                        processSectionLine(currentSection, line, recipe);
+                    }
+                } catch (DataCorruptionException e) {
+                    Ui.printErrorMessage("Data corruption detected: " + e.getMessage());
+                    Ui.printErrorMessage("Skipping corrupted entry and continuing with next line...");
                 }
             }
         } catch (IOException e) {
-            Ui.printErrorMessage(e.getMessage());
+            Ui.printErrorMessage("Error reading save file: " + e.getMessage());
+            Ui.printErrorMessage("Starting with empty data...");
         }
     }
 
     private static void processShoppingLine(String line, ShoppingList shoppingList) {
-        String[] shoppingListItem = line.substring("[Shopping]".length()).trim().split(" ");
-        String name = unescapeSpecialCharacters(shoppingListItem[0]);
-        double quantity = Double.parseDouble(shoppingListItem[1]);
-        Unit unit = Unit.parseUnit(shoppingListItem[2]);
-        Category category = Category.parseCategory(shoppingListItem[3]);
-        shoppingList.addItem(new ShoppingListItem(name, quantity, unit, category));
+        try {
+            String[] shoppingListItem = line.substring("[Shopping]".length()).trim().split(" ");
+            if (shoppingListItem.length != 4) {
+                throw new DataCorruptionException("Invalid shopping list item format");
+            }
+            String name = unescapeSpecialCharacters(shoppingListItem[0]);
+            double quantity = Double.parseDouble(shoppingListItem[1]);
+            Unit unit = Unit.parseUnit(shoppingListItem[2]);
+            Category category = Category.parseCategory(shoppingListItem[3]);
+            shoppingList.addItem(new ShoppingListItem(name, quantity, unit, category));
+        } catch (NumberFormatException e) {
+            throw new DataCorruptionException("Invalid quantity format in shopping list");
+        } catch (IllegalArgumentException e) {
+            throw new DataCorruptionException("Invalid unit or category in shopping list");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DataCorruptionException("Invalid arguments in shopping list item");
+        }
     }
 
     private static Recipe processRecipeLine(String line, RecipeManager recipeManager) {
-        String recipeName = unescapeSpecialCharacters(line.substring("[Recipe]".length()).trim());
-        return recipeManager.addRecipe(recipeName);
+        try {
+            String recipeName = unescapeSpecialCharacters(line.substring("[Recipe]".length()).trim());
+            if (recipeName.isEmpty()) {
+                throw new DataCorruptionException("Empty recipe name");
+            }
+            return recipeManager.addRecipe(recipeName);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DataCorruptionException("Invalid recipe line format");
+        }
     }
 
     private static void processStockLine(String line, IngredientInventory inventory) {
-        line = line.substring("[Stock]".length()).trim();
-        String[] stockItem = line.split(" ");
-        String stockName = unescapeSpecialCharacters(stockItem[0]);
-        double stockQuantity = Double.parseDouble(stockItem[1]);
-        Unit stockUnit = Unit.parseUnit(stockItem[2]);
-        Category stockCategory = Category.parseCategory(stockItem[3]);
-        inventory.addNewIngredient(stockName, stockQuantity, stockUnit, stockCategory);
+        try {
+            line = line.substring("[Stock]".length()).trim();
+            String[] stockItem = line.split(" ");
+            if (stockItem.length != 4) {
+                throw new DataCorruptionException("Invalid stock item format");
+            }
+            String stockName = unescapeSpecialCharacters(stockItem[0]);
+            double stockQuantity = Double.parseDouble(stockItem[1]);
+            Unit stockUnit = Unit.parseUnit(stockItem[2]);
+            Category stockCategory = Category.parseCategory(stockItem[3]);
+            inventory.addNewIngredient(stockName, stockQuantity, stockUnit, stockCategory);
+        } catch (NumberFormatException e) {
+            throw new DataCorruptionException("Invalid quantity format in stock");
+        } catch (IllegalArgumentException e) {
+            throw new DataCorruptionException("Invalid unit or category in stock");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DataCorruptionException("Invalid arguments in stock item");
+        }
     }
 
     private static void processLowStockLine(String line, IngredientInventory inventory) {
-        line = line.substring("[LowStock]".length()).trim();
-        String[] lowStockItem = line.split(" ");
-        String lowStockName = unescapeSpecialCharacters(lowStockItem[0]);
-        double lowStockQuantity = Double.parseDouble(lowStockItem[1]);
-        inventory.setAlert(lowStockName, lowStockQuantity);
+        try {
+            line = line.substring("[LowStock]".length()).trim();
+            String[] lowStockItem = line.split(" ");
+            String lowStockName = unescapeSpecialCharacters(lowStockItem[0]);
+            double lowStockQuantity = Double.parseDouble(lowStockItem[1]);
+            inventory.setAlert(lowStockName, lowStockQuantity);
+        } catch (NumberFormatException e) {
+            throw new DataCorruptionException("Invalid quantity format in stock");
+        } catch (IllegalArgumentException e) {
+            throw new DataCorruptionException("Invalid unit or category in stock");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DataCorruptionException("Invalid arguemtns in stock item");
+        }
     }
 
     private static void processSectionLine(String currentSection, String line, Recipe recipe) {
@@ -225,4 +268,5 @@ public class Storage {
             Ui.printErrorMessage(e.getMessage());
         }
     }
+
 }
