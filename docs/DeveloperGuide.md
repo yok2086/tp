@@ -100,7 +100,7 @@ The Storage feature is designed to be modular and extensible, allowing for easy 
 
 The following sequence diagram illustrates the interaction between the `Storage` class and the other key lists in the application during the loading and saving of data:
 The key lists include: `StockList`, `LowStockList`, `RecipeList`, `ShoppingList`
-<img src="img_3.png" alt="drawing" style="width:1000px;"/>
+<img src="Storage_Sequence_Diagram.png" alt="drawing" style="width:1000px;"/>
 
 # Implementation of the Meal Plan, Plan Presets and Viewing features
 
@@ -246,7 +246,7 @@ Management and Shopping Lists. The core components of the Ingredient Inventory f
 The following sequence diagram illustrates the interaction between the user, the Ingredient Inventory, and the
 Ingredient feature during ingredient management:
 
-<img src="Ingredients_Sequence_Diagram.png" alt="drawing" style="width:500px;"/>
+![IngredientInventory_Sequence_Diagram.png](team/IngredientInventory_Sequence_Diagram.png)
 
 ### Why It Is Implemented This Way
 The Ingredient and Ingredient Inventory features follow a modular design to ensure flexibility, scalability, and

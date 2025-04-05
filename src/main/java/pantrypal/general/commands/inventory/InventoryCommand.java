@@ -3,8 +3,7 @@ package pantrypal.general.commands.inventory;
 import pantrypal.general.commands.Command;
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
-import pantrypal.mealplan.PlanPresets;
-import pantrypal.mealplan.WeeklySchedule;
+import pantrypal.mealplan.MealPlanManager;
 import pantrypal.recipe.RecipeManager;
 import pantrypal.shoppinglist.ShoppingList;
 
@@ -19,8 +18,8 @@ public abstract class InventoryCommand extends Command {
     public InventoryCommand() {}
 
     @Override
-    public abstract void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
-                                 RecipeManager recipes, WeeklySchedule week, Scanner in);
+    public abstract void execute(Ui ui, IngredientInventory inventory, ShoppingList list, RecipeManager recipes,
+                                 MealPlanManager plans, Scanner in);
 
 
 }
