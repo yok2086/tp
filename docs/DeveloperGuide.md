@@ -246,7 +246,7 @@ Management and Shopping Lists. The core components of the Ingredient Inventory f
 The following sequence diagram illustrates the interaction between the user, the Ingredient Inventory, and the
 Ingredient feature during ingredient management:
 
-<img src="Ingredients_Sequence_Diagram.png" alt="drawing" style="width:500px;"/>
+![IngredientInventory_Sequence_Diagram.png](team/IngredientInventory_Sequence_Diagram.png)
 
 ### Why It Is Implemented This Way
 The Ingredient and Ingredient Inventory features follow a modular design to ensure flexibility, scalability, and
