@@ -165,11 +165,11 @@ View the name of all the recipes available in the repository.
 #### Add New Ingredient
 Command:
 ```
-addNewIngredient <ingredient_name> <quantity> <unit>
+addNewIngredient <ingredient_name> <quantity> <unit> <category>
 ```
 Example:
 ```
-addNewIngredient milk 200 ml
+addNewIngredient milk 200 ml DAIRY
 ```
 Description: Adds a new ingredient with a specified quantity and unit to the inventory.
 
