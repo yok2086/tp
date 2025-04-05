@@ -78,6 +78,7 @@ The following sequence diagram illustrates the interaction between the user, the
 <img src="Parser_Sequence_Diagram.png" alt="drawing" style="width:900px;"/>
 
 
+
 ### Why It Is Implemented This Way
 By using separate command classes, we can easily extend the functionality of the application without modifying the core parsing logic.
 By encapsulating the command logic within individual classes, we adhere to the Single Responsibility Principle, making the codebase easier to understand and maintain.
@@ -101,6 +102,7 @@ The Storage feature is designed to be modular and extensible, allowing for easy 
 The following sequence diagram illustrates the interaction between the `Storage` class and the other key lists in the application during the loading and saving of data:
 The key lists include: `StockList`, `LowStockList`, `RecipeList`, `ShoppingList`
 <img src="Storage_Sequence_Diagram.png" alt="drawing" style="width:1000px;"/>
+
 
 # Implementation of the Meal Plan, Plan Presets and Viewing features
 
