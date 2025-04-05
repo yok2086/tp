@@ -173,7 +173,7 @@ public class Storage {
         for (Ingredient ingredient : ingredients) {
             fileInput.append(escapeSpecialCharacters(ingredient.getName())).append(" ")
                     .append(ingredient.getQuantity()).append(" ")
-                    .append(ingredient.getUnit()).append(" | ");
+                    .append(ingredient.getUnit()).append(" ").append(ingredient.getCategory()).append(" | ");
         }
         fileInput.append("\n");
         return fileInput;
@@ -196,7 +196,7 @@ public class Storage {
             for (ShoppingListItem item : shoppingList.getItems()) {
                 fileInput.append("[Shopping] ").append(escapeSpecialCharacters(item.getIngredientName())).append(" ")
                         .append(item.getQuantity()).append(" ")
-                        .append(item.getUnit()).append("\n");
+                        .append(item.getUnit()).append(" ").append(item.getCategory()).append("\n");
             }
 
             for (Map.Entry<String, Ingredient> ingredient : inventory.getInventory().entrySet()) {
