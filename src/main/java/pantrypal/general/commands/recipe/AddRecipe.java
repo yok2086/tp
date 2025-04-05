@@ -18,11 +18,9 @@ public class AddRecipe extends RecipeCommand {
     private String content;
     private LocalDate expiryDate;
 
-
     public AddRecipe() {
         super("addRecipe", "Add a recipe");
     }
-
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, RecipeManager recipes,

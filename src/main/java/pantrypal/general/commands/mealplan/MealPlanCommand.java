@@ -4,6 +4,7 @@ import pantrypal.general.commands.Command;
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.mealplan.Day;
+import pantrypal.mealplan.MealType;
 import pantrypal.mealplan.MealPlanManager;
 import pantrypal.recipe.RecipeManager;
 import pantrypal.shoppinglist.ShoppingList;
@@ -18,13 +19,20 @@ public abstract class MealPlanCommand extends Command {
 
     public MealPlanCommand() {}
 
-    public Day getDay(int dayIndex){
-        for (Day day : Day.values()){
-            if (day.ordinal() == dayIndex){
-                return day;
-            }
+    public Day getDay(String day){
+        try {
+            return Day.valueOf(day.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return null;
         }
-        return null;
+    }
+
+    public MealType getMealType(String mealName){
+        try {
+            return MealType.valueOf(mealName.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
     }
 
     @Override
