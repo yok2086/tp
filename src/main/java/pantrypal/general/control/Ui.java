@@ -110,7 +110,6 @@ public class Ui {
     }
 
     public static void showMessage(String message) {
-        Ui.printLine();
         System.out.println(message);
         Ui.printLine();
     }

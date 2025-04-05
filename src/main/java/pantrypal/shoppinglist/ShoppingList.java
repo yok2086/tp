@@ -69,7 +69,7 @@ public class ShoppingList {
             System.out.println("Shopping list is empty.");
         } else {
             System.out.println("Shopping List:");
-            for (int i = 0; i < items.size(); i++) {
+            for (int i = 1; i <= items.size(); i++) {
                 System.out.println(i + ": " + items.get(i));
             }
         }

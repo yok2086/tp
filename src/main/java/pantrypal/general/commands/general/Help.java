@@ -13,10 +13,7 @@ import pantrypal.general.commands.recipe.AddRecipe;
 import pantrypal.general.commands.recipe.ListRecipe;
 import pantrypal.general.commands.recipe.RemoveRecipe;
 import pantrypal.general.commands.recipe.ViewRecipe;
-import pantrypal.general.commands.shoppinglist.AddShoppingItem;
-import pantrypal.general.commands.shoppinglist.GenerateShoppingList;
-import pantrypal.general.commands.shoppinglist.RemoveShoppingItem;
-import pantrypal.general.commands.shoppinglist.ViewShoppingList;
+import pantrypal.general.commands.shoppinglist.*;
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.mealplan.MealPlanManager;
@@ -33,9 +30,9 @@ public class Help extends GeneralCommand {
             new AddIngredient(), new IncreaseQuantity(), new DecreaseQuantity(), new SetAlert(), new CheckStock(),
             new ViewLowStock(),  new ConvertIngredient(), new ViewIngredientsByCategory(), new UnitList(),
             new CategoryList(),
-            new AddShoppingItem(), new GenerateShoppingList(), new RemoveShoppingItem(), new ViewShoppingList(),
+            new AddShoppingItem(), new GenerateShoppingList(), new RemoveShoppingItem(), new EditShoppingItem(),
+            new MarkShoppingItemAsPurchased(), new ViewShoppingList(),
             new AddRecipe(), new ViewRecipe(), new RemoveRecipe(), new ListRecipe()
-
     );
 
     public Help() {

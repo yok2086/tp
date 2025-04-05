@@ -16,7 +16,7 @@ public class AddShoppingItem extends ShoppingListCommand {
     private String name;
 
     public AddShoppingItem() {
-        super("addShoppingItem <name> <quantity> <unit> <category>",
+        super("addShoppingItem <name> <quantity> <unit>",
                 "Add an item to the shopping list");
     }
 
