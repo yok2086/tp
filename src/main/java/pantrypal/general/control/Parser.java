@@ -112,7 +112,7 @@ public class Parser {
                 return new ViewIngredientsByCategory(categoryName);
             case "unitList":
                 return new UnitList();
-            case "CategoryList":
+            case "categoryList":
                 return new CategoryList();
             //From here on are commands for ShoppingList
             case "addShoppingItem":

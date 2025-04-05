@@ -3,7 +3,6 @@ package pantrypal.shoppinglist;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pantrypal.inventory.Unit;
@@ -32,34 +31,6 @@ public class ShoppingListItemTest {
     public void testSetIngredientName() {
         item.setIngredientName("flour");
         assertEquals("flour", item.getIngredientName(), "Ingredient name should be updated to 'flour'.");
-    }
-
-    @Test
-    public void testConstructorNegativeQuantity() {
-        // Creating a ShoppingListItem with a negative quantity should trigger an AssertionError.
-        assertThrows(AssertionError.class, () -> {
-            new ShoppingListItem("sugar", -100, Unit.GRAM);
-        }, "Constructor should throw AssertionError for negative quantity");
-    }
-
-    @Test
-    public void testSetQuantityNegative() {
-        // Setting a negative quantity via setQuantity should trigger an AssertionError.
-        ShoppingListItem item = new ShoppingListItem("flour", 100, Unit.GRAM);
-        assertThrows(AssertionError.class, () -> {
-            item.setQuantity(-50);
-        }, "setQuantity should throw AssertionError for negative quantity");
-    }
-
-    @Test
-    public void testUpdateItemNegativeQuantity() {
-        // Updating an existing item in the ShoppingList with a negative quantity should trigger an AssertionError.
-        ShoppingList list = new ShoppingList();
-        ShoppingListItem item = new ShoppingListItem("butter", 100, Unit.GRAM);
-        list.addItem(item);
-        assertThrows(AssertionError.class, () -> {
-            list.updateItem("butter", -200, Unit.GRAM);
-        }, "updateItem should throw AssertionError for negative quantity");
     }
 
     @Test

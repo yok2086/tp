@@ -22,8 +22,8 @@ public class ShoppingListGeneratorTest {
     public void setUp() {
         // Initialize the inventory and add some ingredients.
         inventory = new IngredientInventory();
-        inventory.addNewIngredient("sugar", 100, Unit.parseUnit("g"), Category.parseCategory("CONDIMENTS"));
-        inventory.addNewIngredient("flour", 300,  Unit.parseUnit("g"), Category.parseCategory("GRAINS"));
+        inventory.addNewIngredient("sugar", 100, Unit.parseUnit("g"), Category.parseCategory("CONDIMENT"));
+        inventory.addNewIngredient("flour", 300,  Unit.parseUnit("g"), Category.parseCategory("GRAIN"));
         inventory.addNewIngredient("butter", 50, Unit.parseUnit("g"), Category.parseCategory("DAIRY"));
     }
 
