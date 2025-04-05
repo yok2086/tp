@@ -47,6 +47,26 @@ public class MealPlanManager {
         }
     }
 
+    public void viewPlanForWeek() {
+        for (Plan plan : weeklyPlans) {
+            if (plan != null) {
+                Ui.showMessage(plan.toString());
+            }
+        }
+    }
+
+    public boolean findInCreatedPlans(String planName) {
+        boolean found = false;
+        for (Plan plan : planList) {
+            if (plan.getPlanName().contains(planName)) {
+                found = true;
+                Ui.showMessage((planList.indexOf(plan)+1) + //plus 1 for matching to user view
+                        ": " + plan.getPlanName());
+            }
+        }
+        return found;
+    }
+
     public Plan[] getWeeklyPlans() {
         return weeklyPlans;
     }

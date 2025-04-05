@@ -98,11 +98,11 @@ public class IngredientInventoryTest {
     }
 
     @Test
-    void testFindInventory() {
+    void testIsInInventory() {
         inventory.addNewIngredient("Cheese", 0.5, Unit.KILOGRAM, Category.parseCategory("DAIRY"));
-        assertTrue(inventory.findInventory("Cheese", 0.3, Unit.KILOGRAM), "Cheese should " +
+        assertTrue(inventory.isInInventory("Cheese", 0.3, Unit.KILOGRAM), "Cheese should " +
                 "be in inventory with enough quantity");
-        assertFalse(inventory.findInventory("Cheese", 0.6, Unit.KILOGRAM), "Cheese should " +
+        assertFalse(inventory.isInInventory("Cheese", 0.6, Unit.KILOGRAM), "Cheese should " +
                 "not be sufficient in inventory");
     }
 

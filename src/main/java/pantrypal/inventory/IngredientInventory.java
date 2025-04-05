@@ -81,7 +81,7 @@ public class IngredientInventory {
     }
 
     //Find if ingredient is in stock
-    public boolean findInventory(String name, double quantity, Unit unit) {
+    public boolean isInInventory(String name, double quantity, Unit unit) {
         Ingredient ingredient = inventory.get(name);
 
         if (ingredient != null
