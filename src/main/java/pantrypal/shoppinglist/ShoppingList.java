@@ -2,8 +2,6 @@ package pantrypal.shoppinglist;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import pantrypal.inventory.Category;
 import pantrypal.inventory.Unit;
 
 public class ShoppingList {

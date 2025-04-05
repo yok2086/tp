@@ -19,7 +19,12 @@ import pantrypal.general.commands.recipe.AddRecipe;
 import pantrypal.general.commands.recipe.ListRecipe;
 import pantrypal.general.commands.recipe.RemoveRecipe;
 import pantrypal.general.commands.recipe.ViewRecipe;
-import pantrypal.general.commands.shoppinglist.*;
+import pantrypal.general.commands.shoppinglist.AddShoppingItem;
+import pantrypal.general.commands.shoppinglist.RemoveShoppingItem;
+import pantrypal.general.commands.shoppinglist.ViewShoppingList;
+import pantrypal.general.commands.shoppinglist.EditShoppingItem;
+import pantrypal.general.commands.shoppinglist.GenerateShoppingList;
+import pantrypal.general.commands.shoppinglist.MarkShoppingItemAsPurchased;
 import pantrypal.inventory.Category;
 import pantrypal.inventory.Unit;
 
@@ -136,7 +141,8 @@ public class Parser {
                 return new EditShoppingItem(index, name, quantity, unit);
             case "markShoppingItemAsPurchased":
                 if (inputParts.length < 2) {
-                    throw new IllegalArgumentException("Insufficient arguments for markShoppingItemAsPurchased command.");
+                    throw new IllegalArgumentException
+                            ("Insufficient arguments for markShoppingItemAsPurchased command.");
                 }
                 name = inputParts[1].toUpperCase();
                 return new MarkShoppingItemAsPurchased(name);

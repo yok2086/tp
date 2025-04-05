@@ -1,6 +1,5 @@
 package pantrypal.shoppinglist;
 
-import pantrypal.inventory.Category;
 import pantrypal.inventory.Unit;
 
 public class ShoppingListItem {

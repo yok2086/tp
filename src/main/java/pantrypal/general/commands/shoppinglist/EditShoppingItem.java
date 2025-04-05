@@ -1,7 +1,6 @@
 package pantrypal.general.commands.shoppinglist;
 
 import pantrypal.general.control.Ui;
-import pantrypal.inventory.Category;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.mealplan.MealPlanManager;
 import pantrypal.recipe.RecipeManager;

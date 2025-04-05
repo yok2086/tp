@@ -2,7 +2,6 @@ package pantrypal.shoppinglist;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pantrypal.inventory.Category;
 import pantrypal.inventory.Unit;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;

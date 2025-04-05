@@ -3,7 +3,6 @@ package pantrypal.general.commands.shoppinglist;
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.inventory.Unit;
-import pantrypal.inventory.Category;
 import pantrypal.mealplan.MealPlanManager;
 import pantrypal.recipe.RecipeManager;
 import pantrypal.shoppinglist.ShoppingList;
