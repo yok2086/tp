@@ -1,5 +1,7 @@
 package pantrypal.inventory;
 
+import pantrypal.general.control.Ui;
+
 public enum Unit {
     GRAM("g", 1.0),
     KILOGRAM("kg", 1000.0),
@@ -51,7 +53,7 @@ public enum Unit {
                 throw new IllegalArgumentException("Invalid unit: " + text + "\nType unitList for list of valid units");
             }
         }catch(IllegalArgumentException e){
-            e.getMessage();
+            Ui.showMessage(e.getMessage());
         }
         return result;
     }

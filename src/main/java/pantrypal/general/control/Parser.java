@@ -29,7 +29,7 @@ import pantrypal.inventory.Unit;
 public class Parser {
 
     public Command parse(String input) {
-        String[] inputParts = input.split(" ");
+        String[] inputParts = input.trim().split(" ");
         String command = inputParts[0];
 
         String name;
@@ -100,7 +100,7 @@ public class Parser {
                 return new ViewIngredientsByCategory(categoryName);
             case "unitList":
                 return new UnitList();
-            case "CategoryList":
+            case "categoryList":
                 return new CategoryList();
             //From here on are commands for ShoppingList
             case "addShoppingItem":
