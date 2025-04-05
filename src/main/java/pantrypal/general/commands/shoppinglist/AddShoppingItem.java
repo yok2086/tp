@@ -15,6 +15,22 @@ public class AddShoppingItem extends ShoppingListCommand {
     private ShoppingListItem shoppingListItem;
     private String name;
 
+    public double getQuantity() {
+        return shoppingListItem.getQuantity();
+    }
+
+    public Unit getUnit() {
+        return shoppingListItem.getUnit();
+    }
+
+    public Category getCategory() {
+        return shoppingListItem.getCategory();
+    }
+
+    public String getName() {
+        return name;
+    }
+
     public AddShoppingItem() {
         super("addShoppingItem <name> <quantity> <unit> <category>",
                 "Add an item to the shopping list");

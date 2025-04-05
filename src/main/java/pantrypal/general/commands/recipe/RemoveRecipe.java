@@ -11,6 +11,10 @@ import java.util.Scanner;
 public class RemoveRecipe extends RecipeCommand {
     private String recipeName;
 
+    public String getRecipeName() {
+        return recipeName;
+    }
+
     public RemoveRecipe() {
         super("removeRecipe <name>", "Removes a recipe");
     }

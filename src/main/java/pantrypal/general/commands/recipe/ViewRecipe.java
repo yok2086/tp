@@ -11,6 +11,10 @@ import java.util.Scanner;
 public class ViewRecipe extends RecipeCommand {
     private String recipeName;
 
+    public String getRecipeName() {
+        return recipeName;
+    }
+
     public ViewRecipe() {
         super("viewRecipe <Recipe Name>","View a specific recipe");
     }
@@ -25,4 +29,5 @@ public class ViewRecipe extends RecipeCommand {
 
         recipes.showRecipe(recipeName);
     }
+
 }

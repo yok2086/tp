@@ -12,6 +12,14 @@ public class ConvertIngredient extends InventoryCommand {
     private String name;
     private Unit targetUnit;
 
+    public String getName() {
+        return name;
+    }
+
+    public Unit getTargetUnit() {
+        return targetUnit;
+    }
+
     public ConvertIngredient() {
         super("convertIngredient <name> <targetUnit>",
                 "Convert the ingredient quantity to the target unit");
@@ -28,4 +36,5 @@ public class ConvertIngredient extends InventoryCommand {
 
         inventory.convertIngredient(name, targetUnit);
     }
+
 }
