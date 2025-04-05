@@ -47,8 +47,7 @@ public class ExecutePlanForDay extends MealPlanCommand {
                     Ui.showMessage("Adding " + missingIngredient.getName() + " to shopping list.");
                     // Add the missing ingredient to the shopping list
                     ShoppingListItem shoppingListItem = new ShoppingListItem(missingIngredient.getName(),
-                            missingIngredient.getQuantity(), missingIngredient.getUnit(),
-                            missingIngredient.getCategory());
+                            missingIngredient.getQuantity(), missingIngredient.getUnit());
                     list.addItem(shoppingListItem);
                 }
             } else {
