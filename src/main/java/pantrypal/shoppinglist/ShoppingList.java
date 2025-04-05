@@ -52,6 +52,7 @@ public class ShoppingList {
         assert newIngredientName != null : "Ingredient name cannot be null.";
         assert newUnit != null : "Unit cannot be null.";
         assert newQuantity >= 0 : "Quantity must be non-negative.";
+        index = index - 1;
         if (index < 0 || index >= items.size()) {
             return false;
         }
@@ -70,7 +71,7 @@ public class ShoppingList {
         } else {
             System.out.println("Shopping List:");
             for (int i = 1; i <= items.size(); i++) {
-                System.out.println(i + ": " + items.get(i));
+                System.out.println(i + ": " + items.get(i-1));
             }
         }
     }

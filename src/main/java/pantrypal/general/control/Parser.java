@@ -32,6 +32,7 @@ public class Parser {
         String name;
         double quantity;
         Unit unit;
+        int index;
         Category category;
 
         try {
@@ -107,7 +108,6 @@ public class Parser {
                 name = inputParts[1].toUpperCase();
                 quantity = Double.parseDouble(inputParts[2]);
                 unit = Unit.parseUnit(inputParts[3]);
-                category = Category.parseCategory(inputParts[4]);
                 return new AddShoppingItem(name, quantity, unit);
             case "generateShoppingList":
                 return new GenerateShoppingList();
@@ -120,9 +120,20 @@ public class Parser {
             case "viewShoppingList":
                 return new ViewShoppingList();
             case "editShoppingItem":
-                return new EditShoppingItem();
+                if (inputParts.length < 5) {
+                    throw new IllegalArgumentException("Insufficient arguments for editShoppingItem command.");
+                }
+                index = Integer.parseInt(inputParts[1]);
+                name = inputParts[2].toUpperCase();
+                quantity = Double.parseDouble(inputParts[3]);
+                unit = Unit.parseUnit(inputParts[4]);
+                return new EditShoppingItem(index, name, quantity, unit);
             case "markShoppingItemAsPurchased":
-                return new MarkShoppingItemAsPurchased();
+                if (inputParts.length < 2) {
+                    throw new IllegalArgumentException("Insufficient arguments for markShoppingItemAsPurchased command.");
+                }
+                name = inputParts[1].toUpperCase();
+                return new MarkShoppingItemAsPurchased(name);
             //From here on are commands for Recipe
             case "addRecipe":
                 return new AddRecipe();
