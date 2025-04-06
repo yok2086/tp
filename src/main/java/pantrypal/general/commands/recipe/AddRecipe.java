@@ -28,12 +28,14 @@ public class AddRecipe extends RecipeCommand {
         boolean isFinished = false;
         boolean isValidRecipe = false;
 
-        do {
-            System.out.println("Please Input Recipe Name: ");
-            recipeName = in.nextLine();
-        } while (recipeName.trim().isEmpty());
-
-        Recipe recipe = recipes.addRecipe(recipeName.trim().toUpperCase());
+        Recipe recipe = null;
+        while (recipe == null) {
+            do {
+                System.out.println("Please Input Recipe Name: ");
+                recipeName = in.nextLine();
+            } while (recipeName.trim().isEmpty());
+            recipe = recipes.addRecipe(recipeName.trim().toUpperCase());
+        }
 
         int stepNumber = 1;
         while (!isFinished) {

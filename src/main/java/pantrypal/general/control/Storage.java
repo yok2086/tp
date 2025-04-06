@@ -172,7 +172,8 @@ public class Storage {
         for (Ingredient ingredient : ingredients) {
             fileInput.append(escapeSpecialCharacters(ingredient.getName())).append(" ")
                     .append(ingredient.getQuantity()).append(" ")
-                    .append(ingredient.getUnit()).append(" | ");
+                    .append(ingredient.getUnit()).append(" ")
+                    .append(ingredient.getCategory()).append(" | ");
         }
         fileInput.append("\n");
         return fileInput;
