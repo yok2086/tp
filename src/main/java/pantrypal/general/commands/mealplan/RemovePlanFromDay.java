@@ -8,15 +8,16 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
-public class RemovePlanFromWeek extends MealPlanCommand {
+public class RemovePlanFromDay extends MealPlanCommand {
 
     private String day;
 
-    public RemovePlanFromWeek() {
-        super("addPlanToList <plan name>", "Add a new plan to the list");
+    public RemovePlanFromDay() {
+        super("removePlanFromDay <day>",
+                "Remove plan from a specific day");
     }
 
-    public RemovePlanFromWeek(String day) {
+    public RemovePlanFromDay(String day) {
         this.day = day;
     }
 
