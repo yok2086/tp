@@ -341,7 +341,8 @@ public class Parser {
                 if (deleteRecipeMealName == null || deleteRecipeMealName.isEmpty()) {
                     throw new IllegalArgumentException("Meal name cannot be null or empty");
                 }
-                assert deleteRecipeMealName != null && !deleteRecipeMealName.isEmpty() : "Meal name cannot be null or empty";
+                assert deleteRecipeMealName != null && !deleteRecipeMealName.isEmpty() : "Meal name cannot " +
+                        "be null or empty";
                 return new RemoveRecipeFromPlan(deleteRecipePlanIndex, deleteRecipeMealName);
             case "removePlanFromDay":
                 if (inputParts.length < 2) {
@@ -351,7 +352,8 @@ public class Parser {
                 if (deleteFromWeekDayName == null || deleteFromWeekDayName.isEmpty()) {
                     throw new IllegalArgumentException("Day name cannot be null or empty");
                 }
-                assert deleteFromWeekDayName != null && !deleteFromWeekDayName.isEmpty() : "Day name cannot be null or empty";
+                assert deleteFromWeekDayName != null && !deleteFromWeekDayName.isEmpty() : "Day name cannot " +
+                        "be null or empty";
                 return new RemovePlanFromDay(deleteFromWeekDayName);
             case "viewPlanForDay":
                 if (inputParts.length < 2) {
