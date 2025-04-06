@@ -11,8 +11,8 @@ public enum Unit {
     MILLIGRAM("mg", 0.001),
 
     EGG("egg", -1.0),
-    EGG_WHITE("egg white", -1.0),
-    EGG_YOLK("egg yolk", -1.0),
+    EGG_WHITE("egg_white", -1.0),
+    EGG_YOLK("egg_yolk", -1.0),
     PINCH("pinch", -1.0),
     SPLASH("splash", -1.0),
     BUNCH("bunch", -1.0),
@@ -21,7 +21,7 @@ public enum Unit {
     PINT("pt", -1.0),
     QUART("qt", -1.0),
     GALLON("gal", -1.0),
-    FLUID_OUNCE("fl oz", -1.0),
+    FLUID_OUNCE("fl_oz", -1.0),
     CUBIC_CENTIMETER("cc", -1.0),
     CUBIC_INCH("in³", -1.0),
     CUBIC_FOOT("ft³", -1.0),
@@ -64,20 +64,18 @@ public enum Unit {
     public static Unit parseUnit(String text) {
         Unit result = null;
         boolean found = false;
-        try {
-            for (Unit unit : Unit.values()) {
-                if (unit.unit.equalsIgnoreCase(text) || unit.name().equalsIgnoreCase(text)) {
-                    result = unit;
-                    found = true;
-                    break;
-                }
+
+        for (Unit unit : Unit.values()) {
+            if (unit.unit.equalsIgnoreCase(text) || unit.name().equalsIgnoreCase(text)) {
+                result = unit;
+                found = true;
+                break;
             }
-            if (!found) {
-                throw new IllegalArgumentException("Invalid unit: " + text + "\nType unitList for list of valid units");
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
         }
+        if (!found) {
+            throw new IllegalArgumentException("Invalid unit: " + text + "\nType unitList for list of valid units");
+        }
+
         return result;
     }
 }
