@@ -57,6 +57,7 @@ public class ShoppingList {
         assert newIngredientName != null : "Ingredient name cannot be null.";
         assert newUnit != null : "Unit cannot be null.";
         assert newQuantity >= 0 : "Quantity must be non-negative.";
+        index -= 1;
         if (index < 0 || index >= items.size()) {
             return false;
         }
