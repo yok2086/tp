@@ -63,6 +63,9 @@ public class Parser {
                 }
                 name = inputParts[1].toUpperCase();
                 quantity = Double.parseDouble(inputParts[2]);
+                if (quantity < 0) {
+                    throw new IllegalArgumentException("Negative quantity is not allowed for addNewIngredient command.");
+                }
                 unit = Unit.parseUnit(inputParts[3]);
                 category = Category.parseCategory(inputParts[4]);
                 return new AddIngredient(name, quantity, unit, category);
@@ -72,6 +75,9 @@ public class Parser {
                 }
                 name = inputParts[1].toUpperCase();
                 quantity = Double.parseDouble(inputParts[2]);
+                if (quantity < 0) {
+                    throw new IllegalArgumentException("Negative quantity is not allowed for increaseQuantity command.");
+                }
                 return new IncreaseQuantity(name, quantity);
             case "decreaseQuantity":
                 if (inputParts.length < 3) {
@@ -79,6 +85,9 @@ public class Parser {
                 }
                 name = inputParts[1].toUpperCase();
                 quantity = Double.parseDouble(inputParts[2]);
+                if (quantity < 0) {
+                    throw new IllegalArgumentException("Negative quantity is not allowed for decreaseQuantity command.");
+                }
                 return new DecreaseQuantity(name, quantity);
             case "setAlert":
                 if (inputParts.length < 3) {
@@ -86,6 +95,9 @@ public class Parser {
                 }
                 name = inputParts[1].toUpperCase();
                 double threshold = Double.parseDouble(inputParts[2]);
+                if (threshold < 0) {
+                    throw new IllegalArgumentException("Negative threshold is not allowed for setAlert command.");
+                }
                 return new SetAlert(name, threshold);
             case "viewStock":
                 return new CheckStock();
@@ -122,7 +134,7 @@ public class Parser {
                 name = inputParts[1].toUpperCase();
                 quantity = Double.parseDouble(inputParts[2]);
                 unit = Unit.parseUnit(inputParts[3]);
-                if(quantity < 0){
+                if (quantity < 0) {
                     throw new IllegalArgumentException("Negative quantity is not allowed for addShoppingItem command.");
                 }
                 return new AddShoppingItem(name, quantity, unit);
@@ -141,16 +153,19 @@ public class Parser {
                     throw new IllegalArgumentException("Insufficient arguments for editShoppingItem command.");
                 }
                 index = Integer.parseInt(inputParts[1]);
+                if (index < 0) {
+                    throw new IllegalArgumentException("Negative index is not allowed for editShoppingItem command.");
+                }
                 name = inputParts[2].toUpperCase();
                 quantity = Double.parseDouble(inputParts[3]);
-                if(quantity < 0){
-                    throw new IllegalArgumentException("Negative quantity is not allowed for addShoppingItem command.");
+                if (quantity < 0) {
+                    throw new IllegalArgumentException("Negative quantity is not allowed for editShoppingItem command.");
                 }
                 unit = Unit.parseUnit(inputParts[4]);
                 return new EditShoppingItem(index, name, quantity, unit);
             case "markShoppingItemAsPurchased":
                 if (inputParts.length < 2) {
-                    throw new IllegalArgumentException ("Insufficient arguments for markShoppingItemAsPurchased" +
+                    throw new IllegalArgumentException("Insufficient arguments for markShoppingItemAsPurchased" +
                             "command.");
                 }
                 name = inputParts[1].toUpperCase();
@@ -184,6 +199,9 @@ public class Parser {
                     throw new IllegalArgumentException("Insufficient arguments for addPlanToDay command.");
                 }
                 int addToWeekIndex = Integer.parseInt(inputParts[1]);
+                if (addToWeekIndex < 0) {
+                    throw new IllegalArgumentException("Negative index is not allowed for addPlanToDay command.");
+                }
                 String addDayName = inputParts[2];
                 return new AddPlanToDay(addToWeekIndex, addDayName);
             case "addRecipeToPlan":
@@ -191,7 +209,13 @@ public class Parser {
                     throw new IllegalArgumentException("Insufficient arguments for addPlanToDay command.");
                 }
                 int addRecipePlanIndex = Integer.parseInt(inputParts[1]);
+                if (addRecipePlanIndex < 0) {
+                    throw new IllegalArgumentException("Negative index is not allowed for addRecipeToPlan command.");
+                }
                 int addRecipeRecipeIndex = Integer.parseInt(inputParts[2]);
+                if (addRecipeRecipeIndex < 0) {
+                    throw new IllegalArgumentException("Negative index is not allowed for addRecipeToPlan command.");
+                }
                 String addRecipeMealName = inputParts[3];
                 return new AddRecipeToPlan(addRecipePlanIndex, addRecipeRecipeIndex, addRecipeMealName);
             case "removeRecipeFromPlan":
@@ -199,6 +223,9 @@ public class Parser {
                     throw new IllegalArgumentException("Insufficient arguments for removeRecipeFromPlan command.");
                 }
                 int deleteRecipePlanIndex = Integer.parseInt(inputParts[1]);
+                if (deleteRecipePlanIndex < 0) {
+                    throw new IllegalArgumentException("Negative index is not allowed for removeRecipeFromPlan command.");
+                }
                 String deleteRecipeMealName = inputParts[2];
                 return new RemoveRecipeFromPlan(deleteRecipePlanIndex, deleteRecipeMealName);
             case "removePlanFromDay":
@@ -239,3 +266,4 @@ public class Parser {
         }
     }
 }
+
