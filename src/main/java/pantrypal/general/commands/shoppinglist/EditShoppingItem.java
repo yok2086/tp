@@ -36,7 +36,7 @@ public class EditShoppingItem extends ShoppingListCommand {
                         RecipeManager recipes, MealPlanManager plans, Scanner in) {
         boolean success = list.editItem(index, newIngredientName, newQuantity, newUnit);
         if (success) {
-            ui.showMessage("Item at index " + index + " updated successfully.");
+            ui.showMessage("Item at index " + index + 1 + " updated successfully.");
         } else {
             ui.showMessage("Error: Invalid index provided. No item updated.");
         }

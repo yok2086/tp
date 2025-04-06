@@ -218,7 +218,7 @@ public class Parser {
                 if (inputParts.length < 5) {
                     throw new IllegalArgumentException("Insufficient arguments for editShoppingItem command.");
                 }
-                index = Integer.parseInt(inputParts[1]);
+                index = Integer.parseInt(inputParts[1]) - 1;
                 if (index < 0) {
                     throw new IllegalArgumentException("Index must be non-negative");
                 }
@@ -293,7 +293,7 @@ public class Parser {
                 if (inputParts.length < 3) {
                     throw new IllegalArgumentException("Insufficient arguments for addPlanToDay command.");
                 }
-                int addToWeekIndex = Integer.parseInt(inputParts[1]);
+                int addToWeekIndex = Integer.parseInt(inputParts[1]) - 1;
                 if (addToWeekIndex < 0) {
                     throw new IllegalArgumentException("Week index must be non-negative");
                 }
@@ -309,13 +309,13 @@ public class Parser {
                 if (inputParts.length < 4) {
                     throw new IllegalArgumentException("Insufficient arguments for addPlanToDay command.");
                 }
-                int addRecipePlanIndex = Integer.parseInt(inputParts[1]);
+                int addRecipePlanIndex = Integer.parseInt(inputParts[1]) - 1;
                 if (addRecipePlanIndex < 0) {
                     throw new IllegalArgumentException("Plan index must be non-negative");
                 }
                 assert addRecipePlanIndex >= 0 : "Plan index must be non-negative";
 
-                int addRecipeRecipeIndex = Integer.parseInt(inputParts[2]);
+                int addRecipeRecipeIndex = Integer.parseInt(inputParts[2]) - 1;
                 if (addRecipeRecipeIndex < 0) {
                     throw new IllegalArgumentException("Recipe index must be non-negative");
                 }
@@ -331,7 +331,7 @@ public class Parser {
                 if (inputParts.length < 3) {
                     throw new IllegalArgumentException("Insufficient arguments for removeRecipeFromPlan command.");
                 }
-                int deleteRecipePlanIndex = Integer.parseInt(inputParts[1]);
+                int deleteRecipePlanIndex = Integer.parseInt(inputParts[1]) - 1;
                 if (deleteRecipePlanIndex < 0) {
                     throw new IllegalArgumentException("Plan index must be non-negative");
                 }
