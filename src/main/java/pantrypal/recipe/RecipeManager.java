@@ -195,7 +195,9 @@ public class RecipeManager{
         }
 
         for (Recipe recipe : filteredItems) {
+            Ui.printLine();
             System.out.println(recipe.getContent());
+            Ui.printLine();
         }
     }
 
