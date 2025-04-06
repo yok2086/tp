@@ -242,7 +242,8 @@ public class Storage {
         return fileInput;
     }
 
-    private static StringBuilder saveMealPlans(RecipeManager recipeManager, MealPlanManager plans, StringBuilder fileInput) {
+    private static StringBuilder saveMealPlans(RecipeManager recipeManager, MealPlanManager plans,
+                                               StringBuilder fileInput) {
         for (Plan plan : plans.getPlanList()) {
             Recipe[] planRecipes = plan.getPlanRecipes();
             fileInput.append("[MealPlan] ").append(plan.getPlanName()).append("\n")
@@ -290,11 +291,14 @@ public class Storage {
         }
 
         if (line.startsWith("[Breakfast]")) {
-            plans.getPlanDetails(plan.getPlanName()).addRecipeToPlan(recipeManager.getRecipeList().get(recipeIndex), MealType.BREAKFAST);
+            plans.getPlanDetails(plan.getPlanName()).addRecipeToPlan(recipeManager.getRecipeList().get(recipeIndex),
+                    MealType.BREAKFAST);
         } else if (line.startsWith("[Lunch]")) {
-            plans.getPlanDetails(plan.getPlanName()).addRecipeToPlan(recipeManager.getRecipeList().get(recipeIndex), MealType.LUNCH);
+            plans.getPlanDetails(plan.getPlanName()).addRecipeToPlan(recipeManager.getRecipeList().get(recipeIndex),
+                    MealType.LUNCH);
         } else if (line.startsWith("[Dinner]")) {
-            plans.getPlanDetails(plan.getPlanName()).addRecipeToPlan(recipeManager.getRecipeList().get(recipeIndex), MealType.DINNER);
+            plans.getPlanDetails(plan.getPlanName()).addRecipeToPlan(recipeManager.getRecipeList().get(recipeIndex),
+                    MealType.DINNER);
         } else {
             throw new DataCorruptionException("Invalid meal plan details format");
         }
