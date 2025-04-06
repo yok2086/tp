@@ -14,6 +14,7 @@ import pantrypal.general.commands.inventory.ViewIngredientsByCategory;
 import pantrypal.general.commands.recipe.RemoveRecipe;
 import pantrypal.general.commands.recipe.ViewRecipe;
 import pantrypal.general.commands.shoppinglist.AddShoppingItem;
+import pantrypal.inventory.Unit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
@@ -46,7 +47,7 @@ public class ParserTest {
         AddIngredient addIngredientCommand = (AddIngredient) command;
         assertEquals("FLOUR", addIngredientCommand.getName());
         assertEquals(2.5, addIngredientCommand.getQuantity(), 0.01);
-        assertEquals("cup", addIngredientCommand.getUnit());
+        assertEquals(Unit.CUP, addIngredientCommand.getUnit());
     }
 
     @Test
