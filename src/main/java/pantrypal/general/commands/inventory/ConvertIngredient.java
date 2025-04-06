@@ -26,6 +26,11 @@ public class ConvertIngredient extends InventoryCommand {
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, RecipeManager recipes,
                         MealPlanManager plans, Scanner in) {
 
-        inventory.convertIngredient(name, targetUnit);
+        try {
+            inventory.convertIngredient(name, targetUnit);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 }
