@@ -145,15 +145,25 @@ public class IngredientInventory {
     }
 
     public void convertIngredient(String name, Unit targetUnit) {
-        Ingredient ingredient = inventory.get(name);
-        if (ingredient == null) {
-            throw new IllegalArgumentException("Ingredient not found.");
+        try {
+            Ingredient ingredient = inventory.get(name);
+            if (ingredient == null) {
+                throw new IllegalArgumentException("Ingredient not found.");
+            }
+            Unit currentUnit = ingredient.getUnit();
+            double convertedQuantity = Unit.convert(ingredient.getQuantity(), currentUnit, targetUnit);
+            if (convertedQuantity == -1.0) {
+                throw new IllegalArgumentException("Invalid conversion from " + currentUnit + " to " + targetUnit + " for " + name);
+            }
+            ingredient.setQuantity(convertedQuantity);
+            ingredient.setUnit(targetUnit);
+            System.out.println(name + " converted to " + convertedQuantity + " " + targetUnit);
+
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
-        double convertedQuantity = Unit.convert(ingredient.getQuantity(), ingredient.getUnit(), targetUnit);
-        ingredient.setQuantity(convertedQuantity);
-        ingredient.setUnit(targetUnit);
-        System.out.println(name + " converted " + convertedQuantity + " to " + targetUnit);
     }
+
 
     public String viewIngredientsByCategory(Category category) {
         boolean found = false;
