@@ -11,10 +11,6 @@ import java.util.Scanner;
 public class DeleteIngredient extends InventoryCommand {
     private String name;
 
-    public String getName() {
-        return name;
-    }
-
     public DeleteIngredient() {
         super("deleteIngredient <name>",
                 "Delete an ingredient from the inventory");
@@ -22,6 +18,10 @@ public class DeleteIngredient extends InventoryCommand {
 
     public DeleteIngredient(String name) {
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override

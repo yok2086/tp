@@ -11,16 +11,16 @@ import java.util.Scanner;
 public class ViewRecipe extends RecipeCommand {
     private String recipeName;
 
-    public String getRecipeName() {
-        return recipeName;
-    }
-
     public ViewRecipe() {
         super("viewRecipe <Recipe Name>","View a specific recipe");
     }
 
     public ViewRecipe(String recipeName) {
         this.recipeName = recipeName;
+    }
+
+    public String getRecipeName() {
+        return recipeName;
     }
 
     @Override

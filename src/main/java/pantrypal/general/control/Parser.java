@@ -64,7 +64,8 @@ public class Parser {
                 name = inputParts[1].toUpperCase();
                 quantity = Double.parseDouble(inputParts[2]);
                 if (quantity < 0) {
-                    throw new IllegalArgumentException("Negative quantity is not allowed for addNewIngredient command.");
+                    throw new IllegalArgumentException("Negative quantity is not allowed for " +
+                            "addNewIngredient command.");
                 }
                 unit = Unit.parseUnit(inputParts[3]);
                 category = Category.parseCategory(inputParts[4]);
@@ -76,7 +77,8 @@ public class Parser {
                 name = inputParts[1].toUpperCase();
                 quantity = Double.parseDouble(inputParts[2]);
                 if (quantity < 0) {
-                    throw new IllegalArgumentException("Negative quantity is not allowed for increaseQuantity command.");
+                    throw new IllegalArgumentException("Negative quantity is not allowed for " +
+                            "increaseQuantity command.");
                 }
                 return new IncreaseQuantity(name, quantity);
             case "decreaseQuantity":
@@ -86,7 +88,8 @@ public class Parser {
                 name = inputParts[1].toUpperCase();
                 quantity = Double.parseDouble(inputParts[2]);
                 if (quantity < 0) {
-                    throw new IllegalArgumentException("Negative quantity is not allowed for decreaseQuantity command.");
+                    throw new IllegalArgumentException("Negative quantity is not allowed for " +
+                            "decreaseQuantity command.");
                 }
                 return new DecreaseQuantity(name, quantity);
             case "setAlert":
@@ -159,7 +162,8 @@ public class Parser {
                 name = inputParts[2].toUpperCase();
                 quantity = Double.parseDouble(inputParts[3]);
                 if (quantity < 0) {
-                    throw new IllegalArgumentException("Negative quantity is not allowed for editShoppingItem command.");
+                    throw new IllegalArgumentException("Negative quantity is not allowed for " +
+                            "editShoppingItem command.");
                 }
                 unit = Unit.parseUnit(inputParts[4]);
                 return new EditShoppingItem(index, name, quantity, unit);
@@ -224,7 +228,8 @@ public class Parser {
                 }
                 int deleteRecipePlanIndex = Integer.parseInt(inputParts[1]);
                 if (deleteRecipePlanIndex < 0) {
-                    throw new IllegalArgumentException("Negative index is not allowed for removeRecipeFromPlan command.");
+                    throw new IllegalArgumentException("Negative index is not allowed for " +
+                            "removeRecipeFromPlan command.");
                 }
                 String deleteRecipeMealName = inputParts[2];
                 return new RemoveRecipeFromPlan(deleteRecipePlanIndex, deleteRecipeMealName);
