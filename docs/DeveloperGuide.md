@@ -355,17 +355,14 @@ supporting low-stock alerts.
 The Ingredient Inventory feature is modular and extensible, allowing for seamless integration with features like Recipe
 Management and Shopping Lists. The core components of the Ingredient Inventory feature include:
 
-- **Ingredient Inventory Class**: Manages the collection of ingredients, allowing users to add, edit, and delete
-- items.
-- **Low-Stock Alert System**: Enables users to set and receive low-stock alerts, notifying them when ingredients fall
-- below a set threshold.
+- **Ingredient Inventory Class**: Manages the collection of ingredients, allowing users to add, edit, and delete items.
+- **Low-Stock Alert System**: Enables users to set and receive low-stock alerts, notifying them when ingredients fall below a set threshold.
 - **Integration with Ingredient Feature**: Uses the Ingredient class to ensure consistency and modularity in ingredient representation.
 - **Unit Conversion System**: Enables users to convert ingredient quantities between different units (e.g. kg to g) for consistency in recipes and inventory tracking.
 - **Category Management**: Allows ingredients to be categorized (e.g. Dairy, Condiments, Spices) for easier organization and filtering.
 
 ### Core Functionalities
-- **Adding and Managing Ingredients**: Users can add new ingredients with a name, quantity, unit, and category while ensuring
-- valid input through validation checks.
+- **Adding and Managing Ingredients**: Users can add new ingredients with a name, quantity, unit, and category while ensuring valid input through validation checks.
 - **Updating Ingredient Quantities**: The feature allows increasing or decreasing ingredient quantities.
 - **Deleting Ingredients**: Users can remove ingredients from the inventory, ensuring accurate stock representation.
 - **Low-Stock Alerts**: The system supports configurable alerts to notify users when ingredients are running low.
