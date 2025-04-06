@@ -13,7 +13,7 @@ public class FindForPlans extends MealPlanCommand {
     String searchKey;
 
     public FindForPlans() {
-        super("findForPlans <contains>", "Search amongst all created plans to find" +
+        super("findForPlans <contains>", "Search amongst all created plans to find " +
                 "one that contains the search key.");
     }
 

@@ -8,15 +8,15 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
-public class AddPlanToList extends MealPlanCommand {
+public class AddPlan extends MealPlanCommand {
 
     private String planName;
 
-    public AddPlanToList() {
-        super("addPlanToList <plan name>", "Add a new plan to the list");
+    public AddPlan() {
+        super("addPlan <plan name>", "Add a new plan");
     }
 
-    public AddPlanToList(String planName) {
+    public AddPlan(String planName) {
         this.planName = planName;
     }
 

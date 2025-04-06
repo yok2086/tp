@@ -20,9 +20,14 @@ public class DeleteIngredient extends InventoryCommand {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, RecipeManager recipes,
                         MealPlanManager plans, Scanner in) {
         inventory.deleteIngredient(name);
     }
+
 }
