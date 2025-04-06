@@ -33,7 +33,12 @@ public class DecreaseQuantity extends InventoryCommand {
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, RecipeManager recipes,
                         MealPlanManager plans, Scanner in) {
-        inventory.decreaseQuantity(name, quantity);
-
+        try {
+            inventory.decreaseQuantity(name, quantity);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
+
 }
+
