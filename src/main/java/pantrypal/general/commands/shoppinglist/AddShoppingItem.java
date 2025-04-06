@@ -14,16 +14,29 @@ public class AddShoppingItem extends ShoppingListCommand {
     private ShoppingListItem shoppingListItem;
     private String name;
 
-    public AddShoppingItem() {
-        super("addShoppingItem <name> <quantity> <unit>",
-                "Add an item to the shopping list");
-    }
-
     public AddShoppingItem(String name, double quantity, Unit unit) {
         super("AddShoppingItem <name> <quantity> <unit>",
                 "Add an item to the shopping list");
         shoppingListItem = new ShoppingListItem(name, quantity, unit);
         this.name = name;
+    }
+
+    public AddShoppingItem() {
+        super("addShoppingItem <name> <quantity> <unit>",
+                "Add an item to the shopping list");
+    }
+
+    public double getQuantity() {
+        return shoppingListItem.getQuantity();
+    }
+
+    public Unit getUnit() {
+        return shoppingListItem.getUnit();
+    }
+
+
+    public String getName() {
+        return name;
     }
 
     @Override

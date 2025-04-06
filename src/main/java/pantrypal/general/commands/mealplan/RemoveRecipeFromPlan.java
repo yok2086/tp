@@ -14,7 +14,8 @@ public class RemoveRecipeFromPlan extends MealPlanCommand {
     String mealType;
 
     public RemoveRecipeFromPlan() {
-        super("addPlanToList <plan name>", "Add a new plan to the list");
+        super("removeRecipeFromPlan <plan index> <breakfast/lunch/dinner> ",
+                "Remove recipe from a meal plan");
     }
 
     public RemoveRecipeFromPlan(int planIndex, String mealType) {
@@ -28,11 +29,11 @@ public class RemoveRecipeFromPlan extends MealPlanCommand {
         try {
             plans.getPlanDetails(planIndex).removeRecipeFromPlan(getMealType(mealType));
         } catch (IndexOutOfBoundsException e) {
-            ui.showMessage("Invalid plan index given.");
+            Ui.showMessage("Invalid plan index given.");
         } catch (NullPointerException e) {
             System.out.println("Invalid meal type given.\nPlease enter only BREAKFAST, LUNCH OR DINNER");
         } catch (IllegalArgumentException e) {
-            ui.showMessage("Invalid input given. Please refrain from unconventional datatypes");
+            Ui.showMessage("Invalid input given. Please refrain from unconventional datatypes");
         }
     }
 }

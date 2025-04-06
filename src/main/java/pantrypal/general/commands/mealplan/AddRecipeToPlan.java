@@ -16,7 +16,8 @@ public class AddRecipeToPlan extends MealPlanCommand {
     String mealType;
 
     public AddRecipeToPlan() {
-        super("addPlanToList <plan name>", "Add a new plan to the list");
+        super("addRecipeToPlan <plan index> <recipe index>",
+                "Add a recipe to a meal plan");
     }
 
     public AddRecipeToPlan(int planIndex, int recipeIndex, String mealType) {
@@ -35,13 +36,13 @@ public class AddRecipeToPlan extends MealPlanCommand {
             Recipe recipe = recipes.getRecipeList().get(recipeIndex);
             plans.getPlanDetails(planIndex).addRecipeToPlan(recipe, getMealType(mealType));
         } catch (ArrayIndexOutOfBoundsException e) {
-            ui.showMessage(e.getMessage());
+            Ui.showMessage(e.getMessage());
         } catch (IndexOutOfBoundsException e) {
-            ui.showMessage("Invalid plan index");
+            Ui.showMessage("Invalid plan index");
         } catch (NullPointerException e) {
-            ui.showMessage("Invalid meal type given.\nPlease enter only BREAKFAST, LUNCH OR DINNER");
+            Ui.showMessage("Invalid meal type given.\nPlease enter only BREAKFAST, LUNCH OR DINNER");
         } catch (IllegalArgumentException e) {
-            ui.showMessage("Invalid input given. Please refrain from unconventional datatypes");
+            Ui.showMessage("Invalid input given. Please refrain from unconventional datatypes");
         }
     }
 }

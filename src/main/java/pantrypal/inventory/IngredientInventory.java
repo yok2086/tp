@@ -33,7 +33,6 @@ public class IngredientInventory {
 
             // If validation passes, add the ingredient to the inventory
             inventory.put(name, new Ingredient(name, quantity, unit, category));
-            Ui.showMessage("Ingredient " + name + " added successfully.");
         } catch (IllegalArgumentException e) {
             // Catch validation exceptions and display the error message in the UI
             Ui.showMessage("Error: " + e.getMessage());

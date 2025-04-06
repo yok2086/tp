@@ -3,17 +3,18 @@ package pantrypal.general.commands.general;
 import pantrypal.general.commands.Command;
 import pantrypal.general.commands.inventory.AddIngredient;
 import pantrypal.general.commands.inventory.ConvertIngredient;
+import pantrypal.general.commands.inventory.DeleteIngredient;
 import pantrypal.general.commands.inventory.IncreaseQuantity;
 import pantrypal.general.commands.inventory.DecreaseQuantity;
 import pantrypal.general.commands.inventory.SetAlert;
 import pantrypal.general.commands.inventory.CheckStock;
 import pantrypal.general.commands.inventory.ViewIngredientsByCategory;
 import pantrypal.general.commands.inventory.ViewLowStock;
-import pantrypal.general.commands.mealplan.AddPlanToList;
-import pantrypal.general.commands.mealplan.AddPlanToWeek;
+import pantrypal.general.commands.mealplan.AddPlan;
+import pantrypal.general.commands.mealplan.AddPlanToDay;
 import pantrypal.general.commands.mealplan.AddRecipeToPlan;
 import pantrypal.general.commands.mealplan.RemoveRecipeFromPlan;
-import pantrypal.general.commands.mealplan.RemovePlanFromWeek;
+import pantrypal.general.commands.mealplan.RemovePlanFromDay;
 import pantrypal.general.commands.mealplan.ViewPlanForDay;
 import pantrypal.general.commands.mealplan.ViewPlanForWeek;
 import pantrypal.general.commands.mealplan.ExecutePlanForDay;
@@ -43,15 +44,15 @@ public class Help extends GeneralCommand {
             new Exit(), new Help(),
             new AddIngredient(), new IncreaseQuantity(), new DecreaseQuantity(), new SetAlert(), new CheckStock(),
             new ViewLowStock(),  new ConvertIngredient(), new ViewIngredientsByCategory(), new UnitList(),
-            new CategoryList(),
+            new CategoryList(), new DeleteIngredient(),
       
             new AddShoppingItem(), new GenerateShoppingList(), new RemoveShoppingItem(), new EditShoppingItem(),
             new MarkShoppingItemAsPurchased(), new ViewShoppingList(),
       
             new AddRecipe(), new ViewRecipe(), new RemoveRecipe(), new ListRecipe(),
       
-            new AddPlanToList(), new AddPlanToWeek(), new AddRecipeToPlan(), new ExecutePlanForDay(),
-            new FindForPlans(), new RemovePlanFromWeek(), new RemoveRecipeFromPlan(), new ViewPlanForDay(),
+            new AddPlan(), new AddPlanToDay(), new AddRecipeToPlan(), new ExecutePlanForDay(),
+            new FindForPlans(), new RemovePlanFromDay(), new RemoveRecipeFromPlan(), new ViewPlanForDay(),
             new ViewPlanForWeek()
     );
 

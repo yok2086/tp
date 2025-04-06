@@ -18,7 +18,7 @@ public class MealPlanManager {
                 "\nThere are " + planList.size() + " created plans currently.");
     }
 
-    public void addPlanToWeek(int planIndex, Day day) {
+    public void addPlanToDay(int planIndex, Day day) {
         int dayIndex = day.ordinal();
         Plan plan = planList.get(planIndex);
         if (weeklyPlans[dayIndex] == null) {
