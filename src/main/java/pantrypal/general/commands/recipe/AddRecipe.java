@@ -41,6 +41,10 @@ public class AddRecipe extends RecipeCommand {
         while (!isFinished) {
             System.out.println("Please Input Ingredient Name: <When done, type exit>");
             String ingredientName = in.nextLine().trim().toUpperCase();
+            if (ingredientName.isBlank()){
+                Ui.printErrorMessage("Ingredient Name cannot be blank. Try again");
+                continue;
+            }
 
             if (ingredientName.equals("EXIT")) {
                 isFinished = true;

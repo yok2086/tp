@@ -27,8 +27,8 @@ public class UnitList extends GeneralCommand {
                 "POUND(lb)" + "\n" +
                 "MILLIGRAM(mg)" + "\n" +
                 "EGG(egg)" + "\n" +
-                "EGG WHITE(egg white)" + "\n" +
-                "EGG YOLK(egg yolk)" + "\n" +
+                "EGG_WHITE(egg white)" + "\n" +
+                "EGG_YOLK(egg yolk)" + "\n" +
                 "PINCH(pinch)" + "\n" +
                 "SPLASH(splash)" + "\n" +
                 "BUNCH(bunch)" + "\n" +
@@ -37,15 +37,15 @@ public class UnitList extends GeneralCommand {
                 "PINT(pt)" + "\n" +
                 "QUART(qt)" + "\n" +
                 "GALLON(gal)" + "\n" +
-                "FLUID OUNCE(fl oz)" + "\n" +
-                "CUBIC CENTIMETER(cc)" + "\n" +
-                "CUBIC INCH(in³)" + "\n" +
-                "CUBIC FOOT(ft³)" + "\n" +
-                "SQUARE INCH(in²)" + "\n" +
-                "SQUARE FOOT(ft²)" + "\n" +
-                "SQUARE METER(m²)" + "\n" +
-                "SQUARE CENTIMETER(cm²)" + "\n" +
-                "LITER PER MINUTE(L/min)" + "\n" +
+                "FLUID_OUNCE(fl oz)" + "\n" +
+                "CUBIC_CENTIMETER(cc)" + "\n" +
+                "CUBIC_INCH(in³)" + "\n" +
+                "CUBIC_FOOT(ft³)" + "\n" +
+                "SQUARE_INCH(in²)" + "\n" +
+                "SQUARE_FOOT(ft²)" + "\n" +
+                "SQUARE_METER(m²)" + "\n" +
+                "SQUARE_CENTIMETER(cm²)" + "\n" +
+                "LITER_PER_MINUTE(L/min)" + "\n" +
                 "KILOCALORIE(kcal)" + "\n" +
                 "CALORIE(cal)");
     }
