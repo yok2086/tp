@@ -8,11 +8,6 @@ public class Plan {
     private Recipe[] planRecipes = new Recipe[3]; //Maximum 3 recipes per plan
     private String planName;
 
-    public enum MealType {
-        BREAKFAST,
-        LUNCH,
-        DINNER
-    }
 
     public Plan(String planName) {
         this.planName = planName.isEmpty() ? "default" : planName;
@@ -50,13 +45,15 @@ public class Plan {
 
     @Override
     public String toString() {
+        int mealIndexCount = 0;
         StringBuilder sb = new StringBuilder();
         sb.append("Plan Name: ").append(planName).append("\n");
         sb.append("Recipes:\n");
         for (Recipe recipe : planRecipes) {
             if (recipe != null) {
-                sb.append(recipe.getName()).append("\n");
+                sb.append(MealType.values()[mealIndexCount]).append(recipe.getName()).append("\n");
             }
+            mealIndexCount++;
         }
         return sb.toString();
     }

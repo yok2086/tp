@@ -18,11 +18,9 @@ public class AddRecipe extends RecipeCommand {
     private String content;
     private LocalDate expiryDate;
 
-
     public AddRecipe() {
         super("addRecipe", "Add a recipe");
     }
-
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, RecipeManager recipes,
@@ -30,17 +28,23 @@ public class AddRecipe extends RecipeCommand {
         boolean isFinished = false;
         boolean isValidRecipe = false;
 
-        do {
-            System.out.println("Please Input Recipe Name: ");
-            recipeName = in.nextLine();
-        } while (recipeName.trim().isEmpty());
-
-        Recipe recipe = recipes.addRecipe(recipeName.trim().toUpperCase());
+        Recipe recipe = null;
+        while (recipe == null) {
+            do {
+                System.out.println("Please Input Recipe Name: ");
+                recipeName = in.nextLine();
+            } while (recipeName.trim().isEmpty());
+            recipe = recipes.addRecipe(recipeName.trim().toUpperCase());
+        }
 
         int stepNumber = 1;
         while (!isFinished) {
             System.out.println("Please Input Ingredient Name: <When done, type exit>");
             String ingredientName = in.nextLine().trim().toUpperCase();
+            if (ingredientName.isBlank()){
+                Ui.printErrorMessage("Ingredient Name cannot be blank. Try again");
+                continue;
+            }
 
             if (ingredientName.equals("EXIT")) {
                 isFinished = true;

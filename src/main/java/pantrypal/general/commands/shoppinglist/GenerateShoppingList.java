@@ -21,6 +21,8 @@ public class GenerateShoppingList extends ShoppingListCommand {
         ShoppingListGenerator shoppingListGenerator = new ShoppingListGenerator(inventory);
         ShoppingList newShoppingList = shoppingListGenerator.generateShoppingList();
         list.copyFrom(newShoppingList);
-        Ui.showMessage("Shopping list has been cleared! \nShopping list has been auto-generated.");
+        Ui.showMessage("Shopping list has been cleared! \nShopping list has been auto-generated as below:");
+        new ViewShoppingList();
+        Ui.printLine();
     }
 }

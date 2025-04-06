@@ -192,12 +192,14 @@ public class Storage {
         String[] ingredients = line.trim().split(" \\|");
         for (String ingredient : ingredients) {
             String[] parts = ingredient.trim().split(" ");
-            String ingredientName = unescapeSpecialCharacters(parts[0]);
-            double ingredientQuantity = Double.parseDouble(parts[1]);
-            Unit ingredientUnit = Unit.parseUnit(parts[2]);
-            Category ingredientCategory = Category.valueOf(parts[3].toUpperCase());
-            recipe.addIngredient(new Ingredient(ingredientName, ingredientQuantity, ingredientUnit,
-                    ingredientCategory));
+            if (parts.length > 1){
+                String ingredientName = unescapeSpecialCharacters(parts[0]);
+                double ingredientQuantity = Double.parseDouble(parts[1]);
+                Unit ingredientUnit = Unit.parseUnit(parts[2]);
+                Category ingredientCategory = Category.valueOf(parts[3].toUpperCase());
+                recipe.addIngredient(new Ingredient(ingredientName, ingredientQuantity, ingredientUnit,
+                        ingredientCategory));
+            }
         }
     }
 
@@ -216,7 +218,8 @@ public class Storage {
         for (Ingredient ingredient : ingredients) {
             fileInput.append(escapeSpecialCharacters(ingredient.getName())).append(" ")
                     .append(ingredient.getQuantity()).append(" ")
-                    .append(ingredient.getUnit()).append(" ").append(ingredient.getCategory()).append(" | ");
+                    .append(ingredient.getUnit()).append(" ")
+                    .append(ingredient.getCategory()).append(" | ");
         }
         fileInput.append("\n");
         return fileInput;
@@ -268,5 +271,4 @@ public class Storage {
             Ui.printErrorMessage(e.getMessage());
         }
     }
-
 }

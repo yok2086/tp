@@ -33,5 +33,6 @@ public class RemoveShoppingItem extends ShoppingListCommand {
         } else {
             Ui.showMessage("Item '" + name + "' not found in the shopping list.");
         }
+        Ui.printLine();
     }
 }
