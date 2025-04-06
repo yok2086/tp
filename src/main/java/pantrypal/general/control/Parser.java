@@ -15,11 +15,11 @@ import pantrypal.general.commands.inventory.CheckStock;
 import pantrypal.general.commands.inventory.ViewIngredientsByCategory;
 import pantrypal.general.commands.inventory.ViewLowStock;
 import pantrypal.general.commands.inventory.DeleteIngredient;
-import pantrypal.general.commands.mealplan.AddPlanToList;
-import pantrypal.general.commands.mealplan.AddPlanToWeek;
+import pantrypal.general.commands.mealplan.AddPlan;
+import pantrypal.general.commands.mealplan.AddPlanToDay;
 import pantrypal.general.commands.mealplan.AddRecipeToPlan;
 import pantrypal.general.commands.mealplan.RemoveRecipeFromPlan;
-import pantrypal.general.commands.mealplan.RemovePlanFromWeek;
+import pantrypal.general.commands.mealplan.RemovePlanFromDay;
 import pantrypal.general.commands.mealplan.ViewPlanForDay;
 import pantrypal.general.commands.mealplan.ViewPlanForWeek;
 import pantrypal.general.commands.mealplan.ExecutePlanForDay;
@@ -173,22 +173,22 @@ public class Parser {
             case "viewRecipeList":
                 return new ListRecipe();
             //From here on are commands for MealPlan
-            case "addPlanToList":
+            case "addPlan":
                 if (inputParts.length < 2) {
-                    throw new IllegalArgumentException("Insufficient arguments for addPlanToList command.");
+                    throw new IllegalArgumentException("Insufficient arguments for addPlan command.");
                 }
                 String planName = inputParts[1];
-                return new AddPlanToList(planName);
-            case "addPlanToWeek":
+                return new AddPlan(planName);
+            case "addPlanToDay":
                 if (inputParts.length < 3) {
-                    throw new IllegalArgumentException("Insufficient arguments for addPlanToWeek command.");
+                    throw new IllegalArgumentException("Insufficient arguments for addPlanToDay command.");
                 }
                 int addToWeekIndex = Integer.parseInt(inputParts[1]);
                 String addDayName = inputParts[2];
-                return new AddPlanToWeek(addToWeekIndex, addDayName);
+                return new AddPlanToDay(addToWeekIndex, addDayName);
             case "addRecipeToPlan":
                 if (inputParts.length < 4) {
-                    throw new IllegalArgumentException("Insufficient arguments for addPlanToWeek command.");
+                    throw new IllegalArgumentException("Insufficient arguments for addPlanToDay command.");
                 }
                 int addRecipePlanIndex = Integer.parseInt(inputParts[1]);
                 int addRecipeRecipeIndex = Integer.parseInt(inputParts[2]);
@@ -201,12 +201,12 @@ public class Parser {
                 int deleteRecipePlanIndex = Integer.parseInt(inputParts[1]);
                 String deleteRecipeMealName = inputParts[2];
                 return new RemoveRecipeFromPlan(deleteRecipePlanIndex, deleteRecipeMealName);
-            case "removeRecipeFromWeek":
+            case "removePlanFromDay":
                 if (inputParts.length < 2) {
                     throw new IllegalArgumentException("Insufficient arguments for removeRecipeFromWeek command.");
                 }
                 String deleteFromWeekDayName = inputParts[1];
-                return new RemovePlanFromWeek(deleteFromWeekDayName);
+                return new RemovePlanFromDay(deleteFromWeekDayName);
             case "viewPlanForDay":
                 if (inputParts.length < 2) {
                     throw new IllegalArgumentException("Insufficient arguments for viewPlanForDay command.");
@@ -215,7 +215,7 @@ public class Parser {
                 return new ViewPlanForDay(viewDayName);
             case "viewPlanForWeek":
                 return new ViewPlanForWeek();
-            case "executePlanForDay":
+            case "execute":
                 if (inputParts.length < 2) {
                     throw new IllegalArgumentException("Insufficient arguments for executePlanForDay command.");
                 }

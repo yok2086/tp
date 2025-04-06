@@ -18,7 +18,7 @@ public class ExecutePlanForDay extends MealPlanCommand {
     private String day;
 
     public ExecutePlanForDay() {
-        super("executePlanForDay <day>", "Execute a plan for a specific day");
+        super("execute <day>", "Execute a plan for a specific day");
     }
 
     public ExecutePlanForDay(String day) {
@@ -71,11 +71,6 @@ public class ExecutePlanForDay extends MealPlanCommand {
 
         Day dayEnum = getDay(day);
 
-        //First I need to get the recipes in the plan
-        //Then check if the ingredients are available in the pantry
-        //If not, prompt to add them to the shopping list
-        //Then decrease quantity of the ingredients in the pantry
-        //Show all recipes in the plan
         Plan plan = mealPlanManager.getPlanForDay(dayEnum);
         if (plan == null) {
             Ui.showMessage("No plan found for the specified day.");

@@ -22,9 +22,6 @@ public class AddShoppingItem extends ShoppingListCommand {
         return shoppingListItem.getUnit();
     }
 
-    public Category getCategory() {
-        return shoppingListItem.getCategory();
-    }
 
     public String getName() {
         return name;

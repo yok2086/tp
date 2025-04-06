@@ -103,11 +103,11 @@ public class ParserTest {
     @Test
     public void parse_viewIngredientsByCategoryWithValidInputs_returnsViewIngredientsByCategoryCommand() {
         Parser parser = new Parser();
-        Command command = parser.parse("viewIngredientsByCategory GRAINS");
+        Command command = parser.parse("viewIngredientsByCategory grain");
 
         assertInstanceOf(ViewIngredientsByCategory.class, command);
         ViewIngredientsByCategory viewIngredientsByCategoryCommand = (ViewIngredientsByCategory) command;
-        assertEquals("Grains", viewIngredientsByCategoryCommand.getCategory().toString());
+        assertEquals("Grain", viewIngredientsByCategoryCommand.getCategory().toString());
     }
 
     @Test
@@ -133,14 +133,13 @@ public class ParserTest {
     @Test
     public void parse_addShoppingItemWithValidInputs_returnsAddShoppingItemCommand() {
         Parser parser = new Parser();
-        Command command = parser.parse("addShoppingItem Sugar 2.0 kg GRAINS");
+        Command command = parser.parse("addShoppingItem Sugar 2.0 kg");
 
         assertInstanceOf(AddShoppingItem.class, command);
         AddShoppingItem addShoppingItemCommand = (AddShoppingItem) command;
         assertEquals("SUGAR", addShoppingItemCommand.getName());
         assertEquals(2.0, addShoppingItemCommand.getQuantity(), 0.01);
         assertEquals("kg", addShoppingItemCommand.getUnit().toString());
-        assertEquals("GRAINS", addShoppingItemCommand.getCategory().name());
     }
 
 

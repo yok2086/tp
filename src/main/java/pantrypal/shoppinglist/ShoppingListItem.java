@@ -16,7 +16,6 @@ public class ShoppingListItem {
         this.quantity = quantity;
         this.unit = unit;
         this.purchased = false; // Default: not purchased
-        this.category = category;
     }
 
     // Copy constructor
@@ -70,7 +69,4 @@ public class ShoppingListItem {
         return ingredientName + ": " + quantityStr + " " + unit + (purchased ? " (Purchased)" : "");
     }
 
-    public Category getCategory() {
-        return category;
-    }
 }
