@@ -14,26 +14,48 @@ public class IngredientInventory {
         lowStockAlerts = new HashMap<>();
     }
 
-    private void validateIngredient(String name, double quantity, Unit unit, Category category) {
-        assert name != null && !name.isEmpty() : "Ingredient name cannot be null or empty";
-        assert quantity > 0 : "Quantity must be positive";
-        assert unit != null : "Unit cannot be null or empty";
-        assert category != null : "Category cannot be null or empty";
-    }
-
-    // Add new ingredient
+    // Add new ingredient method
     public void addNewIngredient(String name, double quantity, Unit unit, Category category) {
-        validateIngredient(name, quantity, unit, category);
-        inventory.put(name, new Ingredient(name, quantity, unit, category));
+        try {
+            // Validate the ingredient before adding it to the inventory
+            if (name == null || name.isEmpty()) {
+                throw new IllegalArgumentException("Ingredient name cannot be null or empty.");
+            }
+            if (quantity <= 0) {
+                throw new IllegalArgumentException("Quantity must be positive.");
+            }
+            if (unit == null) {
+                throw new IllegalArgumentException("Unit cannot be null or empty.");
+            }
+            if (category == null) {
+                throw new IllegalArgumentException("Category cannot be null or empty.");
+            }
+
+            // If validation passes, add the ingredient to the inventory
+            inventory.put(name, new Ingredient(name, quantity, unit, category));
+            Ui.showMessage("Ingredient " + name + " added successfully.");
+        } catch (IllegalArgumentException e) {
+            // Catch validation exceptions and display the error message in the UI
+            Ui.showMessage("Error: " + e.getMessage());
+        }
     }
 
     // Increase ingredient quantity
     public void increaseQuantity(String name, double quantity) {
+        // Ensure that the quantity is positive
+        if (quantity <= 0) {
+            Ui.showMessage("Error: Quantity to increase must be positive.");
+            return;
+        }
+
+        // Get the ingredient from the inventory
         Ingredient ingredient = inventory.get(name);
         if (ingredient != null) {
+            // Increase the quantity of the ingredient
             ingredient.quantity += quantity;
             Ui.showMessage("Increased " + name + " by " + quantity);
         } else {
+            // If ingredient is not found in the inventory
             Ui.showMessage("Ingredient not found");
         }
     }
