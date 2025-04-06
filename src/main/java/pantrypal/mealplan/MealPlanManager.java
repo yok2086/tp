@@ -14,8 +14,6 @@ public class MealPlanManager {
     public void addPlanToList(String planName) {
         Plan plan = new Plan(planName);
         planList.add(plan);
-        Ui.showMessage("Plan added: " + plan.getPlanName() +
-                "\nThere are " + planList.size() + " created plans currently.");
     }
 
     public void addPlanToDay(int planIndex, Day day) {
@@ -55,6 +53,27 @@ public class MealPlanManager {
         }
     }
 
+    public void viewPlanList() {
+        if (planList.isEmpty()) {
+            Ui.showMessage("No plans available.");
+        } else {
+            Ui.printLine();
+            for (int i = 0; i < planList.size(); i++) {
+                System.out.println((i + 1) + ": " + planList.get(i).getPlanName());
+            }
+            Ui.printLine();
+        }
+    }
+
+    public void viewPlan(int planIndex) {
+        if (planIndex < 0 || planIndex >= planList.size()) {
+            Ui.showMessage("Invalid plan index.");
+            return;
+        }
+        Plan plan = planList.get(planIndex);
+        Ui.showMessage(plan.toString());
+    }
+
     public boolean findInCreatedPlans(String planName) {
         boolean found = false;
         for (Plan plan : planList) {
@@ -71,12 +90,25 @@ public class MealPlanManager {
         return weeklyPlans;
     }
 
+    public Plan[] getPlanList() {
+        return planList.toArray(new Plan[0]);
+    }
+
     public Plan getPlanForDay(Day day) {
         return weeklyPlans[day.ordinal()];
     }
 
     public Plan getPlanDetails(int planIndex) {
         return planList.get(planIndex);
+    }
+
+    public Plan getPlanDetails (String planName) {
+        for (Plan plan : planList) {
+            if (plan.getPlanName().equalsIgnoreCase(planName)) {
+                return plan;
+            }
+        }
+        return null; // Plan not found
     }
 
 
