@@ -99,6 +99,7 @@ so you can easily track which items have already been bought.
 ### Recipe Commands
 #### Add New Recipe
 Command:
+Note that ```{enter}``` means clicking the enter button. Please enter your input line by line.
 ```
 addRecipe {enter}
 <recipe_name> (no whitespace allowed, use _ instead) {enter}
