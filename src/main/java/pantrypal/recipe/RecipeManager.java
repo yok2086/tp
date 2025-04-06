@@ -90,6 +90,10 @@ public class RecipeManager{
 
     public void addRecipeIngredients(Recipe recipe, String ingredientName, int quantity, Unit unit, Category category) {
 
+        if (recipe == null) {
+            return;
+        }
+
         assert quantity > 0 : "Quantity must be positive";
 
         List<Ingredient> ingredientFilteredList = recipe.getIngredients().stream()
