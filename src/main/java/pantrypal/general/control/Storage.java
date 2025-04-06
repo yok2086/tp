@@ -5,6 +5,8 @@ import pantrypal.inventory.Ingredient;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.inventory.Unit;
 import pantrypal.mealplan.MealPlanManager;
+import pantrypal.mealplan.MealType;
+import pantrypal.mealplan.Plan;
 import pantrypal.recipe.Instruction;
 import pantrypal.recipe.Recipe;
 import pantrypal.recipe.RecipeManager;
@@ -67,6 +69,7 @@ public class Storage {
         try (Scanner scanner = new Scanner(file)) {
             String currentSection = "";
             Recipe recipe = null;
+            Plan plan = null;
 
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine().trim();
@@ -90,8 +93,10 @@ public class Storage {
                         processLowStockLine(line, inventory);
                     } else if (line.startsWith("[MealPlan]")) {
                         currentSection = "MealPlan";
+                        plan = processMealPlanLine(line, plans);
+
                     } else {
-                        processSectionLine(currentSection, line, recipe);
+                        processSectionLine(currentSection, line, recipe, plan, plans, recipeManager);
                     }
                 } catch (DataCorruptionException e) {
                     Ui.printErrorMessage("Data corruption detected: " + e.getMessage());
@@ -172,7 +177,8 @@ public class Storage {
         }
     }
 
-    private static void processSectionLine(String currentSection, String line, Recipe recipe) {
+    private static void processSectionLine(String currentSection, String line, Recipe recipe, Plan plan,
+                                           MealPlanManager plans, RecipeManager recipeManager) {
         switch (currentSection) {
         case "Recipe":
             if (line.startsWith("[Ingredients]")) {
@@ -180,6 +186,9 @@ public class Storage {
             } else if (line.startsWith("[Instructions]")) {
                 processRecipeInstructions(line, recipe);
             }
+            break;
+        case "MealPlan":
+            processMealPlanDetails(line, plan, plans, recipeManager);
             break;
         default:
             System.out.println("Unknown data: " + line);
@@ -191,7 +200,7 @@ public class Storage {
         String[] ingredients = line.trim().split(" \\|");
         for (String ingredient : ingredients) {
             String[] parts = ingredient.trim().split(" ");
-            if (parts.length > 1){
+            if (parts.length > 1) {
                 String ingredientName = unescapeSpecialCharacters(parts[0]);
                 double ingredientQuantity = Double.parseDouble(parts[1]);
                 Unit ingredientUnit = Unit.parseUnit(parts[2]);
@@ -233,6 +242,65 @@ public class Storage {
         return fileInput;
     }
 
+    private static StringBuilder saveMealPlans(RecipeManager recipeManager, MealPlanManager plans, StringBuilder fileInput) {
+        for (Plan plan : plans.getPlanList()) {
+            Recipe[] planRecipes = plan.getPlanRecipes();
+            fileInput.append("[MealPlan] ").append(plan.getPlanName()).append("\n")
+                    .append("[Breakfast] ")
+                    .append(planRecipes[0] != null ? recipeManager.getRecipeIndex(planRecipes[0]) : "null")
+                    .append("\n")
+                    .append("[Lunch] ")
+                    .append(planRecipes[1] != null ? recipeManager.getRecipeIndex(planRecipes[1]) : "null")
+                    .append("\n")
+                    .append("[Dinner] ")
+                    .append(planRecipes[2] != null ? recipeManager.getRecipeIndex(planRecipes[2]) : "null")
+                    .append("\n");
+        }
+        return fileInput;
+    }
+
+    private static Plan processMealPlanLine(String line, MealPlanManager plans) {
+        String[] parts = line.substring("[MealPlan]".length()).trim().split(" ");
+        if (parts.length != 1) {
+            throw new DataCorruptionException("Invalid meal plan format");
+        }
+        String planName = unescapeSpecialCharacters(parts[0]);
+        plans.addPlanToList(planName);
+        return new Plan(planName);
+    }
+
+    public static void processMealPlanDetails(String line, Plan plan, MealPlanManager plans,
+                                              RecipeManager recipeManager) {
+        int recipeIndex = 0;
+        String[] parts = line.trim().split(" ");
+        if (line.startsWith("[Breakfast]") || line.startsWith("[Lunch]") || line.startsWith("[Dinner]")) {
+            if (parts.length != 2) {
+                throw new DataCorruptionException("Invalid meal plan details format");
+            }
+            if (!parts[1].equals("null")) {
+                recipeIndex = Integer.parseInt(parts[1]);
+            }
+            if (recipeIndex < 0) {
+                throw new DataCorruptionException("Invalid recipe index in meal plan");
+            }
+        }
+
+        if (parts[1].equals("null")) {
+            return;
+        }
+
+        if (line.startsWith("[Breakfast]")) {
+            plans.getPlanDetails(plan.getPlanName()).addRecipeToPlan(recipeManager.getRecipeList().get(recipeIndex), MealType.BREAKFAST);
+        } else if (line.startsWith("[Lunch]")) {
+            plans.getPlanDetails(plan.getPlanName()).addRecipeToPlan(recipeManager.getRecipeList().get(recipeIndex), MealType.LUNCH);
+        } else if (line.startsWith("[Dinner]")) {
+            plans.getPlanDetails(plan.getPlanName()).addRecipeToPlan(recipeManager.getRecipeList().get(recipeIndex), MealType.DINNER);
+        } else {
+            throw new DataCorruptionException("Invalid meal plan details format");
+        }
+    }
+
+
     public static void saveData(IngredientInventory inventory, ShoppingList shoppingList, MealPlanManager plans,
                                 RecipeManager recipeManager) {
         try (FileWriter fileWriter = new FileWriter(filePath)) {
@@ -265,6 +333,9 @@ public class Storage {
                 fileInput = saveRecipeIngredients(ingredients, fileInput);
                 fileInput = saveRecipeInstructions(instructions, fileInput);
             }
+
+            saveMealPlans(recipeManager, plans, fileInput);
+
             fileWriter.write(fileInput.toString());
         } catch (IOException e) {
             Ui.printErrorMessage(e.getMessage());
