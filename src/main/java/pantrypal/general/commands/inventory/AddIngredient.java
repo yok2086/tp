@@ -14,13 +14,13 @@ public class AddIngredient extends InventoryCommand {
     private String name;
     private double quantity;
     private String unit;
-    private String category;
+    private Category category;
 
     public AddIngredient(String name, double quantity, Unit unit, Category category) {
         this.name = name;
         this.quantity = quantity;
         this.unit = String.valueOf(unit);
-        this.category = String.valueOf(category);
+        this.category = category;
     }
 
     public AddIngredient() {
@@ -41,15 +41,15 @@ public class AddIngredient extends InventoryCommand {
     }
 
     public String getCategory() {
-        return category;
+        return category.name();
     }
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, RecipeManager recipes,
                         MealPlanManager plans, Scanner in) {
         if (!inventory.getInventory().containsKey(name)) {
-            inventory.addNewIngredient(name, quantity, Unit.parseUnit(unit), Category.parseCategory(category));
-            Ui.printAddIngredientMessage(name, quantity, unit, category);
+            inventory.addNewIngredient(name, quantity, Unit.parseUnit(unit), category);
+            Ui.printAddIngredientMessage(name, quantity, unit, category.name());
         } else {
             Ui.printIngredientExists(name);
         }

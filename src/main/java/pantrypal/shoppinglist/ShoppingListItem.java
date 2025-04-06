@@ -68,4 +68,5 @@ public class ShoppingListItem {
                 : String.valueOf(quantity);
         return ingredientName + ": " + quantityStr + " " + unit + (purchased ? " (Purchased)" : "");
     }
+
 }

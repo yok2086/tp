@@ -19,10 +19,15 @@ public class ViewRecipe extends RecipeCommand {
         this.recipeName = recipeName;
     }
 
+    public String getRecipeName() {
+        return recipeName;
+    }
+
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, RecipeManager recipes,
                         MealPlanManager plans, Scanner in) {
 
         recipes.showRecipe(recipeName);
     }
+
 }
