@@ -33,7 +33,7 @@ public class ParserTest {
     @Test
     public void parse_addNewIngredientWithValidInputs_returnsAddIngredientCommand() {
         Parser parser = new Parser();
-        Command command = parser.parse("addNewIngredient Flour 2.5 cup GRAINS");
+        Command command = parser.parse("addNewIngredient Flour 2.5 cup GRAIN");
 
         assertInstanceOf(AddIngredient.class, command);
         AddIngredient addIngredientCommand = (AddIngredient) command;

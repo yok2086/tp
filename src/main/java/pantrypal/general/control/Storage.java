@@ -4,7 +4,7 @@ import pantrypal.inventory.Category;
 import pantrypal.inventory.Ingredient;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.inventory.Unit;
-import pantrypal.mealplan.PlanPresets;
+import pantrypal.mealplan.MealPlanManager;
 import pantrypal.recipe.Instruction;
 import pantrypal.recipe.Recipe;
 import pantrypal.recipe.RecipeManager;
@@ -27,7 +27,7 @@ public class Storage {
         file = new File(filePath);
     }
 
-    public static void createFile(IngredientInventory inventory, ShoppingList shoppingList, PlanPresets planPresets,
+    public static void createFile(IngredientInventory inventory, ShoppingList shoppingList, MealPlanManager plans,
                                   RecipeManager recipeManager) {
         if (file.getParentFile().mkdirs()) {
             System.out.println("Save file directory not found");
@@ -47,7 +47,7 @@ public class Storage {
         }
 
         if (safeFileExists) {
-            Storage.loadData(inventory, shoppingList, planPresets, recipeManager);
+            Storage.loadData(inventory, shoppingList, plans, recipeManager);
         }
 
         Ui.printLine();
@@ -62,7 +62,7 @@ public class Storage {
         return input.replace("\\|", "|");
     }
 
-    public static void loadData(IngredientInventory inventory, ShoppingList shoppingList, PlanPresets planPresets,
+    public static void loadData(IngredientInventory inventory, ShoppingList shoppingList, MealPlanManager plans,
                                 RecipeManager recipeManager) {
         try (Scanner scanner = new Scanner(file)) {
             String currentSection = "";
@@ -103,8 +103,7 @@ public class Storage {
         String name = unescapeSpecialCharacters(shoppingListItem[0]);
         double quantity = Double.parseDouble(shoppingListItem[1]);
         Unit unit = Unit.parseUnit(shoppingListItem[2]);
-        Category category = Category.parseCategory(shoppingListItem[3]);
-        shoppingList.addItem(new ShoppingListItem(name, quantity, unit, category));
+        shoppingList.addItem(new ShoppingListItem(name, quantity, unit));
     }
 
     private static Recipe processRecipeLine(String line, RecipeManager recipeManager) {
@@ -188,7 +187,7 @@ public class Storage {
         return fileInput;
     }
 
-    public static void saveData(IngredientInventory inventory, ShoppingList shoppingList, PlanPresets planPresets,
+    public static void saveData(IngredientInventory inventory, ShoppingList shoppingList, MealPlanManager plans,
                                 RecipeManager recipeManager) {
         try (FileWriter fileWriter = new FileWriter(filePath)) {
             StringBuilder fileInput = new StringBuilder();

@@ -3,8 +3,7 @@ import java.util.Scanner;
 
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
-import pantrypal.mealplan.PlanPresets;
-import pantrypal.mealplan.WeeklySchedule;
+import pantrypal.mealplan.MealPlanManager;
 import pantrypal.recipe.RecipeManager;
 import pantrypal.shoppinglist.ShoppingList;
 
@@ -15,16 +14,26 @@ public class CategoryList extends GeneralCommand {
     }
 
     @Override
-    public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, PlanPresets presets,
-                        RecipeManager recipes, WeeklySchedule week, Scanner in) {
+    public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, RecipeManager recipes,
+                        MealPlanManager plans, Scanner in) {
         Ui.showMessage("All valid categories: " + "\n" +
                 "DAIRY" + "\n" +
-                "SPICES" + "\n" +
-                "VEGETABLES" + "\n" +
-                "FRUITS" + "\n" +
+                "SPICE" + "\n" +
+                "VEGETABLE" + "\n" +
+                "FRUIT" + "\n" +
                 "MEAT" + "\n" +
-                "GRAINS" + "\n" +
-                "CONDIMENTS" + "\n"
+                "GRAIN" + "\n" +
+                "CONDIMENT" + "\n" +
+                "SWEET" + "\n" +
+                "BEVERAGE" + "\n" +
+                "SEAFOOD" + "\n" +
+                "NUTS" + "\n" +
+                "BAKERY" + "\n" +
+                "FROZEN" + "\n" +
+                "CANNED" + "\n" +
+                "SNACK" + "\n" +
+                "SOUP" + "\n" +
+                "HERB" + "\n"
         );
 
     }

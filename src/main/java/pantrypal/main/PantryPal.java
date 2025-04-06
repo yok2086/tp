@@ -5,8 +5,7 @@ import pantrypal.general.control.Parser;
 import pantrypal.general.control.Storage;
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
-import pantrypal.mealplan.PlanPresets;
-import pantrypal.mealplan.WeeklySchedule;
+import pantrypal.mealplan.MealPlanManager;
 import pantrypal.recipe.RecipeManager;
 import pantrypal.shoppinglist.ShoppingList;
 
@@ -24,21 +23,20 @@ public class PantryPal {
         Ui ui = new Ui();
         IngredientInventory inventory = new IngredientInventory();
         ShoppingList shoppingList = new ShoppingList();
-        PlanPresets presets = new PlanPresets();
-        WeeklySchedule week = new WeeklySchedule(presets);
+        MealPlanManager mealPlanManager = new MealPlanManager();
         RecipeManager recipes = new RecipeManager();
         String input;
         Storage storage = new Storage(FILE_PATH);
 
         Ui.printWelcomeMessage();
-        storage.createFile(inventory, shoppingList, presets, recipes);
+        storage.createFile(inventory, shoppingList, mealPlanManager, recipes);
         while (!isFinished) {
             input = in.nextLine();
 
             Command centralCommand = parser.parse(input);
-            centralCommand.execute(ui, inventory, shoppingList, presets, recipes, week, in);
+            centralCommand.execute(ui, inventory, shoppingList, recipes, mealPlanManager, in);
             isFinished = centralCommand.isExit();
-            Storage.saveData(inventory, shoppingList, presets, recipes);
+            Storage.saveData(inventory, shoppingList, mealPlanManager, recipes);
         }
     }
 }

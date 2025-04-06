@@ -158,18 +158,20 @@ viewRecipeList
 Description:
 View the name of all the recipes available in the repository.
 
+
 ### Inventory Commands
 #### Ingredient Inventory System
 
 #### Add New Ingredient
 Command:
 ```
-addNewIngredient <ingredient_name> <quantity> <unit>
+addNewIngredient <ingredient_name> <quantity> <unit> <category>
 ```
 Example:
 ```
-addNewIngredient milk 200 ml
+addNewIngredient milk 200 ml DAIRY
 ```
+Description: Adds a new ingredient with a specified quantity and unit to the inventory.
 
 #### Increase Specific Quantity to Existing Ingredient
 Command:
@@ -180,6 +182,7 @@ Example:
 ```
 increaseQuantity milk 200
 ```
+Description: Increases the quantity of an existing ingredient by the specified amount.
 
 #### Decrease Specific Quantity to Existing Ingredient
 Command:
@@ -190,6 +193,7 @@ Example:
 ```
 decreaseQuantity milk 200 
 ```
+Description: Decreases the quantity of an existing ingredient by the specified amount.
 
 #### Set Low Stock Ingredient Alert
 Command:
@@ -200,18 +204,21 @@ Example:
 ```
 setAlert flour 10 
 ```
+Description: Sets a threshold quantity to trigger a low-stock alert for an ingredient.
 
 #### Check Ingredient Stock
 Command:
 ```
 viewStock
 ```
+Description: Displays all current ingredients and their quantities in the inventory.
 
 #### View Low Stock Ingredients
 Command:
 ```
 viewLowStock
 ```
+Description: Displays all ingredients that are below their specified low-stock thresholds.
 
 #### Delete Ingredient Entirely
 Command:
@@ -222,10 +229,35 @@ Example:
 ```
 deleteIngredient salt
 ```
+Description: Removes an ingredient from the inventory.
+
+#### Convert Ingredient Unit
+Command:
+```
+convertIngredient <name> <targetUnit>
+```
+Example:
+```
+convertIngredient Sugar kg
+```
+Description: Converts the quantity of the specified ingredient to the target unit.
+
+#### View Ingredients by Category
+Command:
+```
+viewIngredientsByCategory <category>
+```
+Example:
+```
+viewIngredientsByCategory CONDIMENTS
+```
+Description: Displays all ingredients that belong to the specified category.
+
 
 
 ### Meal Plan Commands
 
+`Coming Soon`
 
 
 

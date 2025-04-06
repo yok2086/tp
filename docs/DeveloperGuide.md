@@ -20,22 +20,154 @@
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ... | I want to ... | So that I can ...|
+|---------|----------|---------------|------------------|
+| v1.0    |new user|see usage instructions|refer to them when I forget how to use the application|
+| v1.0    |user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| v1.0    | user     | create a new ingredient                    | keep track of items I’ve added to my pantry                         |
+| v1.0    | user     | update an ingredient’s quantity             | reflect changes when I buy or use ingredients                      |
+| v1.0    | user     | rename an ingredient                        | correct mistakes or reflect updated naming                         |
+| v1.0    | user     | view details of an ingredient               | know exactly how much I have and what type it is                   |
+| v1.0    | user     | delete an ingredient                        | remove unused or expired ingredients from my inventory             |
+| v1.0    | user     | set a low stock threshold for ingredients   | receive alerts when I need to restock                              |
+| v1.0    | user     | view all low stock items                    | quickly identify what needs to be replenished                      |
+| v1.0    | user     | find out if an ingredient is in stock       | check availability before starting a recipe                        |
+| v2.0    | user     | change an ingredient’s unit                 | work with units I prefer or understand better                      |
+| v2.0    | user     | view ingredients by category                | organize or filter ingredients for easier navigation               |
+| v2.0    | user     | convert the unit of an ingredient           | standardize or switch between measurement systems (e.g. g to kg)    |
 
 ## Non-Functional Requirements
-
-{Give non-functional requirements}
+- PantryPal should work on any mainstream operating system (Windows, macOS, Linux) with Java 17 or above installed.
+- Users with average typing speed should be able to complete most tasks more efficiently using commands than mouse navigation.
+- The application should remain responsive when managing a moderately large number of ingredients typical of home kitchens.
+- All data should persist automatically across sessions without requiring manual saving.
 
 ## Glossary
 
 * *glossary item* - Definition
 
-## Instructions for manual testing
+# Manual Testing Instructions for 
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+> **Note:** The following instructions serve as a basic guide for testers to validate the functionality of the program. Testers should go beyond these steps and conduct further exploratory testing.
+---
+
+## 1. Start Application
+
+1. **Follow the setup instructions** provided in the User Guide to initialize the application and set up the `IngredientInventory` class.
+   - **Expected**: The application should start without errors, and the user should be prompted for input.
+
+---
+## 2. Test Cases
+
+### 2.1 Initial State
+
+1. **Test case: `viewStock`**
+   - **Steps**: Call `viewStock` method when the inventory is empty.
+   - **Expected**: The message `Inventory is empty.` should be displayed.
+
+2. **Test case: `viewLowStock`**
+   - **Steps**: Call `viewLowStock` when no ingredients are set with low stock alerts.
+   - **Expected**: The message `No low stock ingredients.` should be displayed.
+
+---
+
+### 2.2 Add New Ingredient
+
+1. **Test case: `addNewIngredient`**
+   - **Steps**: Add a new ingredient to the inventory: `addNewIngredient("Sugar", 5, Unit.GRAM, Category.CONDIMENTS)`.
+   - **Expected**: The ingredient `Sugar` with quantity `5` in grams and the `CONDIMENTS` category should be added to the inventory.
+
+2. **Test case: `addNewIngredient` with invalid data**
+   - **Steps**: Add a new ingredient with invalid data, e.g., `addNewIngredient("", 5, Unit.GRAM, Category.CONDIMENTS)` (empty name).
+   - **Expected**: The method should throw an assertion error indicating that the ingredient name cannot be null or empty.
+
+3. **Test case: `addNewIngredient` with negative quantity**
+   - **Steps**: Add an ingredient with a negative quantity, e.g., `addNewIngredient("Salt", -3, Unit.GRAM, Category.CONDIMENTS)`.
+   - **Expected**: The method should throw an assertion error indicating that the quantity must be positive.
+
+---
+
+### 2.3 Increase Ingredient Quantity
+
+1. **Test case: `increaseQuantity`**
+   - **Steps**: Increase the quantity of an existing ingredient: `increaseQuantity("Sugar", 3)`.
+   - **Expected**: The quantity of `Sugar` should be increased by `3`, making the new quantity `8`.
+
+2. **Test case: `increaseQuantity` for non-existent ingredient**
+   - **Steps**: Try increasing the quantity of a non-existent ingredient: `increaseQuantity("Flour", 5)`.
+   - **Expected**: The message `Ingredient not found` should be displayed.
+
+---
+
+### 2.4 Decrease Ingredient Quantity
+
+1. **Test case: `decreaseQuantity`**
+   - **Steps**: Decrease the quantity of an existing ingredient: `decreaseQuantity("Sugar", 2)`.
+   - **Expected**: The quantity of `Sugar` should be decreased by `2`, making the new quantity `6`.
+
+2. **Test case: `decreaseQuantity` for insufficient quantity**
+   - **Steps**: Try decreasing the quantity beyond available stock: `decreaseQuantity("Sugar", 10)`.
+   - **Expected**: The message `Not enough Sugar in stock.` should be displayed.
+
+3. **Test case: `decreaseQuantity` for non-existent ingredient**
+   - **Steps**: Try decreasing the quantity of a non-existent ingredient: `decreaseQuantity("Flour", 5)`.
+   - **Expected**: The message `Ingredient not found` should be displayed.
+
+---
+
+### 2.5 Set and View Low Stock Alerts
+
+1. **Test case: `setAlert`**
+   - **Steps**: Set a low stock alert for an ingredient: `setAlert("Sugar", 2)`.
+   - **Expected**: A low stock alert for `Sugar` should be set at the threshold of `2`.
+
+2. **Test case: `viewLowStock`**
+   - **Steps**: View low stock ingredients when the alert is set: `viewLowStock()`.
+   - **Expected**: If `Sugar` has a quantity lower than `2`, the message `Low stock: Sugar (quantity)` should be displayed.
+
+---
+
+### 2.6 Delete Ingredient
+
+1. **Test case: `deleteIngredient`**
+   - **Steps**: Delete an existing ingredient: `deleteIngredient("Sugar")`.
+   - **Expected**: The ingredient `Sugar` should be removed from the inventory, and the message `Deleted Sugar from inventory.` should be displayed.
+
+2. **Test case: `deleteIngredient` for non-existent ingredient**
+   - **Steps**: Try deleting a non-existent ingredient: `deleteIngredient("Flour")`.
+   - **Expected**: The message `Ingredient not found.` should be displayed.
+
+---
+
+### 2.7 Convert Ingredient Unit
+
+1. **Test case: `convertIngredient`**
+   - **Steps**: Convert an ingredient's unit: `convertIngredient("Sugar", Unit.KG)`.
+   - **Expected**: The quantity of `Sugar` should be converted to kilograms, and the message `Sugar converted (new quantity) to KG` should be displayed.
+
+2. **Test case: `convertIngredient` for non-existent ingredient**
+   - **Steps**: Try converting a non-existent ingredient: `convertIngredient("Flour", Unit.KG)`.
+   - **Expected**: The method should throw an `IllegalArgumentException` with the message `Ingredient not found.`
+
+---
+
+### 2.8 View Ingredients by Category
+
+1. **Test case: `viewIngredientsByCategory`**
+   - **Steps**: View ingredients by category: `viewIngredientsByCategory(Category.CONDIMENTS)`.
+   - **Expected**: The ingredients in the `CONDIMENTS` category should be displayed, if available.
+
+2. **Test case: `viewIngredientsByCategory` for empty category**
+   - **Steps**: View ingredients by a category with no ingredients: `viewIngredientsByCategory(Category.SPICES)`.
+   - **Expected**: The message `No ingredients found in category: SPICES` should be displayed.
+
+---
+## 1. Start Application
+
+1. **Follow the setup instructions** provided in the User Guide to initialize the application and set up the `IngredientInventory` class.
+    - **Expected**: The application should start without errors, and the user should be prompted for input.
+
+---
 
 
 # Implementation of Command Classes
@@ -100,7 +232,7 @@ The Storage feature is designed to be modular and extensible, allowing for easy 
 
 The following sequence diagram illustrates the interaction between the `Storage` class and the other key lists in the application during the loading and saving of data:
 The key lists include: `StockList`, `LowStockList`, `RecipeList`, `ShoppingList`
-<img src="img_3.png" alt="drawing" style="width:1000px;"/>
+<img src="Storage_Sequence_Diagram.png" alt="drawing" style="width:1000px;"/>
 
 # Implementation of the Meal Plan, Plan Presets and Viewing features
 
@@ -212,7 +344,6 @@ like the Ingredient Inventory, Recipe, and Recipe Manager. The core components o
 - **Updating Ingredient**: Provides methods to modify an ingredient's name, quantity, and unit.
 - **Unit Management**: Ensures valid unit selection and provides functionality for unit conversion.
 
-
 ## Ingredient Inventory Feature
 
 ### Overview
@@ -224,31 +355,36 @@ supporting low-stock alerts.
 The Ingredient Inventory feature is modular and extensible, allowing for seamless integration with features like Recipe
 Management and Shopping Lists. The core components of the Ingredient Inventory feature include:
 
-- **Ingredient Inventory Class**: Manages the collection of ingredients, allowing users to add, update, and delete
+- **Ingredient Inventory Class**: Manages the collection of ingredients, allowing users to add, edit, and delete
 - items.
-- **Low-Stock Alert System**: Enables users to set and retrieve low-stock alerts, notifying them when ingredients fall
+- **Low-Stock Alert System**: Enables users to set and receive low-stock alerts, notifying them when ingredients fall
 - below a set threshold.
-- **Integration with Ingredient Feature**: Uses the Ingredient class to ensure consistency and modularity in ingredient
-- representation.
+- **Integration with Ingredient Feature**: Uses the Ingredient class to ensure consistency and modularity in ingredient representation.
+- **Unit Conversion System**: Enables users to convert ingredient quantities between different units (e.g. kg to g) for consistency in recipes and inventory tracking.
+- **Category Management**: Allows ingredients to be categorized (e.g. Dairy, Condiments, Spices) for easier organization and filtering.
 
 ### Core Functionalities
-- **Adding and Managing Ingredients**: Users can add new ingredients with a name, quantity, and unit while ensuring
+- **Adding and Managing Ingredients**: Users can add new ingredients with a name, quantity, unit, and category while ensuring
 - valid input through validation checks.
 - **Updating Ingredient Quantities**: The feature allows increasing or decreasing ingredient quantities.
 - **Deleting Ingredients**: Users can remove ingredients from the inventory, ensuring accurate stock representation.
 - **Low-Stock Alerts**: The system supports configurable alerts to notify users when ingredients are running low.
+- **Unit Conversion**: Users can add and convert ingredient quantities between different units using predefined conversion factors to maintain consistency.
+- **Categorizing Ingredients**: Users can assign categories to ingredients to improve organization and facilitate searching.
 
 ## Sequence Diagram
 The following sequence diagram illustrates the interaction between the user, the Ingredient Inventory, and the
 Ingredient feature during ingredient management:
 
-<img src="Ingredients_Sequence_Diagram.png" alt="drawing" style="width:500px;"/>
+![IngredientInventory_Sequence_Diagram.png](team/IngredientInventory_Sequence_Diagram.png)
 
 ### Why It Is Implemented This Way
 The Ingredient and Ingredient Inventory features follow a modular design to ensure flexibility, scalability, and
 maintainability. The Single Responsibility Principle is adhered to, with the Ingredient class managing individual
-ingredient attributes (name, quantity, unit) and the Ingredient Inventory class handling the collection of ingredients.
-This clear separation makes the system easy to understand, maintain, and modify without affecting other components.
+ingredient attributes (name, quantity, unit) and the Ingredient Inventory class handling the collection of ingredients, conversions, and stock alerts.
+The addition of unit conversion ensures consistency across different ingredient measurements, making it 
+easier to track inventory. Categorization improves usability by allowing users to group and filter
+ingredients based on type.
 
 # Implementation of the Shopping List Item and Shopping List Features
 
