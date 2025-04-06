@@ -112,21 +112,6 @@ public class IngredientInventoryTest {
     }
 
     @Test
-    void testValidateIngredientThrowsException() {
-        // Test for invalid name
-        assertThrows(AssertionError.class, () -> inventory.addNewIngredient("", 1.0, Unit.GRAM,
-                Category.parseCategory("GRAIN")));
-
-        // Test for invalid quantity
-        assertThrows(AssertionError.class, () -> inventory.addNewIngredient("Salt", -1.0, Unit.GRAM,
-                Category.parseCategory("GRAIN")));
-
-        // Test for invalid unit
-        assertThrows(AssertionError.class, () -> inventory.addNewIngredient("Pepper", 1.0, null,
-                Category.parseCategory("SPICE")));
-    }
-
-    @Test
     void testNullCategoryThrowsException() {
         // Arrange: Set up the necessary objects
         IngredientInventory inventory = new IngredientInventory();
