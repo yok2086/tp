@@ -479,7 +479,7 @@ The Recipe Management feature is modular and extensible, as well as maintaining 
 ## Sequence Diagram
 The following sequence diagram illustrates the interaction between the user, the Recipe Manager, the Recipe, the Ingredient, and the Instruction feature during recipe management:
 
-<img src="Recipe_Sequence_Diagram.png" alt="drawing" style="width:600px;"/>
+<img src="Recipe_Sequence_Diagram.png" alt="drawing" style="width:1000px;"/>
 
 ### Why It Is Implemented This Way
 The Instruction, Recipe, and Recipe Management features follow a modular design to ensure it is easy to be maintained or modified when necessary. The Single Responsibility Principle is adhered to, with Instruction manages only the recipe instructions, while Recipe acts as collection of Instruction and Ingredient, and Recipe Management acts as collection of Instruction only. By separating into smaller classes, it helps the developer understand, maintain without heavy coupling with other components.
