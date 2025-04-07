@@ -2,11 +2,11 @@
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+1. **JUnit 5** - Used for software testing
+2. **Gradle** - Used for build automation
 
 ## Design & implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
 
 ## Product scope
@@ -186,9 +186,8 @@ The core components of the Command classes include:
 2. **Command Types**: Each command inherits from a specific command type, which is used to identify the command's functionality group. This allows for better organization and management of commands within the application.
 2. **Execute Method**: Each command class implements an `execute` method, which contains the logic for performing the action associated with that command. This method is called when the parser returns the command object to the main program.
 
-# Class Diagram
-<img src="Commands_Class_Diagram.png" alt="drawing" style="width:1500px;"/>
-
+## Class Diagram
+<img src="Command_Class_Diagram.png" alt="drawing" style="width:800px;"/>
 
 
 # Implementation of the Parser Feature
@@ -207,7 +206,7 @@ The Parser feature is designed to be modular and extensible, allowing for easy a
 
 4. **Error Handling**: The Parser feature includes error handling to manage invalid input and provide feedback to the user. If the input cannot be parsed or if the command is not recognized, an appropriate error message is displayed.
 
-# Sequence Diagram
+## Sequence Diagram
 
 The following sequence diagram illustrates the interaction between the user, the `Parser`, and the `Command` classes during the execution of a command:
 
@@ -233,7 +232,7 @@ The Storage feature is designed to be modular and extensible, allowing for easy 
 2. **Data Classes**: The Storage feature interacts with various data classes, such as `IngredientInventory`, `ShoppingList`, `RecipeManager`, and `PlanPresets`. Each of these classes represents a specific type of data list and provides methods for manipulating that list.
 3. **File Handling**: The Storage feature uses file handling techniques to read and write data to `data.txt`. It ensures that the data is formatted correctly and that any errors during file operations are handled gracefully.
 
-# Sequence Diagram
+## Sequence Diagram
 
 The following sequence diagram illustrates the interaction between the `Storage` class and the other key lists in the application during the loading and saving of data:
 The key lists include: `StockList`, `LowStockList`, `RecipeList`, `ShoppingList`
