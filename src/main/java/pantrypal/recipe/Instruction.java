@@ -20,7 +20,6 @@ public class Instruction {
     }
 
     /**
-     *
      * @return the step number of the instruction
      */
     public int getStep() {
@@ -28,7 +27,6 @@ public class Instruction {
     }
 
     /**
-     *
      * @return the content of the instruction
      */
     public String getInstruction() {

@@ -29,7 +29,6 @@ public class Recipe {
     }
 
     /**
-     *
      * @return the name of the recipe
      */
     public String getName() {
