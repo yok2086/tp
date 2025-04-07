@@ -198,7 +198,7 @@ public class IngredientInventoryTest {
      * Tests that adding an ingredient with a null name throws an AssertionError.
      */
     @Test
-    void testAddIngredient_NullName_ThrowsException() {
+    void testNullName() {
         assertThrows(AssertionError.class, () ->
                 inventory.addNewIngredient(null, 1.0, Unit.GRAM, Category.CONDIMENT)
         );
@@ -208,7 +208,7 @@ public class IngredientInventoryTest {
      * Tests that adding an ingredient with an empty name throws an AssertionError.
      */
     @Test
-    void testAddIngredient_EmptyName_ThrowsException() {
+    void testEmptyName() {
         assertThrows(AssertionError.class, () ->
                 inventory.addNewIngredient("", 1.0, Unit.GRAM, Category.CONDIMENT)
         );
@@ -218,7 +218,7 @@ public class IngredientInventoryTest {
      * Tests that adding an ingredient with a negative quantity throws an AssertionError.
      */
     @Test
-    void testAddIngredient_NegativeQuantity_ThrowsException() {
+    void testNegativeQuantity() {
         assertThrows(AssertionError.class, () ->
                 inventory.addNewIngredient("Sugar", -5.0, Unit.GRAM, Category.CONDIMENT)
         );
@@ -228,7 +228,7 @@ public class IngredientInventoryTest {
      * Tests that adding an ingredient with zero quantity throws an AssertionError.
      */
     @Test
-    void testAddIngredient_ZeroQuantity_ThrowsException() {
+    void testZeroQuantity() {
         assertThrows(AssertionError.class, () ->
                 inventory.addNewIngredient("Sugar", 0.0, Unit.GRAM, Category.CONDIMENT)
         );
@@ -238,7 +238,7 @@ public class IngredientInventoryTest {
      * Tests that adding an ingredient with a null unit throws an AssertionError.
      */
     @Test
-    void testAddIngredient_NullUnit_ThrowsException() {
+    void testNullUnit() {
         assertThrows(AssertionError.class, () ->
                 inventory.addNewIngredient("Sugar", 1.0, null, Category.CONDIMENT)
         );
@@ -248,7 +248,7 @@ public class IngredientInventoryTest {
      * Tests that adding an ingredient with a null category throws an AssertionError.
      */
     @Test
-    void testAddIngredient_NullCategory_ThrowsException() {
+    void testNullCategory() {
         assertThrows(AssertionError.class, () ->
                 inventory.addNewIngredient("Sugar", 1.0, Unit.GRAM, null)
         );
