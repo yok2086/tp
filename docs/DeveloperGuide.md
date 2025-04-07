@@ -38,15 +38,10 @@
 - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
 
 
-## Acknowledgements
-
-1. **JUnit 5** - Used for software testing
-2. **Gradle** - Used for build automation
-
----
 # Design and Implementation
 
 ### Class Diagram showing the overall structure of the application
+
 <img src="Overall_Class_Diagram.png" alt="drawing" style="width:500px;"/>
 
 ### Quick high-level overview of the classes in the application:
@@ -63,7 +58,9 @@
 - **ShoppingList:** manages the list of items to be purchased, allowing users to add, remove, and view items.
 - **RecipeManager:** manages the list of recipes, allowing users to add, remove, and view recipes.
 - **MealPlanManager** manages the list of meal plans, allowing users to add, remove, and view meal plans.
+
 ---
+
 # Implementation of Command Classes
 
 ## Overview
@@ -299,7 +296,13 @@ Management and Shopping Lists. The core components of the Ingredient Inventory f
 The following sequence diagram illustrates the interaction between the user, the Ingredient Inventory, and the
 Ingredient feature during ingredient management:
 
-![IngredientInventory_Sequence_Diagram.png](team/IngredientInventory_Sequence_Diagram.png)
+<img src="Ingredients_Sequence_Diagram.png" alt="drawing" style="width:1000px;"/>
+
+* The sequence diagram is generalized to include only the decreaseQuantity method, as it follows the same flow as the increaseQuantity method. Both operations involve similar steps—validating input, updating the inventory, and displaying a message—so only one method is shown to avoid redundancy. 
+
+<img src="Ingredients_Sequence_Diagram_2.png" alt="drawing" style="width:1000px;"/>
+
+<img src="Ingredients_Sequence_diagram_3.png" alt="drawing" style="width:1000px;"/>
 
 ### Why It Is Implemented This Way
 The Ingredient and Ingredient Inventory features follow a modular design to ensure flexibility, scalability, and
@@ -693,5 +696,105 @@ meal planning, grocery shopping, and inventory management by providing an all in
         - Repeat test case 2.9.1 three times with different name each time
         - Run the command `viewRecipeList`
     - **Expected**: The list of recipe names should be displayed.
+---
+
+### 2.11 Add New Shopping Item
+
+1. **Test case: `addShoppingItem`**
+    - **Steps**: Add a new item to the shopping list: `addShoppingItem sugar 500 g`
+    - **Expected**: The message `Add 'SUGAR' to the shopping list.` should be displayed.
+
+2. **Test case: `addShoppingItem` with invalid quantity**
+    - **Steps**: Add an item with a negative quantity: `addShoppingItem sugar -5 g`
+    - **Expected**: The message `Quantity must be greater than 0` should be displayed.
+
+3. **Test case: `addShoppingItem` with duplicating item name**
+    - **Steps**: Add an item name 'sugar' twice: `addShoppingItem sugar 150 g`
+    - **Expected**: The message `Item 'SUGAR' already exists. Please use editShoppingItem to update the item.` should be displayed.
+
+4. **Test case: `addShoppingItem` with invalid unit**
+    - **Steps**: Add an item with invalid unit: `addShoppingItem sugar 500 invalid_unit`
+    - **Expected**: The message `Invalid unit: invalid_unit` should be displayed.
+
+---
+
+### 2.12 Remove Shopping Item
+
+1. **Test case: `removeShoppingItem`**
+    - **Steps**: Remove an existing item: `removeShoppingItem sugar`
+    - **Expected**: The message `Removed 'SUGAR' from the shopping list.` should be displayed.
+
+2. **Test case: `removeShoppingItem` with non-existent item**
+    - **Steps**: Try removing a non-existent item: `removeShoppingItem nonexistent_item`
+    - **Expected**: The message `Item 'NONEXISTENT_ITEM' not found in the shopping list.` should be displayed.
+
+---
+
+### 2.13 Edit Shopping Item
+
+1. **Test case: `editShoppingItem`**
+    - **Steps**: Edit an existing item: `editShoppingItem 1 sugar 1000 kg`
+    - **Expected**: The message `Item at index 1 updated successfully.` should be displayed.
+
+2. **Test case: `editShoppingItem` with invalid index**
+    - **Steps**: Try editing an un-existent item with invalid index: `editShoppingItem invalid_index sugar 500 g`
+    - **Expected**: The message `Invalid index provided. No item updated.` should be displayed.
+
+3. **Test case: `editShoppingItem` with invalid quantity**
+    - **Steps**: Edit an item with negative quantity: `editShoppingItem 1 sugar -5 g`
+    - **Expected**: The message `Quantity must be greater than 0` should be displayed.
+
+4. **Test case: `editShoppingItem` with existing item name**
+    - **Steps**: Add a new item: 'addShoppingItem item 50 g'. Then edit its item name to another existing item name: `editShoppingItem 2 sugar 150 g`
+    - **Expected**: The message `Ingredient name already exists. Please try again with another name.` should be displayed.
+
+---
+
+### 2.14 Mark Shopping Item as Purchased
+
+1. **Test case: `markShoppingItemAsPurchased`**
+    - **Steps**: Mark an existing item as purchased: `markShoppingItemAsPurchased sugar`
+    - **Expected**: The message `Marked 'SUGAR' as purchased.` should be displayed.
+
+2. **Test case: `markShoppingItemAsPurchased` with non-existent item**
+    - **Steps**: Try marking a non-existent item: `markShoppingItemAsPurchased nonexistent_item`
+    - **Expected**: The message `Item 'NONEXISTENT_ITEM' not found in the shopping list.` should be displayed.
+
+---
+
+### 2.15 Generate Shopping List
+
+1. **Test case: `generateShoppingList`**
+    - **Steps**:
+        - Add ingredient below alert: `addNewIngredient apple 500 g fruit`
+        - Set low stock alert: `setAlert apple 1000`
+        - Run command: `generateShoppingList`
+    - **Expected**: The message `Shopping list has been auto-generated as below:` should be displayed, and the shopping list should contain sugar with quantity 500g.
+
+2. **Test case: `generateShoppingList` with no low stock items**
+    - **Steps**: Run command when no ingredients are below their alert thresholds: `generateShoppingList`
+    - **Expected**: The message `No items need to be added to shopping list` should be displayed.
+
+---
+
+### 2.16 View Shopping List
+
+1. **Test case: `viewShoppingList` with items**
+    - **Steps**:
+        - Add items using `addShoppingItem`
+        - Run command: `viewShoppingList`
+    - **Expected**: A numbered list of shopping items should be displayed, showing each item's name, quantity, unit, and purchase status if purchased.
+
+2. **Test case: `viewShoppingList` with purchased items**
+    - **Steps**:
+        - Add items using `addShoppingItem`
+        - Mark some items as purchased using `markShoppingItemAsPurchased`
+        - Run command: `viewShoppingList`
+    - **Expected**: The shopping list should display items with their purchase status, showing "(Purchased)" next to purchased items.
+
+3. **Test case: `viewShoppingList` with empty list**
+    - **Steps**: Run command with no items in list: `viewShoppingList`
+    - **Expected**: The message `Shopping list is empty.` should be displayed.
+
 ---
 

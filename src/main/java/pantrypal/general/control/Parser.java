@@ -22,9 +22,9 @@ import pantrypal.general.commands.mealplan.RemovePlan;
 import pantrypal.general.commands.mealplan.RemoveRecipeFromPlan;
 import pantrypal.general.commands.mealplan.RemovePlanFromDay;
 import pantrypal.general.commands.mealplan.ViewPlan;
-import pantrypal.general.commands.mealplan.ViewPlanForDay;
-import pantrypal.general.commands.mealplan.ViewPlanForWeek;
-import pantrypal.general.commands.mealplan.ExecutePlanForDay;
+import pantrypal.general.commands.mealplan.ViewDayPlan;
+import pantrypal.general.commands.mealplan.ViewWeekPlans;
+import pantrypal.general.commands.mealplan.ExecutePlan;
 import pantrypal.general.commands.mealplan.FindPlan;
 import pantrypal.general.commands.mealplan.ViewPlanList;
 import pantrypal.general.commands.recipe.AddRecipe;
@@ -377,9 +377,9 @@ public class Parser {
                     throw new IllegalArgumentException("Day name cannot be null or empty");
                 }
                 assert viewDayName != null && !viewDayName.isEmpty() : "Day name cannot be null or empty";
-                return new ViewPlanForDay(viewDayName);
+                return new ViewDayPlan(viewDayName);
             case "viewplanforweek":
-                return new ViewPlanForWeek();
+                return new ViewWeekPlans();
             case "execute":
                 if (inputParts.length < 2) {
                     throw new IllegalArgumentException("Insufficient arguments for executePlanForDay command.");
@@ -389,7 +389,7 @@ public class Parser {
                     throw new IllegalArgumentException("Day name cannot be null or empty");
                 }
                 assert executeDayName != null && !executeDayName.isEmpty() : "Day name cannot be null or empty";
-                return new ExecutePlanForDay(executeDayName);
+                return new ExecutePlan(executeDayName);
             case "findplan":
                 if (inputParts.length < 2) {
                     throw new IllegalArgumentException("Insufficient arguments for findPlan command.");

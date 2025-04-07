@@ -26,7 +26,7 @@ public class UnitList extends GeneralCommand {
                 "OUNCE(oz)" + "\n" +
                 "POUND(lb)" + "\n" +
                 "MILLIGRAM(mg)" + "\n" +
-                "EGG(egg)" + "\n" +
+                "PIECE(pc)" + "\n" +
                 "EGG_WHITE(egg white)" + "\n" +
                 "EGG_YOLK(egg yolk)" + "\n" +
                 "PINCH(pinch)" + "\n" +

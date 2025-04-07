@@ -29,11 +29,11 @@ public class RemovePlanFromDay extends MealPlanCommand {
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list,RecipeManager recipes,
                         MealPlanManager plans, Scanner in){
         try {
-            plans.removePlanFromWeek(getDay(day));
+            plans.removePlanFromDay(getDay(day));
         } catch (NullPointerException e) {
             Ui.showMessage("Invalid day provided. Please enter a valid day name");
         } catch (IllegalArgumentException e) {
-            ui.showMessage("Invalid input given. Please refrain from unconventional datatypes");
+            Ui.showMessage("Invalid input given. Please refrain from unconventional datatypes");
         }
     }
 }

@@ -14,14 +14,14 @@ import pantrypal.shoppinglist.ShoppingListItem;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ExecutePlanForDay extends MealPlanCommand {
+public class ExecutePlan extends MealPlanCommand {
     private String day;
 
-    public ExecutePlanForDay() {
+    public ExecutePlan() {
         super("execute <day>", "Execute a plan for a specific day");
     }
 
-    public ExecutePlanForDay(String day) {
+    public ExecutePlan(String day) {
         this.day = day;
     }
 

@@ -378,7 +378,7 @@ public class Storage {
         }
         Day day = Day.valueOf(dayName.toUpperCase());
         int planIndex = Integer.parseInt(parts[1]);
-        if (planIndex < 0 || planIndex >= plans.getPlanList().length) {
+        if (planIndex < 0 || planIndex >= plans.getPlanList().size()) {
             throw new DataCorruptionException("Invalid plan index in weekly plan");
         }
         plans.addPlanToDay(planIndex, day);
@@ -414,7 +414,7 @@ public class Storage {
             throw new DataCorruptionException("Invalid meal plan format");
         }
         String planName = unescapeSpecialCharacters(parts[0]);
-        plans.addPlanToList(planName);
+        plans.addPlan(planName);
         return new Plan(planName);
     }
 

@@ -8,11 +8,11 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
-public class ViewPlanForWeek extends MealPlanCommand {
+public class ViewWeekPlans extends MealPlanCommand {
 
 
-    public ViewPlanForWeek() {
-        super("viewPlanForWeek", "View all plans created in the week");
+    public ViewWeekPlans() {
+        super("viewWeekPlans", "View all plans created in the week");
     }
 
     @Override
