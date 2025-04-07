@@ -368,7 +368,7 @@ public class Parser {
                 assert deleteFromWeekDayName != null && !deleteFromWeekDayName.isEmpty() : "Day name cannot " +
                         "be null or empty";
                 return new RemovePlanFromDay(deleteFromWeekDayName);
-            case "viewplanforday":
+            case "viewdayplan":
                 if (inputParts.length < 2) {
                     throw new IllegalArgumentException("Insufficient arguments for viewPlanForDay command.");
                 }
@@ -378,7 +378,7 @@ public class Parser {
                 }
                 assert viewDayName != null && !viewDayName.isEmpty() : "Day name cannot be null or empty";
                 return new ViewDayPlan(viewDayName);
-            case "viewplanforweek":
+            case "viewweekplans":
                 return new ViewWeekPlans();
             case "execute":
                 if (inputParts.length < 2) {
