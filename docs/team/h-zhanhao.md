@@ -8,15 +8,16 @@ plan their meals, and store recipes.
 
 ## Given below are my contributions to the project:
 ## **Command Classes**:          
-  - Added command classes for every command in the application. Which includes every Meal Plan Command, Recipe Command, 
+  - Added command classes for most commands in the application. Which includes most Meal Plan Command, Recipe Command, 
     Shopping List Command, and Ingredient Inventory Command.
   - Implemented the execute method for each command class to perform the required action.
+  - Separated the command classes into different packages for better organization and maintainability.
+  - Separated the command classes into different subclasses for a more dynamic and flexible design of the help command
 ### Implemented the Help Command Class
   - Created the HelpCommand class to provide users with information about the available commands.
 ## **Parser Class**: 
    - Implemented the Parser class to parse user input and instantiate the appropriate command class.
    - Added error handling to manage invalid number of arguments and invalid command types.
-   -
 
 ## **User Interface Class**
   - Designed the user interface to be user-friendly and intuitive.
@@ -24,11 +25,20 @@ plan their meals, and store recipes.
 ## **Storage Class**
   - Implemented the Storage class to handle data storage and retrieval.
   - Added methods to save and load data from files.
-  - Implemented error handling for file operations.
+  - Implemented anti corruption measures to ensure data integrity.
 
 ## **Main Class**
   - Created the Main class to serve as the entry point for the application.
   - Implemented the main method to initialize the application and handle user input.
+  - Implemented the run method to start the application and handle user commands.
+  - Implemented the exit logic to handle application termination.
+
+## **MealPlanManager Class**
+  - Aided in the implementation of the MealPlanManager class to manage meal plans.
+  - Implemented methods to View Plan, View Plan List, and Remove Plans
+
+## JUnit Testing:
+  - Implemented test cases for the Parser class to verify the parsing logic.
 
 ## **Text-Ui-Test**
   - Created the TextUiTest class to test the user interface.
@@ -41,6 +51,8 @@ plan their meals, and store recipes.
     - Added Quick Start Guide and Introduction to the application.
     - Added descriptions and format for General Commands.
 - Developer Guide
+    - Wrote a quick overview of the overall design and implementation of the application.
+    - Made the class diagram for the overall architecture of the application.
     - Completed the implementation of the Parser, Storage and Command Class features
     - Created sequence diagrams for the Parser and Storage features.
     - Created class diagram for the Command Class feature.
@@ -49,9 +61,10 @@ plan their meals, and store recipes.
 ## **Project Management**:
 - Created the project repository 
 - Set up the project structure and initial files.
-- Managed releases for `v.1.0` and `v2.0` of the application.
+- Managed releases for `v.1.0`, `v2.0`, and `v2.1` of the application.
 - Facilitated team collaboration and communication.
-- Aided teammate in completing his feature
+- Aided teammate in completing his features.
+- Facilitated team meetings and discussions.
 
     
 

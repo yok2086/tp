@@ -306,9 +306,9 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_viewPlanForDayWithValidInputs_returnsViewPlanForDayCommand() {
+    public void parse_viewDayPlanWithValidInputs_returnsViewPlanForDayCommand() {
         Parser parser = new Parser();
-        Command command = parser.parse("viewPlanForDay Monday");
+        Command command = parser.parse("viewDayPlan Monday");
 
         assertInstanceOf(ViewDayPlan.class, command);
         ViewDayPlan viewDayPlanCommand = (ViewDayPlan) command;
@@ -316,7 +316,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_viewPlanForDayWithInvalidInputs_returnsNullCommand() {
+    public void parse_viewDayPlanWithInvalidInputs_returnsNullCommand() {
         Parser parser = new Parser();
         Command command = parser.parse("viewPlanForDay");
 
@@ -324,9 +324,9 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_viewPlanForWeek_returnsViewPlanForWeekCommand() {
+    public void parse_viewWeekPlans_returnsViewPlanForWeekCommand() {
         Parser parser = new Parser();
-        Command command = parser.parse("viewPlanForWeek");
+        Command command = parser.parse("viewWeekPlans");
 
         assertInstanceOf(ViewWeekPlans.class, command);
     }
