@@ -72,9 +72,9 @@ public class Parser {
 
                 quantity = Double.parseDouble(inputParts[2]);
                 if (quantity < 0) {
-                    throw new IllegalArgumentException("Quantity must be non-negative");
+                    throw new IllegalArgumentException("Quantity must be greater than 0");
                 }
-                assert quantity >= 0 : "Quantity must be non-negative";
+                assert quantity >= 0 : "Quantity must be greater than 0";
 
                 unit = Unit.parseUnit(inputParts[3]);
                 if (unit == null) {
@@ -100,9 +100,9 @@ public class Parser {
 
                 quantity = Double.parseDouble(inputParts[2]);
                 if (quantity < 0) {
-                    throw new IllegalArgumentException("Quantity must be non-negative");
+                    throw new IllegalArgumentException("Quantity must be greater than 0");
                 }
-                assert quantity >= 0 : "Quantity must be non-negative";
+                assert quantity >= 0 : "Quantity must be greater than 0";
                 return new IncreaseQuantity(name, quantity);
             case "decreasequantity":
                 if (inputParts.length < 3) {
@@ -116,9 +116,9 @@ public class Parser {
 
                 quantity = Double.parseDouble(inputParts[2]);
                 if (quantity < 0) {
-                    throw new IllegalArgumentException("Quantity must be non-negative");
+                    throw new IllegalArgumentException("Quantity must be greater than 0");
                 }
-                assert quantity >= 0 : "Quantity must be non-negative";
+                assert quantity >= 0 : "Quantity must be greater than 0";
                 return new DecreaseQuantity(name, quantity);
             case "setalert":
                 if (inputParts.length < 3) {
@@ -132,9 +132,9 @@ public class Parser {
 
                 double threshold = Double.parseDouble(inputParts[2]);
                 if (threshold < 0) {
-                    throw new IllegalArgumentException("Threshold must be non-negative");
+                    throw new IllegalArgumentException("Threshold must be greater than 0");
                 }
-                assert threshold >= 0 : "Threshold must be non-negative";
+                assert threshold >= 0 : "Threshold must be greater than 0";
                 return new SetAlert(name, threshold);
             case "viewstock":
                 return new CheckStock();
@@ -193,9 +193,9 @@ public class Parser {
 
                 quantity = Double.parseDouble(inputParts[2]);
                 if (quantity < 0) {
-                    throw new IllegalArgumentException("Quantity must be non-negative");
+                    throw new IllegalArgumentException("Quantity must be greater than 0");
                 }
-                assert quantity >= 0 : "Quantity must be non-negative";
+                assert quantity >= 0 : "Quantity must be greater than 0";
 
                 unit = Unit.parseUnit(inputParts[3]);
                 if (unit == null) {
@@ -223,9 +223,9 @@ public class Parser {
                 }
                 index = Integer.parseInt(inputParts[1]) - 1;
                 if (index < 0) {
-                    throw new IllegalArgumentException("Index must be non-negative");
+                    throw new IllegalArgumentException("Index must be greater than 0");
                 }
-                assert index >= 0 : "Index must be non-negative";
+                assert index >= 0 : "Index must be greater than 0";
 
                 name = inputParts[2].toUpperCase();
                 if (name == null || name.isEmpty()) {
@@ -235,9 +235,9 @@ public class Parser {
 
                 quantity = Double.parseDouble(inputParts[3]);
                 if (quantity < 0) {
-                    throw new IllegalArgumentException("Quantity must be non-negative");
+                    throw new IllegalArgumentException("Quantity must be greater than 0");
                 }
-                assert quantity >= 0 : "Quantity must be non-negative";
+                assert quantity >= 0 : "Quantity must be greater than 0";
 
                 unit = Unit.parseUnit(inputParts[4]);
                 if (unit == null) {
@@ -298,9 +298,9 @@ public class Parser {
                 }
                 int addToWeekIndex = Integer.parseInt(inputParts[1]) - 1;
                 if (addToWeekIndex < 0) {
-                    throw new IllegalArgumentException("Week index must be non-negative");
+                    throw new IllegalArgumentException("Week index must be greater than 0");
                 }
-                assert addToWeekIndex >= 0 : "Week index must be non-negative";
+                assert addToWeekIndex >= 0 : "Week index must be greater than 0";
 
                 String addDayName = inputParts[2];
                 if (addDayName == null || addDayName.isEmpty()) {
@@ -314,15 +314,15 @@ public class Parser {
                 }
                 int addRecipePlanIndex = Integer.parseInt(inputParts[1]) - 1;
                 if (addRecipePlanIndex < 0) {
-                    throw new IllegalArgumentException("Plan index must be non-negative");
+                    throw new IllegalArgumentException("Plan index must be greater than 0");
                 }
-                assert addRecipePlanIndex >= 0 : "Plan index must be non-negative";
+                assert addRecipePlanIndex >= 0 : "Plan index must be greater than 0";
 
                 int addRecipeRecipeIndex = Integer.parseInt(inputParts[2]) - 1;
                 if (addRecipeRecipeIndex < 0) {
-                    throw new IllegalArgumentException("Recipe index must be non-negative");
+                    throw new IllegalArgumentException("Recipe index must be greater than 0");
                 }
-                assert addRecipeRecipeIndex >= 0 : "Recipe index must be non-negative";
+                assert addRecipeRecipeIndex >= 0 : "Recipe index must be greater than 0";
 
                 String addRecipeMealName = inputParts[3];
                 if (addRecipeMealName == null || addRecipeMealName.isEmpty()) {
@@ -336,9 +336,9 @@ public class Parser {
                 }
                 int deleteRecipePlanIndex = Integer.parseInt(inputParts[1]) - 1;
                 if (deleteRecipePlanIndex < 0) {
-                    throw new IllegalArgumentException("Plan index must be non-negative");
+                    throw new IllegalArgumentException("Plan index must be greater than 0");
                 }
-                assert deleteRecipePlanIndex >= 0 : "Plan index must be non-negative";
+                assert deleteRecipePlanIndex >= 0 : "Plan index must be greater than 0";
 
                 String deleteRecipeMealName = inputParts[2];
                 if (deleteRecipeMealName == null || deleteRecipeMealName.isEmpty()) {
@@ -398,9 +398,9 @@ public class Parser {
                 }
                 int viewPlanIndex = Integer.parseInt(inputParts[1]) - 1;
                 if (viewPlanIndex < 0) {
-                    throw new IllegalArgumentException("Plan index must be non-negative");
+                    throw new IllegalArgumentException("Plan index must be greater than 0");
                 }
-                assert viewPlanIndex >= 0 : "Plan index must be non-negative";
+                assert viewPlanIndex >= 0 : "Plan index must be greater than 0";
                 return new ViewPlan(viewPlanIndex);
             case "removeplan":
                 if (inputParts.length < 2) {
@@ -408,9 +408,9 @@ public class Parser {
                 }
                 int removePlanIndex = Integer.parseInt(inputParts[1]) - 1;
                 if (removePlanIndex < 0) {
-                    throw new IllegalArgumentException("Plan index must be non-negative");
+                    throw new IllegalArgumentException("Plan index must be greater than 0");
                 }
-                assert removePlanIndex >= 0 : "Plan index must be non-negative";
+                assert removePlanIndex >= 0 : "Plan index must be greater than 0";
                 return new RemovePlan(removePlanIndex);
             default:
                 return new NullCommand("Invalid Command! ");
