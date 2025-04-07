@@ -12,12 +12,11 @@
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+PantryPal is designed for university students and busy individuals who want to simplify their meal planning, grocery shopping, and inventory management. Built on a command-line interface (CLI) using Java, this app is ideal for users with some coding experience who prefer a more practical and efficient way to manage their meals. Perfect for those with limited time and resources, PantryPal helps users stay organized, eat healthy, and reduce food waste—all while offering a customizable solution for managing their pantry
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
-
+PantryPal addresses the common challenges faced by university students and busy individuals when it comes to meal planning, grocery shopping, and inventory management. With limited time, resources, and often little experience in organizing meals efficiently, users struggle with food waste, last-minute grocery trips, and chaotic kitchens.
 ## User Stories
 
 | Version | As a ... | I want to ... | So that I can ...|
@@ -45,18 +44,23 @@
 ## Glossary
 
 * *glossary item* - Definition
+- CEG - Computer Engineering
+- CLI - Command Line Interface
+- GUI - Graphical User Interface
+- Mainstream OS - Windows, Linux, Unix, MacOS
+- SRP - Single Responsibility Principle
 
-# Manual Testing Instructions for 
+---
+
+# Manual Testing Instructions for PantryPal
 
 > **Note:** The following instructions serve as a basic guide for testers to validate the functionality of the program. Testers should go beyond these steps and conduct further exploratory testing.
----
 
 ## 1. Start Application
 
-1. **Follow the setup instructions** provided in the User Guide to initialize the application and set up the `IngredientInventory` class.
-   - **Expected**: The application should start without errors, and the user should be prompted for input.
+1. Follow the instructions in the **Quick Start** section of the PantryPal User Guide to set up the application.
+2. Expected: A welcome message along with a prompt for user input, inviting you to begin managing your pantry, recipes, and grocery list.
 
----
 ## 2. Test Cases
 
 ### 2.1 Initial State
@@ -435,7 +439,7 @@ The Shopping List Item and Shopping List features follow a modular design to ens
 
 ### Overview
 
-The Instruction Feature represents all the instructions in the Recipe. Each instruction instance encapsulates essential attributes such as step number and instruction content. This modular desgin ensures that instructions and instruction list can be easily created, modified, and retrieved when needed.
+The Instruction Feature represents all the instructions in the Recipe. Each instruction instance encapsulates essential attributes such as step number and instruction content. This modular design ensures that instructions and instruction list can be easily created, modified, and retrieved when needed.
 
 ### Design and Implementation
 
