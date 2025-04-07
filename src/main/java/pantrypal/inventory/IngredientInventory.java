@@ -17,7 +17,6 @@ public class IngredientInventory {
     // Add new ingredient method
     public void addNewIngredient(String name, double quantity, Unit unit, Category category) {
         try {
-            // Validate the ingredient before adding it to the inventory
             if (name == null || name.isEmpty()) {
                 throw new IllegalArgumentException("Ingredient name cannot be null or empty.");
             }
@@ -25,56 +24,59 @@ public class IngredientInventory {
                 throw new IllegalArgumentException("Quantity must be positive.");
             }
             if (unit == null) {
-                throw new IllegalArgumentException("Unit cannot be null or empty.");
+                throw new IllegalArgumentException("Unit cannot be null.");
             }
             if (category == null) {
-                throw new IllegalArgumentException("Category cannot be null or empty.");
+                throw new IllegalArgumentException("Category cannot be null.");
             }
-
-            // If validation passes, add the ingredient to the inventory
+            if (inventory.containsKey(name)) {
+                throw new IllegalArgumentException("Ingredient '" + name + "' already exists.");
+            }
             inventory.put(name, new Ingredient(name, quantity, unit, category));
         } catch (IllegalArgumentException e) {
-            // Catch validation exceptions and display the error message in the UI
-            Ui.showMessage("Error: " + e.getMessage());
+            Ui.showMessage(e.getMessage());
         }
     }
 
+
     // Increase ingredient quantity
     public void increaseQuantity(String name, double quantity) {
-        // Ensure that the quantity is positive
-        if (quantity <= 0) {
+        if (quantity < 0) {
             Ui.showMessage("Error: Quantity to increase must be positive.");
             return;
         }
-
-        // Get the ingredient from the inventory
         Ingredient ingredient = inventory.get(name);
         if (ingredient != null) {
-            // Increase the quantity of the ingredient
             ingredient.quantity += quantity;
             Ui.showMessage("Increased " + name + " by " + quantity);
         } else {
-            // If ingredient is not found in the inventory
             Ui.showMessage("Ingredient not found");
         }
     }
 
     // Decrease ingredient quantity
     public void decreaseQuantity(String name, double quantity) {
+        if (quantity < 0) {
+            throw new IllegalArgumentException("Quantity to decrease cannot be negative.");
+        }
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Ingredient name cannot be null or empty.");
+        }
+
         Ingredient ingredient = inventory.get(name);
         if (ingredient != null) {
             if (ingredient.quantity >= quantity) {
                 ingredient.quantity -= quantity;
-                Ui.showMessage("Decreased " + name + " by " + quantity);
             } else {
-                Ui.showMessage("Not enough " + name + " in stock.");
+                throw new IllegalArgumentException("Not enough " + name.toUpperCase() + " in stock.");
             }
         } else {
-            Ui.showMessage("Ingredient not found");
+            throw new IllegalArgumentException("Ingredient not found");
         }
     }
 
-    // Set low stock alert
+
+        // Set low stock alert
     public void setAlert(String name, double threshold) {
         lowStockAlerts.put(name, threshold);
     }
@@ -140,15 +142,26 @@ public class IngredientInventory {
     }
 
     public void convertIngredient(String name, Unit targetUnit) {
-        Ingredient ingredient = inventory.get(name);
-        if (ingredient == null) {
-            throw new IllegalArgumentException("Ingredient not found.");
+        try {
+            Ingredient ingredient = inventory.get(name);
+            if (ingredient == null) {
+                throw new IllegalArgumentException("Ingredient not found.");
+            }
+            Unit currentUnit = ingredient.getUnit();
+            double convertedQuantity = Unit.convert(ingredient.getQuantity(), currentUnit, targetUnit);
+            if (convertedQuantity == -1.0) {
+                throw new IllegalArgumentException("Invalid conversion from " + currentUnit + " to " + targetUnit
+                        + " for " + name);
+            }
+            ingredient.setQuantity(convertedQuantity);
+            ingredient.setUnit(targetUnit);
+            System.out.println(name + " converted to " + convertedQuantity + " " + targetUnit);
+
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
-        double convertedQuantity = Unit.convert(ingredient.getQuantity(), ingredient.getUnit(), targetUnit);
-        ingredient.setQuantity(convertedQuantity);
-        ingredient.setUnit(targetUnit);
-        System.out.println(name + " converted " + convertedQuantity + " to " + targetUnit);
     }
+
 
     public String viewIngredientsByCategory(Category category) {
         boolean found = false;

@@ -20,10 +20,12 @@ import pantrypal.general.commands.mealplan.AddPlanToDay;
 import pantrypal.general.commands.mealplan.AddRecipeToPlan;
 import pantrypal.general.commands.mealplan.RemoveRecipeFromPlan;
 import pantrypal.general.commands.mealplan.RemovePlanFromDay;
+import pantrypal.general.commands.mealplan.ViewPlan;
 import pantrypal.general.commands.mealplan.ViewPlanForDay;
 import pantrypal.general.commands.mealplan.ViewPlanForWeek;
 import pantrypal.general.commands.mealplan.ExecutePlanForDay;
 import pantrypal.general.commands.mealplan.FindForPlans;
+import pantrypal.general.commands.mealplan.ViewPlanList;
 import pantrypal.general.commands.recipe.AddRecipe;
 import pantrypal.general.commands.recipe.ListRecipe;
 import pantrypal.general.commands.recipe.RemoveRecipe;
@@ -62,45 +64,76 @@ public class Parser {
                     throw new IllegalArgumentException("Insufficient arguments for addNewIngredient command.");
                 }
                 name = inputParts[1].toUpperCase();
+                if (name == null || name.isEmpty()) {
+                    throw new IllegalArgumentException("Ingredient name cannot be null or empty");
+                }
+                assert name != null && !name.isEmpty() : "Ingredient name cannot be null or empty";
+
                 quantity = Double.parseDouble(inputParts[2]);
                 if (quantity < 0) {
-                    throw new IllegalArgumentException("Negative quantity is not allowed for " +
-                            "addNewIngredient command.");
+                    throw new IllegalArgumentException("Quantity must be non-negative");
                 }
+                assert quantity >= 0 : "Quantity must be non-negative";
+
                 unit = Unit.parseUnit(inputParts[3]);
+                if (unit == null) {
+                    throw new IllegalArgumentException("Unit cannot be null");
+                }
+                assert unit != null : "Unit cannot be null";
+
                 category = Category.parseCategory(inputParts[4]);
+                if (category == null) {
+                    throw new IllegalArgumentException("Category cannot be null");
+                }
+                assert category != null : "Category cannot be null";
                 return new AddIngredient(name, quantity, unit, category);
             case "increaseQuantity":
                 if (inputParts.length < 3) {
                     throw new IllegalArgumentException("Insufficient arguments for increaseQuantity command.");
                 }
                 name = inputParts[1].toUpperCase();
+                if (name == null || name.isEmpty()) {
+                    throw new IllegalArgumentException("Ingredient name cannot be null or empty");
+                }
+                assert name != null && !name.isEmpty() : "Ingredient name cannot be null or empty";
+
                 quantity = Double.parseDouble(inputParts[2]);
                 if (quantity < 0) {
-                    throw new IllegalArgumentException("Negative quantity is not allowed for " +
-                            "increaseQuantity command.");
+                    throw new IllegalArgumentException("Quantity must be non-negative");
                 }
+                assert quantity >= 0 : "Quantity must be non-negative";
                 return new IncreaseQuantity(name, quantity);
             case "decreaseQuantity":
                 if (inputParts.length < 3) {
                     throw new IllegalArgumentException("Insufficient arguments for decreaseQuantity command.");
                 }
                 name = inputParts[1].toUpperCase();
+                if (name == null || name.isEmpty()) {
+                    throw new IllegalArgumentException("Ingredient name cannot be null or empty");
+                }
+                assert name != null && !name.isEmpty() : "Ingredient name cannot be null or empty";
+
                 quantity = Double.parseDouble(inputParts[2]);
                 if (quantity < 0) {
-                    throw new IllegalArgumentException("Negative quantity is not allowed for " +
-                            "decreaseQuantity command.");
+                    throw new IllegalArgumentException("Quantity must be non-negative");
                 }
+                assert quantity >= 0 : "Quantity must be non-negative";
                 return new DecreaseQuantity(name, quantity);
             case "setAlert":
                 if (inputParts.length < 3) {
                     throw new IllegalArgumentException("Insufficient arguments for setAlert command.");
                 }
                 name = inputParts[1].toUpperCase();
+                if (name == null || name.isEmpty()) {
+                    throw new IllegalArgumentException("Ingredient name cannot be null or empty");
+                }
+                assert name != null && !name.isEmpty() : "Ingredient name cannot be null or empty";
+
                 double threshold = Double.parseDouble(inputParts[2]);
                 if (threshold < 0) {
-                    throw new IllegalArgumentException("Negative threshold is not allowed for setAlert command.");
+                    throw new IllegalArgumentException("Threshold must be non-negative");
                 }
+                assert threshold >= 0 : "Threshold must be non-negative";
                 return new SetAlert(name, threshold);
             case "viewStock":
                 return new CheckStock();
@@ -111,19 +144,36 @@ public class Parser {
                     throw new IllegalArgumentException("Insufficient arguments for deleteIngredient command.");
                 }
                 name = inputParts[1].toUpperCase();
+                if (name == null || name.isEmpty()) {
+                    throw new IllegalArgumentException("Ingredient name cannot be null or empty");
+                }
+                assert name != null && !name.isEmpty() : "Ingredient name cannot be null or empty";
                 return new DeleteIngredient(name);
             case "convertIngredient":
                 if (inputParts.length < 3) {
                     throw new IllegalArgumentException("Insufficient arguments for convertIngredient command.");
                 }
                 name = inputParts[1].toUpperCase();
+                if (name == null || name.isEmpty()) {
+                    throw new IllegalArgumentException("Ingredient name cannot be null or empty");
+                }
+                assert name != null && !name.isEmpty() : "Ingredient name cannot be null or empty";
+
                 unit = Unit.parseUnit(inputParts[2]);
+                if (unit == null) {
+                    throw new IllegalArgumentException("Unit cannot be null");
+                }
+                assert unit != null : "Unit cannot be null";
                 return new ConvertIngredient(name, unit);
             case "viewIngredientsByCategory":
                 if (inputParts.length < 2) {
                     throw new IllegalArgumentException("Insufficient arguments for viewIngredientsByCategory command.");
                 }
                 Category categoryName = Category.parseCategory(inputParts[1]);
+                if (categoryName == null) {
+                    throw new IllegalArgumentException("Category cannot be null");
+                }
+                assert categoryName != null : "Category cannot be null";
                 return new ViewIngredientsByCategory(categoryName);
             case "unitList":
                 return new UnitList();
@@ -135,11 +185,22 @@ public class Parser {
                     throw new IllegalArgumentException("Insufficient arguments for addShoppingItem command.");
                 }
                 name = inputParts[1].toUpperCase();
-                quantity = Double.parseDouble(inputParts[2]);
-                unit = Unit.parseUnit(inputParts[3]);
-                if (quantity < 0) {
-                    throw new IllegalArgumentException("Negative quantity is not allowed for addShoppingItem command.");
+                if (name == null || name.isEmpty()) {
+                    throw new IllegalArgumentException("Item name cannot be null or empty");
                 }
+                assert name != null && !name.isEmpty() : "Item name cannot be null or empty";
+
+                quantity = Double.parseDouble(inputParts[2]);
+                if (quantity < 0) {
+                    throw new IllegalArgumentException("Quantity must be non-negative");
+                }
+                assert quantity >= 0 : "Quantity must be non-negative";
+
+                unit = Unit.parseUnit(inputParts[3]);
+                if (unit == null) {
+                    throw new IllegalArgumentException("Unit cannot be null");
+                }
+                assert unit != null : "Unit cannot be null";
                 return new AddShoppingItem(name, quantity, unit);
             case "generateShoppingList":
                 return new GenerateShoppingList();
@@ -148,6 +209,10 @@ public class Parser {
                     throw new IllegalArgumentException("Insufficient arguments for removeShoppingItem command.");
                 }
                 name = inputParts[1].toUpperCase();
+                if (name == null || name.isEmpty()) {
+                    throw new IllegalArgumentException("Item name cannot be null or empty");
+                }
+                assert name != null && !name.isEmpty() : "Item name cannot be null or empty";
                 return new RemoveShoppingItem(name);
             case "viewShoppingList":
                 return new ViewShoppingList();
@@ -155,17 +220,29 @@ public class Parser {
                 if (inputParts.length < 5) {
                     throw new IllegalArgumentException("Insufficient arguments for editShoppingItem command.");
                 }
-                index = Integer.parseInt(inputParts[1]);
+                index = Integer.parseInt(inputParts[1]) - 1;
                 if (index < 0) {
-                    throw new IllegalArgumentException("Negative index is not allowed for editShoppingItem command.");
+                    throw new IllegalArgumentException("Index must be non-negative");
                 }
+                assert index >= 0 : "Index must be non-negative";
+
                 name = inputParts[2].toUpperCase();
+                if (name == null || name.isEmpty()) {
+                    throw new IllegalArgumentException("Item name cannot be null or empty");
+                }
+                assert name != null && !name.isEmpty() : "Item name cannot be null or empty";
+
                 quantity = Double.parseDouble(inputParts[3]);
                 if (quantity < 0) {
-                    throw new IllegalArgumentException("Negative quantity is not allowed for " +
-                            "editShoppingItem command.");
+                    throw new IllegalArgumentException("Quantity must be non-negative");
                 }
+                assert quantity >= 0 : "Quantity must be non-negative";
+
                 unit = Unit.parseUnit(inputParts[4]);
+                if (unit == null) {
+                    throw new IllegalArgumentException("Unit cannot be null");
+                }
+                assert unit != null : "Unit cannot be null";
                 return new EditShoppingItem(index, name, quantity, unit);
             case "markShoppingItemAsPurchased":
                 if (inputParts.length < 2) {
@@ -173,6 +250,10 @@ public class Parser {
                             "command.");
                 }
                 name = inputParts[1].toUpperCase();
+                if (name == null || name.isEmpty()) {
+                    throw new IllegalArgumentException("Item name cannot be null or empty");
+                }
+                assert name != null && !name.isEmpty() : "Item name cannot be null or empty";
                 return new MarkShoppingItemAsPurchased(name);
             //From here on are commands for Recipe
             case "addRecipe":
@@ -182,12 +263,20 @@ public class Parser {
                     throw new IllegalArgumentException("Insufficient arguments for viewRecipe command.");
                 }
                 name = inputParts[1].toUpperCase();
+                if (name == null || name.isEmpty()) {
+                    throw new IllegalArgumentException("Recipe name cannot be null or empty");
+                }
+                assert name != null && !name.isEmpty() : "Recipe name cannot be null or empty";
                 return new ViewRecipe(name);
             case "removeRecipe":
                 if (inputParts.length < 2) {
                     throw new IllegalArgumentException("Insufficient arguments for removeRecipe command.");
                 }
                 name = inputParts[1].toUpperCase();
+                if (name == null || name.isEmpty()) {
+                    throw new IllegalArgumentException("Recipe name cannot be null or empty");
+                }
+                assert name != null && !name.isEmpty() : "Recipe name cannot be null or empty";
                 return new RemoveRecipe(name);
             case "viewRecipeList":
                 return new ListRecipe();
@@ -197,53 +286,86 @@ public class Parser {
                     throw new IllegalArgumentException("Insufficient arguments for addPlan command.");
                 }
                 String planName = inputParts[1];
+                if (planName == null || planName.isEmpty()) {
+                    throw new IllegalArgumentException("Plan name cannot be null or empty");
+                }
+                assert planName != null && !planName.isEmpty() : "Plan name cannot be null or empty";
                 return new AddPlan(planName);
             case "addPlanToDay":
                 if (inputParts.length < 3) {
                     throw new IllegalArgumentException("Insufficient arguments for addPlanToDay command.");
                 }
-                int addToWeekIndex = Integer.parseInt(inputParts[1]);
+                int addToWeekIndex = Integer.parseInt(inputParts[1]) - 1;
                 if (addToWeekIndex < 0) {
-                    throw new IllegalArgumentException("Negative index is not allowed for addPlanToDay command.");
+                    throw new IllegalArgumentException("Week index must be non-negative");
                 }
+                assert addToWeekIndex >= 0 : "Week index must be non-negative";
+
                 String addDayName = inputParts[2];
+                if (addDayName == null || addDayName.isEmpty()) {
+                    throw new IllegalArgumentException("Day name cannot be null or empty");
+                }
+                assert addDayName != null && !addDayName.isEmpty() : "Day name cannot be null or empty";
                 return new AddPlanToDay(addToWeekIndex, addDayName);
             case "addRecipeToPlan":
                 if (inputParts.length < 4) {
-                    throw new IllegalArgumentException("Insufficient arguments for addPlanToDay command.");
+                    throw new IllegalArgumentException("Insufficient arguments for addRecipeToPlan command.");
                 }
-                int addRecipePlanIndex = Integer.parseInt(inputParts[1]);
+                int addRecipePlanIndex = Integer.parseInt(inputParts[1]) - 1;
                 if (addRecipePlanIndex < 0) {
-                    throw new IllegalArgumentException("Negative index is not allowed for addRecipeToPlan command.");
+                    throw new IllegalArgumentException("Plan index must be non-negative");
                 }
-                int addRecipeRecipeIndex = Integer.parseInt(inputParts[2]);
+                assert addRecipePlanIndex >= 0 : "Plan index must be non-negative";
+
+                int addRecipeRecipeIndex = Integer.parseInt(inputParts[2]) - 1;
                 if (addRecipeRecipeIndex < 0) {
-                    throw new IllegalArgumentException("Negative index is not allowed for addRecipeToPlan command.");
+                    throw new IllegalArgumentException("Recipe index must be non-negative");
                 }
+                assert addRecipeRecipeIndex >= 0 : "Recipe index must be non-negative";
+
                 String addRecipeMealName = inputParts[3];
+                if (addRecipeMealName == null || addRecipeMealName.isEmpty()) {
+                    throw new IllegalArgumentException("Meal name cannot be null or empty");
+                }
+                assert addRecipeMealName != null && !addRecipeMealName.isEmpty() : "Meal name cannot be null or empty";
                 return new AddRecipeToPlan(addRecipePlanIndex, addRecipeRecipeIndex, addRecipeMealName);
             case "removeRecipeFromPlan":
                 if (inputParts.length < 3) {
                     throw new IllegalArgumentException("Insufficient arguments for removeRecipeFromPlan command.");
                 }
-                int deleteRecipePlanIndex = Integer.parseInt(inputParts[1]);
+                int deleteRecipePlanIndex = Integer.parseInt(inputParts[1]) - 1;
                 if (deleteRecipePlanIndex < 0) {
-                    throw new IllegalArgumentException("Negative index is not allowed for " +
-                            "removeRecipeFromPlan command.");
+                    throw new IllegalArgumentException("Plan index must be non-negative");
                 }
+                assert deleteRecipePlanIndex >= 0 : "Plan index must be non-negative";
+
                 String deleteRecipeMealName = inputParts[2];
+                if (deleteRecipeMealName == null || deleteRecipeMealName.isEmpty()) {
+                    throw new IllegalArgumentException("Meal name cannot be null or empty");
+                }
+                assert deleteRecipeMealName != null && !deleteRecipeMealName.isEmpty() : "Meal name cannot " +
+                        "be null or empty";
                 return new RemoveRecipeFromPlan(deleteRecipePlanIndex, deleteRecipeMealName);
             case "removePlanFromDay":
                 if (inputParts.length < 2) {
                     throw new IllegalArgumentException("Insufficient arguments for removeRecipeFromWeek command.");
                 }
                 String deleteFromWeekDayName = inputParts[1];
+                if (deleteFromWeekDayName == null || deleteFromWeekDayName.isEmpty()) {
+                    throw new IllegalArgumentException("Day name cannot be null or empty");
+                }
+                assert deleteFromWeekDayName != null && !deleteFromWeekDayName.isEmpty() : "Day name cannot " +
+                        "be null or empty";
                 return new RemovePlanFromDay(deleteFromWeekDayName);
             case "viewPlanForDay":
                 if (inputParts.length < 2) {
                     throw new IllegalArgumentException("Insufficient arguments for viewPlanForDay command.");
                 }
                 String viewDayName = inputParts[1];
+                if (viewDayName == null || viewDayName.isEmpty()) {
+                    throw new IllegalArgumentException("Day name cannot be null or empty");
+                }
+                assert viewDayName != null && !viewDayName.isEmpty() : "Day name cannot be null or empty";
                 return new ViewPlanForDay(viewDayName);
             case "viewPlanForWeek":
                 return new ViewPlanForWeek();
@@ -252,13 +374,33 @@ public class Parser {
                     throw new IllegalArgumentException("Insufficient arguments for executePlanForDay command.");
                 }
                 String executeDayName = inputParts[1];
+                if (executeDayName == null || executeDayName.isEmpty()) {
+                    throw new IllegalArgumentException("Day name cannot be null or empty");
+                }
+                assert executeDayName != null && !executeDayName.isEmpty() : "Day name cannot be null or empty";
                 return new ExecutePlanForDay(executeDayName);
             case "findForPlans":
                 if (inputParts.length < 2) {
                     throw new IllegalArgumentException("Insufficient arguments for findForPlans command.");
                 }
                 String findSearchKey = inputParts[1];
+                if (findSearchKey == null || findSearchKey.isEmpty()) {
+                    throw new IllegalArgumentException("Search key cannot be null or empty");
+                }
+                assert findSearchKey != null && !findSearchKey.isEmpty() : "Search key cannot be null or empty";
                 return new FindForPlans(findSearchKey);
+            case "viewPlanList":
+                return new ViewPlanList();
+            case "viewPlan":
+                if (inputParts.length < 2) {
+                    throw new IllegalArgumentException("Insufficient arguments for viewPlan command.");
+                }
+                int viewPlanIndex = Integer.parseInt(inputParts[1]) - 1;
+                if (viewPlanIndex < 0) {
+                    throw new IllegalArgumentException("Plan index must be non-negative");
+                }
+                assert viewPlanIndex >= 0 : "Plan index must be non-negative";
+                return new ViewPlan(viewPlanIndex);
             default:
                 return new NullCommand("Invalid Command! ");
             }
@@ -271,4 +413,3 @@ public class Parser {
         }
     }
 }
-

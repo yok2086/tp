@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Recipe {
 
-    private static final String LINE = "_".repeat(50);
+    private static final String LINE = "____________________________________________________________";
 
     private String name;
     private ArrayList<Instruction> instructions = new ArrayList<>();

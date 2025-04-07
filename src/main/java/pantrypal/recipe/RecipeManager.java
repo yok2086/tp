@@ -195,7 +195,9 @@ public class RecipeManager{
         }
 
         for (Recipe recipe : filteredItems) {
+            Ui.printLine();
             System.out.println(recipe.getContent());
+            Ui.printLine();
         }
     }
 
@@ -229,6 +231,15 @@ public class RecipeManager{
 
     public ArrayList<Recipe> getRecipeList() {
         return recipes;
+    }
+
+    public int getRecipeIndex(Recipe recipe) {
+        int index = recipes.indexOf(recipe);
+        if (index == -1) {
+            Ui.showMessage("Recipe not found");
+            return -1;
+        }
+        return index;
     }
 
 }

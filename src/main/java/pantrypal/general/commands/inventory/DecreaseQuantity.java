@@ -1,6 +1,7 @@
 package pantrypal.general.commands.inventory;
 
 import pantrypal.general.control.Ui;
+import pantrypal.inventory.Ingredient;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.mealplan.MealPlanManager;
 import pantrypal.recipe.RecipeManager;
@@ -33,7 +34,12 @@ public class DecreaseQuantity extends InventoryCommand {
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, RecipeManager recipes,
                         MealPlanManager plans, Scanner in) {
-        inventory.decreaseQuantity(name, quantity);
-
+        try {
+            inventory.decreaseQuantity(name, quantity);
+            System.out.println("You have decreased " + quantity + " of " + name);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
+
 }

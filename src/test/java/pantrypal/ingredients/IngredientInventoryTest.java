@@ -35,11 +35,12 @@ public class IngredientInventoryTest {
         Map<String, Ingredient> stock = inventory.getInventory();
 
         // Check if sugar was added
-        assertTrue(stock.containsKey("Sugar")); // Contains sugar?
-        assertEquals(2.5, stock.get("Sugar").getQuantity()); // Quantity correct?
-        assertEquals("kg", stock.get("Sugar").getUnit().toString()); // Unit correct?
+        assertTrue(stock.containsKey("Sugar"));
+        assertEquals(2.5, stock.get("Sugar").getQuantity());
+        assertEquals("kg", stock.get("Sugar").getUnit().toString());
         assertEquals("Condiment", stock.get("Sugar").getCategory().toString());
     }
+
 
     @Test
     void testSetAlert() {
