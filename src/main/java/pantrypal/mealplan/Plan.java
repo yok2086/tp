@@ -38,6 +38,7 @@ public class Plan {
         int mealIndex = mealType.ordinal();
         if (planRecipes[mealIndex] != null) {
             planRecipes[mealIndex] = null;
+            Ui.showMessage("Recipe removed from plan successfully.");
         } else {
             Ui.showMessage("This meal has no recipe.");
         }
@@ -51,7 +52,7 @@ public class Plan {
         sb.append("Recipes:\n");
         for (Recipe recipe : planRecipes) {
             if (recipe != null) {
-                sb.append(MealType.values()[mealIndexCount]).append(" ").append(recipe.getName()).append("\n");
+                sb.append(MealType.values()[mealIndexCount]).append(": ").append(recipe.getName()).append("\n");
             }
             mealIndexCount++;
         }

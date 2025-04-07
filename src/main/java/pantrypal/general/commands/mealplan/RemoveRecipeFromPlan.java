@@ -23,6 +23,14 @@ public class RemoveRecipeFromPlan extends MealPlanCommand {
         this.mealType = mealType;
     }
 
+    public int getPlanIndex() {
+        return planIndex;
+    }
+
+    public String getMealType() {
+        return mealType;
+    }
+
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, RecipeManager recipes,
                         MealPlanManager plans, Scanner in) {
@@ -31,7 +39,7 @@ public class RemoveRecipeFromPlan extends MealPlanCommand {
         } catch (IndexOutOfBoundsException e) {
             Ui.showMessage("Invalid plan index given.");
         } catch (NullPointerException e) {
-            System.out.println("Invalid meal type given.\nPlease enter only BREAKFAST, LUNCH OR DINNER");
+            Ui.showMessage("Invalid meal type given.\nPlease enter only BREAKFAST, LUNCH OR DINNER");
         } catch (IllegalArgumentException e) {
             Ui.showMessage("Invalid input given. Please refrain from unconventional datatypes");
         }

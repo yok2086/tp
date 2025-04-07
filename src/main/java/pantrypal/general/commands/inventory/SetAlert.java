@@ -23,6 +23,17 @@ public class SetAlert extends InventoryCommand {
         this.threshold = threshold;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public double getThreshold() {
+        return threshold;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, RecipeManager recipes,
