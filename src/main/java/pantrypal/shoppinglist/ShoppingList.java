@@ -99,7 +99,7 @@ public class ShoppingList {
                 count = count + 1;
             }
         }
-        if(count >= 1){
+        if(items.get(index).getIngredientName() != newIngredientName && count >= 1){
             return false;
         }
 
