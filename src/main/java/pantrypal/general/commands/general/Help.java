@@ -15,9 +15,9 @@ import pantrypal.general.commands.mealplan.AddPlanToDay;
 import pantrypal.general.commands.mealplan.AddRecipeToPlan;
 import pantrypal.general.commands.mealplan.RemoveRecipeFromPlan;
 import pantrypal.general.commands.mealplan.RemovePlanFromDay;
-import pantrypal.general.commands.mealplan.ViewPlanForDay;
-import pantrypal.general.commands.mealplan.ViewPlanForWeek;
-import pantrypal.general.commands.mealplan.ExecutePlanForDay;
+import pantrypal.general.commands.mealplan.ViewDayPlan;
+import pantrypal.general.commands.mealplan.ViewWeekPlans;
+import pantrypal.general.commands.mealplan.ExecutePlan;
 import pantrypal.general.commands.mealplan.FindForPlans;
 import pantrypal.general.commands.recipe.AddRecipe;
 import pantrypal.general.commands.recipe.ListRecipe;
@@ -51,9 +51,9 @@ public class Help extends GeneralCommand {
       
             new AddRecipe(), new ViewRecipe(), new RemoveRecipe(), new ListRecipe(),
       
-            new AddPlan(), new AddPlanToDay(), new AddRecipeToPlan(), new ExecutePlanForDay(),
-            new FindForPlans(), new RemovePlanFromDay(), new RemoveRecipeFromPlan(), new ViewPlanForDay(),
-            new ViewPlanForWeek()
+            new AddPlan(), new AddPlanToDay(), new AddRecipeToPlan(), new ExecutePlan(),
+            new FindForPlans(), new RemovePlanFromDay(), new RemoveRecipeFromPlan(), new ViewDayPlan(),
+            new ViewWeekPlans()
     );
 
     public Help() {

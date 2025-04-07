@@ -29,7 +29,7 @@ public class RemovePlanFromDay extends MealPlanCommand {
         } catch (NullPointerException e) {
             Ui.showMessage("Invalid day provided. Please enter a valid day name");
         } catch (IllegalArgumentException e) {
-            ui.showMessage("Invalid input given. Please refrain from unconventional datatypes");
+            Ui.showMessage("Invalid input given. Please refrain from unconventional datatypes");
         }
     }
 }

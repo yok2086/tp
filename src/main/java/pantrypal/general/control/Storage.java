@@ -5,6 +5,7 @@ import pantrypal.inventory.Ingredient;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.inventory.Unit;
 import pantrypal.mealplan.MealPlanManager;
+import pantrypal.mealplan.Plan;
 import pantrypal.recipe.Instruction;
 import pantrypal.recipe.Recipe;
 import pantrypal.recipe.RecipeManager;
@@ -34,7 +35,7 @@ public class Storage {
             System.out.println("Save file directory created");
         }
 
-        Boolean safeFileExists = false;
+        boolean safeFileExists = false;
         try {
             if (file.createNewFile()) {
                 System.out.println("Save file created");
@@ -168,20 +169,18 @@ public class Storage {
         } catch (IllegalArgumentException e) {
             throw new DataCorruptionException("Invalid unit or category in stock");
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DataCorruptionException("Invalid arguemtns in stock item");
+            throw new DataCorruptionException("Invalid arguments in stock item");
         }
     }
 
     private static void processSectionLine(String currentSection, String line, Recipe recipe) {
-        switch (currentSection) {
-        case "Recipe":
+        if (currentSection.equals("Recipe")) {
             if (line.startsWith("[Ingredients]")) {
                 processRecipeIngredients(line, recipe);
             } else if (line.startsWith("[Instructions]")) {
                 processRecipeInstructions(line, recipe);
             }
-            break;
-        default:
+        } else {
             System.out.println("Unknown data: " + line);
         }
     }
@@ -233,6 +232,25 @@ public class Storage {
         return fileInput;
     }
 
+    private static StringBuilder savePlanPresets(ArrayList<Plan> presets, StringBuilder fileInput) {
+
+        int mealTypeIndex = 1;
+        fileInput.append("[Preset] ");
+        for (Plan preset : presets) {
+            fileInput.append(escapeSpecialCharacters(preset.getPlanName())).append(" ");
+            for(Recipe recipe : preset.getPlanRecipes()){
+                if (recipe == null){
+                    mealTypeIndex++;
+                    continue;
+                }
+                fileInput.append(mealTypeIndex).append(" ");
+                fileInput.append(escapeSpecialCharacters(recipe.getName())).append(" | ");
+            }
+        }
+        fileInput.append("\n");
+        return fileInput;
+    }
+
     public static void saveData(IngredientInventory inventory, ShoppingList shoppingList, MealPlanManager plans,
                                 RecipeManager recipeManager) {
         try (FileWriter fileWriter = new FileWriter(filePath)) {
@@ -265,6 +283,14 @@ public class Storage {
                 fileInput = saveRecipeIngredients(ingredients, fileInput);
                 fileInput = saveRecipeInstructions(instructions, fileInput);
             }
+
+            for (Plan plan : plans.getPlanDetails()) {
+                String planName = escapeSpecialCharacters(plan.getPlanName());
+                Recipe[] planRecipes = plan.getPlanRecipes();
+                fileInput.append("[PlanPreset] ").append(planName).append("\n");
+                fileInput = savePlanPresets(plans.getPlanDetails(), fileInput);
+            }
+
             fileWriter.write(fileInput.toString());
         } catch (IOException e) {
             Ui.printErrorMessage(e.getMessage());

@@ -34,7 +34,7 @@ public class AddRecipeToPlan extends MealPlanCommand {
                 throw new ArrayIndexOutOfBoundsException("Recipe index out of bounds");
             }
             Recipe recipe = recipes.getRecipeList().get(recipeIndex);
-            plans.getPlanDetails(planIndex).addRecipeToPlan(recipe, getMealType(mealType));
+            plans.getPlanDetails().get(planIndex).addRecipeToPlan(recipe, getMealType(mealType));
         } catch (ArrayIndexOutOfBoundsException e) {
             Ui.showMessage(e.getMessage());
         } catch (IndexOutOfBoundsException e) {

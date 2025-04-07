@@ -11,7 +11,7 @@ public class MealPlanManager {
 
     public MealPlanManager() {}
 
-    public void addPlanToList(String planName) {
+    public void addPlan(String planName) {
         Plan plan = new Plan(planName);
         planList.add(plan);
         Ui.showMessage("Plan added: " + plan.getPlanName() +
@@ -75,8 +75,8 @@ public class MealPlanManager {
         return weeklyPlans[day.ordinal()];
     }
 
-    public Plan getPlanDetails(int planIndex) {
-        return planList.get(planIndex);
+    public ArrayList<Plan> getPlanDetails() {
+        return planList;
     }
 
 

@@ -9,12 +9,14 @@ import pantrypal.general.commands.shoppinglist.ShoppingListCommand;
 
 public class Ui {
     private static final String LOGO =
-            " ____             _              ____       _\n" +
-            "|  _ \\ __ _ _ __ | |_ _ __ _   _|  _ \\ __ _| |\n" +
-            "| |_) / _` | '_ \\| __| '__| | | | |_) / _` | |\n" +
-            "|  __/ (_| | | | | |_| |  | |_| |  __/ (_| | |\n" +
-            "|_|   \\__,_|_| |_|\\__|_|   \\__, |_|   \\__,_|_|\n" +
-            "                           |___/";
+            """
+                     ____             _              ____       _
+                    |  _ \\ __ _ _ __ | |_ _ __ _   _|  _ \\ __ _| |
+                    | |_) / _` | '_ \\| __| '__| | | | |_) / _` | |
+                    |  __/ (_| | | | | |_| |  | |_| |  __/ (_| | |
+                    |_|   \\__,_|_| |_|\\__|_|   \\__, |_|   \\__,_|_|
+                                               |___/
+           """;
 
     public static void printWelcomeMessage() {
         System.out.println(LOGO);
