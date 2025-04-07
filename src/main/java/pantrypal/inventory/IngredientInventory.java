@@ -56,30 +56,27 @@ public class IngredientInventory {
 
     // Decrease ingredient quantity
     public void decreaseQuantity(String name, double quantity) {
-        try {
-            if (quantity < 0) {
-                throw new IllegalArgumentException("Quantity to decrease cannot be negative.");
-            }
-            if(name == null || name.isEmpty()) {
-                throw new IllegalArgumentException("Ingredient name cannot be null or empty.");
-            }
+        if (quantity < 0) {
+            throw new IllegalArgumentException("Quantity to decrease cannot be negative.");
+        }
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Ingredient name cannot be null or empty.");
+        }
 
-            Ingredient ingredient = inventory.get(name);
-            if (ingredient != null) {
-                if (ingredient.quantity >= quantity) {
-                    ingredient.quantity -= quantity;
-                } else {
-                    throw new IllegalArgumentException("Not enough " + name + " in stock.");
-                }
+        Ingredient ingredient = inventory.get(name);
+        if (ingredient != null) {
+            if (ingredient.quantity >= quantity) {
+                ingredient.quantity -= quantity;
             } else {
-                throw new IllegalArgumentException("Ingredient not found");
+                throw new IllegalArgumentException("Not enough " + name.toUpperCase() + " in stock.");
             }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+        } else {
+            throw new IllegalArgumentException("Ingredient not found");
         }
     }
 
-    // Set low stock alert
+
+        // Set low stock alert
     public void setAlert(String name, double threshold) {
         lowStockAlerts.put(name, threshold);
     }
@@ -145,15 +142,26 @@ public class IngredientInventory {
     }
 
     public void convertIngredient(String name, Unit targetUnit) {
-        Ingredient ingredient = inventory.get(name);
-        if (ingredient == null) {
-            throw new IllegalArgumentException("Ingredient not found.");
+        try {
+            Ingredient ingredient = inventory.get(name);
+            if (ingredient == null) {
+                throw new IllegalArgumentException("Ingredient not found.");
+            }
+            Unit currentUnit = ingredient.getUnit();
+            double convertedQuantity = Unit.convert(ingredient.getQuantity(), currentUnit, targetUnit);
+            if (convertedQuantity == -1.0) {
+                throw new IllegalArgumentException("Invalid conversion from " + currentUnit + " to " + targetUnit
+                        + " for " + name);
+            }
+            ingredient.setQuantity(convertedQuantity);
+            ingredient.setUnit(targetUnit);
+            System.out.println(name + " converted to " + convertedQuantity + " " + targetUnit);
+
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
-        double convertedQuantity = Unit.convert(ingredient.getQuantity(), ingredient.getUnit(), targetUnit);
-        ingredient.setQuantity(convertedQuantity);
-        ingredient.setUnit(targetUnit);
-        System.out.println(name + " converted " + convertedQuantity + " to " + targetUnit);
     }
+
 
     public String viewIngredientsByCategory(Category category) {
         boolean found = false;
