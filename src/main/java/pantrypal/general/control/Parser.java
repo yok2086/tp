@@ -253,7 +253,8 @@ public class Parser {
 
             case "markShoppingItemAsPurchased":
                 if (inputParts.length < 2) {
-                    throw new IllegalArgumentException("Insufficient arguments for markShoppingItemAsPurchased command.");
+                    throw new IllegalArgumentException(
+                            "Insufficient arguments for markShoppingItemAsPurchased command.");
                 }
                 name = inputParts[1].toUpperCase();
                 if (name == null || name.isEmpty()) {
