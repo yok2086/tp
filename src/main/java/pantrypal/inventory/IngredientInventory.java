@@ -16,6 +16,11 @@ public class IngredientInventory {
 
     // Add new ingredient method
     public void addNewIngredient(String name, double quantity, Unit unit, Category category) {
+        assert name != null && !name.isEmpty() : "Ingredient name is null or empty";
+        assert quantity > 0 : "Quantity must be positive";
+        assert unit != null : "Unit is null";
+        assert category != null : "Category is null";
+
         try {
             if (name == null || name.isEmpty()) {
                 throw new IllegalArgumentException("Ingredient name cannot be null or empty.");
@@ -30,6 +35,7 @@ public class IngredientInventory {
                 throw new IllegalArgumentException("Category cannot be null.");
             }
             if (inventory.containsKey(name)) {
+                System.out.println("This ingredient already exists.");
                 throw new IllegalArgumentException("Ingredient '" + name + "' already exists.");
             }
             inventory.put(name, new Ingredient(name, quantity, unit, category));
