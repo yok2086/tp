@@ -57,7 +57,6 @@ public class IngredientInventory {
                 throw new IllegalArgumentException("Category cannot be null.");
             }
             if (inventory.containsKey(name)) {
-                System.out.println("This ingredient already exists.");
                 throw new IllegalArgumentException("Ingredient '" + name + "' already exists.");
             }
             inventory.put(name, new Ingredient(name, quantity, unit, category));
@@ -175,6 +174,7 @@ public class IngredientInventory {
                         ingredient.unit + " " + ingredient.category);
             });
         }
+        System.out.println("____________________________________________________________");
     }
 
     /**
@@ -212,6 +212,7 @@ public class IngredientInventory {
         if (!found) {
             System.out.println("No low stock ingredients.");
         }
+        System.out.println("______________________________________________________________");
     }
 
     /**
@@ -263,19 +264,29 @@ public class IngredientInventory {
      */
     public String viewIngredientsByCategory(Category category) {
         boolean found = false;
-        StringBuilder result = new StringBuilder(); // Use StringBuilder to collect output
+        boolean firstMatch = true;
+        StringBuilder result = new StringBuilder();
 
         for (Ingredient ingredient : inventory.values()) {
             if (ingredient.getCategory() == category) {
-                result.append(ingredient).append("\n"); // Append ingredient to result
+                if (firstMatch) {
+                    result.append("Displaying ingredients found in this category:\n");
+                    firstMatch = false;
+                } else {
+                    result.append("\n"); // Add newline before subsequent ingredients
+                }
+                result.append(ingredient);
                 found = true;
             }
         }
+
         if (!found) {
             result.append("No ingredients found in category: ").append(category);
         }
-        return result.toString(); // Return the result as a string
+
+        return result.toString();
     }
+
 
     /**
      * Validates if a category string is valid.

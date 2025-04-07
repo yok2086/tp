@@ -279,6 +279,9 @@ public class Storage {
         }
         Day day = Day.valueOf(dayName.toUpperCase());
         int planIndex = Integer.parseInt(parts[1]);
+        if (planIndex < 0 || planIndex >= plans.getPlanList().length) {
+            throw new DataCorruptionException("Invalid plan index in weekly plan");
+        }
         plans.addPlanToDay(planIndex, day);
     }
 
