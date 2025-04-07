@@ -43,7 +43,8 @@ generateShoppingList
 ```
 Description:
 Automatically generates your shopping list by comparing your current ingredient stock with preset low-stock alerts.
-This command calculates the required amount for each ingredient that needs replenishment.
+This command calculates the required amount for each ingredient that needs replenishment. Original shopping list 
+will be cleared before automatic generation of updated shopping list.
 
 #### **removeShoppingItem**
 Command:
