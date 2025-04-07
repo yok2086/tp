@@ -11,6 +11,10 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
+/**
+ * The PantryPal class is the main entry point for the PantryPal application.
+ * It initializes the necessary components and handles the main application loop.
+ */
 public class PantryPal {
     private static final String FILE_PATH = "./data/data.txt";
     private Storage storage;
@@ -22,6 +26,11 @@ public class PantryPal {
     private Parser parser;
     private boolean isFinished;
 
+    /**
+     * Constructs a new PantryPal instance with the specified file path.
+     *
+     * @param filePath the path to the data file
+     */
     public PantryPal(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -36,6 +45,9 @@ public class PantryPal {
         storage.createFile(inventory, shoppingList, mealPlanManager, recipes);
     }
 
+    /**
+     * Runs the main application loop, processing user input and executing commands.
+     */
     public void run() {
         Scanner in = new Scanner(System.in);
         while (!isFinished) {
@@ -47,7 +59,11 @@ public class PantryPal {
         }
     }
 
-
+    /**
+     * The main method, entry point of the application.
+     *
+     * @param args command-line arguments
+     */
     public static void main(String[] args) {
         new PantryPal(FILE_PATH).run();
     }

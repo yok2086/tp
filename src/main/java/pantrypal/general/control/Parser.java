@@ -40,8 +40,18 @@ import pantrypal.general.commands.shoppinglist.MarkShoppingItemAsPurchased;
 import pantrypal.inventory.Category;
 import pantrypal.inventory.Unit;
 
+
+/**
+ * The Parser class is responsible for parsing user input and returning the appropriate Command object.
+ */
 public class Parser {
 
+    /**
+     * Parses the user input and returns the corresponding Command object.
+     *
+     * @param input the user input as a String
+     * @return the Command object corresponding to the user input
+     */
     public Command parse(String input) {
         String[] inputParts = input.trim().split(" ");
         String command = inputParts[0].toLowerCase();

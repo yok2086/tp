@@ -1,296 +1,69 @@
-# Developer Guide
+# PantryPal Developer Guide
+
+## Table of Contents
+- [Acknowledgements](#acknowledgements)
+- [Core Functionalities](#core-functionalities)
+- [Sequence Diagram](#sequence-diagram)
+- [Why It Is Implemented This Way](#why-it-is-implemented-this-way)
+
+
+- [Implementation of the Parser Feature](#implementation-of-the-parser-feature)
+    - [Overview](#overview)
+    - [Design and Implementation](#design-and-implementation)
+    - [Sequence Diagram](#sequence-diagram-1)
+    - [Why It Is Implemented This Way](#why-it-is-implemented-this-way-1)
+- [Implementation of the Storage Feature](#implementation-of-the-storage-feature)
+    - [Overview](#overview-1)
+    - [Design and Implementation](#design-and-implementation-1)
+    - [Sequence Diagram](#sequence-diagram-2)
+- [Implementation of the Meal Plan Feature](#implementation-of-the-meal-plan-feature)
+    - [Overview](#overview-2)
+    - [Design and Implementation](#design-and-implementation-2)
+    - [Core Functionalities](#core-functionalities-1)
+    - [Sequence Diagram](#sequence-diagram-3)
+    - [Why It Is Implemented This Way](#why-it-is-implemented-this-way-2)
+- [Implementation of the Shopping List Feature](#implementation-of-the-shopping-list-feature)
+    - [Overview](#overview-3)
+    - [Design and Implementation](#design-and-implementation-3)
+    - [Core Functionalities](#core-functionalities-2)
+    - [Sequence Diagram](#sequence-diagram-4)
+    - [Why It Is Implemented This Way](#why-it-is-implemented-this-way-3)
+- [Implementation of the Recipe Feature](#implementation-of-the-recipe-feature)
+    - [Overview](#overview-4)
+    - [Design and Implementation](#design-and-implementation-4)
+    - [Core Functionalities](#core-functionalities-3)
+    - [Sequence Diagram](#sequence-diagram-5)
+    - [Why It Is Implemented This Way](#why-it-is-implemented-this-way-4)
+- [Appendix: Requirements](#appendix-requirements)
+- [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+
 
 ## Acknowledgements
 
 1. **JUnit 5** - Used for software testing
 2. **Gradle** - Used for build automation
 
-## Design & implementation
-
-
-
-## Product scope
-### Target user profile
-
-PantryPal is designed for university students and busy individuals who want to simplify their meal planning, grocery shopping, and inventory management. Built on a command-line interface (CLI) using Java, this app is ideal for users with some coding experience who prefer a more practical and efficient way to manage their meals. Perfect for those with limited time and resources, PantryPal helps users stay organized, eat healthy, and reduce food waste—all while offering a customizable solution for managing their pantry
-
-### Value proposition
-
-PantryPal addresses the common challenges faced by university students and busy individuals when it comes to meal planning, grocery shopping, and inventory management. With limited time, resources, and often little experience in organizing meals efficiently, users struggle with food waste, last-minute grocery trips, and chaotic kitchens.
-## User Stories
-
-
-| Version | As a ... | I want to ...                                                            | So that I can ...                                                |
-|---------|----------|--------------------------------------------------------------------------|------------------------------------------------------------------|
-| v1.0    | new user | see usage instructions                                                   | refer to them when I forget how to use the application           |
-| v1.0    | user     | find a to-do item by name                                                | locate a to-do without having to go through the entire list      |
-| v1.0    | user     | create a new ingredient                                                  | keep track of items I’ve added to my pantry                      |
-| v1.0    | user     | update an ingredient’s quantity                                          | reflect changes when I buy or use ingredients                    |
-| v1.0    | user     | rename an ingredient                                                     | correct mistakes or reflect updated naming                       |
-| v1.0    | user     | view details of an ingredient                                            | know exactly how much I have and what type it is                 |
-| v1.0    | user     | delete an ingredient                                                     | remove unused or expired ingredients from my inventory           |
-| v1.0    | user     | set a low stock threshold for ingredients                                | receive alerts when I need to restock                            |
-| v1.0    | user     | view all low stock items                                                 | quickly identify what needs to be replenished                    |
-| v1.0    | user     | find out if an ingredient is in stock                                    | check availability before starting a recipe                      |
-| v1.0    | budget-conscious student| auto-generate a shopping list based my current stock and planned recipes | purchase only missing ingredients                                |
-| v1.0    | busy student| manually add items to my shopping list                                | quickly include additional ingredients I want to have more       |
-| v1.0    | busy student| manually remove items from my shopping list                           | quickly remove additional ingredients I don't want have so much  |
-| v1.0    | meticulous planner| view my shopping list with clearly numbered items               | easily reference and manage items for later editing or removal   |
-| v1.0    | organized shopper| edit an existing shopping list item by its index                 | update integredients details if my shopping needs change         |
-| v1.0    | user     | add a recipe into a list                                                 | save the recipe to be used later on                              |
-| v1.0    | user     | view all the recipe I saved                                              | choose a recipe to follow                                        |
-| v1.0    | user     | remove recipe easily                                                     | avoid cramping my recipe list with rarely-used recipes           |
-| v2.0    | user     | change an ingredient’s unit                                              | work with units I prefer or understand better                    |
-| v2.0    | user     | view ingredients by category                                             | organize or filter ingredients for easier navigation             |
-| v2.0    | user     | convert the unit of an ingredient                                        | standardize or switch between measurement systems (e.g. g to kg) |
-| v2.0    | cost-conscious student|  mark items on my shopping list as purchased                | track which items I have bought and avoid re-purchasing them     |
-
-## Non-Functional Requirements
-- PantryPal should work on any mainstream operating system (Windows, macOS, Linux) with Java 17 or above installed.
-- Users with average typing speed should be able to complete most tasks more efficiently using commands than mouse navigation.
-- The application should remain responsive when managing a moderately large number of ingredients typical of home kitchens.
-- All data should persist automatically across sessions without requiring manual saving.
-
-## Glossary
-
-* *glossary item* - Definition
-- CEG - Computer Engineering
-- CLI - Command Line Interface
-- GUI - Graphical User Interface
-- Mainstream OS - Windows, Linux, Unix, MacOS
-- SRP - Single Responsibility Principle
-
 ---
+# Design and Implementation
 
-# Manual Testing Instructions for PantryPal
+### Class Diagram showing the overall structure of the application
+<img src="Overall_Class_Diagram.png" alt="drawing" style="width:500px;"/>
 
-> **Note:** The following instructions serve as a basic guide for testers to validate the functionality of the program. Testers should go beyond these steps and conduct further exploratory testing.
+### Quick high-level overview of the classes in the application:
 
-## 1. Start Application
+#### Main Components
+- **PantryPal:** is the main class that serves as the entry point for the application. It initializes the necessary components and starts the user interface.
+- **Ui:** handles the user interface of the application and provides methods for displaying messages
+- **Parser:** is responsible for parsing user input and instantiating the appropriate command class.
+- **Storage:** manages the persistence of data when the application exits. It handles the reading and writing of data to and from `data.txt`, ensuring that user data is saved and can be retrieved when the application is relaunched.
+- **Command:** encapsulates the logic and parameters associated with each command in the application. Each command is represented by a separate class, which inherits from a specific command type.
 
-1. Follow the instructions in the **Quick Start** section of the PantryPal User Guide to set up the application.
-2. Expected: A welcome message along with a prompt for user input, inviting you to begin managing your pantry, recipes, and grocery list.
-
-## 2. Test Cases
-
-### 2.1 Initial State
-
-1. **Test case: `help`**
-   - **Steps**: Call `help` method when starting the application.
-   - **Expected**: The message containing every commands available in the application is displayed.
-
-2. **Test case: `viewStock`**
-   - **Steps**: Call `viewStock` method when the inventory is empty.
-   - **Expected**: The message `Inventory is empty.` should be displayed.
-
-3. **Test case: `viewLowStock`**
-   - **Steps**: Call `viewLowStock` when no ingredients are set with low stock alerts.
-   - **Expected**: The message `No low stock ingredients.` should be displayed.
-
-4. **Test case: `viewRecipeList`**
-   - **Steps**: Call `viewRecipeList` when there are no recipes in the recipe list.
-   - **Expected**: The message `There are no recipes at the moment. You can add via addRecipe` should be displayed.
-
-5. **Test case: `viewShoppingList`**
-   - **Steps**: Call `viewShoppingList` when there is no items in the list.
-   - **Expected**: The message `Shopping list is empty` should be displayed.
-
-6. **Test case: `viewPlanList`**
-   - **Steps**: Call `viewPlanList` when there is no plans.
-   - **Expected**: The message `No plans available` should be displayed.
-
+#### The command classes interact with the following components, each serving as an interface to a specific list of data:
+- **IngredientInventory:** manages the list of ingredients in the pantry, allowing users to add, remove, and modify ingredients.
+- **ShoppingList:** manages the list of items to be purchased, allowing users to add, remove, and view items.
+- **RecipeManager:** manages the list of recipes, allowing users to add, remove, and view recipes.
+- **MealPlanManager** manages the list of meal plans, allowing users to add, remove, and view meal plans.
 ---
-
-### 2.2 Add New Ingredient
-
-1. **Test case: `addNewIngredient`**
-   - **Steps**: Add a new ingredient to the inventory: `addNewIngredient("Sugar", 5, Unit.GRAM, Category.CONDIMENTS)`.
-   - **Expected**: The ingredient `Sugar` with quantity `5` in grams and the `CONDIMENTS` category should be added to the inventory.
-
-2. **Test case: `addNewIngredient` with invalid data**
-   - **Steps**: Add a new ingredient with invalid data, e.g., `addNewIngredient("", 5, Unit.GRAM, Category.CONDIMENTS)` (empty name).
-   - **Expected**: The method should throw an assertion error indicating that the ingredient name cannot be null or empty.
-
-3. **Test case: `addNewIngredient` with negative quantity**
-   - **Steps**: Add an ingredient with a negative quantity, e.g., `addNewIngredient("Salt", -3, Unit.GRAM, Category.CONDIMENTS)`.
-   - **Expected**: The method should throw an assertion error indicating that the quantity must be positive.
-
----
-
-### 2.3 Increase Ingredient Quantity
-
-1. **Test case: `increaseQuantity`**
-   - **Steps**: Increase the quantity of an existing ingredient: `increaseQuantity("Sugar", 3)`.
-   - **Expected**: The quantity of `Sugar` should be increased by `3`, making the new quantity `8`.
-
-2. **Test case: `increaseQuantity` for non-existent ingredient**
-   - **Steps**: Try increasing the quantity of a non-existent ingredient: `increaseQuantity("Flour", 5)`.
-   - **Expected**: The message `Ingredient not found` should be displayed.
-
----
-
-### 2.4 Decrease Ingredient Quantity
-
-1. **Test case: `decreaseQuantity`**
-   - **Steps**: Decrease the quantity of an existing ingredient: `decreaseQuantity("Sugar", 2)`.
-   - **Expected**: The quantity of `Sugar` should be decreased by `2`, making the new quantity `6`.
-
-2. **Test case: `decreaseQuantity` for insufficient quantity**
-   - **Steps**: Try decreasing the quantity beyond available stock: `decreaseQuantity("Sugar", 10)`.
-   - **Expected**: The message `Not enough Sugar in stock.` should be displayed.
-
-3. **Test case: `decreaseQuantity` for non-existent ingredient**
-   - **Steps**: Try decreasing the quantity of a non-existent ingredient: `decreaseQuantity("Flour", 5)`.
-   - **Expected**: The message `Ingredient not found` should be displayed.
-
----
-
-### 2.5 Set and View Low Stock Alerts
-
-1. **Test case: `setAlert`**
-   - **Steps**: Set a low stock alert for an ingredient: `setAlert("Sugar", 2)`.
-   - **Expected**: A low stock alert for `Sugar` should be set at the threshold of `2`.
-
-2. **Test case: `viewLowStock`**
-   - **Steps**: View low stock ingredients when the alert is set: `viewLowStock()`.
-   - **Expected**: If `Sugar` has a quantity lower than `2`, the message `Low stock: Sugar (quantity)` should be displayed.
-
----
-
-### 2.6 Delete Ingredient
-
-1. **Test case: `deleteIngredient`**
-   - **Steps**: Delete an existing ingredient: `deleteIngredient("Sugar")`.
-   - **Expected**: The ingredient `Sugar` should be removed from the inventory, and the message `Deleted Sugar from inventory.` should be displayed.
-
-2. **Test case: `deleteIngredient` for non-existent ingredient**
-   - **Steps**: Try deleting a non-existent ingredient: `deleteIngredient("Flour")`.
-   - **Expected**: The message `Ingredient not found.` should be displayed.
-
----
-
-### 2.7 Convert Ingredient Unit
-
-1. **Test case: `convertIngredient`**
-   - **Steps**: Convert an ingredient's unit: `convertIngredient("Sugar", Unit.KG)`.
-   - **Expected**: The quantity of `Sugar` should be converted to kilograms, and the message `Sugar converted (new quantity) to KG` should be displayed.
-
-2. **Test case: `convertIngredient` for non-existent ingredient**
-   - **Steps**: Try converting a non-existent ingredient: `convertIngredient("Flour", Unit.KG)`.
-   - **Expected**: The method should throw an `IllegalArgumentException` with the message `Ingredient not found.`
-
----
-
-### 2.8 View Ingredients by Category
-
-1. **Test case: `viewIngredientsByCategory`**
-   - **Steps**: View ingredients by category: `viewIngredientsByCategory(Category.CONDIMENTS)`.
-   - **Expected**: The ingredients in the `CONDIMENTS` category should be displayed, if available.
-
-2. **Test case: `viewIngredientsByCategory` for empty category**
-   - **Steps**: View ingredients by a category with no ingredients: `viewIngredientsByCategory(Category.SPICES)`.
-   - **Expected**: The message `No ingredients found in category: SPICES` should be displayed.
-
----
-
-### 2.9 Add A Recipe
-
-1. **Test case: `addRecipe`**
-   - **Steps**: 
-      - Run the command `addRecipe`
-      - Add `good_recipe` for the recipe name
-      - Add any string (no white space) for the ingredient name
-      - Add any positive number for the ingredient quantity
-      - Add any unit availabe in `Unit` (for example, `kg`)
-      - Add any category avaialable in `Category` (for example, `DAIRY`)
-      - Input `exit` to continue
-      - Add any string
-      - Input `exit` to finish
-   - **Expected**: The message `Recipe added successfully` should be displayed.
-
-2. **Test case: `addRecipe` with recipe name containing white space**
-   - **Steps**:
-      - Run the command `addRecipe`
-      - Add `recipe with space` for the recipe name
-   - **Expected**: The message `Warning: Recipe name should not contain space. Use '_' instead.` should be displayed. Users should be prompted to input the recipe name again.
-
-3. **Test case: `addRecipe` with ingredient name containing white space**
-   - **Steps**:
-      - Run the command `addRecipe`
-      - Add any string (no white space) for the recipe name
-      - Add `ingredient with space` for the ingredient name
-   - **Expected**: The message `Ingredient Name cannot contain spaces. Try again` should be displayed. Users should be promted to input the ingredient name again.
-
-4. **Test case: `addRecipe` with quantity not being a number**
-   - **Steps**:
-      - Run the command `addRecipe`
-      - Add any string (no white space) for the recipe name
-      - Add any string (no white space) for the ingredient name
-      - Add any string (not a number) for quantity
-   - **Expected**: The message `Invalid ingredient quantity! Try again.` should be displayed. Users should be prompted to input the quantity again.
-
-5. **Test case: `addRecipe` with non-positive quantity**
-   - **Steps**:
-      - Run the command `addRecipe`
-      - Add any string (no white space) for the recipe name
-      - Add any string (no white space) for the ingredient name
-      - Add any number less than or equal 0 for the ingredient name
-   - **Expected**: The message `Quantity must be greater than 0.Try again.` should be displayed. Users should be prompted to input the quantity again.
-
-6. **Test case: `addRecipe` with invalid unit**
-   - **Steps**:
-      - Run the command `addRecipe`
-      - Add any string (no white space) for the recipe name
-      - Add any string (no white space) for the ingredient name
-      - Add any positive number for the ingredient quantity
-      - Add random string (e.g. `i love you`) for Unit
-   - **Expected**: The message `Invalid ingredient unit! Try again.` should be displayed. Users should be prompted to input the unit again.
-
-7. **Test case: `addRecipe` with invalid category**
-   - **Steps**:
-      - Run the command `addRecipe`
-      - Add any string (no white space) for the recipe name
-      - Add any string (no white space) for the ingredient name
-      - Add any positive number for the ingredient quantity
-      - Add any unit availabe in `Unit` (for example, `kg`)
-      - Add any category avaialable in `Category` (for example, `DAIRY`)
-      - Input `exit` to continue
-      - Add any string
-      - Input `exit` to finish 
-   - **Expected**: The message `Invalid category! Try again.` should be displayed. Users should be prompted to input the category again.
-
-8. **Test case: `addRecipe` with duplicate recipe**
-   - **Steps**: Run test case 2.9.1 (**Test case: `addRecipe`**) with the exact steps twice
-   - **Expected**: The message `Warning: Recipe GOOD_RECIPE already exists` should be displayed. Users should be prompted to input the recipe name again
-   
-
-### 2.10 View A Recipe
-1. **Test case: `viewRecipe`**
-   - **Steps**:
-      - Follow the steps as specified in test case 2.9.1
-      - Run the command `viewRecipe good_recipe`
-   - **Expected**: A message having 3 sections, the first section being the recipe name (`good_recipe`), the second section being the recipe's ingredient and the third section being the recipe's instructions should be displayed.
-
-2. **Test case: `viewRecipe` with non-existing recipe**
-   - **Steps**: Run the command `viewRecipe not_existing`
-   - **Expected**: The message `There is no recipe with name NOT_EXISTING` should be displayed.
-
-### 2.11 View The Full List Of Recipes
-1. **Test case: `viewRecipeList`**
-   - **Steps**:
-      - Follow the steps as specified in test case 2.9.1
-      - Repeat test case 2.9.1 three times with different name each time
-      - Run the command `viewRecipeList`
-   - **Expected**: The list of recipe names should be displayed.
----
-## 1. Start Application
-
-1. **Follow the setup instructions** provided in the User Guide to initialize the application and set up the `IngredientInventory` class.
-    - **Expected**: The application should start without errors, and the user should be prompted for input.
-
----
-
-
 # Implementation of Command Classes
 
 ## Overview
@@ -306,7 +79,7 @@ The core components of the Command classes include:
 ## Class Diagram
 <img src="Command_Class_Diagram.png" alt="drawing" style="width:800px;"/>
 
-
+---
 # Implementation of the Parser Feature
 
 ## Overview
@@ -334,7 +107,7 @@ The following sequence diagram illustrates the interaction between the user, the
 ### Why It Is Implemented This Way
 By using separate command classes, we can easily extend the functionality of the application without modifying the core parsing logic.
 By encapsulating the command logic within individual classes, we adhere to the Single Responsibility Principle, making the codebase easier to understand and maintain.
-
+---
 # Implementation of the Storage Feature
 
 ## Overview
@@ -353,9 +126,39 @@ The Storage feature is designed to be modular and extensible, allowing for easy 
 
 The following sequence diagram illustrates the interaction between the `Storage` class and the other key lists in the application during the loading and saving of data:
 The key lists include: `StockList`, `LowStockList`, `RecipeList`, `ShoppingList`
+
 <img src="Storage_Sequence_Diagram.png" alt="drawing" style="width:1000px;"/>
 
+## Data Storage Format
+The data is stored in a text file called `data.txt` in the following format:
 
+```
+[Shopping] <Ingredient> <Quantity> <Unit> <isPurchased>
+
+[Stock] <Ingredient> <Quantity> <Unit> <Category>
+
+[LowStock] <Ingredient> <Quantity> 
+
+[Recipe] <RecipeName>
+[Ingredients] <Ingredient1> <Quantity1> <Unit1> <Category1> | <Ingredient2> <Quantity2> <Unit2> <Category2> | ...
+[Instructions] <Instruction1> | <Instruction2> | ...
+
+[MealPlan] <MealPlanName>
+[Breakfast] <Recipe Index>
+[Lunch] <Recipe Index>
+[Dinner] <Recipe Index>
+
+[WeeklyPlan]
+[MONDAY] <Plan Index>
+[TUESDAY] <Plan Index>
+[WEDNESDAY] <Plan Index>
+[THURSDAY] <Plan Index>
+[FRIDAY] <Plan Index>
+[SATURDAY] <Plan Index>
+[SUNDAY] <Plan Index>
+```
+
+---
 # Implementation of the Meal Plan, Plan Presets and Viewing features
 
 ## Meal Plan Feature
@@ -445,6 +248,7 @@ amongst all created MealPlan
 
 ![img_6.png](Meal_Plan_Sequence_Diagram.png)
 
+---
 # Implementation of the Ingredient and Ingredient Inventory Features
 
 ## Ingredient Feature
@@ -505,6 +309,8 @@ The addition of unit conversion ensures consistency across different ingredient 
 easier to track inventory. Categorization improves usability by allowing users to group and filter
 ingredients based on type.
 
+---
+
 # Implementation of the Shopping List Item and Shopping List Features
 
 ## Shopping List Item Feature
@@ -548,6 +354,8 @@ The following sequence diagram illustrates the interaction between the user, Sho
 
 ### Why It Is Implemented This Way
 The Shopping List Item and Shopping List features follow a modular design to ensure flexibility, scalability, and maintainability. The Single Responsibility Principle is adhered to, with the ShoppingListItem class managing individual item attributes and the ShoppingList class handling the collection of items. This clear separation makes the system easy to understand, maintain, and modify without affecting other components.
+
+---
 
 # Implementation of the Instruction, Recipe and Recipe Management Features
 
@@ -604,3 +412,286 @@ The following sequence diagram illustrates the interaction between the user, the
 
 ### Why It Is Implemented This Way
 The Instruction, Recipe, and Recipe Management features follow a modular design to ensure it is easy to be maintained or modified when necessary. The Single Responsibility Principle is adhered to, with Instruction manages only the recipe instructions, while Recipe acts as collection of Instruction and Ingredient, and Recipe Management acts as collection of Instruction only. By separating into smaller classes, it helps the developer understand, maintain without heavy coupling with other components.
+
+---
+# Appendix: Requirements
+
+## Product scope
+
+**Target user profile:**
+- University students and busy individuals who want to simplify their meal planning, grocery shopping, and inventory management.
+- Can type fast
+- Prefer a command-line interface (CLI) over a graphical user interface (GUI)
+- prefers typing to mouse navigation
+- Prefer a practical and efficient way to manage their meals
+
+**Value proposition**
+
+PantryPal addresses the common challenges faced by university students and busy individuals when it comes to
+meal planning, grocery shopping, and inventory management by providing an all in one solution that simplifies these tasks.
+
+## User Stories
+
+| Version | As a ... | I want to ...                                                            | So that I can ...                                                |
+|---------|----------|--------------------------------------------------------------------------|------------------------------------------------------------------|
+| v1.0    | new user | see usage instructions                                                   | refer to them when I forget how to use the application           |
+| v1.0    | user     | find a to-do item by name                                                | locate a to-do without having to go through the entire list      |
+| v1.0    | user     | create a new ingredient                                                  | keep track of items I’ve added to my pantry                      |
+| v1.0    | user     | update an ingredient’s quantity                                          | reflect changes when I buy or use ingredients                    |
+| v1.0    | user     | rename an ingredient                                                     | correct mistakes or reflect updated naming                       |
+| v1.0    | user     | view details of an ingredient                                            | know exactly how much I have and what type it is                 |
+| v1.0    | user     | delete an ingredient                                                     | remove unused or expired ingredients from my inventory           |
+| v1.0    | user     | set a low stock threshold for ingredients                                | receive alerts when I need to restock                            |
+| v1.0    | user     | view all low stock items                                                 | quickly identify what needs to be replenished                    |
+| v1.0    | user     | find out if an ingredient is in stock                                    | check availability before starting a recipe                      |
+| v1.0    | budget-conscious student| auto-generate a shopping list based my current stock and planned recipes | purchase only missing ingredients                                |
+| v1.0    | busy student| manually add items to my shopping list                                | quickly include additional ingredients I want to have more       |
+| v1.0    | busy student| manually remove items from my shopping list                           | quickly remove additional ingredients I don't want have so much  |
+| v1.0    | meticulous planner| view my shopping list with clearly numbered items               | easily reference and manage items for later editing or removal   |
+| v1.0    | organized shopper| edit an existing shopping list item by its index                 | update integredients details if my shopping needs change         |
+| v1.0    | user     | add a recipe into a list                                                 | save the recipe to be used later on                              |
+| v1.0    | user     | view all the recipe I saved                                              | choose a recipe to follow                                        |
+| v1.0    | user     | remove recipe easily                                                     | avoid cramping my recipe list with rarely-used recipes           |
+| v2.0    | user     | change an ingredient’s unit                                              | work with units I prefer or understand better                    |
+| v2.0    | user     | view ingredients by category                                             | organize or filter ingredients for easier navigation             |
+| v2.0    | user     | convert the unit of an ingredient                                        | standardize or switch between measurement systems (e.g. g to kg) |
+| v2.0    | cost-conscious student|  mark items on my shopping list as purchased                | track which items I have bought and avoid re-purchasing them     |
+
+## Non-Functional Requirements
+- PantryPal should work on any mainstream operating system (Windows, macOS, Linux) with Java 17 or above installed.
+- Users with average typing speed should be able to complete most tasks more efficiently using commands than mouse navigation.
+- The application should remain responsive when managing a moderately large number of ingredients typical of home kitchens.
+- All data should persist automatically across sessions without requiring manual saving.
+
+## Glossary
+
+* *glossary item* - Definition
+- CLI - Command Line Interface
+- GUI - Graphical User Interface
+- Mainstream OS - Windows, Linux, Unix, MacOS
+- SRP - Single Responsibility Principle
+
+---
+
+# Appendix: Instructions for manual testing
+
+> **Note:** The following instructions serve as a basic guide for testers to validate the functionality of the program. Testers should go beyond these steps and conduct further exploratory testing.
+
+## 1. Start Application
+
+1. Follow the instructions in the **Quick Start** section of the PantryPal User Guide to set up the application.
+2. Expected: A welcome message along with a prompt for user input, inviting you to begin managing your pantry, recipes, and grocery list.
+
+## 2. Test Cases
+
+### 2.1 Initial State
+
+1. **Test case: `help`**
+    - **Steps**: Call `help` method when starting the application.
+    - **Expected**: The message containing every commands available in the application is displayed.
+
+2. **Test case: `viewStock`**
+    - **Steps**: Call `viewStock` method when the inventory is empty.
+    - **Expected**: The message `Inventory is empty.` should be displayed.
+
+3. **Test case: `viewLowStock`**
+    - **Steps**: Call `viewLowStock` when no ingredients are set with low stock alerts.
+    - **Expected**: The message `No low stock ingredients.` should be displayed.
+
+4. **Test case: `viewRecipeList`**
+    - **Steps**: Call `viewRecipeList` when there are no recipes in the recipe list.
+    - **Expected**: The message `There are no recipes at the moment. You can add via addRecipe` should be displayed.
+
+5. **Test case: `viewShoppingList`**
+    - **Steps**: Call `viewShoppingList` when there is no items in the list.
+    - **Expected**: The message `Shopping list is empty` should be displayed.
+
+6. **Test case: `viewPlanList`**
+    - **Steps**: Call `viewPlanList` when there is no plans.
+    - **Expected**: The message `No plans available` should be displayed.
+
+---
+
+### 2.2 Add New Ingredient
+
+1. **Test case: `addNewIngredient`**
+    - **Steps**: Add a new ingredient to the inventory: `addNewIngredient("Sugar", 5, Unit.GRAM, Category.CONDIMENTS)`.
+    - **Expected**: The ingredient `Sugar` with quantity `5` in grams and the `CONDIMENTS` category should be added to the inventory.
+
+2. **Test case: `addNewIngredient` with invalid data**
+    - **Steps**: Add a new ingredient with invalid data, e.g., `addNewIngredient("", 5, Unit.GRAM, Category.CONDIMENTS)` (empty name).
+    - **Expected**: The method should throw an assertion error indicating that the ingredient name cannot be null or empty.
+
+3. **Test case: `addNewIngredient` with negative quantity**
+    - **Steps**: Add an ingredient with a negative quantity, e.g., `addNewIngredient("Salt", -3, Unit.GRAM, Category.CONDIMENTS)`.
+    - **Expected**: The method should throw an assertion error indicating that the quantity must be positive.
+
+---
+
+### 2.3 Increase Ingredient Quantity
+
+1. **Test case: `increaseQuantity`**
+    - **Steps**: Increase the quantity of an existing ingredient: `increaseQuantity("Sugar", 3)`.
+    - **Expected**: The quantity of `Sugar` should be increased by `3`, making the new quantity `8`.
+
+2. **Test case: `increaseQuantity` for non-existent ingredient**
+    - **Steps**: Try increasing the quantity of a non-existent ingredient: `increaseQuantity("Flour", 5)`.
+    - **Expected**: The message `Ingredient not found` should be displayed.
+
+---
+
+### 2.4 Decrease Ingredient Quantity
+
+1. **Test case: `decreaseQuantity`**
+    - **Steps**: Decrease the quantity of an existing ingredient: `decreaseQuantity("Sugar", 2)`.
+    - **Expected**: The quantity of `Sugar` should be decreased by `2`, making the new quantity `6`.
+
+2. **Test case: `decreaseQuantity` for insufficient quantity**
+    - **Steps**: Try decreasing the quantity beyond available stock: `decreaseQuantity("Sugar", 10)`.
+    - **Expected**: The message `Not enough Sugar in stock.` should be displayed.
+
+3. **Test case: `decreaseQuantity` for non-existent ingredient**
+    - **Steps**: Try decreasing the quantity of a non-existent ingredient: `decreaseQuantity("Flour", 5)`.
+    - **Expected**: The message `Ingredient not found` should be displayed.
+
+---
+
+### 2.5 Set and View Low Stock Alerts
+
+1. **Test case: `setAlert`**
+    - **Steps**: Set a low stock alert for an ingredient: `setAlert("Sugar", 2)`.
+    - **Expected**: A low stock alert for `Sugar` should be set at the threshold of `2`.
+
+2. **Test case: `viewLowStock`**
+    - **Steps**: View low stock ingredients when the alert is set: `viewLowStock()`.
+    - **Expected**: If `Sugar` has a quantity lower than `2`, the message `Low stock: Sugar (quantity)` should be displayed.
+
+---
+
+### 2.6 Delete Ingredient
+
+1. **Test case: `deleteIngredient`**
+    - **Steps**: Delete an existing ingredient: `deleteIngredient("Sugar")`.
+    - **Expected**: The ingredient `Sugar` should be removed from the inventory, and the message `Deleted Sugar from inventory.` should be displayed.
+
+2. **Test case: `deleteIngredient` for non-existent ingredient**
+    - **Steps**: Try deleting a non-existent ingredient: `deleteIngredient("Flour")`.
+    - **Expected**: The message `Ingredient not found.` should be displayed.
+
+---
+
+### 2.7 Convert Ingredient Unit
+
+1. **Test case: `convertIngredient`**
+    - **Steps**: Convert an ingredient's unit: `convertIngredient("Sugar", Unit.KG)`.
+    - **Expected**: The quantity of `Sugar` should be converted to kilograms, and the message `Sugar converted (new quantity) to KG` should be displayed.
+
+2. **Test case: `convertIngredient` for non-existent ingredient**
+    - **Steps**: Try converting a non-existent ingredient: `convertIngredient("Flour", Unit.KG)`.
+    - **Expected**: The method should throw an `IllegalArgumentException` with the message `Ingredient not found.`
+
+---
+
+### 2.8 View Ingredients by Category
+
+1. **Test case: `viewIngredientsByCategory`**
+    - **Steps**: View ingredients by category: `viewIngredientsByCategory(Category.CONDIMENTS)`.
+    - **Expected**: The ingredients in the `CONDIMENTS` category should be displayed, if available.
+
+2. **Test case: `viewIngredientsByCategory` for empty category**
+    - **Steps**: View ingredients by a category with no ingredients: `viewIngredientsByCategory(Category.SPICES)`.
+    - **Expected**: The message `No ingredients found in category: SPICES` should be displayed.
+
+---
+
+### 2.9 Add A Recipe
+
+1. **Test case: `addRecipe`**
+    - **Steps**:
+        - Run the command `addRecipe`
+        - Add `good_recipe` for the recipe name
+        - Add any string (no white space) for the ingredient name
+        - Add any positive number for the ingredient quantity
+        - Add any unit availabe in `Unit` (for example, `kg`)
+        - Add any category avaialable in `Category` (for example, `DAIRY`)
+        - Input `exit` to continue
+        - Add any string
+        - Input `exit` to finish
+    - **Expected**: The message `Recipe added successfully` should be displayed.
+
+2. **Test case: `addRecipe` with recipe name containing white space**
+    - **Steps**:
+        - Run the command `addRecipe`
+        - Add `recipe with space` for the recipe name
+    - **Expected**: The message `Warning: Recipe name should not contain space. Use '_' instead.` should be displayed. Users should be prompted to input the recipe name again.
+
+3. **Test case: `addRecipe` with ingredient name containing white space**
+    - **Steps**:
+        - Run the command `addRecipe`
+        - Add any string (no white space) for the recipe name
+        - Add `ingredient with space` for the ingredient name
+    - **Expected**: The message `Ingredient Name cannot contain spaces. Try again` should be displayed. Users should be promted to input the ingredient name again.
+
+4. **Test case: `addRecipe` with quantity not being a number**
+    - **Steps**:
+        - Run the command `addRecipe`
+        - Add any string (no white space) for the recipe name
+        - Add any string (no white space) for the ingredient name
+        - Add any string (not a number) for quantity
+    - **Expected**: The message `Invalid ingredient quantity! Try again.` should be displayed. Users should be prompted to input the quantity again.
+
+5. **Test case: `addRecipe` with non-positive quantity**
+    - **Steps**:
+        - Run the command `addRecipe`
+        - Add any string (no white space) for the recipe name
+        - Add any string (no white space) for the ingredient name
+        - Add any number less than or equal 0 for the ingredient name
+    - **Expected**: The message `Quantity must be greater than 0.Try again.` should be displayed. Users should be prompted to input the quantity again.
+
+6. **Test case: `addRecipe` with invalid unit**
+    - **Steps**:
+        - Run the command `addRecipe`
+        - Add any string (no white space) for the recipe name
+        - Add any string (no white space) for the ingredient name
+        - Add any positive number for the ingredient quantity
+        - Add random string (e.g. `i love you`) for Unit
+    - **Expected**: The message `Invalid ingredient unit! Try again.` should be displayed. Users should be prompted to input the unit again.
+
+7. **Test case: `addRecipe` with invalid category**
+    - **Steps**:
+        - Run the command `addRecipe`
+        - Add any string (no white space) for the recipe name
+        - Add any string (no white space) for the ingredient name
+        - Add any positive number for the ingredient quantity
+        - Add any unit availabe in `Unit` (for example, `kg`)
+        - Add any category avaialable in `Category` (for example, `DAIRY`)
+        - Input `exit` to continue
+        - Add any string
+        - Input `exit` to finish
+    - **Expected**: The message `Invalid category! Try again.` should be displayed. Users should be prompted to input the category again.
+
+8. **Test case: `addRecipe` with duplicate recipe**
+    - **Steps**: Run test case 2.9.1 (**Test case: `addRecipe`**) with the exact steps twice
+    - **Expected**: The message `Warning: Recipe GOOD_RECIPE already exists` should be displayed. Users should be prompted to input the recipe name again
+
+
+### 2.10 View A Recipe
+1. **Test case: `viewRecipe`**
+    - **Steps**:
+        - Follow the steps as specified in test case 2.9.1
+        - Run the command `viewRecipe good_recipe`
+    - **Expected**: A message having 3 sections, the first section being the recipe name (`good_recipe`), the second section being the recipe's ingredient and the third section being the recipe's instructions should be displayed.
+
+2. **Test case: `viewRecipe` with non-existing recipe**
+    - **Steps**: Run the command `viewRecipe not_existing`
+    - **Expected**: The message `There is no recipe with name NOT_EXISTING` should be displayed.
+
+### 2.11 View The Full List Of Recipes
+1. **Test case: `viewRecipeList`**
+    - **Steps**:
+        - Follow the steps as specified in test case 2.9.1
+        - Repeat test case 2.9.1 three times with different name each time
+        - Run the command `viewRecipeList`
+    - **Expected**: The list of recipe names should be displayed.
+---
+
