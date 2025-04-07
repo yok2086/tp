@@ -16,7 +16,7 @@ public class AddRecipeToPlan extends MealPlanCommand {
     String mealType;
 
     public AddRecipeToPlan() {
-        super("addRecipeToPlan <plan index> <recipe index>",
+        super("addRecipeToPlan <plan index> <recipe index> <breakfast/lunch/dinner>",
                 "Add a recipe to a meal plan");
     }
 
@@ -35,6 +35,7 @@ public class AddRecipeToPlan extends MealPlanCommand {
             }
             Recipe recipe = recipes.getRecipeList().get(recipeIndex);
             plans.getPlanDetails(planIndex).addRecipeToPlan(recipe, getMealType(mealType));
+            Ui.showMessage("Added recipe to plan");
         } catch (ArrayIndexOutOfBoundsException e) {
             Ui.showMessage(e.getMessage());
         } catch (IndexOutOfBoundsException e) {

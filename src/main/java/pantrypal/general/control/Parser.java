@@ -20,10 +20,12 @@ import pantrypal.general.commands.mealplan.AddPlanToDay;
 import pantrypal.general.commands.mealplan.AddRecipeToPlan;
 import pantrypal.general.commands.mealplan.RemoveRecipeFromPlan;
 import pantrypal.general.commands.mealplan.RemovePlanFromDay;
+import pantrypal.general.commands.mealplan.ViewPlan;
 import pantrypal.general.commands.mealplan.ViewPlanForDay;
 import pantrypal.general.commands.mealplan.ViewPlanForWeek;
 import pantrypal.general.commands.mealplan.ExecutePlanForDay;
 import pantrypal.general.commands.mealplan.FindForPlans;
+import pantrypal.general.commands.mealplan.ViewPlanList;
 import pantrypal.general.commands.recipe.AddRecipe;
 import pantrypal.general.commands.recipe.ListRecipe;
 import pantrypal.general.commands.recipe.RemoveRecipe;
@@ -218,7 +220,7 @@ public class Parser {
                 if (inputParts.length < 5) {
                     throw new IllegalArgumentException("Insufficient arguments for editShoppingItem command.");
                 }
-                index = Integer.parseInt(inputParts[1]);
+                index = Integer.parseInt(inputParts[1]) - 1;
                 if (index < 0) {
                     throw new IllegalArgumentException("Index must be non-negative");
                 }
@@ -293,7 +295,7 @@ public class Parser {
                 if (inputParts.length < 3) {
                     throw new IllegalArgumentException("Insufficient arguments for addPlanToDay command.");
                 }
-                int addToWeekIndex = Integer.parseInt(inputParts[1]);
+                int addToWeekIndex = Integer.parseInt(inputParts[1]) - 1;
                 if (addToWeekIndex < 0) {
                     throw new IllegalArgumentException("Week index must be non-negative");
                 }
@@ -307,15 +309,15 @@ public class Parser {
                 return new AddPlanToDay(addToWeekIndex, addDayName);
             case "addRecipeToPlan":
                 if (inputParts.length < 4) {
-                    throw new IllegalArgumentException("Insufficient arguments for addPlanToDay command.");
+                    throw new IllegalArgumentException("Insufficient arguments for addRecipeToPlan command.");
                 }
-                int addRecipePlanIndex = Integer.parseInt(inputParts[1]);
+                int addRecipePlanIndex = Integer.parseInt(inputParts[1]) - 1;
                 if (addRecipePlanIndex < 0) {
                     throw new IllegalArgumentException("Plan index must be non-negative");
                 }
                 assert addRecipePlanIndex >= 0 : "Plan index must be non-negative";
 
-                int addRecipeRecipeIndex = Integer.parseInt(inputParts[2]);
+                int addRecipeRecipeIndex = Integer.parseInt(inputParts[2]) - 1;
                 if (addRecipeRecipeIndex < 0) {
                     throw new IllegalArgumentException("Recipe index must be non-negative");
                 }
@@ -331,7 +333,7 @@ public class Parser {
                 if (inputParts.length < 3) {
                     throw new IllegalArgumentException("Insufficient arguments for removeRecipeFromPlan command.");
                 }
-                int deleteRecipePlanIndex = Integer.parseInt(inputParts[1]);
+                int deleteRecipePlanIndex = Integer.parseInt(inputParts[1]) - 1;
                 if (deleteRecipePlanIndex < 0) {
                     throw new IllegalArgumentException("Plan index must be non-negative");
                 }
@@ -387,6 +389,18 @@ public class Parser {
                 }
                 assert findSearchKey != null && !findSearchKey.isEmpty() : "Search key cannot be null or empty";
                 return new FindForPlans(findSearchKey);
+            case "viewPlanList":
+                return new ViewPlanList();
+            case "viewPlan":
+                if (inputParts.length < 2) {
+                    throw new IllegalArgumentException("Insufficient arguments for viewPlan command.");
+                }
+                int viewPlanIndex = Integer.parseInt(inputParts[1]) - 1;
+                if (viewPlanIndex < 0) {
+                    throw new IllegalArgumentException("Plan index must be non-negative");
+                }
+                assert viewPlanIndex >= 0 : "Plan index must be non-negative";
+                return new ViewPlan(viewPlanIndex);
             default:
                 return new NullCommand("Invalid Command! ");
             }

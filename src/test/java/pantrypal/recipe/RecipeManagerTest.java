@@ -243,16 +243,18 @@ class RecipeManagerTest {
 
             // Assert: Check if the output is as expected
             String expectedOutput = """
+                    ____________________________________________________________
                     fried_egg
-                    __________________________________________________
+                    ____________________________________________________________
                     Ingredients:
                     1. eggs 50.0 g Dairy
-                    __________________________________________________
+                    ____________________________________________________________
                     Instructions:
                     1. serve eggs
                     2. cook eggs
                     
                     
+                    ____________________________________________________________
                     """;
             assertEquals(normalizeString(expectedOutput), normalizeString(outContent.toString()),
                     "Printed output: " + outContent + " does not match expected output: "
