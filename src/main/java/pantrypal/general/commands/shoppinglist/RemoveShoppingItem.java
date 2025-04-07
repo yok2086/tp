@@ -29,9 +29,9 @@ public class RemoveShoppingItem extends ShoppingListCommand {
         }
         boolean removed = list.removeItem(name);
         if (removed) {
-            Ui.showMessage("Removed '" + name + "' from the shopping list.");
+            System.out.println("Removed '" + name + "' from the shopping list.");
         } else {
-            Ui.showMessage("Item '" + name + "' not found in the shopping list.");
+            System.out.println("Item '" + name + "' not found in the shopping list.");
         }
         Ui.printLine();
     }
