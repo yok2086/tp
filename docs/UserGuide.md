@@ -103,7 +103,7 @@ Note that ```{enter}``` means clicking the enter button. Please enter your input
 ```
 addRecipe {enter}
 <recipe_name> (no whitespace allowed, use _ instead) {enter}
-<ingredient_name/exit> {enter}
+<ingredient_name/exit> (no whitespace allowed, use _ instead) {enter}
 <ingredient_quantity> {enter}
 <unit_of_measurement> {enter}
 <instructions/exit> {enter}
