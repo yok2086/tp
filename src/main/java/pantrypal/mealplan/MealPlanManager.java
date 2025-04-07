@@ -51,10 +51,14 @@ public class MealPlanManager {
     }
 
     public void viewPlanForWeek() {
-        for (Plan plan : weeklyPlans) {
-            if (plan != null) {
-                Ui.showMessage(plan.toString());
+        Ui.printLine();
+        for (int i = 0; i < weeklyPlans.length; i++) {
+            if (weeklyPlans[i] != null) {
+                System.out.println(Day.values()[i].name() + ": \n" + weeklyPlans[i].toString());
+            } else {
+                System.out.println("No plan for " + Day.values()[i].name());
             }
+            Ui.printLine();
         }
     }
 

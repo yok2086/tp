@@ -112,6 +112,7 @@ public class Ui {
 
     public static void showMessage(String message) {
         System.out.println(message);
+        Ui.printLine();
     }
 
     public static void printErrorMessage(String message) {
