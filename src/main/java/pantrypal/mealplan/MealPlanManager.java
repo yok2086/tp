@@ -19,6 +19,12 @@ public class MealPlanManager {
     public void removePlanFromList(int planIndex) {
         Plan plan = planList.get(planIndex);
         planList.remove(plan);
+        //Remove plan from Weekly Plan if it exists
+        for (int i = 0; i < weeklyPlans.length; i++) {
+            if (weeklyPlans[i] != null && weeklyPlans[i].equals(plan)) {
+                weeklyPlans[i] = null;
+            }
+        }
     }
 
     public void addPlanToDay(int planIndex, Day day) {
