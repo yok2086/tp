@@ -33,8 +33,7 @@ public class CategoryList extends GeneralCommand {
                 "CANNED" + "\n" +
                 "SNACK" + "\n" +
                 "SOUP" + "\n" +
-                "HERB" + "\n"
+                "HERB"
         );
-
     }
 }
