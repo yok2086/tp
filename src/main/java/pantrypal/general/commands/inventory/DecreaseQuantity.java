@@ -35,10 +35,10 @@ public class DecreaseQuantity extends InventoryCommand {
                         MealPlanManager plans, Scanner in) {
         try {
             inventory.decreaseQuantity(name, quantity);
+            System.out.println("You have decreased " + quantity + " of " + name);
         } catch (IllegalArgumentException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 
 }
-

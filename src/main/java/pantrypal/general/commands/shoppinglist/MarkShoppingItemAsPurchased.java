@@ -12,12 +12,12 @@ public class MarkShoppingItemAsPurchased extends ShoppingListCommand {
     private String ingredientName;
 
     public MarkShoppingItemAsPurchased(String ingredientName) {
-        super("markItemAsPurchased <ingredient_name>", "Mark a shopping list item as purchased");
+        super("markShoppingItemAsPurchased <ingredient_name>", "Mark a shopping list item as purchased");
         this.ingredientName = ingredientName;
     }
 
     public MarkShoppingItemAsPurchased() {
-        super("markItemAsPurchased <ingredient_name>", "Mark a shopping list item as purchased");
+        super("markShoppingItemAsPurchased <ingredient_name>", "Mark a shopping list item as purchased");
     }
 
     @Override
@@ -29,6 +29,5 @@ public class MarkShoppingItemAsPurchased extends ShoppingListCommand {
         } else {
             ui.showMessage("Item '" + ingredientName + "' not found in the shopping list.");
         }
-        Ui.printLine();
     }
 }

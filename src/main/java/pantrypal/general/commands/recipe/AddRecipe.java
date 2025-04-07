@@ -46,6 +46,11 @@ public class AddRecipe extends RecipeCommand {
                 continue;
             }
 
+            if (ingredientName.split(" ").length > 1) {
+                Ui.printErrorMessage("Ingredient Name cannot contain spaces. Try again");
+                continue;
+            }
+
             if (ingredientName.equals("EXIT")) {
                 isFinished = true;
                 continue;
@@ -55,38 +60,40 @@ public class AddRecipe extends RecipeCommand {
             Unit unit = null;
             Category category = null;
 
-            try {
-                System.out.println("Please Input Ingredient Quantity:");
-                quantity = Integer.parseInt(in.nextLine());
+            while (quantity == 0) {
+                try {
+                    System.out.println("Please Input Ingredient Quantity:");
+                    quantity = Integer.parseInt(in.nextLine());
 
-                if (quantity <= 0) {
-                    throw new ArithmeticException("Quantity must be greater than 0.");
-                }
-
-                System.out.println("Please Input Quantity Unit:");
-                String quantityUnit = in.nextLine();
-                unit = Unit.parseUnit(quantityUnit);
-
-                while (category == null) {  // Keep prompting if category is invalid
-                    try {
-                        System.out.println("Please Input Ingredient Category:");
-                        String categoryText = in.nextLine().trim().toUpperCase();
-                        category = Category.parseCategory(categoryText);
-                    } catch (IllegalArgumentException e) {
-                        Ui.printErrorMessage("Invalid category! Try again.");
+                    if (quantity <= 0) {
+                        throw new ArithmeticException("Quantity must be greater than 0.");
                     }
-                }
-            } catch (NumberFormatException e) {
-                Ui.printErrorMessage("Invalid ingredient quantity! Try again.");
-                continue;
-            } catch (ArithmeticException e) {
-                Ui.printErrorMessage(e.getMessage() + "Try again.");
-                continue;
-            } catch (IllegalArgumentException e) {
-                Ui.printErrorMessage("Invalid ingredient unit! Try again.");
-                continue;
-            }
 
+                    while (unit == null) {
+                        try {
+                            System.out.println("Please Input Quantity Unit:");
+                            String quantityUnit = in.nextLine();
+                            unit = Unit.parseUnit(quantityUnit);
+                        } catch (IllegalArgumentException e) {
+                            Ui.printErrorMessage("Invalid ingredient unit! Try again.");
+                        }
+                    }
+
+                    while (category == null) {  // Keep prompting if category is invalid
+                        try {
+                            System.out.println("Please Input Ingredient Category:");
+                            String categoryText = in.nextLine().trim().toUpperCase();
+                            category = Category.parseCategory(categoryText);
+                        } catch (IllegalArgumentException e) {
+                            Ui.printErrorMessage("Invalid category! Try again.");
+                        }
+                    }
+                } catch (NumberFormatException e) {
+                    Ui.printErrorMessage("Invalid ingredient quantity! Try again.");
+                } catch (ArithmeticException e) {
+                    Ui.printErrorMessage(e.getMessage() + "Try again.");
+                }
+            }
             recipes.addRecipeIngredients(recipe, ingredientName, quantity, unit, category);
         }
 

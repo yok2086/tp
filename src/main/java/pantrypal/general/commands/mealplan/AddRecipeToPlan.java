@@ -10,13 +10,12 @@ import pantrypal.shoppinglist.ShoppingList;
 import java.util.Scanner;
 
 public class AddRecipeToPlan extends MealPlanCommand {
-
     int planIndex;
     int recipeIndex;
     String mealType;
 
     public AddRecipeToPlan() {
-        super("addRecipeToPlan <plan index> <recipe index>",
+        super("addRecipeToPlan <plan index> <recipe index> <breakfast/lunch/dinner>",
                 "Add a recipe to a meal plan");
     }
 
@@ -24,6 +23,18 @@ public class AddRecipeToPlan extends MealPlanCommand {
         this.planIndex = planIndex;
         this.recipeIndex = recipeIndex;
         this.mealType = mealType;
+    }
+
+    public int getPlanIndex() {
+        return planIndex;
+    }
+
+    public int getRecipeIndex() {
+        return recipeIndex;
+    }
+
+    public String getMealType() {
+        return mealType;
     }
 
     @Override
@@ -34,7 +45,8 @@ public class AddRecipeToPlan extends MealPlanCommand {
                 throw new ArrayIndexOutOfBoundsException("Recipe index out of bounds");
             }
             Recipe recipe = recipes.getRecipeList().get(recipeIndex);
-            plans.getPlanDetails().get(planIndex).addRecipeToPlan(recipe, getMealType(mealType));
+            plans.getPlanDetails(planIndex).addRecipeToPlan(recipe, getMealType(mealType));
+            Ui.showMessage("Added recipe to plan");
         } catch (ArrayIndexOutOfBoundsException e) {
             Ui.showMessage(e.getMessage());
         } catch (IndexOutOfBoundsException e) {

@@ -13,12 +13,15 @@ import pantrypal.general.commands.inventory.ViewLowStock;
 import pantrypal.general.commands.mealplan.AddPlan;
 import pantrypal.general.commands.mealplan.AddPlanToDay;
 import pantrypal.general.commands.mealplan.AddRecipeToPlan;
+import pantrypal.general.commands.mealplan.RemovePlan;
 import pantrypal.general.commands.mealplan.RemoveRecipeFromPlan;
 import pantrypal.general.commands.mealplan.RemovePlanFromDay;
+import pantrypal.general.commands.mealplan.ViewPlan;
 import pantrypal.general.commands.mealplan.ViewDayPlan;
 import pantrypal.general.commands.mealplan.ViewWeekPlans;
 import pantrypal.general.commands.mealplan.ExecutePlan;
-import pantrypal.general.commands.mealplan.FindForPlans;
+import pantrypal.general.commands.mealplan.FindPlan;
+import pantrypal.general.commands.mealplan.ViewPlanList;
 import pantrypal.general.commands.recipe.AddRecipe;
 import pantrypal.general.commands.recipe.ListRecipe;
 import pantrypal.general.commands.recipe.RemoveRecipe;
@@ -43,21 +46,21 @@ public class Help extends GeneralCommand {
     private static final List<Command> commandList = Arrays.asList(
             new Exit(), new Help(),
             new AddIngredient(), new IncreaseQuantity(), new DecreaseQuantity(), new SetAlert(), new CheckStock(),
-            new ViewLowStock(),  new ConvertIngredient(), new ViewIngredientsByCategory(), new UnitList(),
+            new ViewLowStock(), new ConvertIngredient(), new ViewIngredientsByCategory(), new UnitList(),
             new CategoryList(), new DeleteIngredient(),
-      
+
             new AddShoppingItem(), new GenerateShoppingList(), new RemoveShoppingItem(), new EditShoppingItem(),
             new MarkShoppingItemAsPurchased(), new ViewShoppingList(),
-      
+
             new AddRecipe(), new ViewRecipe(), new RemoveRecipe(), new ListRecipe(),
-      
+
             new AddPlan(), new AddPlanToDay(), new AddRecipeToPlan(), new ExecutePlan(),
-            new FindForPlans(), new RemovePlanFromDay(), new RemoveRecipeFromPlan(), new ViewDayPlan(),
-            new ViewWeekPlans()
+            new FindPlan(), new RemovePlanFromDay(), new RemoveRecipeFromPlan(), new ViewDayPlan(),
+            new ViewWeekPlans(), new ViewPlanList(), new ViewPlan(), new RemovePlan()
     );
 
     public Help() {
-        super("help","List all commands");
+        super("help", "List all commands");
     }
 
     @Override

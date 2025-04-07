@@ -21,6 +21,10 @@ public class RemovePlanFromDay extends MealPlanCommand {
         this.day = day;
     }
 
+    public String getDay() {
+        return day;
+    }
+
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list,RecipeManager recipes,
                         MealPlanManager plans, Scanner in){

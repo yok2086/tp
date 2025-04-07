@@ -28,6 +28,7 @@ public class AddIngredient extends InventoryCommand {
                 "Adding new ingredient");
     }
 
+
     public String getName() {
         return name;
     }
@@ -48,6 +49,7 @@ public class AddIngredient extends InventoryCommand {
                         MealPlanManager plans, Scanner in) {
         try {
             inventory.addNewIngredient(name, quantity, unit, category);
+            System.out.println("Added ingredient " + name + " with quantity " + quantity + " and unit " + unit);
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
         }

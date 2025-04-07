@@ -109,11 +109,11 @@ public class Ui {
 
     public void printInvalidCommandMessage(String errorMessage) {
         Ui.showMessage(errorMessage + "Please try again.");
-        Ui.printLine();
     }
 
     public static void showMessage(String message) {
         System.out.println(message);
+        Ui.printLine();
     }
 
     public static void printErrorMessage(String message) {

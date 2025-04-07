@@ -9,7 +9,6 @@ import pantrypal.shoppinglist.ShoppingList;
 import java.util.Scanner;
 
 public class AddPlanToDay extends MealPlanCommand {
-
     private int planIndex;
     private String day;
 
@@ -23,17 +22,25 @@ public class AddPlanToDay extends MealPlanCommand {
         this.day = day;
     }
 
+    public String getDay() {
+        return day;
+    }
+
+    public int getPlanIndex() {
+        return planIndex;
+    }
+
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list,RecipeManager recipes,
                         MealPlanManager plans, Scanner in){
         try {
             plans.addPlanToDay(planIndex, getDay(day));
-        } catch (IndexOutOfBoundsException e) {
-            Ui.showMessage("Invalid plan index given.");
+            Ui.showMessage("Plan for " + getDay(day).name() + " added: " +
+                    plans.getPlanDetails(planIndex).getPlanName());
         } catch (NullPointerException e) {
             Ui.showMessage("Invalid day index provided. Please enter a valid day name.");
         } catch (IllegalArgumentException e) {
-            Ui.showMessage("Invalid plan index provided. Please enter a valid plan index.");
+            Ui.showMessage(e.getMessage());
         }
     }
 }

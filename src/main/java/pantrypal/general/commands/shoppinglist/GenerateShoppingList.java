@@ -1,13 +1,13 @@
 package pantrypal.general.commands.shoppinglist;
 
+import java.util.Scanner;
+
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.mealplan.MealPlanManager;
 import pantrypal.recipe.RecipeManager;
 import pantrypal.shoppinglist.ShoppingList;
 import pantrypal.shoppinglist.ShoppingListGenerator;
-
-import java.util.Scanner;
 
 public class GenerateShoppingList extends ShoppingListCommand {
 
@@ -23,6 +23,5 @@ public class GenerateShoppingList extends ShoppingListCommand {
         list.copyFrom(newShoppingList);
         Ui.showMessage("Shopping list has been cleared! \nShopping list has been auto-generated as below:");
         new ViewShoppingList();
-        Ui.printLine();
     }
 }
