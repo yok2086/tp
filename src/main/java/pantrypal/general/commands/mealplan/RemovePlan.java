@@ -8,14 +8,14 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
-public class ViewPlan extends MealPlanCommand {
+public class RemovePlan extends MealPlanCommand {
     private int planIndex;
 
-    public ViewPlan() {
-        super("viewPlan <plan name>", "View a specific meal plan");
+    public RemovePlan() {
+        super("removePlan <plan name>", "Remove a specific meal plan");
     }
 
-    public ViewPlan(int planIndex) {
+    public RemovePlan(int planIndex) {
         this.planIndex = planIndex;
     }
 
@@ -26,6 +26,11 @@ public class ViewPlan extends MealPlanCommand {
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, RecipeManager recipes,
                         MealPlanManager plans, Scanner in) {
-        plans.viewPlan(planIndex);
+        if (planIndex < 0 || planIndex >= plans.getPlanList().length) {
+            Ui.showMessage("Invalid plan index. Please try again.");
+            return;
+        }
+        plans.removePlanFromList(planIndex);
+        Ui.showMessage("Plan removed successfully.");
     }
 }

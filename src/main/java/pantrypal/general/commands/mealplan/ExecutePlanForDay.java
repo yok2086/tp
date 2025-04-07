@@ -25,6 +25,10 @@ public class ExecutePlanForDay extends MealPlanCommand {
         this.day = day;
     }
 
+    public String getDay() {
+        return day;
+    }
+
     private boolean inventoryIsSufficient(Recipe recipe, IngredientInventory inventory, ShoppingList list, Scanner in) {
         // Check if the ingredients required in the recipe are available in the pantry
         ArrayList<Ingredient> requiredIngredients = recipe.getIngredients(); //point of cohesion with Recipe
