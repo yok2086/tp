@@ -9,11 +9,12 @@ Given below are my contributions to the project.
 ## Code Contributed
 - **Recipe Management Feature**:  
   I contributed to all the codes related to Recipe Manangement feature and all its JUnit tests. This includes:
-  - The `Instruction` class, which represents a step in the recipe's instruction. This class ensures modularity for the recipe class, and make the recipe overall easier to edit.
-  - The `Recipe` class, which represents a single recipe. This class holds all the information (name, instructions, ingredients). These informations are easily added, edited, and removed through this class. The attributes are also used by other class.
-  - The `RecipeManager` class, which works as the collection of Recipes. This class manages all the activities related to Recipe Management such as add, remove, view, search, edit recipes and its information.
+  - The ``Instruction`` class represents all the instructions in the Recipe. Each instruction instance encapsulates essential attributes such as step number and instruction content. This modular desgin ensures that instructions and instruction list can be easily created, modified, and retrieved when needed.
+  - The ``Recipe`` class represents individual recipes in the system. Each recipe instance encapsulates essential attributes such as name, instructions, and ingredients. This modular design ensures that recipes can be easily created, modified, and retrieved when needed.
+  - The ``RecipeManagemer`` class is responsible for managing a collection of recipes, tracking their name, ingredients and instructions. This feature enables users to add recipes, update recipe's ingredients and instructions, and remove recipes.
   - Keep the code coherence and work smoothly with other classes in the project.
   - The `RecipeManagerTest` JUnit test, which works as the test for all the method related to recipe management.
+  - Manage the parser and command class with other team members to ensure all the functions are represented, all the inputs and error handling are correctly integrated with each other. 
 - [Link to my code on tP Code Dashboard](<>)
 
 ## Enhancements Implemented
@@ -44,4 +45,10 @@ Given below are my contributions to the project.
 - Added detailed descriptions on the design and implementation of the instruction, recipe, and recipe management features.
 
 ## **Project Management**:
-- hi
+- Created and managed GitHub issues
+- Collaborated with other team members to ensure the coherence of all the classes in the project
+- Collaborated with other team members to ensure new feautures does not cause conflict
+- Developed JUnit tests for core functionalities.
+- Contributed to feature integration by adjusting logic in the command line interface.
+- Tested other team member's code
+- Find and fix the bugs and issue in the team's code and documentations
