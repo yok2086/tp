@@ -24,15 +24,13 @@ public class MealPlanManager {
     public void addPlanToDay(int planIndex, Day day) {
         int dayIndex = day.ordinal();
         if (planIndex < 0 || planIndex >= planList.size()) {
-            Ui.showMessage("Invalid plan index.");
-            return;
+            throw new IllegalArgumentException("Invalid plan index provided. Please enter a valid plan index.");
         }
         Plan plan = planList.get(planIndex);
         if (weeklyPlans[dayIndex] == null) {
             weeklyPlans[dayIndex] = plan;
-            Ui.showMessage("Plan for " + day.name() + " added: " + plan.getPlanName());
         } else {
-            Ui.showMessage("There is already a plan for " + day.name());
+            throw new IllegalArgumentException("Plan already exists for this day.");
         }
     }
 
@@ -126,5 +124,12 @@ public class MealPlanManager {
         return null; // Plan not found
     }
 
-
+    public int getPlanIndex(String planName) {
+        for (int i = 0; i < planList.size(); i++) {
+            if (planList.get(i).getPlanName().equalsIgnoreCase(planName)) {
+                return i;
+            }
+        }
+        return -1; // Plan not found
+    }
 }
