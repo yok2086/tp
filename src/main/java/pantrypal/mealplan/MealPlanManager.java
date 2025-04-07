@@ -16,8 +16,17 @@ public class MealPlanManager {
         planList.add(plan);
     }
 
+    public void removePlanFromList(int planIndex) {
+        Plan plan = planList.get(planIndex);
+        planList.remove(plan);
+    }
+
     public void addPlanToDay(int planIndex, Day day) {
         int dayIndex = day.ordinal();
+        if (planIndex < 0 || planIndex >= planList.size()) {
+            Ui.showMessage("Invalid plan index.");
+            return;
+        }
         Plan plan = planList.get(planIndex);
         if (weeklyPlans[dayIndex] == null) {
             weeklyPlans[dayIndex] = plan;
@@ -31,6 +40,7 @@ public class MealPlanManager {
         int dayIndex = day.ordinal();
         if (weeklyPlans[dayIndex] != null) {
             weeklyPlans[dayIndex] = null;
+            Ui.showMessage("Plan removed from " + day);
         } else {
             Ui.showMessage("There is no plan for " + day.name());
         }
@@ -46,10 +56,14 @@ public class MealPlanManager {
     }
 
     public void viewPlanForWeek() {
-        for (Plan plan : weeklyPlans) {
-            if (plan != null) {
-                Ui.showMessage(plan.toString());
+        Ui.printLine();
+        for (int i = 0; i < weeklyPlans.length; i++) {
+            if (weeklyPlans[i] != null) {
+                System.out.println(Day.values()[i].name() + ": \n" + weeklyPlans[i].toString());
+            } else {
+                System.out.println("No plan for " + Day.values()[i].name());
             }
+            Ui.printLine();
         }
     }
 
@@ -77,8 +91,9 @@ public class MealPlanManager {
     public boolean findInCreatedPlans(String planName) {
         boolean found = false;
         for (Plan plan : planList) {
-            if (plan.getPlanName().contains(planName)) {
+            if (plan.getPlanName().equalsIgnoreCase(planName)) {
                 found = true;
+                Ui.showMessage("Here are the plans that match your search:");
                 Ui.showMessage((planList.indexOf(plan)+1) + //plus 1 for matching to user view
                         ": " + plan.getPlanName());
             }

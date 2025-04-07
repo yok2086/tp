@@ -112,13 +112,17 @@ public class Storage {
     private static void processShoppingLine(String line, ShoppingList shoppingList) {
         try {
             String[] shoppingListItem = line.substring("[Shopping]".length()).trim().split(" ");
-            if (shoppingListItem.length != 3) {
+            if (shoppingListItem.length != 4) {
                 throw new DataCorruptionException("Invalid shopping list item format");
             }
             String name = unescapeSpecialCharacters(shoppingListItem[0]);
             double quantity = Double.parseDouble(shoppingListItem[1]);
             Unit unit = Unit.parseUnit(shoppingListItem[2]);
+            boolean isPurchased = Boolean.parseBoolean(shoppingListItem[3]);
             shoppingList.addItem(new ShoppingListItem(name, quantity, unit));
+            if (isPurchased) {
+                shoppingList.markItemAsPurchased(name);
+            }
         } catch (NumberFormatException e) {
             throw new DataCorruptionException("Invalid quantity format in shopping list");
         } catch (IllegalArgumentException e) {
@@ -313,7 +317,7 @@ public class Storage {
             for (ShoppingListItem item : shoppingList.getItems()) {
                 fileInput.append("[Shopping] ").append(escapeSpecialCharacters(item.getIngredientName())).append(" ")
                         .append(item.getQuantity()).append(" ")
-                        .append(item.getUnit()).append("\n");
+                        .append(item.getUnit()).append(" ").append(item.isPurchased()).append("\n");
             }
 
             for (Map.Entry<String, Ingredient> ingredient : inventory.getInventory().entrySet()) {
