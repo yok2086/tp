@@ -23,12 +23,12 @@ public class MealPlanTest {
     @BeforeEach
     void setUp(){
         this.plans = new MealPlanManager();
-    }
+    }   
 
     @Test
     void testAddPlan() {
-        plans.addPlan("");
-        plans.addPlan("plan1");
+        plans.addPlanToList("");
+        plans.addPlanToList("plan1");
 
         assertEquals("default", plans.getPlanDetails().get(0).getPlanName(),
                 "plan name not correctly converted");

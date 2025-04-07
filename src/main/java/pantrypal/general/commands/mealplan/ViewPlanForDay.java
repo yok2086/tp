@@ -8,15 +8,15 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
-public class ViewDayPlan extends MealPlanCommand {
+public class ViewPlanForDay extends MealPlanCommand {
 
     String day;
 
-    public ViewDayPlan() {
+    public ViewPlanForDay() {
         super("viewDayPlan <day>", "View a day's plan");
     }
 
-    public ViewDayPlan(String day) {
+    public ViewPlanForDay(String day) {
         this.day = day;
     }
 

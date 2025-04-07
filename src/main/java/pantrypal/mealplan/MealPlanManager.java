@@ -11,7 +11,7 @@ public class MealPlanManager {
 
     public MealPlanManager() {}
 
-    public void addPlan(String planName) {
+    public void addPlanToList(String planName) {
         Plan plan = new Plan(planName);
         planList.add(plan);
     }
