@@ -2,6 +2,8 @@ package pantrypal.inventory;
 
 import pantrypal.general.control.Ui;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,7 +57,6 @@ public class IngredientInventory {
                 throw new IllegalArgumentException("Category cannot be null.");
             }
             if (inventory.containsKey(name)) {
-                System.out.println("This ingredient already exists.");
                 throw new IllegalArgumentException("Ingredient '" + name + "' already exists.");
             }
             inventory.put(name, new Ingredient(name, quantity, unit, category));
@@ -73,17 +74,29 @@ public class IngredientInventory {
      */
     public void increaseQuantity(String name, double quantity) {
         if (quantity < 0) {
-            Ui.showMessage("Error: Quantity to increase must be positive.");
-            return;
+            throw new IllegalArgumentException("Quantity to increase must be positive.");
         }
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Ingredient name cannot be null or empty.");
+        }
+
         Ingredient ingredient = inventory.get(name);
         if (ingredient != null) {
-            ingredient.quantity += quantity;
-            Ui.showMessage("Increased " + name + " by " + quantity);
+            BigDecimal ingredientQuantity = new BigDecimal(Double.toString(ingredient.quantity));
+            BigDecimal quantityToIncrease = new BigDecimal(Double.toString(quantity));
+            BigDecimal newQuantity = ingredientQuantity.add(quantityToIncrease);
+            newQuantity = newQuantity.setScale(8, RoundingMode.HALF_UP);
+            ingredient.quantity = newQuantity.doubleValue();
+            BigDecimal increaseAmount = new BigDecimal(Double.toString(quantity));
+            String increaseAmountString = increaseAmount.stripTrailingZeros().toPlainString();
+
+            Ui.showMessage("Increased " + name + " by " + increaseAmountString);
         } else {
-            Ui.showMessage("Ingredient not found");
+            throw new IllegalArgumentException("Ingredient not found");
         }
     }
+
+
 
     /**
      * Decreases the quantity of an existing ingredient.
@@ -101,22 +114,32 @@ public class IngredientInventory {
 
         Ingredient ingredient = inventory.get(name);
         if (ingredient != null) {
-            if (ingredient.quantity >= quantity) {
-                ingredient.quantity -= quantity;
-            } else {
+            BigDecimal ingredientQuantity = new BigDecimal(Double.toString(ingredient.quantity));
+            BigDecimal quantityToDecrease = new BigDecimal(Double.toString(quantity));
+
+            BigDecimal newQuantity = ingredientQuantity.subtract(quantityToDecrease);
+
+            if (newQuantity.compareTo(BigDecimal.ZERO) < 0) {
                 throw new IllegalArgumentException("Not enough " + name.toUpperCase() + " in stock.");
             }
+            newQuantity = newQuantity.setScale(8, RoundingMode.HALF_UP);
+            ingredient.quantity = newQuantity.doubleValue();
+
+            BigDecimal decreaseAmount = new BigDecimal(Double.toString(quantity));
+            String decreaseAmountString = decreaseAmount.stripTrailingZeros().toPlainString();  
+
+            Ui.showMessage("Decreased " + name + " by " + decreaseAmountString);
         } else {
             throw new IllegalArgumentException("Ingredient not found");
         }
     }
 
     /**
-     * Sets a low stock alert threshold for a specific ingredient.
-     *
-     * @param name      Ingredient name.
-     * @param threshold Minimum quantity before alert.
-     */
+             * Sets a low stock alert threshold for a specific ingredient.
+             *
+             * @param name      Ingredient name.
+             * @param threshold Minimum quantity before alert.
+             */
     public void setAlert(String name, double threshold) {
         lowStockAlerts.put(name, threshold);
     }
@@ -151,6 +174,7 @@ public class IngredientInventory {
                         ingredient.unit + " " + ingredient.category);
             });
         }
+        System.out.println("____________________________________________________________");
     }
 
     /**
@@ -188,6 +212,7 @@ public class IngredientInventory {
         if (!found) {
             System.out.println("No low stock ingredients.");
         }
+        System.out.println("______________________________________________________________");
     }
 
     /**
@@ -239,19 +264,29 @@ public class IngredientInventory {
      */
     public String viewIngredientsByCategory(Category category) {
         boolean found = false;
-        StringBuilder result = new StringBuilder(); // Use StringBuilder to collect output
+        boolean firstMatch = true;
+        StringBuilder result = new StringBuilder();
 
         for (Ingredient ingredient : inventory.values()) {
             if (ingredient.getCategory() == category) {
-                result.append(ingredient).append("\n"); // Append ingredient to result
+                if (firstMatch) {
+                    result.append("Displaying ingredients found in this category:\n");
+                    firstMatch = false;
+                } else {
+                    result.append("\n"); // Add newline before subsequent ingredients
+                }
+                result.append(ingredient);
                 found = true;
             }
         }
+
         if (!found) {
             result.append("No ingredients found in category: ").append(category);
         }
-        return result.toString(); // Return the result as a string
+
+        return result.toString();
     }
+
 
     /**
      * Validates if a category string is valid.

@@ -1,13 +1,22 @@
 package pantrypal.shoppinglist;
 
-import pantrypal.inventory.IngredientInventory;
-import pantrypal.inventory.Ingredient;
 import java.util.Map;
+import pantrypal.inventory.Ingredient;
+import pantrypal.inventory.IngredientInventory;
 
+/**
+ * Generates a shopping list based on the difference between required ingredients
+ * and available ingredients in the inventory.
+ */
 public class ShoppingListGenerator {
     private ShoppingList shoppingList;
     private IngredientInventory inventory;
 
+    /**
+     * Constructs a new ShoppingListGenerator with the specified inventory.
+     *
+     * @param inventory The ingredient inventory to use for generation
+     */
     public ShoppingListGenerator(IngredientInventory inventory) {
         this.shoppingList = new ShoppingList();
         this.inventory = inventory;
@@ -34,7 +43,6 @@ public class ShoppingListGenerator {
                 }
             }
         }
-
         return shoppingList;
     }
 }

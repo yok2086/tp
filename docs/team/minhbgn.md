@@ -11,7 +11,7 @@ Given below are my contributions to the project.
   I contributed to all the codes related to Recipe Manangement feature and all its JUnit tests. This includes:
   - The ``Instruction`` class represents all the instructions in the Recipe. Each instruction instance encapsulates essential attributes such as step number and instruction content. This modular desgin ensures that instructions and instruction list can be easily created, modified, and retrieved when needed.
   - The ``Recipe`` class represents individual recipes in the system. Each recipe instance encapsulates essential attributes such as name, instructions, and ingredients. This modular design ensures that recipes can be easily created, modified, and retrieved when needed.
-  - The ``RecipeManagemer`` class is responsible for managing a collection of recipes, tracking their name, ingredients and instructions. This feature enables users to add recipes, update recipe's ingredients and instructions, and remove recipes.
+  - The ``RecipeManagemer`` class is responsible for managing a collection of recipes, tracking their name, ingredients and instructions. This feature enables users to add and remove recipes.
   - Keep the code coherence and work smoothly with other classes in the project.
   - The `RecipeManagerTest` JUnit test, which works as the test for all the method related to recipe management.
   - Manage the parser and command class with other team members to ensure all the functions are represented, all the inputs and error handling are correctly integrated with each other. 
@@ -27,9 +27,19 @@ Given below are my contributions to the project.
   
 ### Error Handling inside the Class
 - **What it does**:  
-  The `RecipeManagement` class integrates error checking (when removing from empty list, getting item from empty list, etc) by using `assert` calls. 
+  The `RecipeManager` class integrates error checking (when removing from empty list, getting item from empty list, etc) by using `assert` calls. 
 - **Why it is implemented that way**:  
   This ensures that the data format is reliable, reducing unpredicted behavior that might happen from the application
+
+### Edit Recipe's Instructions and Ingredient
+- **What it does**:
+  The `RecipeManager` class implements edit functions for users to easily retrieve and edit the recipe's instruction list and ingredient list. 
+  They can also retrieve the ingredient and instruction data and alter these data. 
+  However, it has not been made public to the User through the user interface yet and has remained as back-end feature for this current version. 
+  Integrating this feature to the UI should be simple and will be made in the next release.
+- **Why it is implemented that way**:
+  By storing the content of recipe as classes instead of String, the information is more easily extracted and modified.
+  Granting the user access to edit the recipe content will grant more power to the user, thus increase their experience.
 
 ## **Documentation**:
 ### User Guide:

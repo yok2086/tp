@@ -189,7 +189,7 @@ public class IngredientInventoryTest {
 
         assertTrue(result.contains("Sugar"));
 
-        String expectedOutput = "Sugar 2.5 g Condiment\n";
+        String expectedOutput = "Displaying ingredients found in this category:\nSugar 2.5 g Condiment";
         assertEquals(expectedOutput, result);
     }
 

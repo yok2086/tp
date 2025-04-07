@@ -6,15 +6,28 @@ import java.util.List;
 import pantrypal.general.control.Ui;
 import pantrypal.inventory.Unit;
 
+/**
+ * Manages a collection of shopping list items.
+ * Provides functionality to add, remove, update, and edit items in the shopping list.
+ */
 public class ShoppingList {
     private List<ShoppingListItem> items;
 
+    /**
+     * Constructs an empty shopping list.
+     */
     public ShoppingList() {
         items = new ArrayList<>();
         assert items != null : "Items list should be initialized.";
     }
 
-    // Add a new item to the shopping list.
+    /**
+     * Adds a new item to the shopping list.
+     * If an item with the same name already exists, their quantities are combined.
+     *
+     * @param item The item to add
+     * @return true if the item was added successfully, false otherwise
+     */
     public boolean addItem(ShoppingListItem item) {
         assert item != null : "ShoppingListItem cannot be null.";
         // Check for an existing item with the same name.
@@ -27,19 +40,36 @@ public class ShoppingList {
         return true;
     }
 
-    // Get the list of shopping items.
+    /**
+     * Returns all items in the shopping list.
+     *
+     * @return A list of all shopping list items
+     */
     public List<ShoppingListItem> getItems() {
         assert items != null : "Items list should never be null.";
         return items;
     }
 
-    // Remove an item by ingredient name.
+    /**
+     * Removes an item from the shopping list by name.
+     *
+     * @param ingredientName The name of the ingredient to remove
+     * @return true if the item was found and removed, false otherwise
+     * @throws IllegalArgumentException if ingredientName is null or empty
+     */
     public boolean removeItem(String ingredientName) {
         assert ingredientName != null : "Ingredient name cannot be null.";
         return items.removeIf(item -> item.getIngredientName().equalsIgnoreCase(ingredientName));
     }
 
-    // Update an existing item's quantity and unit.
+    /**
+     * Updates an existing item in the shopping list.
+     *
+     * @param ingredientName The name of the ingredient to update
+     * @param newQuantity The new quantity
+     * @param newUnit The new unit
+     * @return true if the item was found and updated, false otherwise
+     */
     public boolean updateItem(String ingredientName, double newQuantity, Unit newUnit) {
         assert ingredientName != null : "Ingredient name cannot be null.";
         assert newUnit != null : "Unit cannot be null.";
@@ -54,7 +84,14 @@ public class ShoppingList {
         return false;
     }
 
-    // Edit an item by its index in the list.
+    /**
+     * Edits an item in the shopping list by index.
+     *
+     * @param index The index of the item to edit
+     * @param newIngredientName The new ingredient name
+     * @param newQuantity The new quantity
+     * @param newUnit The new unit
+     */
     public void editItem(int index, String newIngredientName, double newQuantity, Unit newUnit) {
         ShoppingListItem item = items.get(index);
         item.setIngredientName(newIngredientName);
@@ -62,13 +99,14 @@ public class ShoppingList {
         item.setUnit(newUnit);
     }
 
-    // Display the shopping list.
+    /**
+     * Displays the shopping list.
+     */
     public void displayList() {
         assert items != null : "Items list should not be null when displaying.";
         if (items.isEmpty()) {
             System.out.println("Shopping list is empty.");
         } else {
-            Ui.printLine();
             System.out.println("Shopping List:");
             for (int i = 1; i <= items.size(); i++) {
                 System.out.println(i + ": " + items.get(i-1));
@@ -77,7 +115,13 @@ public class ShoppingList {
         }
     }
 
-    // Mark an item as purchased by its ingredient name.
+    /**
+     * Marks an item as purchased by name.
+     *
+     * @param ingredientName The name of the ingredient to mark as purchased
+     * @return true if the item was found and marked, false otherwise
+     * @throws IllegalArgumentException if ingredientName is null or empty
+     */
     public boolean markItemAsPurchased(String ingredientName) {
         assert ingredientName != null : "Ingredient name cannot be null.";
         for (ShoppingListItem item : items) {
@@ -89,6 +133,13 @@ public class ShoppingList {
         return false;
     }
 
+    /**
+     * Copies all items from another shopping list into this one.
+     * Existing items with the same name will have their quantities combined.
+     *
+     * @param newShoppingList The shopping list to copy from
+     * @throws IllegalArgumentException if newShoppingList is null
+     */
     public void copyFrom(ShoppingList newShoppingList) {
         if (newShoppingList != null) {
             // Clear existing items
@@ -101,6 +152,12 @@ public class ShoppingList {
         }
     }
 
+    /**
+     * Replaces all items in this shopping list with items from another shopping list.
+     *
+     * @param newShoppingList The shopping list to copy from
+     * @throws IllegalArgumentException if newShoppingList is null
+     */
     public void copyList(ShoppingList newShoppingList) {
         if (newShoppingList != null) {
             this.items.clear();
@@ -109,5 +166,4 @@ public class ShoppingList {
             }
         }
     }
-
 }
