@@ -17,14 +17,14 @@ import pantrypal.general.commands.inventory.ViewLowStock;
 import pantrypal.general.commands.mealplan.AddPlan;
 import pantrypal.general.commands.mealplan.AddPlanToDay;
 import pantrypal.general.commands.mealplan.AddRecipeToPlan;
-import pantrypal.general.commands.mealplan.ExecutePlanForDay;
+import pantrypal.general.commands.mealplan.ExecutePlan;
 import pantrypal.general.commands.mealplan.FindPlan;
 import pantrypal.general.commands.mealplan.RemovePlan;
 import pantrypal.general.commands.mealplan.RemovePlanFromDay;
 import pantrypal.general.commands.mealplan.RemoveRecipeFromPlan;
 import pantrypal.general.commands.mealplan.ViewPlan;
-import pantrypal.general.commands.mealplan.ViewPlanForDay;
-import pantrypal.general.commands.mealplan.ViewPlanForWeek;
+import pantrypal.general.commands.mealplan.ViewDayPlan;
+import pantrypal.general.commands.mealplan.ViewWeekPlans;
 import pantrypal.general.commands.mealplan.ViewPlanList;
 import pantrypal.general.commands.recipe.AddRecipe;
 import pantrypal.general.commands.recipe.ListRecipe;
@@ -310,9 +310,9 @@ public class ParserTest {
         Parser parser = new Parser();
         Command command = parser.parse("viewPlanForDay Monday");
 
-        assertInstanceOf(ViewPlanForDay.class, command);
-        ViewPlanForDay viewPlanForDayCommand = (ViewPlanForDay) command;
-        assertEquals("Monday", viewPlanForDayCommand.getDay());
+        assertInstanceOf(ViewDayPlan.class, command);
+        ViewDayPlan viewDayPlanCommand = (ViewDayPlan) command;
+        assertEquals("Monday", viewDayPlanCommand.getDay());
     }
 
     @Test
@@ -328,7 +328,7 @@ public class ParserTest {
         Parser parser = new Parser();
         Command command = parser.parse("viewPlanForWeek");
 
-        assertInstanceOf(ViewPlanForWeek.class, command);
+        assertInstanceOf(ViewWeekPlans.class, command);
     }
 
     @Test
@@ -336,9 +336,9 @@ public class ParserTest {
         Parser parser = new Parser();
         Command command = parser.parse("execute Monday");
 
-        assertInstanceOf(ExecutePlanForDay.class, command);
-        ExecutePlanForDay executePlanForDayCommand = (ExecutePlanForDay) command;
-        assertEquals("Monday", executePlanForDayCommand.getDay());
+        assertInstanceOf(ExecutePlan.class, command);
+        ExecutePlan executePlanCommand = (ExecutePlan) command;
+        assertEquals("Monday", executePlanCommand.getDay());
     }
 
     @Test

@@ -26,7 +26,7 @@ public class AddPlan extends MealPlanCommand {
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, RecipeManager recipes,
                         MealPlanManager plans, Scanner in) {
-        plans.addPlanToList(planName);
+        plans.addPlan(planName);
         Ui.showMessage("Plan added: " + planName);
     }
 }

@@ -310,6 +310,14 @@ public class RecipeManager{
     }
 
     /**
+     * For use in MealPlan
+     * @return the corresponding index in recipe list
+     */
+    public Recipe getRecipe(int recipeIndex) {
+        return recipes.get(recipeIndex);
+    }
+
+    /**
      * Get the index of a specified recipe object
      * @param recipe the recipe object to be found
      * @return the index of the recipe in the list

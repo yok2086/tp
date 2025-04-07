@@ -2,22 +2,22 @@ package pantrypal.inventory;
 
 public enum Category {
     DAIRY,
-    SPICE,
+    SPICE, //condiment
     VEGETABLE,
     FRUIT,
-    MEAT,
+    MEAT, //poultry
     GRAIN,
     CONDIMENT,
-    SWEET,
-    BEVERAGE,
-    SEAFOOD,
+    SWEET, //misc
+    BEVERAGE, //misc
+    SEAFOOD, //poultry
     NUTS,
-    BAKERY,
-    FROZEN,
-    CANNED,
-    SNACK,
-    SOUP,
-    HERB;
+    BAKERY, //misc or grains
+    FROZEN, //misc
+    CANNED, //misc
+    SNACK, //misc
+    SOUP, //misc
+    HERB; //vegetable
 
     @Override
     public String toString() {

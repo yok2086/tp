@@ -26,7 +26,7 @@ public class RemovePlan extends MealPlanCommand {
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, RecipeManager recipes,
                         MealPlanManager plans, Scanner in) {
-        if (planIndex < 0 || planIndex >= plans.getPlanList().length) {
+        if (planIndex < 0 || planIndex >= plans.getPlanList().size()) {
             Ui.showMessage("Invalid plan index. Please try again.");
             return;
         }
