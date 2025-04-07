@@ -35,7 +35,7 @@ public class RemoveRecipeFromPlan extends MealPlanCommand {
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, RecipeManager recipes,
                         MealPlanManager plans, Scanner in) {
         try {
-            plans.getPlanDetails().get(planIndex).removeRecipeFromPlan(getMealType(mealType));
+            plans.getPlanDetails(planIndex).removeRecipeFromPlan(getMealType(mealType));
         } catch (IndexOutOfBoundsException e) {
             Ui.showMessage("Invalid plan index given.");
         } catch (NullPointerException e) {

@@ -111,8 +111,8 @@ public class MealPlanManager {
         return weeklyPlans[day.ordinal()];
     }
 
-    public ArrayList<Plan> getPlanDetails() {
-        return planList;
+    public Plan getPlanDetails(int planIndex) {
+        return planList.get(planIndex);
     }
 
     public Plan getPlanDetails (String planName) {
