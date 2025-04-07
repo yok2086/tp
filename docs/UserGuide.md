@@ -137,8 +137,9 @@ Example:
 generateShoppingList
 ```
 Description:
-Automatically generates your shopping list by comparing your current ingredient stock with preset low-stock alerts.
-This command calculates the required amount for each ingredient that needs replenishment.
+Automatically creates a shopping list by comparing your current ingredient stock with preset low-stock alerts from the 
+inventory. It calculates the required quantity for each ingredient that is below its threshold and updates your shopping
+list accordingly. Note that running this command clears the previous shopping list before generating an updated version.
 
 #### **removeShoppingItem**
 Command:
