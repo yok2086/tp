@@ -44,11 +44,9 @@ public class AddShoppingItem extends ShoppingListCommand {
                         RecipeManager recipes, MealPlanManager plans, Scanner in) {
         boolean success = list.addItem(shoppingListItem);
         if(!success){
-            System.out.println("Item '" + name + "' already exists. Please use editShoppingItem to update the item.");
-            Ui.printLine();
+            Ui.showMessage("Item '" + name + "' already exists. Please use editShoppingItem to update the item.");
         } else{
             Ui.showMessage("Add '" + name + "' to the shopping list.");
-            Ui.printLine();
         }
     }
 }

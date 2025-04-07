@@ -181,7 +181,7 @@ public class Parser {
             case "categorylist":
                 return new CategoryList();
             //From here on are commands for ShoppingList
-            case "addshoppingitem": //typo error
+            case "addshoppingitem":
                 if (inputParts.length < 4) {
                     throw new IllegalArgumentException("Insufficient arguments for addShoppingItem command.");
                 }
@@ -245,9 +245,9 @@ public class Parser {
                 }
                 assert unit != null : "Unit cannot be null";
                 return new EditShoppingItem(index, name, quantity, unit);
-            case "markitemaspurchased":
+            case "markshoppingitemaspurchased":
                 if (inputParts.length < 2) {
-                    throw new IllegalArgumentException("Insufficient arguments for markItemAsPurchased" +
+                    throw new IllegalArgumentException("Insufficient arguments for markShoppingItemAsPurchased" +
                             "command.");
                 }
                 name = inputParts[1].toUpperCase();
@@ -300,7 +300,7 @@ public class Parser {
                 if (addToWeekIndex < 0) {
                     throw new IllegalArgumentException("Week index must be greater than 0");
                 }
-                assert addToWeekIndex >= 0 : "Week index must be greater than 0";
+                assert addToWeekIndex >= 0 : "Week index must be non-negative";
 
                 String addDayName = inputParts[2];
                 if (addDayName == null || addDayName.isEmpty()) {
@@ -408,9 +408,9 @@ public class Parser {
                 }
                 int removePlanIndex = Integer.parseInt(inputParts[1]) - 1;
                 if (removePlanIndex < 0) {
-                    throw new IllegalArgumentException("Plan index must be greater than 0");
+                    throw new IllegalArgumentException("Plan index must be greater than 0.");
                 }
-                assert removePlanIndex >= 0 : "Plan index must be greater than 0";
+                assert removePlanIndex >= 0 : "Plan index must be greater than 0.";
                 return new RemovePlan(removePlanIndex);
             default:
                 return new NullCommand("Invalid Command! ");
