@@ -181,7 +181,7 @@ public class Parser {
             case "categorylist":
                 return new CategoryList();
             //From here on are commands for ShoppingList
-            case "addshoppingitem": //typo error
+            case "addshoppingitem":
                 if (inputParts.length < 4) {
                     throw new IllegalArgumentException("Insufficient arguments for addShoppingItem command.");
                 }
@@ -300,7 +300,7 @@ public class Parser {
                 if (addToWeekIndex < 0) {
                     throw new IllegalArgumentException("Week index must be greater than 0");
                 }
-                assert addToWeekIndex >= 0 : "Week index must be greater than 0";
+                assert addToWeekIndex >= 0 : "Week index must be non-negative";
 
                 String addDayName = inputParts[2];
                 if (addDayName == null || addDayName.isEmpty()) {
