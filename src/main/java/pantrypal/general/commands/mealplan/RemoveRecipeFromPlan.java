@@ -39,7 +39,7 @@ public class RemoveRecipeFromPlan extends MealPlanCommand {
         } catch (IndexOutOfBoundsException e) {
             Ui.showMessage("Invalid plan index given.");
         } catch (NullPointerException e) {
-            System.out.println("Invalid meal type given.\nPlease enter only BREAKFAST, LUNCH OR DINNER");
+            Ui.showMessage("Invalid meal type given.\nPlease enter only BREAKFAST, LUNCH OR DINNER");
         } catch (IllegalArgumentException e) {
             Ui.showMessage("Invalid input given. Please refrain from unconventional datatypes");
         }

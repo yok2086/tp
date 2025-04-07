@@ -36,6 +36,7 @@ public class MealPlanManager {
         int dayIndex = day.ordinal();
         if (weeklyPlans[dayIndex] != null) {
             weeklyPlans[dayIndex] = null;
+            Ui.showMessage("Plan removed from " + day);
         } else {
             Ui.showMessage("There is no plan for " + day.name());
         }

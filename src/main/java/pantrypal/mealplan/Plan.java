@@ -38,6 +38,7 @@ public class Plan {
         int mealIndex = mealType.ordinal();
         if (planRecipes[mealIndex] != null) {
             planRecipes[mealIndex] = null;
+            Ui.showMessage("Recipe removed from plan successfully.");
         } else {
             Ui.showMessage("This meal has no recipe.");
         }
