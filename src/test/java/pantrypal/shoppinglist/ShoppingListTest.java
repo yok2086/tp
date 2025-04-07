@@ -67,7 +67,7 @@ public class ShoppingListTest {
         shoppingList.addItem(item1);
         shoppingList.addItem(item2);
         // Valid edit: edit item at index 2 (flour).
-        shoppingList.editItem(2, "flour", 250, Unit.GRAM);
+        shoppingList.editItem(2-1, "flour", 250, Unit.GRAM);
         ShoppingListItem editedItem = shoppingList.getItems().get(1);
         assertEquals("flour", editedItem.getIngredientName(),
                 "Ingredient name should remain 'flour'.");
