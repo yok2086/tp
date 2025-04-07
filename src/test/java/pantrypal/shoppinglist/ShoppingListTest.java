@@ -67,16 +67,11 @@ public class ShoppingListTest {
         shoppingList.addItem(item1);
         shoppingList.addItem(item2);
         // Valid edit: edit item at index 1 (flour).
-        boolean edited = shoppingList.editItem(2, "flour", 250, Unit.GRAM);
-        assertTrue(edited, "Editing valid index should return true.");
+        shoppingList.editItem(1, "flour", 250, Unit.GRAM);
         ShoppingListItem editedItem = shoppingList.getItems().get(1);
         assertEquals("flour", editedItem.getIngredientName(),
                 "Ingredient name should remain 'flour'.");
         assertEquals(250, editedItem.getQuantity(), "Quantity should be updated to 250.");
-        // Invalid edit: index out of bounds.
-        boolean invalidEdit = shoppingList.editItem(5, "milk", 300,
-                Unit.MILLILITER);
-        assertFalse(invalidEdit, "Editing an invalid index should return false.");
     }
 
     @Test

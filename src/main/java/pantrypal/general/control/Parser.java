@@ -1,41 +1,41 @@
 package pantrypal.general.control;
 
 import pantrypal.general.commands.Command;
-import pantrypal.general.commands.general.Help;
-import pantrypal.general.commands.general.Exit;
 import pantrypal.general.commands.NullCommand;
-import pantrypal.general.commands.general.UnitList;
 import pantrypal.general.commands.general.CategoryList;
+import pantrypal.general.commands.general.Exit;
+import pantrypal.general.commands.general.Help;
+import pantrypal.general.commands.general.UnitList;
 import pantrypal.general.commands.inventory.AddIngredient;
-import pantrypal.general.commands.inventory.ConvertIngredient;
-import pantrypal.general.commands.inventory.IncreaseQuantity;
-import pantrypal.general.commands.inventory.DecreaseQuantity;
-import pantrypal.general.commands.inventory.SetAlert;
 import pantrypal.general.commands.inventory.CheckStock;
+import pantrypal.general.commands.inventory.ConvertIngredient;
+import pantrypal.general.commands.inventory.DecreaseQuantity;
+import pantrypal.general.commands.inventory.DeleteIngredient;
+import pantrypal.general.commands.inventory.IncreaseQuantity;
+import pantrypal.general.commands.inventory.SetAlert;
 import pantrypal.general.commands.inventory.ViewIngredientsByCategory;
 import pantrypal.general.commands.inventory.ViewLowStock;
-import pantrypal.general.commands.inventory.DeleteIngredient;
 import pantrypal.general.commands.mealplan.AddPlan;
 import pantrypal.general.commands.mealplan.AddPlanToDay;
 import pantrypal.general.commands.mealplan.AddRecipeToPlan;
-import pantrypal.general.commands.mealplan.RemoveRecipeFromPlan;
+import pantrypal.general.commands.mealplan.ExecutePlanForDay;
+import pantrypal.general.commands.mealplan.FindForPlans;
 import pantrypal.general.commands.mealplan.RemovePlanFromDay;
+import pantrypal.general.commands.mealplan.RemoveRecipeFromPlan;
 import pantrypal.general.commands.mealplan.ViewPlan;
 import pantrypal.general.commands.mealplan.ViewPlanForDay;
 import pantrypal.general.commands.mealplan.ViewPlanForWeek;
-import pantrypal.general.commands.mealplan.ExecutePlanForDay;
-import pantrypal.general.commands.mealplan.FindForPlans;
 import pantrypal.general.commands.mealplan.ViewPlanList;
 import pantrypal.general.commands.recipe.AddRecipe;
 import pantrypal.general.commands.recipe.ListRecipe;
 import pantrypal.general.commands.recipe.RemoveRecipe;
 import pantrypal.general.commands.recipe.ViewRecipe;
 import pantrypal.general.commands.shoppinglist.AddShoppingItem;
-import pantrypal.general.commands.shoppinglist.RemoveShoppingItem;
-import pantrypal.general.commands.shoppinglist.ViewShoppingList;
 import pantrypal.general.commands.shoppinglist.EditShoppingItem;
 import pantrypal.general.commands.shoppinglist.GenerateShoppingList;
 import pantrypal.general.commands.shoppinglist.MarkShoppingItemAsPurchased;
+import pantrypal.general.commands.shoppinglist.RemoveShoppingItem;
+import pantrypal.general.commands.shoppinglist.ViewShoppingList;
 import pantrypal.inventory.Category;
 import pantrypal.inventory.Unit;
 
@@ -194,6 +194,9 @@ public class Parser {
                 if (quantity < 0) {
                     throw new IllegalArgumentException("Quantity must be non-negative");
                 }
+                if (quantity > 100000) {
+                    throw new IllegalArgumentException("Quantity is too large (max: 100000)");
+                }
                 assert quantity >= 0 : "Quantity must be non-negative";
 
                 unit = Unit.parseUnit(inputParts[3]);
@@ -222,9 +225,9 @@ public class Parser {
                 }
                 index = Integer.parseInt(inputParts[1]) - 1;
                 if (index < 0) {
-                    throw new IllegalArgumentException("Index must be non-negative");
+                    throw new IllegalArgumentException("Index must be positive");
                 }
-                assert index >= 0 : "Index must be non-negative";
+                assert index >= 0 : "Index must be positive";
 
                 name = inputParts[2].toUpperCase();
                 if (name == null || name.isEmpty()) {
@@ -236,6 +239,9 @@ public class Parser {
                 if (quantity < 0) {
                     throw new IllegalArgumentException("Quantity must be non-negative");
                 }
+                if (quantity > 100000) {
+                    throw new IllegalArgumentException("Quantity is too large (max: 100000)");
+                }
                 assert quantity >= 0 : "Quantity must be non-negative";
 
                 unit = Unit.parseUnit(inputParts[4]);
@@ -244,10 +250,10 @@ public class Parser {
                 }
                 assert unit != null : "Unit cannot be null";
                 return new EditShoppingItem(index, name, quantity, unit);
+
             case "markShoppingItemAsPurchased":
                 if (inputParts.length < 2) {
-                    throw new IllegalArgumentException("Insufficient arguments for markShoppingItemAsPurchased" +
-                            "command.");
+                    throw new IllegalArgumentException("Insufficient arguments for markShoppingItemAsPurchased command.");
                 }
                 name = inputParts[1].toUpperCase();
                 if (name == null || name.isEmpty()) {
