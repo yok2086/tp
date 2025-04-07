@@ -8,14 +8,24 @@ import pantrypal.inventory.Unit;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The central manager that manages all methods related to Recipe
+ */
 public class RecipeManager{
 
     private final ArrayList<Recipe> recipes = new ArrayList<>();
 
+    /**
+     * Constructor for the RecipeManager class
+     */
     public RecipeManager() {
     }
 
-
+    /**
+     * Add a recipe into the recipe repository
+     * @param recipeName the name of the recipe to be added
+     * @return the newly created recipe object
+     */
     public Recipe addRecipe(String recipeName) {
 
         String[] parts = recipeName.split(" ", 2);
@@ -37,6 +47,10 @@ public class RecipeManager{
         return recipe;
     }
 
+    /**
+     * Edit recipe by custom command. Unused up to this version
+     * @param command the custom string command
+     */
     public void editRecipe(String command) {
 
         // Splitting into parts
@@ -88,6 +102,14 @@ public class RecipeManager{
 
     }
 
+    /**
+     * Add an ingredient to a recipe
+     * @param recipe the recipe object to have an ingredient added
+     * @param ingredientName the name of the ingredient to be added
+     * @param quantity the quanitity of the ingredient to be added
+     * @param unit the unit of measurement for the ingredient
+     * @param category the category that the ingredient falls in
+     */
     public void addRecipeIngredients(Recipe recipe, String ingredientName, int quantity, Unit unit, Category category) {
 
         if (recipe == null) {
@@ -111,6 +133,14 @@ public class RecipeManager{
         }
     }
 
+    /**
+     * Edit an ingredient of a recipe
+     * @param recipe the recipe object that has an ingredient being edited
+     * @param ingredientName the name of the ingredient to be edited
+     * @param newName new name of the ingredient
+     * @param newQuantity new quanitity for the ingredient
+     * @param newUnit new unit of measurement for the ingredient
+     */
     public void editRecipeIngredients(Recipe recipe, String ingredientName,
                                       String newName, int newQuantity, Unit newUnit) {
         try {
@@ -131,6 +161,12 @@ public class RecipeManager{
         }
     }
 
+    /**
+     * Add an instruction to a specified recipe
+     * @param recipe the recipe object that needs their instruction edited
+     * @param step new instruction step number
+     * @param content new instruction content
+     */
     public void addRecipeInstruction(Recipe recipe, int step, String content) {
         assert step > 0 : "Step must be positive";
 
@@ -143,6 +179,12 @@ public class RecipeManager{
         }
     }
 
+    /**
+     * Edit the recipe instruction. Unused in this version
+     * @param recipe the recipe object that needs their instruction modified
+     * @param stepString new step number
+     * @param content new instruction content
+     */
     public void editRecipeInstruction(Recipe recipe, String stepString, String content) {
         try {
             int stepInt = Integer.parseInt(stepString);
@@ -160,6 +202,11 @@ public class RecipeManager{
         }
     }
 
+    /**
+     * Remove an instruction from a recipe
+     * @param recipe the recipe object that has their instruction removed
+     * @param stepString the step number at which the instruction needs to be removed
+     */
     public void removeRecipeInstruction(Recipe recipe, String stepString) {
         try {
             int stepInt = Integer.parseInt(stepString);
@@ -171,10 +218,18 @@ public class RecipeManager{
         }
     }
 
+    /**
+     * Remove an ingredient from the recipe
+     * @param recipe the recipe object to have their ingredient removed
+     * @param ingredientName the name of the ingredient to be removed
+     */
     public void removeRecipeIngredient(Recipe recipe, String ingredientName) {
         recipe.removeIngredient(ingredientName);
     }
 
+    /**
+     * List all recipe names available in the list
+     */
     public void listRecipe() {
         if (recipes.isEmpty()) {
             System.out.println("There are no recipes at the moment. You can add via addRecipe");
@@ -186,6 +241,10 @@ public class RecipeManager{
         }
     }
 
+    /**
+     * Show all information of a specified recipe
+     * @param recipeName the name of the recipe to have their information shown
+     */
     public void showRecipe(String recipeName) {
         List<Recipe> filteredItems = recipes.stream().filter(item -> recipeName.equals(item.getName())).toList();
 
@@ -201,6 +260,11 @@ public class RecipeManager{
         }
     }
 
+    /**
+     * Search a recipe by their name
+     * @param recipeName the name of the recip to be searched
+     * @return the recipe object that has a specified name
+     */
     public Recipe searchRecipe(String recipeName) {
         List<Recipe> filteredItems = recipes.stream().
                 filter(recipe -> recipeName.equals(recipe.getName())).toList();
@@ -213,6 +277,10 @@ public class RecipeManager{
         }
     }
 
+    /**
+     * Remove a recipe from the list
+     * @param recipeName the name of the recipe to be removed
+     */
     public void removeRecipe(String recipeName) {
         List<Recipe> filteredItems = recipes.stream().filter(recipe -> recipeName.
                 equals(recipe.getName())).toList();
@@ -225,14 +293,27 @@ public class RecipeManager{
         }
     }
 
+    /**
+     * Copy the recipes from a list to this manager's list. Used to load in data from the external dataset.
+     * @param recipes the list of recipe to be copied into the manager's list
+     */
     public void copyList(ArrayList<Recipe> recipes) {
         this.recipes.addAll(recipes);
     }
 
+    /**
+     * Used mainly for debugging and testing
+     * @return the whole recipe list
+     */
     public ArrayList<Recipe> getRecipeList() {
         return recipes;
     }
 
+    /**
+     * Get the index of a specified recipe object
+     * @param recipe the recipe object to be found
+     * @return the index of the recipe in the list
+     */
     public int getRecipeIndex(Recipe recipe) {
         int index = recipes.indexOf(recipe);
         if (index == -1) {
