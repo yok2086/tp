@@ -12,7 +12,7 @@ public class RemovePlan extends MealPlanCommand {
     private int planIndex;
 
     public RemovePlan() {
-        super("removePlan <plan name>", "Remove a specific meal plan");
+        super("removePlan <plan index>", "Remove a specific meal plan");
     }
 
     public RemovePlan(int planIndex) {

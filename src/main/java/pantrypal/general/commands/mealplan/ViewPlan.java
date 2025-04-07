@@ -12,7 +12,7 @@ public class ViewPlan extends MealPlanCommand {
     private int planIndex;
 
     public ViewPlan() {
-        super("viewPlan <plan name>", "View a specific meal plan");
+        super("viewPlan <plan index>", "View a specific meal plan");
     }
 
     public ViewPlan(int planIndex) {
