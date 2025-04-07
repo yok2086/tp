@@ -29,7 +29,7 @@ public class FindPlan extends MealPlanCommand {
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, RecipeManager recipes,
                         MealPlanManager plans, Scanner in) {
         try {
-            if(!plans.findInCreatedPlans(searchKey)){
+            if (!plans.findInCreatedPlans(searchKey)) {
                 throw new NullPointerException("No plans matching the search key was found");
             }
         } catch (NullPointerException e) {

@@ -23,6 +23,10 @@ public class MealPlanManager {
 
     public void addPlanToDay(int planIndex, Day day) {
         int dayIndex = day.ordinal();
+        if (planIndex < 0 || planIndex >= planList.size()) {
+            Ui.showMessage("Invalid plan index.");
+            return;
+        }
         Plan plan = planList.get(planIndex);
         if (weeklyPlans[dayIndex] == null) {
             weeklyPlans[dayIndex] = plan;
@@ -92,7 +96,6 @@ public class MealPlanManager {
                 Ui.showMessage("Here are the plans that match your search:");
                 Ui.showMessage((planList.indexOf(plan)+1) + //plus 1 for matching to user view
                         ": " + plan.getPlanName());
-                Ui.printLine();
             }
         }
         return found;
