@@ -19,6 +19,7 @@ PantryPal is designed for university students and busy individuals who want to s
 PantryPal addresses the common challenges faced by university students and busy individuals when it comes to meal planning, grocery shopping, and inventory management. With limited time, resources, and often little experience in organizing meals efficiently, users struggle with food waste, last-minute grocery trips, and chaotic kitchens.
 ## User Stories
 
+
 | Version | As a ... | I want to ...                                                            | So that I can ...                                                |
 |---------|----------|--------------------------------------------------------------------------|------------------------------------------------------------------|
 | v1.0    | new user | see usage instructions                                                   | refer to them when I forget how to use the application           |
@@ -36,6 +37,9 @@ PantryPal addresses the common challenges faced by university students and busy 
 | v1.0    | busy student| manually remove items from my shopping list                           | quickly remove additional ingredients I don't want have so much  |
 | v1.0    | meticulous planner| view my shopping list with clearly numbered items               | easily reference and manage items for later editing or removal   |
 | v1.0    | organized shopper| edit an existing shopping list item by its index                 | update integredients details if my shopping needs change         |
+| v1.0    | user     | add a recipe into a list                                                 | save the recipe to be used later on                              |
+| v1.0    | user     | view all the recipe I saved                                              | choose a recipe to follow                                        |
+| v1.0    | user     | remove recipe easily                                                     | avoid cramping my recipe list with rarely-used recipes           |
 | v2.0    | user     | change an ingredient’s unit                                              | work with units I prefer or understand better                    |
 | v2.0    | user     | view ingredients by category                                             | organize or filter ingredients for easier navigation             |
 | v2.0    | user     | convert the unit of an ingredient                                        | standardize or switch between measurement systems (e.g. g to kg) |
@@ -71,13 +75,29 @@ PantryPal addresses the common challenges faced by university students and busy 
 
 ### 2.1 Initial State
 
-1. **Test case: `viewStock`**
+1. **Test case: `help`**
+   - **Steps**: Call `help` method when starting the application.
+   - **Expected**: The message containing every commands available in the application is displayed.
+
+2. **Test case: `viewStock`**
    - **Steps**: Call `viewStock` method when the inventory is empty.
    - **Expected**: The message `Inventory is empty.` should be displayed.
 
-2. **Test case: `viewLowStock`**
+3. **Test case: `viewLowStock`**
    - **Steps**: Call `viewLowStock` when no ingredients are set with low stock alerts.
    - **Expected**: The message `No low stock ingredients.` should be displayed.
+
+4. **Test case: `viewRecipeList`**
+   - **Steps**: Call `viewRecipeList` when there are no recipes in the recipe list.
+   - **Expected**: The message `There are no recipes at the moment. You can add via addRecipe` should be displayed.
+
+5. **Test case: `viewShoppingList`**
+   - **Steps**: Call `viewShoppingList` when there is no items in the list.
+   - **Expected**: The message `Shopping list is empty` should be displayed.
+
+6. **Test case: `viewPlanList`**
+   - **Steps**: Call `viewPlanList` when there is no plans.
+   - **Expected**: The message `No plans available` should be displayed.
 
 ---
 
@@ -171,6 +191,97 @@ PantryPal addresses the common challenges faced by university students and busy 
    - **Steps**: View ingredients by a category with no ingredients: `viewIngredientsByCategory(Category.SPICES)`.
    - **Expected**: The message `No ingredients found in category: SPICES` should be displayed.
 
+---
+
+### 2.9 Add A Recipe
+
+1. **Test case: `addRecipe`**
+   - **Steps**: 
+      - Run the command `addRecipe`
+      - Add `good_recipe` for the recipe name
+      - Add any string (no white space) for the ingredient name
+      - Add any positive number for the ingredient quantity
+      - Add any unit availabe in `Unit` (for example, `kg`)
+      - Add any category avaialable in `Category` (for example, `DAIRY`)
+      - Input `exit` to continue
+      - Add any string
+      - Input `exit` to finish
+   - **Expected**: The message `Recipe added successfully` should be displayed.
+
+2. **Test case: `addRecipe` with recipe name containing white space**
+   - **Steps**:
+      - Run the command `addRecipe`
+      - Add `recipe with space` for the recipe name
+   - **Expected**: The message `Warning: Recipe name should not contain space. Use '_' instead.` should be displayed. Users should be prompted to input the recipe name again.
+
+3. **Test case: `addRecipe` with ingredient name containing white space**
+   - **Steps**:
+      - Run the command `addRecipe`
+      - Add any string (no white space) for the recipe name
+      - Add `ingredient with space` for the ingredient name
+   - **Expected**: The message `Ingredient Name cannot contain spaces. Try again` should be displayed. Users should be promted to input the ingredient name again.
+
+4. **Test case: `addRecipe` with quantity not being a number**
+   - **Steps**:
+      - Run the command `addRecipe`
+      - Add any string (no white space) for the recipe name
+      - Add any string (no white space) for the ingredient name
+      - Add any string (not a number) for quantity
+   - **Expected**: The message `Invalid ingredient quantity! Try again.` should be displayed. Users should be prompted to input the quantity again.
+
+5. **Test case: `addRecipe` with non-positive quantity**
+   - **Steps**:
+      - Run the command `addRecipe`
+      - Add any string (no white space) for the recipe name
+      - Add any string (no white space) for the ingredient name
+      - Add any number less than or equal 0 for the ingredient name
+   - **Expected**: The message `Quantity must be greater than 0.Try again.` should be displayed. Users should be prompted to input the quantity again.
+
+6. **Test case: `addRecipe` with invalid unit**
+   - **Steps**:
+      - Run the command `addRecipe`
+      - Add any string (no white space) for the recipe name
+      - Add any string (no white space) for the ingredient name
+      - Add any positive number for the ingredient quantity
+      - Add random string (e.g. `i love you`) for Unit
+   - **Expected**: The message `Invalid ingredient unit! Try again.` should be displayed. Users should be prompted to input the unit again.
+
+7. **Test case: `addRecipe` with invalid category**
+   - **Steps**:
+      - Run the command `addRecipe`
+      - Add any string (no white space) for the recipe name
+      - Add any string (no white space) for the ingredient name
+      - Add any positive number for the ingredient quantity
+      - Add any unit availabe in `Unit` (for example, `kg`)
+      - Add any category avaialable in `Category` (for example, `DAIRY`)
+      - Input `exit` to continue
+      - Add any string
+      - Input `exit` to finish 
+   - **Expected**: The message `Invalid category! Try again.` should be displayed. Users should be prompted to input the category again.
+
+8. **Test case: `addRecipe` with duplicate recipe**
+   - **Steps**: Run test case 2.9.1 (**Test case: `addRecipe`**) with the exact steps twice
+   - **Expected**: The message `Warning: Recipe GOOD_RECIPE already exists` should be displayed. Users should be prompted to input the recipe name again
+   
+
+### 2.10 View A Recipe
+1. **Test case: `viewRecipe`**
+   - **Steps**:
+      - Follow the steps as specified in test case 2.9.1
+      - Run the command `viewRecipe good_recipe`
+   - **Expected**: A message having 3 sections, the first section being the recipe name (`good_recipe`), the second section being the recipe's ingredient and the third section being the recipe's instructions should be displayed.
+
+2. **Test case: `viewRecipe` with non-existing recipe**
+   - **Steps**: Run the command `viewRecipe not_existing`
+   - **Expected**: The message `There is no recipe with name NOT_EXISTING` should be displayed.
+
+### 2.11 View The Full List Of Recipes
+1. **Test case: `viewRecipeList`**
+   - **Steps**:
+      - Follow the steps as specified in test case 2.9.1
+      - Repeat test case 2.9.1 three times with different name each time
+      - Run the command `viewRecipeList`
+   - **Expected**: The list of recipe names should be displayed.
 ---
 ## 1. Start Application
 
@@ -472,7 +583,6 @@ The Recipe feature is designed for flexibility, accuracy and consistency, ensuri
 ### Core Functionalities
 - **Adding and Managing Recipe Ingredients**: Users can add new ingredients with a name, quantity, and unit while ensuring valid input through validation checks.
 - **Adding and Managing Recipe Instructions**: Users can add new instructions with a step number and their content.
-- **Get Ingredients and Instructions**: Users can retrieve the unique ingredients and instructions associated with a recipe to change their content.
 - **Deleting Ingredients**: Users can remove ingredients from the recipe, ensuring accurate recipe information.
 - **Deleting Instructions**: Users can remove instructions from the recipe, ensuring accurate recipe information.
 
@@ -485,8 +595,8 @@ The Recipe Management feature is responsible for managing a collection of recipe
 The Recipe Management feature is modular and extensible, as well as maintaining accuracy, allowing it to be used seamlessly by other features. The core componenets of the Recipe Management feature include:
 
 - **Recipe Manager Class**: Manages the collection of recipes, allowing users to add, remove, or update the recipe's content.
-- **Edit Ingredient**: Edits the chosen recipe's ingredient's name, quantity, or unit, ensuring the recipe's accuracy.
-- **Edit Instruction**: Edits the chosen recipe's instruction step number or content, ensuring the recipe's accuracy
+- **Edit Ingredient**: Edits the chosen recipe's ingredient's name, quantity, or unit, ensuring the recipe's accuracy. This feature has been implemented in the back end and will be open to the user in a future release.
+- **Edit Instruction**: Edits the chosen recipe's instruction step number or content, ensuring the recipe's accuracy. This feature has been implemented in the back end and will be open to the user in a future release.
 
 ## Sequence Diagram
 The following sequence diagram illustrates the interaction between the user, the Recipe Manager, the Recipe, the Ingredient, and the Instruction feature during recipe management:
