@@ -28,6 +28,7 @@ public class AddIngredient extends InventoryCommand {
                 "Adding new ingredient");
     }
 
+
     public String getName() {
         return name;
     }
