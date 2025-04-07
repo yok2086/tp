@@ -19,21 +19,27 @@ PantryPal is designed for university students and busy individuals who want to s
 PantryPal addresses the common challenges faced by university students and busy individuals when it comes to meal planning, grocery shopping, and inventory management. With limited time, resources, and often little experience in organizing meals efficiently, users struggle with food waste, last-minute grocery trips, and chaotic kitchens.
 ## User Stories
 
-| Version | As a ... | I want to ... | So that I can ...|
-|---------|----------|---------------|------------------|
-| v1.0    |new user|see usage instructions|refer to them when I forget how to use the application|
-| v1.0    |user|find a to-do item by name|locate a to-do without having to go through the entire list|
-| v1.0    | user     | create a new ingredient                    | keep track of items I’ve added to my pantry                         |
-| v1.0    | user     | update an ingredient’s quantity             | reflect changes when I buy or use ingredients                      |
-| v1.0    | user     | rename an ingredient                        | correct mistakes or reflect updated naming                         |
-| v1.0    | user     | view details of an ingredient               | know exactly how much I have and what type it is                   |
-| v1.0    | user     | delete an ingredient                        | remove unused or expired ingredients from my inventory             |
-| v1.0    | user     | set a low stock threshold for ingredients   | receive alerts when I need to restock                              |
-| v1.0    | user     | view all low stock items                    | quickly identify what needs to be replenished                      |
-| v1.0    | user     | find out if an ingredient is in stock       | check availability before starting a recipe                        |
-| v2.0    | user     | change an ingredient’s unit                 | work with units I prefer or understand better                      |
-| v2.0    | user     | view ingredients by category                | organize or filter ingredients for easier navigation               |
-| v2.0    | user     | convert the unit of an ingredient           | standardize or switch between measurement systems (e.g. g to kg)    |
+| Version | As a ... | I want to ...                                                            | So that I can ...                                                |
+|---------|----------|--------------------------------------------------------------------------|------------------------------------------------------------------|
+| v1.0    | new user | see usage instructions                                                   | refer to them when I forget how to use the application           |
+| v1.0    | user     | find a to-do item by name                                                | locate a to-do without having to go through the entire list      |
+| v1.0    | user     | create a new ingredient                                                  | keep track of items I’ve added to my pantry                      |
+| v1.0    | user     | update an ingredient’s quantity                                          | reflect changes when I buy or use ingredients                    |
+| v1.0    | user     | rename an ingredient                                                     | correct mistakes or reflect updated naming                       |
+| v1.0    | user     | view details of an ingredient                                            | know exactly how much I have and what type it is                 |
+| v1.0    | user     | delete an ingredient                                                     | remove unused or expired ingredients from my inventory           |
+| v1.0    | user     | set a low stock threshold for ingredients                                | receive alerts when I need to restock                            |
+| v1.0    | user     | view all low stock items                                                 | quickly identify what needs to be replenished                    |
+| v1.0    | user     | find out if an ingredient is in stock                                    | check availability before starting a recipe                      |
+| v1.0    | budget-conscious student| auto-generate a shopping list based my current stock and planned recipes | purchase only missing ingredients                                |
+| v1.0    | busy student| manually add items to my shopping list                                | quickly include additional ingredients I want to have more       |
+| v1.0    | busy student| manually remove items from my shopping list                           | quickly remove additional ingredients I don't want have so much  |
+| v1.0    | meticulous planner| view my shopping list with clearly numbered items               | easily reference and manage items for later editing or removal   |
+| v1.0    | organized shopper| edit an existing shopping list item by its index                 | update integredients details if my shopping needs change         |
+| v2.0    | user     | change an ingredient’s unit                                              | work with units I prefer or understand better                    |
+| v2.0    | user     | view ingredients by category                                             | organize or filter ingredients for easier navigation             |
+| v2.0    | user     | convert the unit of an ingredient                                        | standardize or switch between measurement systems (e.g. g to kg) |
+| v2.0    | cost-conscious student|  mark items on my shopping list as purchased                | track which items I have bought and avoid re-purchasing them     |
 
 ## Non-Functional Requirements
 - PantryPal should work on any mainstream operating system (Windows, macOS, Linux) with Java 17 or above installed.
