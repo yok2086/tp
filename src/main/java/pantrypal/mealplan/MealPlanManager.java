@@ -82,10 +82,12 @@ public class MealPlanManager {
     public boolean findInCreatedPlans(String planName) {
         boolean found = false;
         for (Plan plan : planList) {
-            if (plan.getPlanName().contains(planName)) {
+            if (plan.getPlanName().equalsIgnoreCase(planName)) {
                 found = true;
+                Ui.showMessage("Here are the plans that match your search:");
                 Ui.showMessage((planList.indexOf(plan)+1) + //plus 1 for matching to user view
                         ": " + plan.getPlanName());
+                Ui.printLine();
             }
         }
         return found;
