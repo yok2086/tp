@@ -147,7 +147,7 @@ public class MealPlanTest {
 
         assertEquals(0, plans.getPlanList().size());
         try {
-            plans.removePlanFromList(0);
+            plans.removePlan(0);
         } catch (IndexOutOfBoundsException e) {
             assertEquals(0, plans.getPlanList().size());
         }
@@ -158,7 +158,7 @@ public class MealPlanTest {
         plans.addPlanToDay(0, Day.MONDAY);
         plans.getPlan(0).addRecipeToPlan(recipes.getRecipe(0), MealType.BREAKFAST);
 
-        plans.removePlanFromList(0);
+        plans.removePlan(0);
         assertEquals(0, plans.getPlanList().size(), "Plan should have been removed");
         assertNull(plans.getWeeklyPlans()[0], "Weekly plan should have been removed");
     }
