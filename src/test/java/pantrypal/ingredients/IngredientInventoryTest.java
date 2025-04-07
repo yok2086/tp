@@ -131,15 +131,14 @@ public class IngredientInventoryTest {
     }
 
     /**
-     * Tests that providing a null category to the validator throws an exception.
+     * Tests that providing a null category
      */
     @Test
     void testNullCategoryThrowsException() {
         IngredientInventory inventory = new IngredientInventory();
-        String nullCategory = null;  // Null category input
+        String nullCategory = null;
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            // Call the method that should throw the exception
             inventory.validateIngredientCategory(nullCategory);
         });
         assertEquals("Category cannot be null.\nType categoryList for a list of valid categories.",
@@ -147,7 +146,7 @@ public class IngredientInventoryTest {
     }
 
     /**
-     * Tests that providing an invalid category to the validator throws an exception.
+     * Tests that providing an invalid category
      */
     @Test
     void testInvalidCategoryThrowsException() {
@@ -195,7 +194,7 @@ public class IngredientInventoryTest {
     }
 
     /**
-     * Tests that adding an ingredient with a null name throws an AssertionError.
+     * Tests that adding an ingredient with a null name
      */
     @Test
     void testNullName() {
@@ -205,7 +204,7 @@ public class IngredientInventoryTest {
     }
 
     /**
-     * Tests that adding an ingredient with an empty name throws an AssertionError.
+     * Tests that adding an ingredient with an empty name
      */
     @Test
     void testEmptyName() {
@@ -215,7 +214,7 @@ public class IngredientInventoryTest {
     }
 
     /**
-     * Tests that adding an ingredient with a negative quantity throws an AssertionError.
+     * Tests that adding an ingredient with a negative quantity
      */
     @Test
     void testNegativeQuantity() {
@@ -225,7 +224,7 @@ public class IngredientInventoryTest {
     }
 
     /**
-     * Tests that adding an ingredient with zero quantity throws an AssertionError.
+     * Tests that adding an ingredient with zero quantity
      */
     @Test
     void testZeroQuantity() {
@@ -235,7 +234,7 @@ public class IngredientInventoryTest {
     }
 
     /**
-     * Tests that adding an ingredient with a null unit throws an AssertionError.
+     * Tests that adding an ingredient with a null unit
      */
     @Test
     void testNullUnit() {
@@ -245,7 +244,7 @@ public class IngredientInventoryTest {
     }
 
     /**
-     * Tests that adding an ingredient with a null category throws an AssertionError.
+     * Tests that adding an ingredient with a null category
      */
     @Test
     void testNullCategory() {
