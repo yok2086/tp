@@ -4,6 +4,7 @@ import pantrypal.inventory.Category;
 import pantrypal.inventory.Ingredient;
 import pantrypal.inventory.IngredientInventory;
 import pantrypal.inventory.Unit;
+import pantrypal.mealplan.Day;
 import pantrypal.mealplan.MealPlanManager;
 import pantrypal.mealplan.MealType;
 import pantrypal.mealplan.Plan;
@@ -94,7 +95,8 @@ public class Storage {
                     } else if (line.startsWith("[MealPlan]")) {
                         currentSection = "MealPlan";
                         plan = processMealPlanLine(line, plans);
-
+                    } else if (line.startsWith("[WeeklyPlan]")) {
+                        currentSection = "WeeklyPlan";
                     } else {
                         processSectionLine(currentSection, line, recipe, plan, plans, recipeManager);
                     }
@@ -194,6 +196,9 @@ public class Storage {
         case "MealPlan":
             processMealPlanDetails(line, plan, plans, recipeManager);
             break;
+        case "WeeklyPlan":
+            processWeeklyPlans(line, plans);
+            break;
         default:
             System.out.println("Unknown data: " + line);
         }
@@ -246,8 +251,8 @@ public class Storage {
         return fileInput;
     }
 
-    private static StringBuilder saveMealPlans(RecipeManager recipeManager, MealPlanManager plans,
-                                               StringBuilder fileInput) {
+    private static void saveMealPlans(RecipeManager recipeManager, MealPlanManager plans,
+                                      StringBuilder fileInput) {
         for (Plan plan : plans.getPlanList()) {
             Recipe[] planRecipes = plan.getPlanRecipes();
             fileInput.append("[MealPlan] ").append(plan.getPlanName()).append("\n")
@@ -261,7 +266,31 @@ public class Storage {
                     .append(planRecipes[2] != null ? recipeManager.getRecipeIndex(planRecipes[2]) : "null")
                     .append("\n");
         }
-        return fileInput;
+    }
+
+    private static void processWeeklyPlans(String line, MealPlanManager plans) {
+        String[] parts = line.trim().split(" ");
+        if (parts.length != 2) {
+            throw new DataCorruptionException("Invalid weekly plan format");
+        }
+        String dayName = parts[0].substring(1, parts[0].length() - 1);
+        if (parts[1].equals("null")) {
+            return;
+        }
+        Day day = Day.valueOf(dayName.toUpperCase());
+        int planIndex = Integer.parseInt(parts[1]);
+        plans.addPlanToDay(planIndex, day);
+    }
+
+    private static void saveWeeklyPlans(MealPlanManager plans, StringBuilder fileInput) {
+        fileInput.append("[WeeklyPlan] \n");
+        for (int i = 0; i < plans.getWeeklyPlans().length; i++) {
+            Plan plan = plans.getWeeklyPlans()[i];
+            if (plan != null) {
+                fileInput.append("[").append(Day.values()[i].name()).append("]").append(" ")
+                        .append(plans.getPlanIndex(plan.getPlanName())).append("\n");
+            }
+        }
     }
 
     private static Plan processMealPlanLine(String line, MealPlanManager plans) {
@@ -343,6 +372,7 @@ public class Storage {
             }
 
             saveMealPlans(recipeManager, plans, fileInput);
+            saveWeeklyPlans(plans, fileInput);
 
             fileWriter.write(fileInput.toString());
         } catch (IOException e) {
