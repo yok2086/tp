@@ -57,7 +57,7 @@ Given below are my contributions to the project.
 ## **Project Management**:
 - Created and managed GitHub issues
 - Collaborated with other team members to ensure the coherence of all the classes in the project
-- Collaborated with other team members to ensure new feautures does not cause conflict
+- Collaborated with other team members to ensure new features does not cause conflict
 - Developed JUnit tests for core functionalities.
 - Contributed to feature integration by adjusting logic in the command line interface.
 - Tested other team member's code
