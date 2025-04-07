@@ -20,42 +20,39 @@ public class IngredientInventoryTest {
 
     @BeforeEach
 
-    // Runs before every test case
     void setUp() {
         inventory = new IngredientInventory();
     }
 
+    /**
+     * Tests adding a new ingredient to the inventory and checks if it is stored correctly.
+     */
     @Test
     void testAddNewIngredient() {
-        // Add sugar
         inventory.addNewIngredient("Sugar", 2.5, Unit.parseUnit("kg"),
                 Category.parseCategory("CONDIMENT"));
 
-        // Get inventory
         Map<String, Ingredient> stock = inventory.getInventory();
 
-        // Check if sugar was added
         assertTrue(stock.containsKey("Sugar"));
         assertEquals(2.5, stock.get("Sugar").getQuantity());
         assertEquals("kg", stock.get("Sugar").getUnit().toString());
         assertEquals("Condiment", stock.get("Sugar").getCategory().toString());
     }
 
-
+    /**
+     * Tests setting a low stock alert and decreasing quantity below the threshold.
+     */
     @Test
     void testSetAlert() {
-        // Add sugar
         inventory.addNewIngredient("Sugar", 2.5, Unit.parseUnit("kg"),
                 Category.parseCategory("CONDIMENT"));
         inventory.setAlert("Sugar", 2.0);
         inventory.decreaseQuantity("Sugar", 1);
 
-        // Get inventory
         Map<String, Ingredient> stock = inventory.getInventory();
         Map<String, Double> lowStockAlerts = inventory.getLowStockAlerts();
 
-
-        // Check for alert and stock
         assertTrue(stock.containsKey("Sugar"), "Sugar should exist in inventory");
         assertEquals(1.5, stock.get("Sugar").getQuantity(), 0.01, "Sugar quantity " +
                 "should be 1.5 kg");
@@ -66,6 +63,9 @@ public class IngredientInventoryTest {
 
     }
 
+    /**
+     * Tests increasing the quantity of an existing ingredient.
+     */
     @Test
     void testIncreaseQuantity() {
         inventory.addNewIngredient("Flour", 1.0, Unit.KILOGRAM, Category.parseCategory("GRAIN"));
@@ -74,6 +74,9 @@ public class IngredientInventoryTest {
                 + " be 1.5 kg");
     }
 
+    /**
+     * Tests decreasing the quantity of an existing ingredient.
+     */
     @Test
     void testDecreaseQuantity() {
         inventory.addNewIngredient("Milk", 2.0, Unit.LITER, Category.parseCategory("DAIRY"));
@@ -83,6 +86,9 @@ public class IngredientInventoryTest {
                 " 0.5 L");
     }
 
+    /**
+     * Tests decreasing the quantity of an existing ingredient.
+     */
     @Test
     void testDecreaseQuantityInsufficientStock() {
         inventory.addNewIngredient("Butter", 0.2, Unit.KILOGRAM, Category.parseCategory("DAIRY"));
@@ -94,7 +100,9 @@ public class IngredientInventoryTest {
         assertEquals("Not enough BUTTER in stock.", exception.getMessage());
     }
 
-
+    /**
+     * Tests that deleting an ingredient removes it from the inventory.
+     */
     @Test
     void testDeleteIngredient() {
         inventory.addNewIngredient("Eggs", 12, Unit.POUND, Category.parseCategory("DAIRY"));
@@ -102,6 +110,9 @@ public class IngredientInventoryTest {
         assertFalse(inventory.getInventory().containsKey("Eggs"), "Eggs should be removed from inventory");
     }
 
+    /**
+     * Tests checking if an ingredient with sufficient quantity exists in the inventory.
+     */
     @Test
     void testIsInInventory() {
         inventory.addNewIngredient("Cheese", 0.5, Unit.KILOGRAM, Category.parseCategory("DAIRY"));
@@ -111,77 +122,136 @@ public class IngredientInventoryTest {
                 "not be sufficient in inventory");
     }
 
+    /**
+     * Tests that the inventory is initially empty.
+     */
     @Test
     void testCheckStockEmpty() {
         assertTrue(inventory.getInventory().isEmpty(), "Inventory should be empty initially");
     }
 
+    /**
+     * Tests that providing a null category to the validator throws an exception.
+     */
     @Test
     void testNullCategoryThrowsException() {
-        // Arrange: Set up the necessary objects
         IngredientInventory inventory = new IngredientInventory();
         String nullCategory = null;  // Null category input
 
-        // Act and Assert: Use assertThrows to expect the IllegalArgumentException
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             // Call the method that should throw the exception
             inventory.validateIngredientCategory(nullCategory);
         });
-
-        // Assert the exception message is what we expect
         assertEquals("Category cannot be null.\nType categoryList for a list of valid categories.",
                 exception.getMessage());
     }
 
-
+    /**
+     * Tests that providing an invalid category to the validator throws an exception.
+     */
     @Test
     void testInvalidCategoryThrowsException() {
-        // Arrange: Set up the necessary objects
         IngredientInventory inventory = new IngredientInventory();
-        String invalidCategory = "INVALID_CATEGORY";  // Example invalid category
+        String invalidCategory = "INVALID_CATEGORY";
 
-        // Act and Assert: Use assertThrows to expect the IllegalArgumentException
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            // Call the method that should throw the exception
             inventory.validateIngredientCategory(invalidCategory);
         });
-
-        // Assert the exception message is what we expect
         assertEquals("Invalid category: " + invalidCategory + "\nType categoryList for a " +
                 "list of valid categories.", exception.getMessage());
     }
 
+    /**
+     * Tests conversion of an ingredient’s unit (e.g., from grams to kilograms).
+     */
     @Test
     public void testConvertIngredient() {
-        // Add "Sugar" with 2.5 grams to the inventory
         inventory.addNewIngredient("Sugar", 2.5, Unit.parseUnit("g"),
                 Category.parseCategory("CONDIMENT"));
-
-        // Convert "Sugar" from GRAM to KILOGRAM
         inventory.convertIngredient("Sugar", Unit.KILOGRAM);
 
-        // Get ingredient after conversion
         Map<String, Ingredient> stock = inventory.getInventory();
         Ingredient sugar = stock.get("Sugar");
 
-        // Check if sugar was converted
-        assertNotNull(sugar); // Sugar exists
-        assertEquals(0.0025, sugar.getQuantity(), 0.0001); //  2.5g -> 0.0025kg
-        assertEquals("kg", sugar.getUnit().toString()); // Unit should be kg
+        assertNotNull(sugar);
+        assertEquals(0.0025, sugar.getQuantity(), 0.0001);
+        assertEquals("kg", sugar.getUnit().toString());
     }
 
+    /**
+     * Tests filtering and viewing ingredients by a specific category.
+     */
     @Test
     public void testViewIngredientsByCategory() {
-        // Add ingredients to inventory
         inventory.addNewIngredient("Sugar", 2.5, Unit.parseUnit("g"),
                 Category.parseCategory("CONDIMENT"));
 
         String result = inventory.viewIngredientsByCategory(Category.parseCategory("CONDIMENT"));
 
-        // Check if the output contains "Sugar"
         assertTrue(result.contains("Sugar"));
 
         String expectedOutput = "Sugar 2.5 g Condiment\n";
         assertEquals(expectedOutput, result);
     }
+
+    /**
+     * Tests that adding an ingredient with a null name throws an AssertionError.
+     */
+    @Test
+    void testAddIngredient_NullName_ThrowsException() {
+        assertThrows(AssertionError.class, () ->
+                inventory.addNewIngredient(null, 1.0, Unit.GRAM, Category.CONDIMENT)
+        );
+    }
+
+    /**
+     * Tests that adding an ingredient with an empty name throws an AssertionError.
+     */
+    @Test
+    void testAddIngredient_EmptyName_ThrowsException() {
+        assertThrows(AssertionError.class, () ->
+                inventory.addNewIngredient("", 1.0, Unit.GRAM, Category.CONDIMENT)
+        );
+    }
+
+    /**
+     * Tests that adding an ingredient with a negative quantity throws an AssertionError.
+     */
+    @Test
+    void testAddIngredient_NegativeQuantity_ThrowsException() {
+        assertThrows(AssertionError.class, () ->
+                inventory.addNewIngredient("Sugar", -5.0, Unit.GRAM, Category.CONDIMENT)
+        );
+    }
+
+    /**
+     * Tests that adding an ingredient with zero quantity throws an AssertionError.
+     */
+    @Test
+    void testAddIngredient_ZeroQuantity_ThrowsException() {
+        assertThrows(AssertionError.class, () ->
+                inventory.addNewIngredient("Sugar", 0.0, Unit.GRAM, Category.CONDIMENT)
+        );
+    }
+
+    /**
+     * Tests that adding an ingredient with a null unit throws an AssertionError.
+     */
+    @Test
+    void testAddIngredient_NullUnit_ThrowsException() {
+        assertThrows(AssertionError.class, () ->
+                inventory.addNewIngredient("Sugar", 1.0, null, Category.CONDIMENT)
+        );
+    }
+
+    /**
+     * Tests that adding an ingredient with a null category throws an AssertionError.
+     */
+    @Test
+    void testAddIngredient_NullCategory_ThrowsException() {
+        assertThrows(AssertionError.class, () ->
+                inventory.addNewIngredient("Sugar", 1.0, Unit.GRAM, null)
+        );
+    }
+
 }
