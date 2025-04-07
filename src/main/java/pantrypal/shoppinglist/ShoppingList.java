@@ -92,11 +92,23 @@ public class ShoppingList {
      * @param newQuantity The new quantity
      * @param newUnit The new unit
      */
-    public void editItem(int index, String newIngredientName, double newQuantity, Unit newUnit) {
+    public boolean editItem(int index, String newIngredientName, double newQuantity, Unit newUnit) {
+        int count = 0;
+        for (ShoppingListItem existingItem : items) {
+            if (existingItem.getIngredientName().equalsIgnoreCase(newIngredientName)) {
+                count = count + 1;
+            }
+        }
+        if(count >= 1){
+            return false;
+        }
+
         ShoppingListItem item = items.get(index);
         item.setIngredientName(newIngredientName);
         item.setQuantity(newQuantity);
         item.setUnit(newUnit);
+
+        return true;
     }
 
     /**
@@ -105,7 +117,8 @@ public class ShoppingList {
     public void displayList() {
         assert items != null : "Items list should not be null when displaying.";
         if (items.isEmpty()) {
-            System.out.println("Shopping list is empty.");
+            System.out.println("No items need to be added to shopping list");
+            Ui.printLine();
         } else {
             System.out.println("Shopping List:");
             for (int i = 1; i <= items.size(); i++) {
