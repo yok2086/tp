@@ -10,7 +10,7 @@ public enum Unit {
     POUND("lb", 453.59),
     MILLIGRAM("mg", 0.001),
 
-    EGG("egg", -1.0),
+    PIECE("piece", -1.0),
     EGG_WHITE("egg_white", -1.0),
     EGG_YOLK("egg_yolk", -1.0),
     PINCH("pinch", -1.0),

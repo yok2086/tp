@@ -495,9 +495,11 @@ Management and Shopping Lists. The core components of the Ingredient Inventory f
 ## Sequence Diagram
 The following sequence diagram illustrates the interaction between the user, the Ingredient Inventory, and the
 Ingredient feature during ingredient management:
+![Ingredients_Sequence_Diagram.png](Ingredients_Sequence_Diagram.png)
+* The sequence diagram is generalized to include only the decreaseQuantity method, as it follows the same flow as the increaseQuantity method. Both operations involve similar steps—validating input, updating the inventory, and displaying a message—so only one method is shown to avoid redundancy. 
 
-![IngredientInventory_Sequence_Diagram.png](team/IngredientInventory_Sequence_Diagram.png)
-
+![Ingredients_Sequence_Diagram_2.png](Ingredients_Sequence_Diagram_2.png)
+![Ingredients_Sequence_diagram_3.png](Ingredients_Sequence_diagram_3.png)
 ### Why It Is Implemented This Way
 The Ingredient and Ingredient Inventory features follow a modular design to ensure flexibility, scalability, and
 maintainability. The Single Responsibility Principle is adhered to, with the Ingredient class managing individual
