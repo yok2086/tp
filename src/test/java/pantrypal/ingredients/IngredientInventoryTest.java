@@ -86,10 +86,14 @@ public class IngredientInventoryTest {
     @Test
     void testDecreaseQuantityInsufficientStock() {
         inventory.addNewIngredient("Butter", 0.2, Unit.KILOGRAM, Category.parseCategory("DAIRY"));
-        inventory.decreaseQuantity("Butter", 0.5);
-        assertEquals(0.2, inventory.getInventory().get("Butter").getQuantity(), "Butter " +
-                "quantity should remain 0.2 kg");
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            inventory.decreaseQuantity("Butter", 0.5);
+        });
+
+        assertEquals("Not enough BUTTER in stock.", exception.getMessage());
     }
+
 
     @Test
     void testDeleteIngredient() {

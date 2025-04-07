@@ -75,8 +75,7 @@ public class IngredientInventory {
         }
     }
 
-
-        // Set low stock alert
+    // Set low stock alert
     public void setAlert(String name, double threshold) {
         lowStockAlerts.put(name, threshold);
     }
