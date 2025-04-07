@@ -2,6 +2,8 @@ package pantrypal.shoppinglist;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import pantrypal.general.control.Ui;
 import pantrypal.inventory.Unit;
 
 public class ShoppingList {
@@ -57,6 +59,7 @@ public class ShoppingList {
         assert newIngredientName != null : "Ingredient name cannot be null.";
         assert newUnit != null : "Unit cannot be null.";
         assert newQuantity >= 0 : "Quantity must be non-negative.";
+        index -= 1;
         if (index < 0 || index >= items.size()) {
             return false;
         }
@@ -73,10 +76,12 @@ public class ShoppingList {
         if (items.isEmpty()) {
             System.out.println("Shopping list is empty.");
         } else {
+            Ui.printLine();
             System.out.println("Shopping List:");
             for (int i = 1; i <= items.size(); i++) {
                 System.out.println(i + ": " + items.get(i-1));
             }
+            Ui.printLine();
         }
     }
 

@@ -50,10 +50,33 @@ public enum Unit {
     }
 
     public static double convert(double quantity, Unit from, Unit to) {
-        if (from.getConversion() == -1 || to.getConversion() == -1) {
-            throw new IllegalArgumentException("Cannot convert between " + from + " and " + to);
+        boolean validConversion = true;
+
+        if ((from == KILOGRAM || from == GRAM || from == MILLIGRAM) &&
+                (to == KILOGRAM || to == GRAM || to == MILLIGRAM)) {
+            // Allow conversion between KG, G, and MG
+            validConversion = true;
+        } else if (from == KILOGRAM && (to != GRAM && to != MILLIGRAM)) {
+            validConversion = false;
+        } else if (from == GRAM && (to != KILOGRAM && to != MILLIGRAM)) {
+            validConversion = false;
+        } else if (from == MILLIGRAM && (to != GRAM && to != KILOGRAM)) {
+            validConversion = false;
+        } else if ((from == CUP || from == OUNCE || from == POUND) &&
+                (to == CUP || to == OUNCE || to == POUND)) {
+            // Allow conversion between CUP, OUNCE, and POUND
+            validConversion = true;
+        } else if (from == MILLILITER && to != LITER) {
+            validConversion = false;
+        } else if (from == LITER && to != MILLILITER) {
+            validConversion = false;
         }
-        return (quantity * from.getConversion()) / to.getConversion();
+        if (validConversion) {
+            return (quantity * from.getConversion()) / to.getConversion();
+        } else {
+            System.out.println("You can't convert from " + from + " to " + to + ".");
+            return -1.0;
+        }
     }
 
     @Override

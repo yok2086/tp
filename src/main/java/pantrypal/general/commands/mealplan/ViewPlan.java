@@ -8,22 +8,20 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
-public class AddPlan extends MealPlanCommand {
+public class ViewPlan extends MealPlanCommand {
+    private int planIndex;
 
-    private String planName;
-
-    public AddPlan() {
-        super("addPlan <plan name>", "Add a new plan");
+    public ViewPlan() {
+        super("viewPlan <plan name>", "View a specific meal plan");
     }
 
-    public AddPlan(String planName) {
-        this.planName = planName;
+    public ViewPlan(int planIndex) {
+        this.planIndex = planIndex;
     }
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, RecipeManager recipes,
                         MealPlanManager plans, Scanner in) {
-        plans.addPlanToList(planName);
-        Ui.showMessage("Plan added: " + planName);
+        plans.viewPlan(planIndex);
     }
 }
