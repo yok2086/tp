@@ -18,6 +18,7 @@ import pantrypal.general.commands.inventory.DeleteIngredient;
 import pantrypal.general.commands.mealplan.AddPlan;
 import pantrypal.general.commands.mealplan.AddPlanToDay;
 import pantrypal.general.commands.mealplan.AddRecipeToPlan;
+import pantrypal.general.commands.mealplan.RemovePlan;
 import pantrypal.general.commands.mealplan.RemoveRecipeFromPlan;
 import pantrypal.general.commands.mealplan.RemovePlanFromDay;
 import pantrypal.general.commands.mealplan.ViewPlan;
@@ -244,9 +245,9 @@ public class Parser {
                 }
                 assert unit != null : "Unit cannot be null";
                 return new EditShoppingItem(index, name, quantity, unit);
-            case "markShoppingItemAsPurchased":
+            case "markItemAsPurchased":
                 if (inputParts.length < 2) {
-                    throw new IllegalArgumentException("Insufficient arguments for markShoppingItemAsPurchased" +
+                    throw new IllegalArgumentException("Insufficient arguments for markItemAsPurchased" +
                             "command.");
                 }
                 name = inputParts[1].toUpperCase();
@@ -401,6 +402,16 @@ public class Parser {
                 }
                 assert viewPlanIndex >= 0 : "Plan index must be non-negative";
                 return new ViewPlan(viewPlanIndex);
+            case "removePlan":
+                if (inputParts.length < 2) {
+                    throw new IllegalArgumentException("Insufficient arguments for removePlan command.");
+                }
+                int removePlanIndex = Integer.parseInt(inputParts[1]) - 1;
+                if (removePlanIndex < 0) {
+                    throw new IllegalArgumentException("Plan index must be non-negative");
+                }
+                assert removePlanIndex >= 0 : "Plan index must be non-negative";
+                return new RemovePlan(removePlanIndex);
             default:
                 return new NullCommand("Invalid Command! ");
             }

@@ -51,7 +51,7 @@ public class Plan {
         sb.append("Recipes:\n");
         for (Recipe recipe : planRecipes) {
             if (recipe != null) {
-                sb.append(MealType.values()[mealIndexCount]).append(" ").append(recipe.getName()).append("\n");
+                sb.append(MealType.values()[mealIndexCount]).append(": ").append(recipe.getName()).append("\n");
             }
             mealIndexCount++;
         }

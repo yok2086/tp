@@ -16,6 +16,11 @@ public class MealPlanManager {
         planList.add(plan);
     }
 
+    public void removePlanFromList(int planIndex) {
+        Plan plan = planList.get(planIndex);
+        planList.remove(plan);
+    }
+
     public void addPlanToDay(int planIndex, Day day) {
         int dayIndex = day.ordinal();
         Plan plan = planList.get(planIndex);
