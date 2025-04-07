@@ -50,13 +50,13 @@ public class IngredientInventory {
             if (quantity <= 0) {
                 throw new IllegalArgumentException("Quantity must be positive.");
             }
-             if (unit == null) {
+            if (unit == null) {
                 throw new IllegalArgumentException("Unit cannot be null.");
             }
-             if (category == null) {
+            if (category == null) {
                 throw new IllegalArgumentException("Category cannot be null.");
             }
-             if (inventory.containsKey(name)) {
+            if (inventory.containsKey(name)) {
                 throw new IllegalArgumentException("Ingredient '" + name + "' already exists.");
             }
             inventory.put(name, new Ingredient(name, quantity, unit, category));
