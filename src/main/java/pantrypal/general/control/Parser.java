@@ -25,7 +25,7 @@ import pantrypal.general.commands.mealplan.ViewPlan;
 import pantrypal.general.commands.mealplan.ViewPlanForDay;
 import pantrypal.general.commands.mealplan.ViewPlanForWeek;
 import pantrypal.general.commands.mealplan.ExecutePlanForDay;
-import pantrypal.general.commands.mealplan.FindForPlans;
+import pantrypal.general.commands.mealplan.FindPlan;
 import pantrypal.general.commands.mealplan.ViewPlanList;
 import pantrypal.general.commands.recipe.AddRecipe;
 import pantrypal.general.commands.recipe.ListRecipe;
@@ -44,7 +44,7 @@ public class Parser {
 
     public Command parse(String input) {
         String[] inputParts = input.trim().split(" ");
-        String command = inputParts[0];
+        String command = inputParts[0].toLowerCase();
 
         String name;
         double quantity;
@@ -60,7 +60,7 @@ public class Parser {
             case "exit":
                 return new Exit();
             //From here on are commands for Ingredient
-            case "addNewIngredient":
+            case "addnewingredient":
                 if (inputParts.length < 5) {
                     throw new IllegalArgumentException("Insufficient arguments for addNewIngredient command.");
                 }
@@ -88,7 +88,7 @@ public class Parser {
                 }
                 assert category != null : "Category cannot be null";
                 return new AddIngredient(name, quantity, unit, category);
-            case "increaseQuantity":
+            case "increasequantity":
                 if (inputParts.length < 3) {
                     throw new IllegalArgumentException("Insufficient arguments for increaseQuantity command.");
                 }
@@ -104,7 +104,7 @@ public class Parser {
                 }
                 assert quantity >= 0 : "Quantity must be non-negative";
                 return new IncreaseQuantity(name, quantity);
-            case "decreaseQuantity":
+            case "decreasequantity":
                 if (inputParts.length < 3) {
                     throw new IllegalArgumentException("Insufficient arguments for decreaseQuantity command.");
                 }
@@ -120,7 +120,7 @@ public class Parser {
                 }
                 assert quantity >= 0 : "Quantity must be non-negative";
                 return new DecreaseQuantity(name, quantity);
-            case "setAlert":
+            case "setalert":
                 if (inputParts.length < 3) {
                     throw new IllegalArgumentException("Insufficient arguments for setAlert command.");
                 }
@@ -136,11 +136,11 @@ public class Parser {
                 }
                 assert threshold >= 0 : "Threshold must be non-negative";
                 return new SetAlert(name, threshold);
-            case "viewStock":
+            case "viewstock":
                 return new CheckStock();
-            case "viewLowStock":
+            case "viewlowstock":
                 return new ViewLowStock();
-            case "deleteIngredient":
+            case "deleteingredient":
                 if (inputParts.length < 2) {
                     throw new IllegalArgumentException("Insufficient arguments for deleteIngredient command.");
                 }
@@ -150,7 +150,7 @@ public class Parser {
                 }
                 assert name != null && !name.isEmpty() : "Ingredient name cannot be null or empty";
                 return new DeleteIngredient(name);
-            case "convertIngredient":
+            case "convertingredient":
                 if (inputParts.length < 3) {
                     throw new IllegalArgumentException("Insufficient arguments for convertIngredient command.");
                 }
@@ -166,7 +166,7 @@ public class Parser {
                 }
                 assert unit != null : "Unit cannot be null";
                 return new ConvertIngredient(name, unit);
-            case "viewIngredientsByCategory":
+            case "viewingredientsbycategory":
                 if (inputParts.length < 2) {
                     throw new IllegalArgumentException("Insufficient arguments for viewIngredientsByCategory command.");
                 }
@@ -176,12 +176,12 @@ public class Parser {
                 }
                 assert categoryName != null : "Category cannot be null";
                 return new ViewIngredientsByCategory(categoryName);
-            case "unitList":
+            case "unitlist":
                 return new UnitList();
-            case "categoryList":
+            case "categorylist":
                 return new CategoryList();
             //From here on are commands for ShoppingList
-            case "addShoppingItem":
+            case "addshoppingitem": //typo error
                 if (inputParts.length < 4) {
                     throw new IllegalArgumentException("Insufficient arguments for addShoppingItem command.");
                 }
@@ -203,9 +203,9 @@ public class Parser {
                 }
                 assert unit != null : "Unit cannot be null";
                 return new AddShoppingItem(name, quantity, unit);
-            case "generateShoppingList":
+            case "generateshoppinglist":
                 return new GenerateShoppingList();
-            case "removeShoppingItem":
+            case "removeshoppingitem":
                 if (inputParts.length < 2) {
                     throw new IllegalArgumentException("Insufficient arguments for removeShoppingItem command.");
                 }
@@ -215,9 +215,9 @@ public class Parser {
                 }
                 assert name != null && !name.isEmpty() : "Item name cannot be null or empty";
                 return new RemoveShoppingItem(name);
-            case "viewShoppingList":
+            case "viewshoppinglist":
                 return new ViewShoppingList();
-            case "editShoppingItem":
+            case "editshoppingitem":
                 if (inputParts.length < 5) {
                     throw new IllegalArgumentException("Insufficient arguments for editShoppingItem command.");
                 }
@@ -245,7 +245,7 @@ public class Parser {
                 }
                 assert unit != null : "Unit cannot be null";
                 return new EditShoppingItem(index, name, quantity, unit);
-            case "markItemAsPurchased":
+            case "markitemaspurchased":
                 if (inputParts.length < 2) {
                     throw new IllegalArgumentException("Insufficient arguments for markItemAsPurchased" +
                             "command.");
@@ -257,9 +257,9 @@ public class Parser {
                 assert name != null && !name.isEmpty() : "Item name cannot be null or empty";
                 return new MarkShoppingItemAsPurchased(name);
             //From here on are commands for Recipe
-            case "addRecipe":
+            case "addrecipe":
                 return new AddRecipe();
-            case "viewRecipe":
+            case "viewrecipe":
                 if (inputParts.length < 2) {
                     throw new IllegalArgumentException("Insufficient arguments for viewRecipe command.");
                 }
@@ -269,7 +269,7 @@ public class Parser {
                 }
                 assert name != null && !name.isEmpty() : "Recipe name cannot be null or empty";
                 return new ViewRecipe(name);
-            case "removeRecipe":
+            case "removerecipe":
                 if (inputParts.length < 2) {
                     throw new IllegalArgumentException("Insufficient arguments for removeRecipe command.");
                 }
@@ -279,10 +279,10 @@ public class Parser {
                 }
                 assert name != null && !name.isEmpty() : "Recipe name cannot be null or empty";
                 return new RemoveRecipe(name);
-            case "viewRecipeList":
+            case "viewrecipelist":
                 return new ListRecipe();
             //From here on are commands for MealPlan
-            case "addPlan":
+            case "addplan":
                 if (inputParts.length < 2) {
                     throw new IllegalArgumentException("Insufficient arguments for addPlan command.");
                 }
@@ -292,7 +292,7 @@ public class Parser {
                 }
                 assert planName != null && !planName.isEmpty() : "Plan name cannot be null or empty";
                 return new AddPlan(planName);
-            case "addPlanToDay":
+            case "addplantoday":
                 if (inputParts.length < 3) {
                     throw new IllegalArgumentException("Insufficient arguments for addPlanToDay command.");
                 }
@@ -308,7 +308,7 @@ public class Parser {
                 }
                 assert addDayName != null && !addDayName.isEmpty() : "Day name cannot be null or empty";
                 return new AddPlanToDay(addToWeekIndex, addDayName);
-            case "addRecipeToPlan":
+            case "addrecipetoplan":
                 if (inputParts.length < 4) {
                     throw new IllegalArgumentException("Insufficient arguments for addRecipeToPlan command.");
                 }
@@ -330,7 +330,7 @@ public class Parser {
                 }
                 assert addRecipeMealName != null && !addRecipeMealName.isEmpty() : "Meal name cannot be null or empty";
                 return new AddRecipeToPlan(addRecipePlanIndex, addRecipeRecipeIndex, addRecipeMealName);
-            case "removeRecipeFromPlan":
+            case "removerecipefromplan":
                 if (inputParts.length < 3) {
                     throw new IllegalArgumentException("Insufficient arguments for removeRecipeFromPlan command.");
                 }
@@ -347,9 +347,9 @@ public class Parser {
                 assert deleteRecipeMealName != null && !deleteRecipeMealName.isEmpty() : "Meal name cannot " +
                         "be null or empty";
                 return new RemoveRecipeFromPlan(deleteRecipePlanIndex, deleteRecipeMealName);
-            case "removePlanFromDay":
+            case "removeplanfromday":
                 if (inputParts.length < 2) {
-                    throw new IllegalArgumentException("Insufficient arguments for removeRecipeFromWeek command.");
+                    throw new IllegalArgumentException("Insufficient arguments for removePlanFromDay command.");
                 }
                 String deleteFromWeekDayName = inputParts[1];
                 if (deleteFromWeekDayName == null || deleteFromWeekDayName.isEmpty()) {
@@ -358,7 +358,7 @@ public class Parser {
                 assert deleteFromWeekDayName != null && !deleteFromWeekDayName.isEmpty() : "Day name cannot " +
                         "be null or empty";
                 return new RemovePlanFromDay(deleteFromWeekDayName);
-            case "viewPlanForDay":
+            case "viewplanforday":
                 if (inputParts.length < 2) {
                     throw new IllegalArgumentException("Insufficient arguments for viewPlanForDay command.");
                 }
@@ -368,7 +368,7 @@ public class Parser {
                 }
                 assert viewDayName != null && !viewDayName.isEmpty() : "Day name cannot be null or empty";
                 return new ViewPlanForDay(viewDayName);
-            case "viewPlanForWeek":
+            case "viewplanforweek":
                 return new ViewPlanForWeek();
             case "execute":
                 if (inputParts.length < 2) {
@@ -380,19 +380,19 @@ public class Parser {
                 }
                 assert executeDayName != null && !executeDayName.isEmpty() : "Day name cannot be null or empty";
                 return new ExecutePlanForDay(executeDayName);
-            case "findForPlans":
+            case "findplan":
                 if (inputParts.length < 2) {
-                    throw new IllegalArgumentException("Insufficient arguments for findForPlans command.");
+                    throw new IllegalArgumentException("Insufficient arguments for findPlan command.");
                 }
                 String findSearchKey = inputParts[1];
                 if (findSearchKey == null || findSearchKey.isEmpty()) {
                     throw new IllegalArgumentException("Search key cannot be null or empty");
                 }
                 assert findSearchKey != null && !findSearchKey.isEmpty() : "Search key cannot be null or empty";
-                return new FindForPlans(findSearchKey);
-            case "viewPlanList":
+                return new FindPlan(findSearchKey);
+            case "viewplanlist":
                 return new ViewPlanList();
-            case "viewPlan":
+            case "viewplan":
                 if (inputParts.length < 2) {
                     throw new IllegalArgumentException("Insufficient arguments for viewPlan command.");
                 }
@@ -402,7 +402,7 @@ public class Parser {
                 }
                 assert viewPlanIndex >= 0 : "Plan index must be non-negative";
                 return new ViewPlan(viewPlanIndex);
-            case "removePlan":
+            case "removeplan":
                 if (inputParts.length < 2) {
                     throw new IllegalArgumentException("Insufficient arguments for removePlan command.");
                 }

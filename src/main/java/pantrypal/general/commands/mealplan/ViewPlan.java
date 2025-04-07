@@ -19,6 +19,10 @@ public class ViewPlan extends MealPlanCommand {
         this.planIndex = planIndex;
     }
 
+    public int getPlanIndex() {
+        return planIndex;
+    }
+
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, RecipeManager recipes,
                         MealPlanManager plans, Scanner in) {

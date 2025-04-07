@@ -8,17 +8,21 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
-public class FindForPlans extends MealPlanCommand {
+public class FindPlan extends MealPlanCommand {
 
     String searchKey;
 
-    public FindForPlans() {
-        super("findForPlans <contains>", "Search amongst all created plans to find " +
+    public FindPlan() {
+        super("findPlan <contains>", "Search amongst all created plans to find " +
                 "one that contains the search key.");
     }
 
-    public FindForPlans(String contains) {
+    public FindPlan(String searchKey) {
         this.searchKey = searchKey;
+    }
+
+    public String getSearchKey() {
+        return searchKey;
     }
 
     @Override

@@ -23,6 +23,14 @@ public class RemoveRecipeFromPlan extends MealPlanCommand {
         this.mealType = mealType;
     }
 
+    public int getPlanIndex() {
+        return planIndex;
+    }
+
+    public String getMealType() {
+        return mealType;
+    }
+
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, RecipeManager recipes,
                         MealPlanManager plans, Scanner in) {

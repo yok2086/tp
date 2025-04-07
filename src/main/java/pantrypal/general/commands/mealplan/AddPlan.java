@@ -9,7 +9,6 @@ import pantrypal.shoppinglist.ShoppingList;
 import java.util.Scanner;
 
 public class AddPlan extends MealPlanCommand {
-
     private String planName;
 
     public AddPlan() {
@@ -18,6 +17,10 @@ public class AddPlan extends MealPlanCommand {
 
     public AddPlan(String planName) {
         this.planName = planName;
+    }
+
+    public String getPlanName() {
+        return planName;
     }
 
     @Override
