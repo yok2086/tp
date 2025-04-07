@@ -17,6 +17,7 @@ public class ViewShoppingList extends ShoppingListCommand {
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list,
                         RecipeManager recipes, MealPlanManager plans, Scanner in) {
+        Ui.printLine();
         list.displayList(); // Error handling is inside the function
     }
 }

@@ -49,17 +49,7 @@ class RecipeManagerTest {
                 "Expected fried egg to be eggs");
 
         friedEgg.removeIngredient("eggs");
-        /* Removed for handled case
-        try {
-            recipeManager.addRecipeIngredients(friedEgg, "eggs",
-                    50, Unit.parseUnit("eggs"), Category.parseCategory("DAIRY"));
-            fail("Method should throw an unsupported unit exception");
-        } catch (IllegalArgumentException e) {
-            assertNotNull(e, "Method should throw an unsupported unit exception");
-        } catch (Exception e){
-            fail("Unexpected exception thrown");
-        }
-        */
+
         try {
             recipeManager.addRecipeIngredients(friedEgg, "eggs",
                     50, Unit.parseUnit("g"), Category.parseCategory("HEHE"));
