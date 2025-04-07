@@ -7,6 +7,7 @@ import pantrypal.recipe.RecipeManager;
 import pantrypal.shoppinglist.ShoppingList;
 import pantrypal.shoppinglist.ShoppingListItem;
 import pantrypal.inventory.Unit;
+
 import java.util.Scanner;
 
 public class EditShoppingItem extends ShoppingListCommand {
@@ -41,10 +42,9 @@ public class EditShoppingItem extends ShoppingListCommand {
         }
         // If the index is valid, perform the edit operation.
         boolean success = list.editItem(index, newIngredientName, newQuantity, newUnit);
-        if(success){
+        if (success) {
             ui.showMessage("Item at index " + (index + 1) + " updated successfully.");
-        }
-        else{
+        } else {
             ui.showMessage("Ingredient name already exists. Please try again with another name.");
         }
 
