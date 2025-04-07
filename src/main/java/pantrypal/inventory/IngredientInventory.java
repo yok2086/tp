@@ -212,6 +212,7 @@ public class IngredientInventory {
         if (!found) {
             System.out.println("No low stock ingredients.");
         }
+        System.out.println("______________________________________________________________");
     }
 
     /**
