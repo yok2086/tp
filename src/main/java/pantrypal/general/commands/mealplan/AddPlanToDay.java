@@ -9,7 +9,6 @@ import pantrypal.shoppinglist.ShoppingList;
 import java.util.Scanner;
 
 public class AddPlanToDay extends MealPlanCommand {
-
     private int planIndex;
     private String day;
 
@@ -21,6 +20,14 @@ public class AddPlanToDay extends MealPlanCommand {
     public AddPlanToDay(int planIndex, String day) {
         this.planIndex = planIndex;
         this.day = day;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public int getPlanIndex() {
+        return planIndex;
     }
 
     @Override

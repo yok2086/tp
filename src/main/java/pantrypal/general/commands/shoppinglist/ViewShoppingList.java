@@ -18,5 +18,6 @@ public class ViewShoppingList extends ShoppingListCommand {
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list,
                         RecipeManager recipes, MealPlanManager plans, Scanner in) {
         list.displayList(); // Error handling is inside the function
+        Ui.printLine();
     }
 }

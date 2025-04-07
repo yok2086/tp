@@ -10,7 +10,6 @@ import pantrypal.shoppinglist.ShoppingList;
 import java.util.Scanner;
 
 public class AddRecipeToPlan extends MealPlanCommand {
-
     int planIndex;
     int recipeIndex;
     String mealType;
@@ -24,6 +23,18 @@ public class AddRecipeToPlan extends MealPlanCommand {
         this.planIndex = planIndex;
         this.recipeIndex = recipeIndex;
         this.mealType = mealType;
+    }
+
+    public int getPlanIndex() {
+        return planIndex;
+    }
+
+    public int getRecipeIndex() {
+        return recipeIndex;
+    }
+
+    public String getMealType() {
+        return mealType;
     }
 
     @Override

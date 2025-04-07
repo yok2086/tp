@@ -5,17 +5,42 @@ import pantrypal.general.control.Ui;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Manages an inventory of ingredients, including adding, removing, updating quantities,
+ * checking stock levels, setting low stock alerts, and viewing ingredients by category.
+ */
 public class IngredientInventory {
+    /**
+     * Stores ingredients by their name.
+     */
     private Map<String, Ingredient> inventory;
+    /**
+     * Stores low stock alert thresholds by ingredient name.
+     */
     private Map<String, Double> lowStockAlerts;
 
+    /**
+     * Constructor to initialize ingredient inventory and alert map.
+     */
     public IngredientInventory() {
         inventory = new HashMap<>();
         lowStockAlerts = new HashMap<>();
     }
 
-    // Add new ingredient method
+    /**
+     * Adds a new ingredient to the inventory.
+     *
+     * @param name     Name of the ingredient.
+     * @param quantity Initial quantity.
+     * @param unit     Unit of measurement.
+     * @param category Ingredient category.
+     */
     public void addNewIngredient(String name, double quantity, Unit unit, Category category) {
+        assert name != null && !name.isEmpty() : "Ingredient name is null or empty";
+        assert quantity > 0 : "Quantity must be positive";
+        assert unit != null : "Unit is null";
+        assert category != null : "Category is null";
+
         try {
             if (name == null || name.isEmpty()) {
                 throw new IllegalArgumentException("Ingredient name cannot be null or empty.");
@@ -30,6 +55,7 @@ public class IngredientInventory {
                 throw new IllegalArgumentException("Category cannot be null.");
             }
             if (inventory.containsKey(name)) {
+                System.out.println("This ingredient already exists.");
                 throw new IllegalArgumentException("Ingredient '" + name + "' already exists.");
             }
             inventory.put(name, new Ingredient(name, quantity, unit, category));
@@ -39,7 +65,12 @@ public class IngredientInventory {
     }
 
 
-    // Increase ingredient quantity
+    /**
+     * Increases the quantity of an existing ingredient.
+     *
+     * @param name     Name of the ingredient.
+     * @param quantity Quantity to increase.
+     */
     public void increaseQuantity(String name, double quantity) {
         if (quantity < 0) {
             Ui.showMessage("Error: Quantity to increase must be positive.");
@@ -54,7 +85,12 @@ public class IngredientInventory {
         }
     }
 
-    // Decrease ingredient quantity
+    /**
+     * Decreases the quantity of an existing ingredient.
+     *
+     * @param name     Name of the ingredient.
+     * @param quantity Quantity to decrease.
+     */
     public void decreaseQuantity(String name, double quantity) {
         if (quantity < 0) {
             throw new IllegalArgumentException("Quantity to decrease cannot be negative.");
@@ -75,23 +111,37 @@ public class IngredientInventory {
         }
     }
 
-
-    // Set low stock alert
+    /**
+     * Sets a low stock alert threshold for a specific ingredient.
+     *
+     * @param name      Ingredient name.
+     * @param threshold Minimum quantity before alert.
+     */
     public void setAlert(String name, double threshold) {
         lowStockAlerts.put(name, threshold);
     }
 
-    // Get low stock alert
+    /**
+     * Retrieves all low stock alert thresholds.
+     *
+     * @return Map of ingredient names to their alert thresholds.
+     */
     public Map<String, Double> getLowStockAlerts() {
         return lowStockAlerts;
     }
 
-    // Get inventory
+    /**
+     * Retrieves the entire ingredient inventory.
+     *
+     * @return Map of ingredient names to Ingredient objects.
+     */
     public Map<String, Ingredient> getInventory() {
         return inventory;
     }
 
-    // Check stock
+    /**
+     * Prints the current inventory to the console.
+     */
     public void checkStock() {
         if (inventory.isEmpty()) {
             System.out.println("Inventory is empty.");
@@ -103,19 +153,28 @@ public class IngredientInventory {
         }
     }
 
-    //Find if ingredient is in stock
+    /**
+     * Checks if a specific quantity of an ingredient is in stock.
+     *
+     * @param name     Ingredient name.
+     * @param quantity Quantity needed.
+     * @param unit     Unit of the requested quantity.
+     * @return true if in inventory with sufficient quantity, else false.
+     */
     public boolean isInInventory(String name, double quantity, Unit unit) {
         Ingredient ingredient = inventory.get(name);
 
         if (ingredient != null
                 && ingredient.getQuantity() >= quantity
-                && ingredient .getUnit() == unit) {
+                && ingredient.getUnit() == unit) {
             return true;
         }
         return false;
     }
 
-    // View low stock ingredients
+    /**
+     * Prints ingredients that are below their low stock thresholds.
+     */
     public void viewLowStock() {
         boolean found = false;
         for (Map.Entry<String, Double> alert : lowStockAlerts.entrySet()) {
@@ -131,7 +190,11 @@ public class IngredientInventory {
         }
     }
 
-    // Delete ingredient
+    /**
+     * Deletes an ingredient from the inventory and removes its alert if set.
+     *
+     * @param name Ingredient name to delete.
+     */
     public void deleteIngredient(String name) {
         if (inventory.remove(name) != null) {
             lowStockAlerts.remove(name);
@@ -141,6 +204,12 @@ public class IngredientInventory {
         }
     }
 
+    /**
+     * Converts an ingredient's quantity from its current unit to another.
+     *
+     * @param name Ingredient name.
+     * @param targetUnit Unit to convert to.
+     */
     public void convertIngredient(String name, Unit targetUnit) {
         try {
             Ingredient ingredient = inventory.get(name);
@@ -162,7 +231,12 @@ public class IngredientInventory {
         }
     }
 
-
+    /**
+     * Returns all ingredients in a specified category.
+     *
+     * @param category Category to filter by.
+     * @return A string listing ingredients in that category.
+     */
     public String viewIngredientsByCategory(Category category) {
         boolean found = false;
         StringBuilder result = new StringBuilder(); // Use StringBuilder to collect output
@@ -179,6 +253,11 @@ public class IngredientInventory {
         return result.toString(); // Return the result as a string
     }
 
+    /**
+     * Validates if a category string is valid.
+     *
+     * @param category Category name as string.
+     */
     public void validateIngredientCategory(String category) {
         if (category == null) {
             throw new IllegalArgumentException("Category cannot be null.\nType categoryList for a list of valid " +
