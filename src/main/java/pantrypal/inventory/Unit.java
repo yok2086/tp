@@ -1,5 +1,10 @@
 package pantrypal.inventory;
 
+/**
+ * Enum representing various units of measurement for ingredients.
+ * Includes common units like grams, kilograms, milliliters, and others.
+ * Provides methods for unit conversion and parsing.
+ */
 public enum Unit {
     GRAM("g", 1.0),
     KILOGRAM("kg", 1000.0),
@@ -10,7 +15,7 @@ public enum Unit {
     POUND("lb", 453.59),
     MILLIGRAM("mg", 0.001),
 
-    EGG("egg", -1.0),
+    PIECE("piece", -1.0),
     EGG_WHITE("egg_white", -1.0),
     EGG_YOLK("egg_yolk", -1.0),
     PINCH("pinch", -1.0),
@@ -36,19 +41,44 @@ public enum Unit {
     private final String unit;
     private final double conversion;
 
+    /**
+     * Constructor for the Unit enum.
+     *
+     * @param unit       The unit abbreviation (e.g., "g", "kg").
+     * @param conversion The conversion factor for the unit (relative to grams or milliliters).
+     */
     Unit(String unit, double conversion) {
         this.unit = unit;
         this.conversion = conversion;
     }
 
+    /**
+     * Gets the unit abbreviation (e.g., "g", "kg").
+     *
+     * @return The unit abbreviation.
+     */
     public String getUnit() {
         return unit;
     }
 
+    /**
+     * Gets the conversion factor for the unit.
+     *
+     * @return The conversion factor.
+     */
     public double getConversion() {
         return conversion;
     }
 
+    /**
+     * Converts the given quantity from one unit to another.
+     * Only allows conversions between certain compatible units (e.g., grams to kilograms).
+     *
+     * @param quantity The quantity to convert.
+     * @param from     The unit to convert from.
+     * @param to       The unit to convert to.
+     * @return The converted quantity or -1 if the conversion is not possible.
+     */
     public static double convert(double quantity, Unit from, Unit to) {
         boolean validConversion = true;
 
@@ -79,11 +109,23 @@ public enum Unit {
         }
     }
 
+    /**
+     * Returns the string representation of the unit.
+     *
+     * @return The unit abbreviation.
+     */
     @Override
     public String toString() {
         return unit;
     }
 
+    /**
+     * Parses a unit from a string. The string can be either the unit abbreviation or the enum name.
+     *
+     * @param text The unit string to parse.
+     * @return The corresponding Unit enum.
+     * @throws IllegalArgumentException If the unit is invalid.
+     */
     public static Unit parseUnit(String text) {
         Unit result = null;
         boolean found = false;

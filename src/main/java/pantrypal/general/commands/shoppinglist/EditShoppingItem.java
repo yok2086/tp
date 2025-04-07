@@ -40,7 +40,13 @@ public class EditShoppingItem extends ShoppingListCommand {
             return;
         }
         // If the index is valid, perform the edit operation.
-        list.editItem(index, newIngredientName, newQuantity, newUnit);
-        ui.showMessage("Item at index " + (index + 1) + " updated successfully.");
+        boolean success = list.editItem(index, newIngredientName, newQuantity, newUnit);
+        if(success){
+            ui.showMessage("Item at index " + (index + 1) + " updated successfully.");
+        }
+        else{
+            ui.showMessage("Ingredient name already exists. Please try again with another name.");
+        }
+
     }
 }
