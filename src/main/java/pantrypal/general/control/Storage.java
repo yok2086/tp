@@ -21,15 +21,32 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * The Storage class handles the loading and saving of data to a file.
+ * It provides methods to create a file, load data from it, and save data to it.
+ */
 public class Storage {
     private static String filePath = "";
     private static File file;
 
+    /**
+     * Constructs a Storage object with the specified file path.
+     *
+     * @param filePath the path to the file used for storage
+     */
     public Storage(String filePath) {
         Storage.filePath = filePath;
         file = new File(filePath);
     }
 
+    /**
+     * Creates a new file if it does not exist and loads data from the file if it exists.
+     *
+     * @param inventory the ingredient inventory
+     * @param shoppingList the shopping list
+     * @param plans the meal plan manager
+     * @param recipeManager the recipe manager
+     */
     public static void createFile(IngredientInventory inventory, ShoppingList shoppingList, MealPlanManager plans,
                                   RecipeManager recipeManager) {
         if (file.getParentFile().mkdirs()) {
@@ -65,6 +82,14 @@ public class Storage {
         return input.replace("\\|", "|");
     }
 
+    /**
+     * Loads data from the file into the provided inventory, shopping list, meal plan manager, and recipe manager.
+     *
+     * @param inventory the ingredient inventory
+     * @param shoppingList the shopping list
+     * @param plans the meal plan manager
+     * @param recipeManager the recipe manager
+     */
     public static void loadData(IngredientInventory inventory, ShoppingList shoppingList, MealPlanManager plans,
                                 RecipeManager recipeManager) {
         try (Scanner scanner = new Scanner(file)) {
@@ -111,6 +136,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Processes a line from the shopping section of the file.
+     *
+     * @param line the line to process
+     * @param shoppingList the shopping list
+     */
     private static void processShoppingLine(String line, ShoppingList shoppingList) {
         try {
             String[] shoppingListItem = line.substring("[Shopping]".length()).trim().split(" ");
@@ -134,6 +165,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Processes a line from the recipe section of the file.
+     *
+     * @param line the line to process
+     * @param recipeManager the recipe manager
+     * @return the processed recipe
+     */
     private static Recipe processRecipeLine(String line, RecipeManager recipeManager) {
         try {
             String recipeName = unescapeSpecialCharacters(line.substring("[Recipe]".length()).trim());
@@ -146,6 +184,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Processes a line from the stock section of the file.
+     *
+     * @param line the line to process
+     * @param inventory the ingredient inventory
+     */
     private static void processStockLine(String line, IngredientInventory inventory) {
         try {
             line = line.substring("[Stock]".length()).trim();
@@ -167,6 +211,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Processes a line from the low stock section of the file.
+     *
+     * @param line the line to process
+     * @param inventory the ingredient inventory
+     */
     private static void processLowStockLine(String line, IngredientInventory inventory) {
         try {
             line = line.substring("[LowStock]".length()).trim();
@@ -183,6 +233,16 @@ public class Storage {
         }
     }
 
+    /**
+     * Processes a line from the specified section of the file.
+     *
+     * @param currentSection the current section being processed
+     * @param line the line to process
+     * @param recipe the current recipe being processed
+     * @param plan the current plan being processed
+     * @param plans the meal plan manager
+     * @param recipeManager the recipe manager
+     */
     private static void processSectionLine(String currentSection, String line, Recipe recipe, Plan plan,
                                            MealPlanManager plans, RecipeManager recipeManager) {
         switch (currentSection) {
@@ -204,6 +264,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Processes the ingredients of a recipe from a line in the file.
+     *
+     * @param line the line to process
+     * @param recipe the recipe to add ingredients to
+     */
     private static void processRecipeIngredients(String line, Recipe recipe) {
         line = line.substring("[Ingredients]".length()).trim();
         String[] ingredients = line.trim().split(" \\|");
@@ -220,6 +286,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Processes the instructions of a recipe from a line in the file.
+     *
+     * @param line the line to process
+     * @param recipe the recipe to add instructions to
+     */
     private static void processRecipeInstructions(String line, Recipe recipe) {
         line = line.substring("[Instructions]".length()).trim();
         String[] instructions = line.trim().split(" \\|");
@@ -230,6 +302,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the ingredients of a recipe to a StringBuilder.
+     *
+     * @param ingredients the list of ingredients
+     * @param fileInput the StringBuilder to append to
+     * @return the updated StringBuilder
+     */
     private static StringBuilder saveRecipeIngredients(ArrayList<Ingredient> ingredients, StringBuilder fileInput) {
         fileInput.append("[Ingredients] ");
         for (Ingredient ingredient : ingredients) {
@@ -242,6 +321,13 @@ public class Storage {
         return fileInput;
     }
 
+    /**
+     * Saves the instructions of a recipe to a StringBuilder.
+     *
+     * @param instructions the list of instructions
+     * @param fileInput the StringBuilder to append to
+     * @return the updated StringBuilder
+     */
     private static StringBuilder saveRecipeInstructions(ArrayList<Instruction> instructions, StringBuilder fileInput) {
         fileInput.append("[Instructions] ");
         for (Instruction instruction : instructions) {
@@ -251,6 +337,13 @@ public class Storage {
         return fileInput;
     }
 
+    /**
+     * Saves the meal plans to a StringBuilder.
+     *
+     * @param recipeManager the recipe manager
+     * @param plans the meal plan manager
+     * @param fileInput the StringBuilder to append to
+     */
     private static void saveMealPlans(RecipeManager recipeManager, MealPlanManager plans,
                                       StringBuilder fileInput) {
         for (Plan plan : plans.getPlanList()) {
@@ -268,6 +361,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Processes the weekly plans from a line in the file.
+     *
+     * @param line the line to process
+     * @param plans the meal plan manager
+     */
     private static void processWeeklyPlans(String line, MealPlanManager plans) {
         String[] parts = line.trim().split(" ");
         if (parts.length != 2) {
@@ -279,12 +378,18 @@ public class Storage {
         }
         Day day = Day.valueOf(dayName.toUpperCase());
         int planIndex = Integer.parseInt(parts[1]);
-        if (planIndex < 0 || planIndex >= plans.getPlanList().length) {
+        if (planIndex < 0 || planIndex >= plans.getPlanList().size()) {
             throw new DataCorruptionException("Invalid plan index in weekly plan");
         }
         plans.addPlanToDay(planIndex, day);
     }
 
+    /**
+     * Saves the weekly plans to a StringBuilder.
+     *
+     * @param plans the meal plan manager
+     * @param fileInput the StringBuilder to append to
+     */
     private static void saveWeeklyPlans(MealPlanManager plans, StringBuilder fileInput) {
         fileInput.append("[WeeklyPlan] \n");
         for (int i = 0; i < plans.getWeeklyPlans().length; i++) {
@@ -296,16 +401,31 @@ public class Storage {
         }
     }
 
+    /**
+     * Processes a line from the meal plan section of the file.
+     *
+     * @param line the line to process
+     * @param plans the meal plan manager
+     * @return the processed plan
+     */
     private static Plan processMealPlanLine(String line, MealPlanManager plans) {
         String[] parts = line.substring("[MealPlan]".length()).trim().split(" ");
         if (parts.length != 1) {
             throw new DataCorruptionException("Invalid meal plan format");
         }
         String planName = unescapeSpecialCharacters(parts[0]);
-        plans.addPlanToList(planName);
+        plans.addPlan(planName);
         return new Plan(planName);
     }
 
+    /**
+     * Processes the details of a meal plan from a line in the file.
+     *
+     * @param line the line to process
+     * @param plan the current plan being processed
+     * @param plans the meal plan manager
+     * @param recipeManager the recipe manager
+     */
     public static void processMealPlanDetails(String line, Plan plan, MealPlanManager plans,
                                               RecipeManager recipeManager) {
         int recipeIndex = 0;
@@ -341,6 +461,14 @@ public class Storage {
     }
 
 
+    /**
+     * Saves the data from the provided inventory, shopping list, meal plan manager, and recipe manager to the file.
+     *
+     * @param inventory the ingredient inventory
+     * @param shoppingList the shopping list
+     * @param plans the meal plan manager
+     * @param recipeManager the recipe manager
+     */
     public static void saveData(IngredientInventory inventory, ShoppingList shoppingList, MealPlanManager plans,
                                 RecipeManager recipeManager) {
         try (FileWriter fileWriter = new FileWriter(filePath)) {

@@ -11,12 +11,12 @@ public class MealPlanManager {
 
     public MealPlanManager() {}
 
-    public void addPlanToList(String planName) {
+    public void addPlan(String planName) {
         Plan plan = new Plan(planName);
         planList.add(plan);
     }
 
-    public void removePlanFromList(int planIndex) {
+    public void removePlan(int planIndex) {
         Plan plan = planList.get(planIndex);
         planList.remove(plan);
         //Remove plan from Weekly Plan if it exists
@@ -40,7 +40,7 @@ public class MealPlanManager {
         }
     }
 
-    public void removePlanFromWeek(Day day) {
+    public void removePlanFromDay(Day day) {
         int dayIndex = day.ordinal();
         if (weeklyPlans[dayIndex] != null) {
             weeklyPlans[dayIndex] = null;
@@ -92,7 +92,7 @@ public class MealPlanManager {
         Ui.showMessage(plan.toString());
     }
 
-    public boolean findInCreatedPlans(String planName) {
+    public boolean findPlan(String planName) {
         boolean found = false;
         for (Plan plan : planList) {
             if (plan.getPlanName().equalsIgnoreCase(planName)) {
@@ -109,19 +109,22 @@ public class MealPlanManager {
         return weeklyPlans;
     }
 
-    public Plan[] getPlanList() {
-        return planList.toArray(new Plan[0]);
+    public ArrayList<Plan> getPlanList() {
+        return planList;
     }
 
     public Plan getPlanForDay(Day day) {
         return weeklyPlans[day.ordinal()];
     }
 
-    public Plan getPlanDetails(int planIndex) {
+    public Plan getPlan(int planIndex) {
+        if (planIndex < 0 || planIndex >= planList.size()) {
+            return null;
+        }
         return planList.get(planIndex);
     }
 
-    public Plan getPlanDetails (String planName) {
+    public Plan getPlanDetails(String planName) {
         for (Plan plan : planList) {
             if (plan.getPlanName().equalsIgnoreCase(planName)) {
                 return plan;

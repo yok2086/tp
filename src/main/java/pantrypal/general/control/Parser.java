@@ -22,9 +22,9 @@ import pantrypal.general.commands.mealplan.RemovePlan;
 import pantrypal.general.commands.mealplan.RemoveRecipeFromPlan;
 import pantrypal.general.commands.mealplan.RemovePlanFromDay;
 import pantrypal.general.commands.mealplan.ViewPlan;
-import pantrypal.general.commands.mealplan.ViewPlanForDay;
-import pantrypal.general.commands.mealplan.ViewPlanForWeek;
-import pantrypal.general.commands.mealplan.ExecutePlanForDay;
+import pantrypal.general.commands.mealplan.ViewDayPlan;
+import pantrypal.general.commands.mealplan.ViewWeekPlans;
+import pantrypal.general.commands.mealplan.ExecutePlan;
 import pantrypal.general.commands.mealplan.FindPlan;
 import pantrypal.general.commands.mealplan.ViewPlanList;
 import pantrypal.general.commands.recipe.AddRecipe;
@@ -40,8 +40,18 @@ import pantrypal.general.commands.shoppinglist.MarkShoppingItemAsPurchased;
 import pantrypal.inventory.Category;
 import pantrypal.inventory.Unit;
 
+
+/**
+ * The Parser class is responsible for parsing user input and returning the appropriate Command object.
+ */
 public class Parser {
 
+    /**
+     * Parses the user input and returns the corresponding Command object.
+     *
+     * @param input the user input as a String
+     * @return the Command object corresponding to the user input
+     */
     public Command parse(String input) {
         String[] inputParts = input.trim().split(" ");
         String command = inputParts[0].toLowerCase();
@@ -358,7 +368,7 @@ public class Parser {
                 assert deleteFromWeekDayName != null && !deleteFromWeekDayName.isEmpty() : "Day name cannot " +
                         "be null or empty";
                 return new RemovePlanFromDay(deleteFromWeekDayName);
-            case "viewplanforday":
+            case "viewdayplan":
                 if (inputParts.length < 2) {
                     throw new IllegalArgumentException("Insufficient arguments for viewPlanForDay command.");
                 }
@@ -367,9 +377,9 @@ public class Parser {
                     throw new IllegalArgumentException("Day name cannot be null or empty");
                 }
                 assert viewDayName != null && !viewDayName.isEmpty() : "Day name cannot be null or empty";
-                return new ViewPlanForDay(viewDayName);
-            case "viewplanforweek":
-                return new ViewPlanForWeek();
+                return new ViewDayPlan(viewDayName);
+            case "viewweekplans":
+                return new ViewWeekPlans();
             case "execute":
                 if (inputParts.length < 2) {
                     throw new IllegalArgumentException("Insufficient arguments for executePlanForDay command.");
@@ -379,7 +389,7 @@ public class Parser {
                     throw new IllegalArgumentException("Day name cannot be null or empty");
                 }
                 assert executeDayName != null && !executeDayName.isEmpty() : "Day name cannot be null or empty";
-                return new ExecutePlanForDay(executeDayName);
+                return new ExecutePlan(executeDayName);
             case "findplan":
                 if (inputParts.length < 2) {
                     throw new IllegalArgumentException("Insufficient arguments for findPlan command.");

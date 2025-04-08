@@ -12,7 +12,7 @@ public class RemovePlan extends MealPlanCommand {
     private int planIndex;
 
     public RemovePlan() {
-        super("removePlan <plan index>", "Remove a specific meal plan");
+        super("removeplan <plan index>", "Remove a specific meal plan");
     }
 
     public RemovePlan(int planIndex) {
@@ -26,11 +26,11 @@ public class RemovePlan extends MealPlanCommand {
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, RecipeManager recipes,
                         MealPlanManager plans, Scanner in) {
-        if (planIndex < 0 || planIndex >= plans.getPlanList().length) {
+        if (planIndex < 0 || planIndex >= plans.getPlanList().size()) {
             Ui.showMessage("Invalid plan index. Please try again.");
             return;
         }
-        plans.removePlanFromList(planIndex);
+        plans.removePlan(planIndex);
         Ui.showMessage("Plan removed successfully.");
     }
 }

@@ -11,32 +11,60 @@ import pantrypal.shoppinglist.ShoppingList;
 
 import java.util.Scanner;
 
+/**
+ * The PantryPal class is the main entry point for the PantryPal application.
+ * It initializes the necessary components and handles the main application loop.
+ */
 public class PantryPal {
-    static final String FILE_PATH = "./data/data.txt";
+    private static final String FILE_PATH = "./data/data.txt";
+    private Storage storage;
+    private IngredientInventory inventory;
+    private ShoppingList shoppingList;
+    private MealPlanManager mealPlanManager;
+    private RecipeManager recipes;
+    private Ui ui;
+    private Parser parser;
+    private boolean isFinished;
+
     /**
-     * Main entry-point for the PantryPal application.
+     * Constructs a new PantryPal instance with the specified file path.
+     *
+     * @param filePath the path to the data file
      */
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        boolean isFinished = false;
-        Parser parser = new Parser();
-        Ui ui = new Ui();
-        IngredientInventory inventory = new IngredientInventory();
-        ShoppingList shoppingList = new ShoppingList();
-        MealPlanManager mealPlanManager = new MealPlanManager();
-        RecipeManager recipes = new RecipeManager();
-        String input;
-        Storage storage = new Storage(FILE_PATH);
+    public PantryPal(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        inventory = new IngredientInventory();
+        shoppingList = new ShoppingList();
+        mealPlanManager = new MealPlanManager();
+        recipes = new RecipeManager();
+        parser = new Parser();
+        isFinished = false;
 
-        Ui.printWelcomeMessage();
+        ui.printWelcomeMessage();
         storage.createFile(inventory, shoppingList, mealPlanManager, recipes);
-        while (!isFinished) {
-            input = in.nextLine();
+    }
 
+    /**
+     * Runs the main application loop, processing user input and executing commands.
+     */
+    public void run() {
+        Scanner in = new Scanner(System.in);
+        while (!isFinished) {
+            String input = in.nextLine();
             Command centralCommand = parser.parse(input);
             centralCommand.execute(ui, inventory, shoppingList, recipes, mealPlanManager, in);
             isFinished = centralCommand.isExit();
-            Storage.saveData(inventory, shoppingList, mealPlanManager, recipes);
+            storage.saveData(inventory, shoppingList, mealPlanManager, recipes);
         }
+    }
+
+    /**
+     * The main method, entry point of the application.
+     *
+     * @param args command-line arguments
+     */
+    public static void main(String[] args) {
+        new PantryPal(FILE_PATH).run();
     }
 }

@@ -1,5 +1,36 @@
 # PantryPal User Guide
 
+## Table of Contents
+- [Introduction](#introduction)
+- [Quick Start](#quick-start)
+- [Features](#features)
+  - [Inventory Commands](#inventory-commands)
+    - [Add New Ingredient](#add-new-ingredient)
+    - [Increase Specific Quantity to Existing Ingredient](#increase-specific-quantity-to-existing-ingredient)
+    - [Decrease Specific Quantity to Existing Ingredient](#decrease-specific-quantity-to-existing-ingredient)
+    - [Set Low Stock Ingredient Alert](#set-low-stock-ingredient-alert)
+    - [Check Ingredient Stock](#check-ingredient-stock)
+    - [View Low Stock Ingredients](#view-low-stock-ingredients)
+    - [Delete Ingredient Entirely](#delete-ingredient-entirely)
+    - [Convert Ingredient Unit](#convert-ingredient-unit)
+    - [View Ingredients by Category](#view-ingredients-by-category)
+  - [Shopping List Commands](#shopping-list-commands)
+    - [Add Shopping Item](#add-shopping-item)
+    - [Generate Shopping List](#generate-shopping-list)
+    - [Remove Shopping Item](#remove-shopping-item)
+    - [View Shopping List](#view-shopping-list)
+    - [Edit Shopping Item](#edit-shopping-item)
+    - [Mark Item As Purchased](#mark-item-as-purchased)
+  - [Recipe Commands](#recipe-commands)
+    - [Add New Recipe](#add-new-recipe)
+    - [View A Specific Recipe](#view-a-specific-recipe)
+    - [Remove A Recipe](#remove-a-recipe)
+    - [List All Recipes](#list-all-recipes)
+  - [Meal Plan Commands](#meal-plan-commands)
+- [General Commands](#general-commands)
+- [FAQ](#faq)
+- [Command Summary](#command-summary)
+
 ## Introduction
 
 PantryPal is an all-in-one application designed to help students manage their meals. 
@@ -266,17 +297,29 @@ View the name of all the recipes available in the repository.
 
 ### General Commands
 
-#### List all available commands: `help`
-* **Format**: `help`
-* **Description**: Displays a list of all available commands and their descriptions.
+#### List all available commands
+Command:
+```
+help
+```
+Description:
+Displays a list of all available commands and their descriptions.
 
 #### List all valid units: `unitList`
-* **Format**: `unitList`
-* **Description**: Displays a list of all valid units for ingredients.
+Command:
+```
+unitList
+```
+Description:
+Displays a list of all valid units for ingredients.
 
-#### Exit the program: `exit`
-* **Format**: `exit`
-* **Description**: Exits the program.
+#### Exit the program: 
+Command:
+```
+exit
+```
+Description:
+Exits the program.
 
 
 ## FAQ
