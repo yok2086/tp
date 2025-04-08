@@ -14,6 +14,8 @@ Given below are my contributions to the project.
   - The `ShoppingList` class, which manages the collection of shopping list items and supports operations such as add, remove, update, edit (by index), and mark as purchased.
   - The `ShoppingListItem` class, which represents a single shopping list entry. This class ensures proper formatting (e.g., whole numbers without decimal places) and supports a purchased flag.
   - The `ShoppingListGenerator` class, which auto-generates the shopping list by comparing low-stock alerts from the Ingredient Inventory with current stock levels.
+  - Testing classes for shopping list, I created and maintained JUnit tests to ensure all functionalities of the **ShoppingList ShoppingListItem** were thoroughly tested. This includes testing adding, removing, updating shopping list item, displaying and auto-generating shopping list for low stock ingredients and marking shopping list item as purchased.
+  - Command classes for shopping list related command, to ensure shopping list related classes integrates seamlessly with the main UI. This involved adjusting how messages are displayed in the CLI, improving the clarity and accuracy of feedback for the user.
 - [Link to my code on tP Code Dashboard](<https://nus-cs2113-ay2425s2.github.io/tp-dashboard/?search=kemilii&breakdown=true&sort=groupTitle%20dsc&sortWithin=title&since=2025-02-21&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other>)
 
 ## Enhancements Implemented
@@ -34,13 +36,11 @@ Given below are my contributions to the project.
 - **Highlights**:  
   Integration of an index-based edit function allows users to easily modify items, and the "mark as purchased" feature visually tracks completed items.
 
-### Auto-generation of Shopping List
-- **What it does**:  
-  The `ShoppingListGenerator` class automatically creates a shopping list by checking low-stock alerts from the Ingredient Inventory. It computes required quantities and updates or adds items accordingly.
-- **Why it is implemented that way**:  
-  Automating the shopping list generation reduces manual input, helping busy users quickly see what ingredients need replenishment.
-- **Highlights**:  
-  This feature required careful coordination with the Ingredient Inventory and a clear design to merge auto-generated items with manual list management.
+3. **Shopping List Management Improvements**
+   * Added purchase status tracking for shopping items
+   * Implemented better item organization and display
+   * Enhanced list generation algorithm
+   * Added support for unit conversion in shopping items
 
 ## **Documentation**:
 ### User Guide:
@@ -59,3 +59,6 @@ Given below are my contributions to the project.
 ## **Project Management**:
 - Set up Gradle build system
 - Configured testing framework 
+- Helped testing team members' code and created issues tracking
+- Provided feedback on implementation approaches
+- Helped resolve merge conflicts
