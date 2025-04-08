@@ -171,13 +171,19 @@ and will prompt the user on all missing ingredients and whether they would want 
 The following sequence diagram illustrates the interactions between the user, MealPlanManager, each relevant Plan and what they will present 
 
 <img src="MealPlanManager_Overview_Sequence_Diagram.png" alt="drawing" style="width:1000px;"/>
-
+**Command List for MealPlanManager**
 <img src="MealPlanManager_AddPlan_Sequence_Diagram.png" alt="drawing" style="width:1000px;"/>
+**AddPlan Command Sequence Diagram**
 <img src="MealPlanManager_AddPlanToDay_Sequence_Diagram.png" alt="drawing" style="width:1000px;"/>
+**AddPlanToDay Command Sequence Diagram**
 <img src="MealPlanManager_RemovePlan_Sequence_Diagram.png" alt="drawing" style="width:1000px;"/>
+**RemovePlan Command Sequence Diagram**
 <img src="MealPlanManager_RemovePlanFromDay_Sequence_Diagram.png" alt="drawing" style="width:1000px;"/>
+**RemovePlanFromDay Command Sequence Diagram**
 <img src="MealPlanManager_ExecutePlan_UpperFrame_Sequence_Diagram.png" alt="drawing" style="width:1000px;"/>
+**ExecutePlan Top-Level Command Sequence Diagram**
 <img src="MealPlanManager_ExecutePlan_LowerFrame_Sequence_Diagram.png" alt="drawing" style="width:1000px;"/>
+**ExecutePlan Lower-Level Command Sequence Diagram**
 
 ---
 # Implementation of the Ingredient and Ingredient Inventory Features
