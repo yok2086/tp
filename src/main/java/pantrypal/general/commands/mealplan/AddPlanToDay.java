@@ -37,6 +37,8 @@ public class AddPlanToDay extends MealPlanCommand {
             plans.addPlanToDay(planIndex, getDay(day));
             Ui.showMessage("Plan for " + getDay(day).name() + " added: " +
                     plans.getPlan(planIndex).getPlanName());
+        } catch (IndexOutOfBoundsException e) {
+            Ui.showMessage("Invalid plan index given.");
         } catch (NullPointerException e) {
             Ui.showMessage("Invalid day index provided. Please enter a valid day name.");
         } catch (IllegalArgumentException e) {

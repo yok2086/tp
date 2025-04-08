@@ -46,16 +46,16 @@ public class MealPlanManager {
             weeklyPlans[dayIndex] = null;
             Ui.showMessage("Plan removed from " + day);
         } else {
-            Ui.showMessage("There is no plan for " + day.name());
+            Ui.showMessage("There is no plan for " + day);
         }
     }
 
-    public void viewPlanForDay(Day day) {
+    public void viewDayPlan(Day day) {
         int dayIndex = day.ordinal();
         if (weeklyPlans[dayIndex] != null) {
-            Ui.showMessage("Plan for " + day.name() + ": " + weeklyPlans[dayIndex]);
+            Ui.showMessage("Plan for " + day + ": " + weeklyPlans[dayIndex]);
         } else {
-            Ui.showMessage("There is no plan for " + day.name());
+            Ui.showMessage("There is no plan for " + day);
         }
     }
 

@@ -318,7 +318,7 @@ public class ParserTest {
     @Test
     public void parse_viewDayPlanWithInvalidInputs_returnsNullCommand() {
         Parser parser = new Parser();
-        Command command = parser.parse("viewPlanForDay");
+        Command command = parser.parse("viewDayPlan");
 
         assertInstanceOf(NullCommand.class, command);
     }

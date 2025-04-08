@@ -71,11 +71,11 @@ public class ExecutePlan extends MealPlanCommand {
 
     @Override
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, RecipeManager recipes,
-                        MealPlanManager mealPlanManager, Scanner in) {
+                        MealPlanManager plans, Scanner in) {
 
         Day dayEnum = getDay(day);
 
-        Plan plan = mealPlanManager.getPlanForDay(dayEnum);
+        Plan plan = plans.getPlanForDay(dayEnum);
         if (plan == null) {
             Ui.showMessage("No plan found for the specified day.");
             return;

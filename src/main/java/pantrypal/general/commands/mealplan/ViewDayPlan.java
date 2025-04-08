@@ -28,7 +28,7 @@ public class ViewDayPlan extends MealPlanCommand {
     public void execute(Ui ui, IngredientInventory inventory, ShoppingList list, RecipeManager recipes,
                         MealPlanManager plans, Scanner in) {
         try {
-            plans.viewPlanForDay(getDay(day));
+            plans.viewDayPlan(getDay(day));
         } catch (NullPointerException e) {
             Ui.showMessage("Invalid day index provided. Please enter a valid day name.");
         } catch (IllegalArgumentException e) {
