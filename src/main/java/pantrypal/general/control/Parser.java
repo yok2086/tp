@@ -308,9 +308,9 @@ public class Parser {
                 }
                 int addToWeekIndex = Integer.parseInt(inputParts[1]) - 1;
                 if (addToWeekIndex < 0) {
-                    throw new IllegalArgumentException("Week index must be greater than 0");
+                    throw new IllegalArgumentException("Plan index must be greater than 0");
                 }
-                assert addToWeekIndex >= 0 : "Week index must be non-negative";
+                assert addToWeekIndex >= 0 : "Plan index must be non-negative";
 
                 String addDayName = inputParts[2];
                 if (addDayName == null || addDayName.isEmpty()) {
@@ -370,7 +370,7 @@ public class Parser {
                 return new RemovePlanFromDay(deleteFromWeekDayName);
             case "viewdayplan":
                 if (inputParts.length < 2) {
-                    throw new IllegalArgumentException("Insufficient arguments for viewPlanForDay command.");
+                    throw new IllegalArgumentException("Insufficient arguments for viewDayPlan command.");
                 }
                 String viewDayName = inputParts[1];
                 if (viewDayName == null || viewDayName.isEmpty()) {
