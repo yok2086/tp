@@ -32,7 +32,7 @@ public class ViewDayPlan extends MealPlanCommand {
         } catch (NullPointerException e) {
             Ui.showMessage("Invalid day index provided. Please enter a valid day name.");
         } catch (IllegalArgumentException e) {
-            Ui.showMessage("Invalid plan index provided. Please enter a valid plan index.");
+            Ui.showMessage("Invalid input given. Please refrain from unconventional datatypes");
         }
     }
 }

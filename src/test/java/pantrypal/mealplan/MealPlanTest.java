@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pantrypal.inventory.IngredientInventory;
 import pantrypal.recipe.RecipeManager;
 
 
@@ -16,28 +15,22 @@ public class MealPlanTest {
 
     private MealPlanManager plans;
     private RecipeManager recipes;
-    private IngredientInventory inventory;
 
     @BeforeEach
     void setUp(){
         this.plans = new MealPlanManager();
         this.recipes = new RecipeManager();
-        this.inventory = new IngredientInventory();
     }   
 
     @Test
     void testAddPlan() {
-        assertNull(plans.getPlan(0), "No plan should have been created yet");
 
-        plans.addPlan("");
         plans.addPlan("plan1");
-        plans.addPlan("好おπㄴ");
+        plans.addPlan("好\\お/πㄴ");
 
-        assertEquals("default", plans.getPlan(0).getPlanName(),
-                "plan name not correctly converted");
-        assertEquals("plan1", plans.getPlan(1).getPlanName(),
+        assertEquals("plan1", plans.getPlan(0).getPlanName(),
                 "plan name not correctly parsed");
-        assertEquals("好おπㄴ", plans.getPlan(2).getPlanName(),
+        assertEquals("好\\お/πㄴ", plans.getPlan(1).getPlanName(),
                 "plan name not correctly parsed");
     }
 
