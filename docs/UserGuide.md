@@ -5,29 +5,10 @@
 - [Quick Start](#quick-start)
 - [Features](#features)
   - [Inventory Commands](#inventory-commands)
-    - [Add New Ingredient](#add-new-ingredient)
-    - [Increase Specific Quantity to Existing Ingredient](#increase-specific-quantity-to-existing-ingredient)
-    - [Decrease Specific Quantity to Existing Ingredient](#decrease-specific-quantity-to-existing-ingredient)
-    - [Set Low Stock Ingredient Alert](#set-low-stock-ingredient-alert)
-    - [Check Ingredient Stock](#check-ingredient-stock)
-    - [View Low Stock Ingredients](#view-low-stock-ingredients)
-    - [Delete Ingredient Entirely](#delete-ingredient-entirely)
-    - [Convert Ingredient Unit](#convert-ingredient-unit)
-    - [View Ingredients by Category](#view-ingredients-by-category)
   - [Shopping List Commands](#shopping-list-commands)
-    - [Add Shopping Item](#add-shopping-item)
-    - [Generate Shopping List](#generate-shopping-list)
-    - [Remove Shopping Item](#remove-shopping-item)
-    - [View Shopping List](#view-shopping-list)
-    - [Edit Shopping Item](#edit-shopping-item)
-    - [Mark Item As Purchased](#mark-item-as-purchased)
   - [Recipe Commands](#recipe-commands)
-    - [Add New Recipe](#add-new-recipe)
-    - [View A Specific Recipe](#view-a-specific-recipe)
-    - [Remove A Recipe](#remove-a-recipe)
-    - [List All Recipes](#list-all-recipes)
   - [Meal Plan Commands](#meal-plan-commands)
-- [General Commands](#general-commands)
+  - [General Commands](#general-commands)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
@@ -44,6 +25,8 @@ plan their meals, and store recipes.
 2. Copy the file to the folder you want to use as the home folder for PantryPal.
 3. Open a command line terminal and navigate to the folder where you saved the file.
 4. Run the command `java -jar PantryPal.jar` to start the application.
+
+---
 
 ## Features 
 
@@ -141,6 +124,7 @@ viewIngredientsByCategory CONDIMENTS
 ```
 Description: Displays all ingredients that belong to the specified category.
 
+---
 
 ### Shopping List Commands
 PantryPal's Shopping List feature helps you manage your grocery needs efficiently. You can manually add items, automatically generate a list based on low-stock alerts, edit existing items, and mark items as purchased. This ensures you never miss out on essential ingredients.
@@ -223,6 +207,8 @@ Description:
 Marks an item in your shopping list as purchased. The item will be visually updated (e.g., with a “(Purchased)” tag)
 so you can easily track which items have already been bought.
 
+---
+
 ### Recipe Commands
 #### Add New Recipe
 Command:
@@ -286,14 +272,144 @@ viewRecipeList
 Description:
 View the name of all the recipes available in the repository.
 
-
+---
 
 ### Meal Plan Commands
 
-`Coming Soon`
+#### Add Plan
+Command:
+```
+addPlan <plan_name>
+```
+Example:
+```
+addPlan NewPlanName
+```
+Description:
+Adds a new meal plan with the specified name. The plan will be created and can be modified later.
+
+#### Remove Plan
+Command:
+```
+removePlan <plan_index>
+```
+Example:
+```
+removePlan 1
+```
+Description:
+Removes the meal plan at the specified index from the list of plans. The plan will be deleted permanently.
+
+#### Add Plan to a Specific Day
+Command:
+```
+addPlanToDay <plan_index> <day>
+```
+Example:
+```
+addPlanToDay 1 Monday
+```
+Description:
+Adds the specified meal plan to a specific day of the week. The plan will be associated with that day.
+
+#### Remove Plan From a Specific Day
+Command:
+```
+removePlanFromDay <day>
+```
+Example:
+```
+removePlanFromDay Monday
+```
+Description:
+Removes the meal plan from the specified day of the week. The plan will no longer be associated with that day.
 
 
+#### Add Recipe to Plan
+Command:
+```
+addRecipeToPlan <plan_index> <recipe_index> <breakfast/lunch/dinner>
+```
+Example:
+```
+addRecipeToPlan 1 2 breakfast
+```
+Description:
+Adds a recipe to a specific plan for a specific meal (breakfast, lunch, or dinner). The recipe will be associated with that meal in the plan.
 
+#### Remove Recipe from Plan
+Command:
+```
+removeRecipeFromPlan <plan_index> <breakfast/lunch/dinner>
+```
+Example:
+```
+removeRecipeFromPlan 1 breakfast
+```
+Description:
+Removes a recipe from a specific meal in the meal plan. The recipe will no longer be associated with that meal.
+
+#### View a Specific Meal Plan
+Command:
+```
+viewPlan <plan_index>
+```
+Example:
+```
+viewPlan 1
+```
+Description:
+Displays the details of a specific meal plan, including the recipes associated with each meal (breakfast, lunch, and dinner).
+
+#### View All Meal Plans
+Command:
+```
+viewPlanList
+```
+Example:
+```
+viewPlanList
+```
+Description:
+Displays a list of all the meal plans available in the application. Each plan will be listed with its index number for easy reference.
+
+#### View the Plan for a Specific Day
+Command:
+```
+viewDayPlan <day>
+```
+Example:
+```
+viewDayPlan Monday
+```
+Description:
+Displays the meal plan for a specific day of the week. The plan will include the recipes associated with breakfast, lunch, and dinner for that day.
+
+#### View Weekly Meal Plans
+Command:
+```
+viewWeekPlans
+```
+Example:
+```
+viewWeekPlans
+```
+Description:
+Displays the meal plans for the entire week. Each day will show the associated meal plans for breakfast, lunch, and dinner.
+
+#### Execute Meal Plan
+Command:
+```
+execute <day>
+```
+Example:
+```
+execute Monday
+```
+Description:
+Executes the meal plan for a specific day. The application will display the recipes associated with breakfast, lunch, and dinner for that day, allowing you to follow the plan easily.
+
+---
 
 ### General Commands
 
@@ -321,6 +437,7 @@ exit
 Description:
 Exits the program.
 
+---
 
 ## FAQ
 
@@ -340,6 +457,7 @@ Exits the program.
 2. Check the command format and make sure you are entering the correct parameters.
 3. Refer to the `help` command to see the list of available commands and their formats.
 
+---
 
 ## Command Summary
 

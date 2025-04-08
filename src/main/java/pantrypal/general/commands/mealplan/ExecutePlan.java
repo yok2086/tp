@@ -44,7 +44,7 @@ public class ExecutePlan extends MealPlanCommand {
         // If there are missing ingredients, prompt to add them to the shopping list
         if (!missingIngredients.isEmpty()) {
             Ui.showMessage("These are the missing ingredients for " + recipe.getName() + ": " + missingIngredients);
-            System.out.println("Would you like to add missing requiredIngredients into shopping list? (yes/no)");
+            System.out.println("Would you like to add missing required ingredients into shopping list? (yes/no)");
             String response = in.nextLine().trim().toLowerCase();
             if (response.equals("yes")) {
                 for (Ingredient missingIngredient : missingIngredients) {

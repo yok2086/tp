@@ -50,6 +50,7 @@ plan their meals, and store recipes.
     - Included the command summary table for all commands in the User Guide.
     - Added Quick Start Guide and Introduction to the application.
     - Added descriptions and format for General Commands.
+    - Added descriptions and format for Meal Plan Commands.
 - Developer Guide
     - Wrote a quick overview of the overall design and implementation of the application.
     - Made the class diagram for the overall architecture of the application.
