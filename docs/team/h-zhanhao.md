@@ -6,6 +6,8 @@ PantryPal is an all-in-one application designed to help students manage their me
 The application allows users to keep track of their ingredients, automatically generate shopping lists,
 plan their meals, and store recipes. 
 
+#### tP Code Dashboard link: https://nus-cs2113-ay2425s2.github.io/tp-dashboard/?search=h-zhanhao&breakdown=true
+
 ## Given below are my contributions to the project:
 ## **Command Classes**:          
   - Added command classes for most commands in the application. Which includes most Meal Plan Command, Recipe Command, 
@@ -13,15 +15,18 @@ plan their meals, and store recipes.
   - Implemented the execute method for each command class to perform the required action.
   - Separated the command classes into different packages for better organization and maintainability.
   - Separated the command classes into different subclasses for a more dynamic and flexible design of the help command
+    
 ### Implemented the Help Command Class
   - Created the HelpCommand class to provide users with information about the available commands.
+    
 ## **Parser Class**: 
    - Implemented the Parser class to parse user input and instantiate the appropriate command class.
    - Added error handling to manage invalid number of arguments and invalid command types.
 
 ## **User Interface Class**
   - Designed the user interface to be user-friendly and intuitive.
-  - Implemented the TextUi class to handle user input and output.
+  - Implemented the UI class to handle the application's display 
+    
 ## **Storage Class**
   - Implemented the Storage class to handle data storage and retrieval.
   - Added methods to save and load data from files.
@@ -37,12 +42,15 @@ plan their meals, and store recipes.
   - Aided in the implementation of the MealPlanManager class to manage meal plans.
   - Implemented methods to View Plan, View Plan List, and Remove Plans
 
-## JUnit Testing:
+## **JUnit Testing:**
   - Implemented test cases for the Parser class to verify the parsing logic.
 
 ## **Text-Ui-Test**
   - Created the TextUiTest class to test the user interface.
   - Added test cases for various user inputs and outputs.
+
+## **Demo Video**
+- Created a demo video showcasing the features and functionality of the application.
 
 ## **Documentation**:
 - User Guide
@@ -50,8 +58,9 @@ plan their meals, and store recipes.
     - Included the command summary table for all commands in the User Guide.
     - Added Quick Start Guide and Introduction to the application.
     - Added descriptions and format for General Commands.
+    - Added descriptions and format for Meal Plan Commands.
 - Developer Guide
-    - Wrote a quick overview of the overall design and implementation of the application.
+    - Wrote a overview of the overall design and implementation of the application.
     - Made the class diagram for the overall architecture of the application.
     - Completed the implementation of the Parser, Storage and Command Class features
     - Created sequence diagrams for the Parser and Storage features.
@@ -63,7 +72,9 @@ plan their meals, and store recipes.
 - Set up the project structure and initial files.
 - Managed releases for `v.1.0`, `v2.0`, and `v2.1` of the application.
 - Facilitated team collaboration and communication.
-- Aided teammate in completing his features.
+- Aided teammate in completing features.
+  - Fixed bugs surfaced from issues for the Meal Plan Feature.
+  - Completed missing commands for the Meal Plan Command. For example, View Plan, View Plan List, and Remove Plans commands.
 - Facilitated team meetings and discussions.
 
     

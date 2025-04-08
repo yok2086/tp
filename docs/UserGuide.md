@@ -5,29 +5,10 @@
 - [Quick Start](#quick-start)
 - [Features](#features)
   - [Inventory Commands](#inventory-commands)
-    - [Add New Ingredient](#add-new-ingredient)
-    - [Increase Specific Quantity to Existing Ingredient](#increase-specific-quantity-to-existing-ingredient)
-    - [Decrease Specific Quantity to Existing Ingredient](#decrease-specific-quantity-to-existing-ingredient)
-    - [Set Low Stock Ingredient Alert](#set-low-stock-ingredient-alert)
-    - [Check Ingredient Stock](#check-ingredient-stock)
-    - [View Low Stock Ingredients](#view-low-stock-ingredients)
-    - [Delete Ingredient Entirely](#delete-ingredient-entirely)
-    - [Convert Ingredient Unit](#convert-ingredient-unit)
-    - [View Ingredients by Category](#view-ingredients-by-category)
   - [Shopping List Commands](#shopping-list-commands)
-    - [Add Shopping Item](#add-shopping-item)
-    - [Generate Shopping List](#generate-shopping-list)
-    - [Remove Shopping Item](#remove-shopping-item)
-    - [View Shopping List](#view-shopping-list)
-    - [Edit Shopping Item](#edit-shopping-item)
-    - [Mark Item As Purchased](#mark-item-as-purchased)
   - [Recipe Commands](#recipe-commands)
-    - [Add New Recipe](#add-new-recipe)
-    - [View A Specific Recipe](#view-a-specific-recipe)
-    - [Remove A Recipe](#remove-a-recipe)
-    - [List All Recipes](#list-all-recipes)
   - [Meal Plan Commands](#meal-plan-commands)
-- [General Commands](#general-commands)
+  - [General Commands](#general-commands)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
@@ -44,6 +25,8 @@ plan their meals, and store recipes.
 2. Copy the file to the folder you want to use as the home folder for PantryPal.
 3. Open a command line terminal and navigate to the folder where you saved the file.
 4. Run the command `java -jar PantryPal.jar` to start the application.
+
+---
 
 ## Features 
 
@@ -141,6 +124,7 @@ viewIngredientsByCategory CONDIMENTS
 ```
 Description: Displays all ingredients that belong to the specified category.
 
+---
 
 ### Shopping List Commands
 PantryPal's Shopping List feature helps you manage your grocery needs efficiently. You can manually add items, automatically generate a list based on low-stock alerts, edit existing items, and mark items as purchased. This ensures you never miss out on essential ingredients.
@@ -223,6 +207,8 @@ Description:
 Marks an item in your shopping list as purchased. The item will be visually updated (e.g., with a “(Purchased)” tag)
 so you can easily track which items have already been bought.
 
+---
+
 ### Recipe Commands
 #### Add New Recipe
 Command:
@@ -286,14 +272,156 @@ viewRecipeList
 Description:
 View the name of all the recipes available in the repository.
 
-
+---
 
 ### Meal Plan Commands
 
-`Coming Soon`
+#### Add Plan
+Command:
+```
+addPlan <plan_name>
+```
+Example:
+```
+addPlan NewPlanName
+```
+Description:
+Adds a new meal plan with the specified name. The plan will be created and can be modified later.
+
+#### Remove Plan
+Command:
+```
+removePlan <plan_index>
+```
+Example:
+```
+removePlan 1
+```
+Description:
+Removes the meal plan at the specified index from the list of plans. The plan will be deleted permanently.
+
+#### Add Plan to a Specific Day
+Command:
+```
+addPlanToDay <plan_index> <day>
+```
+Example:
+```
+addPlanToDay 1 Monday
+```
+Description:
+Adds the specified meal plan to a specific day of the week. The plan will be associated with that day.
+
+#### Remove Plan From a Specific Day
+Command:
+```
+removePlanFromDay <day>
+```
+Example:
+```
+removePlanFromDay Monday
+```
+Description:
+Removes the meal plan from the specified day of the week. The plan will no longer be associated with that day.
 
 
+#### Add Recipe to Plan
+Command:
+```
+addRecipeToPlan <plan_index> <recipe_index> <breakfast/lunch/dinner>
+```
+Example:
+```
+addRecipeToPlan 1 2 breakfast
+```
+Description:
+Adds a recipe to a specific plan for a specific meal (breakfast, lunch, or dinner). The recipe will be associated with that meal in the plan.
 
+#### Remove Recipe from Plan
+Command:
+```
+removeRecipeFromPlan <plan_index> <breakfast/lunch/dinner>
+```
+Example:
+```
+removeRecipeFromPlan 1 breakfast
+```
+Description:
+Removes a recipe from a specific meal in the meal plan. The recipe will no longer be associated with that meal.
+
+#### View a Specific Meal Plan
+Command:
+```
+viewPlan <plan_index>
+```
+Example:
+```
+viewPlan 1
+```
+Description:
+Displays the details of a specific meal plan, including the recipes associated with each meal (breakfast, lunch, and dinner).
+
+#### View All Meal Plans
+Command:
+```
+viewPlanList
+```
+Example:
+```
+viewPlanList
+```
+Description:
+Displays a list of all the meal plans available in the application. Each plan will be listed with its index number for easy reference.
+
+#### View the Plan for a Specific Day
+Command:
+```
+viewDayPlan <day>
+```
+Example:
+```
+viewDayPlan Monday
+```
+Description:
+Displays the meal plan for a specific day of the week. The plan will include the recipes associated with breakfast, lunch, and dinner for that day.
+
+#### View Weekly Meal Plans
+Command:
+```
+viewWeekPlans
+```
+Example:
+```
+viewWeekPlans
+```
+Description:
+Displays the meal plans for the entire week. Each day will show the associated meal plans for breakfast, lunch, and dinner.
+
+#### Find Meal Plan
+Command:
+```
+findPlan <keyword>
+```
+Example:
+```
+findPlan pasta
+```
+Description:
+Searches for meal plans that contain the specified keyword in their names. The application will display all matching plans.
+
+#### Execute Meal Plan
+Command:
+```
+execute <day>
+```
+Example:
+```
+execute Monday
+```
+Description:
+Executes the meal plan for a specific day. The application will display the recipes associated with breakfast, lunch, and dinner for that day, allowing you to follow the plan easily.
+
+---
 
 ### General Commands
 
@@ -305,7 +433,7 @@ help
 Description:
 Displays a list of all available commands and their descriptions.
 
-#### List all valid units: `unitList`
+#### List all valid units:
 Command:
 ```
 unitList
@@ -321,6 +449,7 @@ exit
 Description:
 Exits the program.
 
+---
 
 ## FAQ
 
@@ -340,65 +469,86 @@ Exits the program.
 2. Check the command format and make sure you are entering the correct parameters.
 3. Refer to the `help` command to see the list of available commands and their formats.
 
+---
 
 ## Command Summary
 
 ### General Commands
 * **help**: List all available commands
-    * **Format**: `help`
+  * **Format**: `help`
 * **exit**: Exit the program
-    * **Format**: `exit`
+  * **Format**: `exit`
 * **unitList**: List all valid units for ingredients
-    * **Format**: `unitList`
+  * **Format**: `unitList`
+* **categoryList**: List all valid categories
+  * **Format**: `categoryList`
 
 ### Inventory Commands
 * **addNewIngredient**: Add a new ingredient to the inventory
-    * **Format**: `addNewIngredient <name> <quantity> <unit>`
+  * **Format**: `addNewIngredient <name> <quantity> <unit> <category>`
 * **increaseQuantity**: Increase the quantity of an ingredient
-    * **Format**: `increaseQuantity <name> <quantity>`
+  * **Format**: `increaseQuantity <name> <quantity>`
 * **decreaseQuantity**: Decrease the quantity of an ingredient
-    * **Format**: `decreaseQuantity <name> <quantity>`
+  * **Format**: `decreaseQuantity <name> <quantity>`
 * **setAlert**: Set an alert for an ingredient
-    * **Format**: `setAlert <name> <threshold>`
+  * **Format**: `setAlert <name> <threshold>`
 * **viewStock**: Check the stock of all ingredients
-    * **Format**: `viewStock`
+  * **Format**: `viewStock`
 * **viewLowStock**: View ingredients with low stock
-    * **Format**: `viewLowStock`
+  * **Format**: `viewLowStock`
 * **deleteIngredient**: Delete an ingredient from the inventory
-    * **Format**: `deleteIngredient <name>`
+  * **Format**: `deleteIngredient <name>`
+* **convertIngredient**: Convert the unit of an ingredient
+  * **Format**: `convertIngredient <name> <targetUnit>`
+* **viewIngredientsByCategory**: View ingredients by category
+  * **Format**: `viewIngredientsByCategory <category>`
 
 ### Shopping List Commands
 * **addShoppingItem**: Add an item to the shopping list
-    * **Format**: `addShoppingItem <name> <quantity> <unit>`
+  * **Format**: `addShoppingItem <name> <quantity> <unit>`
 * **generateShoppingList**: Generate a shopping list
-    * **Format**: `generateShoppingList`
+  * **Format**: `generateShoppingList`
 * **removeShoppingItem**: Remove an item from the shopping list
-    * **Format**: `removeShoppingItem <name>`
+  * **Format**: `removeShoppingItem <name>`
 * **viewShoppingList**: View the shopping list
-    * **Format**: `viewShoppingList`
+  * **Format**: `viewShoppingList`
 * **editShoppingItem**: Edit an existing item by its index
   * **Format**: `editShoppingItem <index> <new_name> <new_quantity> <new_unit>`
 * **markItemAsPurchased**: Mark an item as purchased
   * **Format**: `markItemAsPurchased <name>`
 
-### Meal Plan Commands
-* **viewPlan**: View meal plan presets
-    * **Format**: `viewPlan`
-* **addPlan**: Add a new meal plan
-    * **Format**: `addPlan <planName>`
-* **removePlan**: Remove a meal plan
-    * **Format**: `removePlan <index>`
-* **addRecipeToPlan**: Add a recipe to a meal plan
-    * **Format**: `addRecipeToPlan <recipeIndex> <planIndex> <mealIndex>`
-* **removeRecipeFromPlan**: Remove a recipe from a meal plan
-    * **Format**: `removeRecipeFromPlan <recipeIndex> <planIndex>`
-
 ### Recipe Commands
 * **addRecipe**: Add a new recipe
-    * **Format**: `addRecipe`
+  * **Format**: `addRecipe`
 * **viewRecipe**: View a recipe
-    * **Format**: `viewRecipe <name>`
+  * **Format**: `viewRecipe <name>`
 * **removeRecipe**: Remove a recipe
-    * **Format**: `removeRecipe <name>`
-* **listRecipe**: List all recipes
-    * **Format**: `listRecipe`
+  * **Format**: `removeRecipe <name>`
+* **viewRecipeList**: List all recipes
+  * **Format**: `viewRecipeList`
+
+### Meal Plan Commands
+* **addPlan**: Add a new meal plan
+  * **Format**: `addPlan <plan_name>`
+* **removePlan**: Remove a meal plan
+  * **Format**: `removePlan <plan_index>`
+* **addPlanToDay**: Add a meal plan to a specific day
+  * **Format**: `addPlanToDay <plan_index> <day>`
+* **removePlanFromDay**: Remove a meal plan from a specific day
+  * **Format**: `removePlanFromDay <day>`
+* **addRecipeToPlan**: Add a recipe to a meal plan
+  * **Format**: `addRecipeToPlan <plan_index> <recipe_index> <breakfast/lunch/dinner>`
+* **removeRecipeFromPlan**: Remove a recipe from a meal plan
+  * **Format**: `removeRecipeFromPlan <plan_index> <breakfast/lunch/dinner>`
+* **viewPlan**: View a specific meal plan
+  * **Format**: `viewPlan <plan_index>`
+* **viewPlanList**: View all meal plans
+  * **Format**: `viewPlanList`
+* **viewDayPlan**: View the meal plan for a specific day
+  * **Format**: `viewDayPlan <day>`
+* **viewWeekPlans**: View all meal plans for the week
+  * **Format**: `viewWeekPlans`
+* **execute**: Execute a meal plan for a specific day
+  * **Format**: `execute <day>`
+* **findPlan**: Search for a meal plan by keyword
+  * **Format**: `findPlan <contains>`
