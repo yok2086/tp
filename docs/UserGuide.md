@@ -397,6 +397,18 @@ viewWeekPlans
 Description:
 Displays the meal plans for the entire week. Each day will show the associated meal plans for breakfast, lunch, and dinner.
 
+#### Find Meal Plan
+Command:
+```
+findPlan <keyword>
+```
+Example:
+```
+findPlan pasta
+```
+Description:
+Searches for meal plans that contain the specified keyword in their names. The application will display all matching plans.
+
 #### Execute Meal Plan
 Command:
 ```
@@ -463,60 +475,80 @@ Exits the program.
 
 ### General Commands
 * **help**: List all available commands
-    * **Format**: `help`
+  * **Format**: `help`
 * **exit**: Exit the program
-    * **Format**: `exit`
+  * **Format**: `exit`
 * **unitList**: List all valid units for ingredients
-    * **Format**: `unitList`
+  * **Format**: `unitList`
+* **categoryList**: List all valid categories
+  * **Format**: `categoryList`
 
 ### Inventory Commands
 * **addNewIngredient**: Add a new ingredient to the inventory
-    * **Format**: `addNewIngredient <name> <quantity> <unit>`
+  * **Format**: `addNewIngredient <name> <quantity> <unit> <category>`
 * **increaseQuantity**: Increase the quantity of an ingredient
-    * **Format**: `increaseQuantity <name> <quantity>`
+  * **Format**: `increaseQuantity <name> <quantity>`
 * **decreaseQuantity**: Decrease the quantity of an ingredient
-    * **Format**: `decreaseQuantity <name> <quantity>`
+  * **Format**: `decreaseQuantity <name> <quantity>`
 * **setAlert**: Set an alert for an ingredient
-    * **Format**: `setAlert <name> <threshold>`
+  * **Format**: `setAlert <name> <threshold>`
 * **viewStock**: Check the stock of all ingredients
-    * **Format**: `viewStock`
+  * **Format**: `viewStock`
 * **viewLowStock**: View ingredients with low stock
-    * **Format**: `viewLowStock`
+  * **Format**: `viewLowStock`
 * **deleteIngredient**: Delete an ingredient from the inventory
-    * **Format**: `deleteIngredient <name>`
+  * **Format**: `deleteIngredient <name>`
+* **convertIngredient**: Convert the unit of an ingredient
+  * **Format**: `convertIngredient <name> <targetUnit>`
+* **viewIngredientsByCategory**: View ingredients by category
+  * **Format**: `viewIngredientsByCategory <category>`
 
 ### Shopping List Commands
 * **addShoppingItem**: Add an item to the shopping list
-    * **Format**: `addShoppingItem <name> <quantity> <unit>`
+  * **Format**: `addShoppingItem <name> <quantity> <unit>`
 * **generateShoppingList**: Generate a shopping list
-    * **Format**: `generateShoppingList`
+  * **Format**: `generateShoppingList`
 * **removeShoppingItem**: Remove an item from the shopping list
-    * **Format**: `removeShoppingItem <name>`
+  * **Format**: `removeShoppingItem <name>`
 * **viewShoppingList**: View the shopping list
-    * **Format**: `viewShoppingList`
+  * **Format**: `viewShoppingList`
 * **editShoppingItem**: Edit an existing item by its index
   * **Format**: `editShoppingItem <index> <new_name> <new_quantity> <new_unit>`
 * **markItemAsPurchased**: Mark an item as purchased
   * **Format**: `markItemAsPurchased <name>`
 
-### Meal Plan Commands
-* **viewPlan**: View meal plan presets
-    * **Format**: `viewPlan`
-* **addPlan**: Add a new meal plan
-    * **Format**: `addPlan <planName>`
-* **removePlan**: Remove a meal plan
-    * **Format**: `removePlan <index>`
-* **addRecipeToPlan**: Add a recipe to a meal plan
-    * **Format**: `addRecipeToPlan <recipeIndex> <planIndex> <mealIndex>`
-* **removeRecipeFromPlan**: Remove a recipe from a meal plan
-    * **Format**: `removeRecipeFromPlan <recipeIndex> <planIndex>`
-
 ### Recipe Commands
 * **addRecipe**: Add a new recipe
-    * **Format**: `addRecipe`
+  * **Format**: `addRecipe`
 * **viewRecipe**: View a recipe
-    * **Format**: `viewRecipe <name>`
+  * **Format**: `viewRecipe <name>`
 * **removeRecipe**: Remove a recipe
-    * **Format**: `removeRecipe <name>`
-* **listRecipe**: List all recipes
-    * **Format**: `listRecipe`
+  * **Format**: `removeRecipe <name>`
+* **viewRecipeList**: List all recipes
+  * **Format**: `viewRecipeList`
+
+### Meal Plan Commands
+* **addPlan**: Add a new meal plan
+  * **Format**: `addPlan <plan_name>`
+* **removePlan**: Remove a meal plan
+  * **Format**: `removePlan <plan_index>`
+* **addPlanToDay**: Add a meal plan to a specific day
+  * **Format**: `addPlanToDay <plan_index> <day>`
+* **removePlanFromDay**: Remove a meal plan from a specific day
+  * **Format**: `removePlanFromDay <day>`
+* **addRecipeToPlan**: Add a recipe to a meal plan
+  * **Format**: `addRecipeToPlan <plan_index> <recipe_index> <breakfast/lunch/dinner>`
+* **removeRecipeFromPlan**: Remove a recipe from a meal plan
+  * **Format**: `removeRecipeFromPlan <plan_index> <breakfast/lunch/dinner>`
+* **viewPlan**: View a specific meal plan
+  * **Format**: `viewPlan <plan_index>`
+* **viewPlanList**: View all meal plans
+  * **Format**: `viewPlanList`
+* **viewDayPlan**: View the meal plan for a specific day
+  * **Format**: `viewDayPlan <day>`
+* **viewWeekPlans**: View all meal plans for the week
+  * **Format**: `viewWeekPlans`
+* **execute**: Execute a meal plan for a specific day
+  * **Format**: `execute <day>`
+* **findPlan**: Search for a meal plan by keyword
+  * **Format**: `findPlan <contains>`

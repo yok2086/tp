@@ -39,12 +39,15 @@ plan their meals, and store recipes.
   - Aided in the implementation of the MealPlanManager class to manage meal plans.
   - Implemented methods to View Plan, View Plan List, and Remove Plans
 
-## JUnit Testing:
+## **JUnit Testing:**
   - Implemented test cases for the Parser class to verify the parsing logic.
 
 ## **Text-Ui-Test**
   - Created the TextUiTest class to test the user interface.
   - Added test cases for various user inputs and outputs.
+
+## **Demo Video**
+- Created a demo video showcasing the features and functionality of the application.
 
 ## **Documentation**:
 - User Guide
