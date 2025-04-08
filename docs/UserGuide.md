@@ -433,7 +433,7 @@ help
 Description:
 Displays a list of all available commands and their descriptions.
 
-#### List all valid units: `unitList`
+#### List all valid units:
 Command:
 ```
 unitList
