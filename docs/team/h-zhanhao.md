@@ -15,15 +15,18 @@ plan their meals, and store recipes.
   - Implemented the execute method for each command class to perform the required action.
   - Separated the command classes into different packages for better organization and maintainability.
   - Separated the command classes into different subclasses for a more dynamic and flexible design of the help command
+    
 ### Implemented the Help Command Class
   - Created the HelpCommand class to provide users with information about the available commands.
+    
 ## **Parser Class**: 
    - Implemented the Parser class to parse user input and instantiate the appropriate command class.
    - Added error handling to manage invalid number of arguments and invalid command types.
 
 ## **User Interface Class**
   - Designed the user interface to be user-friendly and intuitive.
-  - Implemented the TextUi class to handle user input and output.
+  - Implemented the UI class to handle the application's display 
+    
 ## **Storage Class**
   - Implemented the Storage class to handle data storage and retrieval.
   - Added methods to save and load data from files.
