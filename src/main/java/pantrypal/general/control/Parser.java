@@ -382,7 +382,7 @@ public class Parser {
                 return new ViewWeekPlans();
             case "execute":
                 if (inputParts.length < 2) {
-                    throw new IllegalArgumentException("Insufficient arguments for executePlanForDay command.");
+                    throw new IllegalArgumentException("Insufficient arguments for execute command.");
                 }
                 String executeDayName = inputParts[1];
                 if (executeDayName == null || executeDayName.isEmpty()) {

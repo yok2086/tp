@@ -6,6 +6,8 @@ PantryPal is an all-in-one application designed to help students manage their me
 The application allows users to keep track of their ingredients, automatically generate shopping lists,
 plan their meals, and store recipes. 
 
+#### tP Code Dashboard link: https://nus-cs2113-ay2425s2.github.io/tp-dashboard/?search=h-zhanhao&breakdown=true
+
 ## Given below are my contributions to the project:
 ## **Command Classes**:          
   - Added command classes for most commands in the application. Which includes most Meal Plan Command, Recipe Command, 
@@ -50,8 +52,9 @@ plan their meals, and store recipes.
     - Included the command summary table for all commands in the User Guide.
     - Added Quick Start Guide and Introduction to the application.
     - Added descriptions and format for General Commands.
+    - Added descriptions and format for Meal Plan Commands.
 - Developer Guide
-    - Wrote a quick overview of the overall design and implementation of the application.
+    - Wrote a overview of the overall design and implementation of the application.
     - Made the class diagram for the overall architecture of the application.
     - Completed the implementation of the Parser, Storage and Command Class features
     - Created sequence diagrams for the Parser and Storage features.
@@ -63,7 +66,9 @@ plan their meals, and store recipes.
 - Set up the project structure and initial files.
 - Managed releases for `v.1.0`, `v2.0`, and `v2.1` of the application.
 - Facilitated team collaboration and communication.
-- Aided teammate in completing his features.
+- Aided teammate in completing features.
+  - Fixed bugs surfaced from issues for the Meal Plan Feature.
+  - Completed missing commands for the Meal Plan Command. For example, View Plan, View Plan List, and Remove Plans commands.
 - Facilitated team meetings and discussions.
 
     

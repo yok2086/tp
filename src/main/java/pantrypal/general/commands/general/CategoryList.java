@@ -24,7 +24,8 @@ public class CategoryList extends GeneralCommand {
                 "GRAIN" + "\n" +
                 "CONDIMENT" + "\n" +
                 "MISC" + "\n" +
-                "NUTS" + "\n"
+                "NUTS" + "\n" +
+                "MEAT" + "\n"
         );
     }
 }
