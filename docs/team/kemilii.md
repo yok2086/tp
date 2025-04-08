@@ -4,9 +4,7 @@
 
 PantryPal is an all-in-one application designed to help students manage their meals.
 The application allows users to keep track of their ingredients, automatically generate shopping lists,
-plan their meals, and store recipes. 
-
-Given below are my contributions to the project.
+plan their meals, and store recipes.
 
 ## Code Contributed
 - **Shopping List Feature**:  
@@ -55,6 +53,6 @@ Given below are my contributions to the project.
 ## **Project Management**:
 - Set up Gradle build system
 - Configured testing framework 
-- Helped testing team members' code and created issues tracking
+- Helped to test team members' code and created issues tracking
 - Provided feedback on implementation approaches
 - Helped resolve merge conflicts
