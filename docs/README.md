@@ -1,4 +1,4 @@
-# Duke
+# PantryPal
 
 PantryPal is an all-in-one application designed to help students manage their meals.
 The application allows users to keep track of their ingredients, automatically generate shopping lists,
