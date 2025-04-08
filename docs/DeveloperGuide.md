@@ -1,43 +1,5 @@
 # PantryPal Developer Guide
 
-## Table of Contents
-- [Acknowledgements](#acknowledgements)
-- [Core Functionalities](#core-functionalities)
-- [Sequence Diagram](#sequence-diagram)
-- [Why It Is Implemented This Way](#why-it-is-implemented-this-way)
-
-
-- [Implementation of the Parser Feature](#implementation-of-the-parser-feature)
-    - [Overview](#overview)
-    - [Design and Implementation](#design-and-implementation)
-    - [Sequence Diagram](#sequence-diagram-1)
-    - [Why It Is Implemented This Way](#why-it-is-implemented-this-way-1)
-- [Implementation of the Storage Feature](#implementation-of-the-storage-feature)
-    - [Overview](#overview-1)
-    - [Design and Implementation](#design-and-implementation-1)
-    - [Sequence Diagram](#sequence-diagram-2)
-- [Implementation of the Meal Plan Feature](#implementation-of-the-meal-plan-feature)
-    - [Overview](#overview-2)
-    - [Design and Implementation](#design-and-implementation-2)
-    - [Core Functionalities](#core-functionalities-1)
-    - [Sequence Diagram](#sequence-diagram-3)
-    - [Why It Is Implemented This Way](#why-it-is-implemented-this-way-2)
-- [Implementation of the Shopping List Feature](#implementation-of-the-shopping-list-feature)
-    - [Overview](#overview-3)
-    - [Design and Implementation](#design-and-implementation-3)
-    - [Core Functionalities](#core-functionalities-2)
-    - [Sequence Diagram](#sequence-diagram-4)
-    - [Why It Is Implemented This Way](#why-it-is-implemented-this-way-3)
-- [Implementation of the Recipe Feature](#implementation-of-the-recipe-feature)
-    - [Overview](#overview-4)
-    - [Design and Implementation](#design-and-implementation-4)
-    - [Core Functionalities](#core-functionalities-3)
-    - [Sequence Diagram](#sequence-diagram-5)
-    - [Why It Is Implemented This Way](#why-it-is-implemented-this-way-4)
-- [Appendix: Requirements](#appendix-requirements)
-- [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
-
-
 # Design and Implementation
 
 ### Class Diagram showing the overall structure of the application
