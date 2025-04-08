@@ -96,8 +96,10 @@ public class MealPlanManager {
         boolean found = false;
         for (Plan plan : planList) {
             if (plan.getPlanName().equalsIgnoreCase(planName)) {
+                if (!found) {
+                    Ui.showMessage("Here are the plans that match your search: ");
+                }
                 found = true;
-                Ui.showMessage("Here are the plans that match your search:");
                 Ui.showMessage((planList.indexOf(plan)+1) + //plus 1 for matching to user view
                         ": " + plan.getPlanName());
             }

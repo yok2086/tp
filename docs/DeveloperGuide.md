@@ -156,93 +156,66 @@ The data is stored in a text file called `data.txt` in the following format:
 ```
 
 ---
-# Implementation of the Meal Plan, Plan Presets and Viewing features
+# Implementation of the Plan, MealPlanManager and Viewing features
 
 ## Meal Plan Feature
 
 ### Overview
-The Meal Plan feature is the core feature of the PantryPal application, and is responsible for the cohesion of the
-Recipe and IngredientInventory features. A Meal Plan instance encapsulates the meals attribute, which holds the recipes
-used by that meal plan. Each Meal Plan instance is created and stored in an overarching PlanPresets instance, and is
-used to instantiate a DailySchedule instance for purposes of viewing.
+The MealPlan feature is the core feature of the PantryPal application, and is responsible for the cohesion of the
+Recipe, ShoppingList and IngredientInventory features. A Plan instance encapsulates the planRecipes and planName
+attributes, which are containers for Recipe and the identifier used for searching respectively.
 
 ### Design and Implementation
-The MealPlan feature is designed for quick interfacing and adaptation of a user's plans. It allows the user to quickly
-modify their plans for any particular day using the given methods.
+The MealPlan feature is designed for quick interfacing and adaptation of a user's tangible plans. 
 
-- **MealPlan Class**: Represents a meal plan instance created by the user with attributes for an identifying name and used recipes. It includes the methods to add, edit and remove certain recipes from the plan.
+- **MealPlan Class**: Represents a meal plan instance created by the user with attributes for an identifying name and used recipes. It includes the methods to add and remove certain recipes from the plan.
 
 ### Core Functionalities
 - **Add Recipe to Plan**: allows the user to add a particular created recipe into a meal plan, through specification by the user on whether it is for breakfast, lunch or dinner.
 - **Remove Recipe from Plan**: allows the user to completely remove a selected recipe from a meal plan.
 
-## Plan Presets Feature
+## MealPlanManager Feature
 
-The Plan Presets feature holds a collection of meal plans that can be quickly added to a DailySchedule instance for
-quick re-iterations of a same meal plan. It encapsulates an ArrayList of plans that have been created by the user, and draws
-from this to substantiate a DailySchedule instance with a created meal plan.
+The MealPlanManager feature holds a collection of Plan objects for, quick re-iterations of a same meal plan as well as
+the tangible representation of the user's weekly schedule in weeklyPlans. It encapsulates planList, an ArrayList of
+Plan objects that have been created by the user, and draws from this to substantiate a weeklyPlan instance for use.
 
 ### Design and Implementation
-The Plan Presets feature is designed for convenience, allowing the user to re-use a same plan for purposes of
+The MealPlanManager feature is designed for convenience, allowing the user to re-use a same plan for purposes of
 a diet, without having to painstakingly enter the details for every duplicate meal plan they are planning to add to their
 viewing schedule.
 
-- **PlanPresets Class**: Represents an individual set of meal plans created by the user that contains the collection of plans.
+- **MealPlanManager Class**: Represents an individual set of meal plans created by the user that contains the collection of plans.
 - **Find Plan feature**: Allows the user to locate a plan with a particular name through matching of string contents.
+- **Execute Plan feature**: Allows the user to mark a plan as completed and reduce quantities of ingredients in Inventory as necessary
 
 ### Core Functionalities
 - **Add Plan**: Instantiates a new Meal Plan instance with a name optionally keyed by the user
 - **Remove Plan**: Removes a plan from the currently created preset
 - **Add recipe to plan**: Facilitates the procedure of adding a recipe to the indicated meal plan as decided by the user
 - **Remove recipe from plan**: Facilitates the procedure of removing a recipe from the indicated meal plan as decided by the user
-
-
-## Viewing Features
-
-### Overview
-The Viewing features includes WeeklySchedule and DailySchedule, which provide the user with a packaged view of the
-summarised contents of a meal plan assigned to a particular day of the week (in the case of WeeklySchedule), and the
-detailed view of a meal plan (in the case of DailySchedule).
-
-## DailySchedule Feature
-
-Provides the user with a proper interface to consolidate their meal plans for a particular day and execute upon them to
-indicate the completion of the meal plan.
-
-### Design and Implementation
-
-- **DailySchedule Class**: Represents the individual day that a user plans for, with functionalities to modify details of the selected plan as necessary.
-- **Execute Plan Feature**: Attempts to remove the ingredients used by the meal plan from the inventory, and marks the plan as acted upon. If insufficient items are in the inventory, prompts the user with the missing ingredients before allowing execution
-
-### Core Functionalities
-- **Set Plan** Select a plan to duplicate from and assign to the dailySchedule
 - **Remove Plan** Remove the current selected plan from dailySchedule
-- **Execute Plan** Marks the plan as done and reduces the stock of ingredients used by the plan. Does not execute if there is a lack in count for any ingredient, and will prompt the user with all missing ingredients
-- **Edit Plan** Able to pick from any detail amongst the plan to modify
-- **View Plan** Able to view the full details of the plan, including the content of each meal's recipe
+- **Execute Plan** Marks the plan as done and reduces the stock of ingredients used by the plan. Does not execute if there is a lack in count for any ingredient,
+and will prompt the user on all missing ingredients and whether they would want to add them to shopping list
+- **View Plan list** Shows a summarized view of each Plan object
+- **View Plan** Shows a detailed view of each Plan object in planList
+- **View Day plan** Shows a detailed view of a day's Plan object
+- **View Week plans** Shows a summarised view of each day's plans in weeklyPlans
+- **Find Plan** 
 
-## WeeklySchedule Feature
-
-Provides the user with an interface to interact with each individual DailySchedule for a weekly plan. 
-
-### Design and Implementation
-
-- **DailySchedule Class**: Represents the individual day that a user plans for, with functionalities to modify details of the selected plan as necessary.
-- **Execute Plan Feature**: Attempts to remove the ingredients used by the meal plan from the inventory, and marks the plan as acted upon. If insufficient items are in the inventory, prompts the user with the missing ingredients before allowing execution
-
-### Core Functionalities
-- **Set Plan** Select a plan to duplicate from and assign to the dailySchedule
-- **Remove Plan** Remove the current selected plan from dailySchedule
-- **Execute Plan** Marks the plan as done and reduces the stock of ingredients used by the plan. Does not execute if there is a lack in count for any ingredient, and will prompt the user with all missing ingredients
-- **Edit Plan** Able to pick from any detail amongst the plan to modify
-- **View Plan** Shows a summarized view of the meal plans in each DailySchedule
 
 ### Sequence Diagram
 
-The following sequence diagram illustrates the interactions between the user, PlanPreset, each MealPlan within
-PlanPreset, DailySchedule, WeeklySchedule, each MealPlan within DailySchedule, IngredientInventory and each Recipe
-amongst all created MealPlan 
+The following sequence diagram illustrates the interactions between the user, MealPlanManager, each relevant Plan and what they will present 
 
+<img src="MealPlanManager_Overview_Sequence_Diagram.png" alt="drawing" style="width:1000px;"/>
+
+<img src="MealPlanManager_AddPlan_Sequence_Diagram.png" alt="drawing" style="width:1000px;"/>
+<img src="MealPlanManager_AddPlanToDay_Sequence_Diagram.png" alt="drawing" style="width:1000px;"/>
+<img src="MealPlanManager_RemovePlan_Sequence_Diagram.png" alt="drawing" style="width:1000px;"/>
+<img src="MealPlanManager_RemovePlanFromDay_Sequence_Diagram.png" alt="drawing" style="width:1000px;"/>
+<img src="MealPlanManager_ExecutePlan_UpperFrame_Sequence_Diagram.png" alt="drawing" style="width:1000px;"/>
+<img src="MealPlanManager_ExecutePlan_LowerFrame_Sequence_Diagram.png" alt="drawing" style="width:1000px;"/>
 
 ---
 # Implementation of the Ingredient and Ingredient Inventory Features
@@ -434,30 +407,31 @@ meal planning, grocery shopping, and inventory management by providing an all in
 
 ## User Stories
 
-| Version | As a ... | I want to ...                                                            | So that I can ...                                                |
-|---------|----------|--------------------------------------------------------------------------|------------------------------------------------------------------|
-| v1.0    | new user | see usage instructions                                                   | refer to them when I forget how to use the application           |
-| v1.0    | user     | find a to-do item by name                                                | locate a to-do without having to go through the entire list      |
-| v1.0    | user     | create a new ingredient                                                  | keep track of items I’ve added to my pantry                      |
-| v1.0    | user     | update an ingredient’s quantity                                          | reflect changes when I buy or use ingredients                    |
-| v1.0    | user     | rename an ingredient                                                     | correct mistakes or reflect updated naming                       |
-| v1.0    | user     | view details of an ingredient                                            | know exactly how much I have and what type it is                 |
-| v1.0    | user     | delete an ingredient                                                     | remove unused or expired ingredients from my inventory           |
-| v1.0    | user     | set a low stock threshold for ingredients                                | receive alerts when I need to restock                            |
-| v1.0    | user     | view all low stock items                                                 | quickly identify what needs to be replenished                    |
-| v1.0    | user     | find out if an ingredient is in stock                                    | check availability before starting a recipe                      |
-| v1.0    | budget-conscious student| auto-generate a shopping list based my current stock and planned recipes | purchase only missing ingredients                                |
-| v1.0    | busy student| manually add items to my shopping list                                | quickly include additional ingredients I want to have more       |
-| v1.0    | busy student| manually remove items from my shopping list                           | quickly remove additional ingredients I don't want have so much  |
-| v1.0    | meticulous planner| view my shopping list with clearly numbered items               | easily reference and manage items for later editing or removal   |
-| v1.0    | organized shopper| edit an existing shopping list item by its index                 | update integredients details if my shopping needs change         |
-| v1.0    | user     | add a recipe into a list                                                 | save the recipe to be used later on                              |
-| v1.0    | user     | view all the recipe I saved                                              | choose a recipe to follow                                        |
-| v1.0    | user     | remove recipe easily                                                     | avoid cramping my recipe list with rarely-used recipes           |
-| v2.0    | user     | change an ingredient’s unit                                              | work with units I prefer or understand better                    |
-| v2.0    | user     | view ingredients by category                                             | organize or filter ingredients for easier navigation             |
-| v2.0    | user     | convert the unit of an ingredient                                        | standardize or switch between measurement systems (e.g. g to kg) |
-| v2.0    | cost-conscious student|  mark items on my shopping list as purchased                | track which items I have bought and avoid re-purchasing them     |
+| Version | As a ...                 | I want to ...                                                            | So that I can ...                                                |
+|---------|--------------------------|--------------------------------------------------------------------------|------------------------------------------------------------------|
+| v1.0    | new user                 | see usage instructions                                                   | refer to them when I forget how to use the application           |
+| v1.0    | user                     | create a new ingredient                                                  | keep track of items I’ve added to my pantry                      |
+| v1.0    | user                     | update an ingredient’s quantity                                          | reflect changes when I buy or use ingredients                    |
+| v1.0    | user                     | rename an ingredient                                                     | correct mistakes or reflect updated naming                       |
+| v1.0    | user                     | view details of an ingredient                                            | know exactly how much I have and what type it is                 |
+| v1.0    | user                     | delete an ingredient                                                     | remove unused or expired ingredients from my inventory           |
+| v1.0    | user                     | set a low stock threshold for ingredients                                | receive alerts when I need to restock                            |
+| v1.0    | user                     | view all low stock items                                                 | quickly identify what needs to be replenished                    |
+| v1.0    | user                     | find out if an ingredient is in stock                                    | check availability before starting a recipe                      |
+| v1.0    | budget-conscious student | auto-generate a shopping list based my current stock and planned recipes | purchase only missing ingredients                                |
+| v1.0    | busy student             | manually add items to my shopping list                                   | quickly include additional ingredients I want to have more       |
+| v1.0    | busy student             | manually remove items from my shopping list                              | quickly remove additional ingredients I don't want have so much  |
+| v1.0    | meticulous planner       | view my shopping list with clearly numbered items                        | easily reference and manage items for later editing or removal   |
+| v1.0    | organized shopper        | edit an existing shopping list item by its index                         | update integredients details if my shopping needs change         |
+| v1.0    | user                     | add a recipe into a list                                                 | save the recipe to be used later on                              |
+| v1.0    | user                     | view all the recipe I saved                                              | choose a recipe to follow                                        |
+| v1.0    | user                     | remove recipe easily                                                     | avoid cramping my recipe list with rarely-used recipes           |
+| v2.0    | user                     | change an ingredient’s unit                                              | work with units I prefer or understand better                    |
+| v2.0    | user                     | view ingredients by category                                             | organize or filter ingredients for easier navigation             |
+| v2.0    | user                     | convert the unit of an ingredient                                        | standardize or switch between measurement systems (e.g. g to kg) |
+| v2.0    | cost-conscious student   | mark items on my shopping list as purchased                              | track which items I have bought and avoid re-purchasing them     |
+| v2.0    | user                     | consolidate and use all the information I have entered                   | have a more convenient time planning out my weeks                |
+
 
 ## Non-Functional Requirements
 - PantryPal should work on any mainstream operating system (Windows, macOS, Linux) with Java 17 or above installed.
@@ -797,3 +771,228 @@ meal planning, grocery shopping, and inventory management by providing an all in
 
 ---
 
+### 2.17 Add Plan
+
+1. **Test case: `addPlan` with only a whitespace after**
+   - **Steps**:
+      - Run command: `addPlan `
+   - **Expected**: An error message indicating that insufficient inputs are given
+
+2. **Test case: `addPlan` with standard string**
+   - **Steps**:
+      - Run command: `addPlan plan1`
+   - **Expected**: a plan with the name `plan1` is created and can be viewed
+
+3. **Test case: `addPlan` with special characters or characters from different language**
+   - **Steps**: `addPlan 好\\お/πㄴ`
+   - **Expected**:  a plan with the name `好\\お/πㄴ` is created and can be viewed
+
+---
+
+### 2.18 AddRecipeToPlan
+
+Requirements:
+At least one valid `addPlan` was successfully called
+At least one valid `addRecipe` was successfully called
+A valid string (`breakfast`,`lunch` or `dinner`) input
+A `addRecipeToPlan` for the same meal type was not called before
+
+1. **Test case: `addrecipetoplan` with only a whitespace after**
+   - **Steps**:
+      - Run command: `addrecipetoplan `
+   - **Expected**: An error message indicating that insufficient inputs are given
+
+2. **Test case: `addrecipetoplan` with valid inputs**
+   - **Steps**:
+      - Run command: `addRecipeToPlan 1 1 breakfast`
+   - **Expected**: the plan in index 0 of planList has a recipe added to the breakfast planRecipe
+
+3. **Test case: `addRecipeToPlan` with special characters or characters from different language**
+   - **Steps**: `addRecipeToPlan 好\\お/πㄴ`
+   - **Expected**: `IllegalArgumentException` should be thrown and a prompt to avoid unconventional characters will be given
+
+---
+
+### 2.19 AddPlanToDay
+
+Requirements:
+At least one valid `addPlan` was successfully called
+At least one valid `addRecipe` was successfully called
+A valid string (`breakfast`,`lunch` or `dinner`) input
+A `addRecipeToPlan` for the same meal type was not called before
+
+1. **Test case: `AddPlanToDay` with only a whitespace after**
+   - **Steps**:
+      - Run command: `AddPlanToDay `
+   - **Expected**: An error message indicating that insufficient inputs are given
+
+2. **Test case: `AddPlanToDay` with valid inputs**
+   - **Steps**:
+      - Run command: `AddPlanToDay 1 MONDAY`
+   - **Expected**: the plan in index 0 of weeklyPlans copies the values of index 0 of planList
+
+3. **Test case: `AddPlanToDay` with special characters or characters from different language**
+   - **Steps**: `AddPlanToDay 2 好\\お/πㄴ`
+   - **Expected**: `IllegalArgumentException` should be thrown and a prompt to avoid unconventional characters will be given
+
+---
+
+### 2.20 RemoveRecipeFromPlan
+
+Requirements:
+At least one valid `addPlan` was successfully called
+At least one valid `addRecipe` was successfully called
+A valid string (`breakfast`,`lunch` or `dinner`) input
+
+1. **Test case: `removeRecipeFromPlan` with only a whitespace after**
+   - **Steps**:
+      - Run command: `removeRecipeFromPlan `
+   - **Expected**: An error message indicating that insufficient inputs are given
+
+2. **Test case: `removeRecipeFromPlan` with valid inputs**
+   - **Steps**:
+      - Run command: `removeRecipeFromPlan 1 BREAKFAST`
+   - **Expected**: the plan in index 0 of weeklyPlans has the value index 0 of planRecipes cleared
+
+3. **Test case: `removeRecipeFromPlan` with special characters or characters from different language**
+   - **Steps**: `removeRecipeFromPlan 好\\お/πㄴ`
+   - **Expected**: `IllegalArgumentException` should be thrown and a prompt to avoid unconventional characters will be given
+
+---
+
+### 2.21 RemovePlan
+
+Requirements:
+At least one valid `addPlan` was successfully called
+
+1. **Test case: `RemovePlan` with only a whitespace after**
+   - **Steps**:
+      - Run command: `RemovePlan `
+   - **Expected**: An error message indicating that insufficient inputs are given
+
+2. **Test case: `RemovePlan` with valid inputs**
+   - **Steps**:
+      - Run command: `RemovePlan 1`
+   - **Expected**: the plan in index 0 of planList is cleared, and the corresponding plan in weeklyPlans is also cleared
+
+3. **Test case: `RemovePlan` with special characters or characters from different language**
+   - **Steps**: `RemovePlan 好\\お/πㄴ`
+   - **Expected**: `IllegalArgumentException` should be thrown and a prompt to avoid unconventional characters will be given
+
+---
+
+### 2.22 RemovePlanFromDay
+
+Requirements:
+At least one valid `addPlanToDay` was successfully called
+
+1. **Test case: `RemovePlanFromDay` with only a whitespace after**
+   - **Steps**:
+      - Run command: `RemovePlanFromDay `
+   - **Expected**: An error message indicating that insufficient inputs are given
+
+2. **Test case: `RemovePlanFromDay` with valid inputs**
+   - **Steps**:
+      - Run command: `RemovePlanFromDay MONDAY`
+   - **Expected**: the plan in index 0 of weeklyPlans is cleared
+
+3. **Test case: `RemovePlan` with special characters or characters from different language**
+   - **Steps**: `RemovePlan 好\\お/πㄴ`
+   - **Expected**: `IllegalArgumentException` should be thrown and a prompt to avoid unconventional characters will be given
+
+---
+
+### 2.23 FindPlan
+
+1. **Test case: `FindPlan` with no plans made or non-matching search key**
+   - **Steps**:
+      - Run command: `FindPlan `
+   - **Expected**: `No plans matching the search key was found`
+
+2. **Test case: `FindPlan` with matching search key**
+   - **Steps**:
+      - Run command: `addPlan plan1` 
+      - Run command: `addPlan egg`
+      - Run command: `addPlan lard`
+      - Run command: `FindPlan l`
+   - **Expected**: the plans with names containing `l` are listed, preceded by their matching indices
+
+---
+
+### 2.24 ExecutePlan
+
+Requirements:
+At least one valid `addRecipe` was called
+At least one valid `addIngredient` was called
+At least one valid `addPlanToDay` was called
+
+1. **Test case: `execute` with insufficient ingredients in IngredientInventory**
+   - **Steps**:
+      - Run command: `execute MONDAY`
+   - **Expected**: series of console messages to inform the user about missing ingredients for the relevant recipes, and prompt for adding missing ingredients to shopping list
+
+2. **Test case: `execute` with sufficient ingredients**
+   - **Steps**:
+      - Run command: `execute TUESDAY`
+   - **Expected**: Informs user about ongoing process to execute plan, then a series of console messages informing user about what recipes were in the plan
+
+---
+
+### 2.25 ViewPlan
+
+
+1. **Test case: `viewPlan` with no plans created**
+   - **Steps**:
+      - Run command: `viewPlan 1`
+   - **Expected**: `Invalid plan index`
+
+2. **Test case: `viewPlan` with valid index and created plan**
+   - **Steps**:
+      - Run command: `viewPlan 1`
+   - **Expected**: Shows the details of index 0 of planList
+
+---
+
+### 2.26 ViewDayPlan
+
+
+1. **Test case: `viewDayPlan` with no plans created**
+   - **Steps**:
+      - Run command: `viewDayPlan 1`
+   - **Expected**: "Invalid plan index"
+
+2. **Test case: `viewDayPlan` with valid input and created plans**
+   - **Steps**:
+      - Run command: `viewPlan 0`
+   - **Expected**: Shows the details of index 0 of weeklyPlans
+
+---
+
+### 2.27 ViewPlanList
+
+1. **Test case: `ViewPlanList` with no plans created**
+   - **Steps**:
+      - Run command: `ViewPlanList`
+   - **Expected**: `No plans available`
+
+2. **Test case: `ViewPlanList` with created plans**
+   - **Steps**:
+      - Run command: `ViewPlanList`
+   - **Expected**: Shows the index and plan names of all plans in planList
+
+---
+
+
+### 2.28 ViewWeekPlans
+
+1. **Test case: `ViewWeekPlans` with no plans created**
+   - **Steps**:
+      - Run command: `ViewWeekPlans`
+   - **Expected**: `No plans available`
+
+2. **Test case: `ViewWeekPlans`  with created plans**
+   - **Steps**:
+      - Run command: `ViewWeekPlans`
+   - **Expected**: Shows the index and plan names of all plans in weeklyPlans
+
+---
